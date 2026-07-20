@@ -224,3 +224,109 @@ html.lenis, .lenis.lenis-smooth { scroll-behavior: auto !important; }
 }
 /* only the full JS experience arms the reveal; without JS lines stay put */
 html:not(.js) .home-exp .oa-line-in{transform:none}
+
+/* =====================================================================
+   SERRES WRAP CENTER — sister-business band (.swc)
+   Sits in .sd-below, i.e. ordinary document flow well clear of the WebGL
+   stage and its ScrollTrigger machinery. Uses the shared .reveal system
+   (js/app.js IntersectionObserver), so it inherits the existing
+   reduced-motion and no-JS fail-safes from styles.css for free.
+   ===================================================================== */
+.swc-band{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+  gap:clamp(28px,5vw,64px);
+  padding:clamp(28px,4vw,52px);
+  background:
+    radial-gradient(90% 70% at 72% 18%,rgba(200,206,216,.12),transparent 55%),
+    linear-gradient(180deg,#111117,#0a0a0c);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  overflow:hidden;
+}
+.swc-copy h2{
+  font-family:var(--font-head);
+  text-transform:uppercase;
+  font-weight:600;
+  font-size:clamp(1.6rem,3.4vw,2.7rem);
+  line-height:1.02;
+  letter-spacing:-.01em;
+  margin:.35em 0 .6em;
+}
+.swc-copy > p{color:var(--text-dim);font-size:.98rem;max-width:52ch}
+
+/* service list — reads as chips, stays a real <ul> for assistive tech */
+.swc-tags{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 26px;padding:0}
+.swc-tags li{
+  font-family:var(--font-head);
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  font-size:.76rem;
+  color:var(--gold);
+  padding:7px 14px;
+  border:1px solid var(--line-2);
+  border-radius:100px;
+}
+
+/* the whole photo is the link out to serreswrapcenter.es */
+.swc-shot{
+  position:relative;
+  display:block;
+  border-radius:var(--radius-sm);
+  overflow:hidden;
+  border:1px solid var(--line-2);
+  box-shadow:var(--shadow);
+  aspect-ratio:16/9;
+  isolation:isolate;
+}
+.swc-shot img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transform:scale(1.02);
+  transition:transform .7s var(--ease),filter .7s var(--ease);
+}
+/* keep the label legible over a bright workshop shot */
+.swc-shot::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,transparent 45%,rgba(8,8,10,.72) 100%);
+  pointer-events:none;
+}
+.swc-shot-tag{
+  position:absolute;
+  left:16px;
+  bottom:14px;
+  z-index:1;
+  display:inline-flex;
+  align-items:center;
+  gap:.5em;
+  font-family:var(--font-head);
+  text-transform:uppercase;
+  letter-spacing:.14em;
+  font-size:.78rem;
+  color:var(--white);
+}
+.swc-shot-tag svg{width:1em;height:1em;transition:transform .35s var(--ease)}
+
+@media (hover:hover){
+  .swc-shot:hover img{transform:scale(1.06);filter:saturate(1.06)}
+  .swc-shot:hover .swc-shot-tag svg{transform:translate(3px,-3px)}
+}
+.swc-shot:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+@media (max-width:860px){
+  .swc-band{grid-template-columns:1fr}
+  /* photo first on narrow screens — it is the hook */
+  .swc-shot{order:-1}
+}
+@media (max-width:620px){
+  .swc-copy .btn{width:100%;justify-content:center}
+}
+@media (prefers-reduced-motion:reduce){
+  .swc-shot img{transition:none;transform:none}
+  .swc-shot-tag svg{transition:none}
+}
