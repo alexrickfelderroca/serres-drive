@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="css/styles.css">
 <link rel="stylesheet" href="css/nav-ink.css">
 <link rel="stylesheet" href="css/transitions.css">
+<link rel="stylesheet" href="css/wave-process.css">
 </head>
 <body>
 <a href="#main" class="btn" style="position:absolute;left:-999px;top:0">Saltar al contenido</a>
@@ -76,27 +77,61 @@
   </div>
 </header>
 <section class="section wrap" id="main">
-  <div class="steps">
-    <div class="step reveal" data-d="1">
-      <div class="s-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M3 13l2-5a2 2 0 0 1 1.9-1.3h10.2A2 2 0 0 1 19 8l2 5v6a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-1H6v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><circle cx="7" cy="16" r="1"/><circle cx="17" cy="16" r="1"/></svg></div>
-      <h3><span data-es>Elige tu coche</span><span data-en>Pick your car</span></h3>
-      <p><span data-es>Explora la flota y encuentra el modelo perfecto para tu plan.</span><span data-en>Browse the fleet and find the perfect model for your plans.</span></p>
+  <!-- Process slider. This markup is the no-JS fallback and the alt-text/SEO
+       surface: four steps with four photographs, readable stacked. js/wave-process.js
+       progressively upgrades it into a single-stage slider with a canvas wave
+       distortion. If the script 404s, throws, or the visitor prefers reduced
+       motion, what stays on screen is exactly what is written here. -->
+  <div class="wp-root reveal" id="waveProcess">
+    <div class="wp-head">
+      <span class="wp-eyebrow"><span data-es>El proceso</span><span data-en>The process</span></span>
+      <div class="wp-head-right">
+        <span class="wp-hint"><span data-es>Arrastra o usa las flechas</span><span data-en>Drag or use the arrows</span></span>
+      </div>
     </div>
-    <div class="step reveal" data-d="2">
-      <div class="s-ic"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.04 3C9.4 3 4 8.4 4 15.04c0 2.12.56 4.18 1.62 6L4 29l8.16-1.58a12 12 0 0 0 3.88.64C22.7 28.06 28.1 22.66 28.1 16.02 28.1 8.4 22.68 3 16.04 3Zm0 21.9c-1.18 0-2.34-.22-3.43-.66l-.25-.1-4.84.94.97-4.72-.16-.25a9.74 9.74 0 0 1-1.49-5.18c0-5.4 4.4-9.8 9.83-9.8 5.4 0 9.8 4.4 9.8 9.8 0 5.4-4.4 9.8-9.82 9.8Z"/></svg></div>
-      <h3><span data-es>Reserva por WhatsApp</span><span data-en>Book on WhatsApp</span></h3>
-      <p><span data-es>Escríbenos con las fechas. Confirmamos disponibilidad y condiciones al momento.</span><span data-en>Message us your dates. We confirm availability and terms right away.</span></p>
-    </div>
-    <div class="step reveal" data-d="3">
-      <div class="s-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg></div>
-      <h3><span data-es>Te lo entregamos</span><span data-en>We deliver it</span></h3>
-      <p><span data-es>Recíbelo impecable donde estés, o recógelo en Barcelona. Entrega en área metro: 100&nbsp;€.</span><span data-en>Get it spotless wherever you are, or pick it up in Barcelona. Metro delivery: €100.</span></p>
-    </div>
-    <div class="step reveal" data-d="4">
-      <div class="s-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></div>
-      <h3><span data-es>Conduce</span><span data-en>Just drive</span></h3>
-      <p><span data-es>Disfruta tu experiencia. Del resto nos ocupamos nosotros.</span><span data-en>Enjoy your experience. We take care of the rest.</span></p>
-    </div>
+
+    <ol class="wp-fallback">
+      <li class="wp-item">
+        <figure class="wp-fig">
+          <img class="wp-photo" src="assets/img/process/step-1.jpg" width="1600" height="1000" loading="eager" decoding="async" fetchpriority="high" alt="BMW M3 Touring blanco sobre fondo negro de estudio">
+        </figure>
+        <div class="wp-copy">
+          <span class="wp-num" aria-hidden="true">01</span>
+          <h3 class="wp-title"><span data-es>Elige tu coche</span><span data-en>Pick your car</span></h3>
+          <p class="wp-desc"><span data-es>Explora la flota y encuentra el modelo perfecto para tu plan.</span><span data-en>Browse the fleet and find the perfect model for your plans.</span></p>
+        </div>
+      </li>
+      <li class="wp-item">
+        <figure class="wp-fig">
+          <img class="wp-photo" src="assets/img/process/step-2.jpg" width="1600" height="1000" loading="lazy" decoding="async" alt="Interior de un Porsche Cayenne con las pantallas del salpicadero encendidas">
+        </figure>
+        <div class="wp-copy">
+          <span class="wp-num" aria-hidden="true">02</span>
+          <h3 class="wp-title"><span data-es>Reserva por WhatsApp</span><span data-en>Book on WhatsApp</span></h3>
+          <p class="wp-desc"><span data-es>Escríbenos con las fechas. Confirmamos disponibilidad y condiciones al momento.</span><span data-en>Message us your dates. We confirm availability and terms right away.</span></p>
+        </div>
+      </li>
+      <li class="wp-item">
+        <figure class="wp-fig">
+          <img class="wp-photo" src="assets/img/process/step-3.jpg" width="1600" height="1000" loading="lazy" decoding="async" alt="Porsche 911 Carrera azul aparcado a la salida del taller, listo para la entrega">
+        </figure>
+        <div class="wp-copy">
+          <span class="wp-num" aria-hidden="true">03</span>
+          <h3 class="wp-title"><span data-es>Te lo entregamos</span><span data-en>We deliver it</span></h3>
+          <p class="wp-desc"><span data-es>Recíbelo impecable donde estés, o recógelo en Barcelona. Entrega en área metro: 100&nbsp;€.</span><span data-en>Get it spotless wherever you are, or pick it up in Barcelona. Metro delivery: €100.</span></p>
+        </div>
+      </li>
+      <li class="wp-item">
+        <figure class="wp-fig">
+          <img class="wp-photo" src="assets/img/process/step-4.jpg" width="1600" height="1000" loading="lazy" decoding="async" alt="Vista desde el asiento del conductor de un Audi RS Q3 circulando por un puente">
+        </figure>
+        <div class="wp-copy">
+          <span class="wp-num" aria-hidden="true">04</span>
+          <h3 class="wp-title"><span data-es>Conduce</span><span data-en>Just drive</span></h3>
+          <p class="wp-desc"><span data-es>Disfruta tu experiencia. Del resto nos ocupamos nosotros.</span><span data-en>Enjoy your experience. We take care of the rest.</span></p>
+        </div>
+      </li>
+    </ol>
   </div>
 </section>
 <section class="section" id="contact-cta">
@@ -170,5 +205,6 @@
 <script src="js/app.js"></script>
 <script src="js/nav-ink.js"></script>
 <script src="js/transitions.js"></script>
+<script src="js/wave-process.js"></script>
 </body>
 </html>

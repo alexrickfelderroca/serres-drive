@@ -1,0 +1,385 @@
+/* =====================================================================
+   SERRES DRIVE — wave-process.css
+   "Wave Distortion Slider" adapted into the 4-step process slider on
+   how.html. A centred photograph ripples under a 2D-canvas displacement
+   effect (js/wave-process.js) while split-text captions, a large display
+   numeral and a custom cursor ring frame it.
+
+   Everything is prefixed .wp-  and uses only the tokens in css/styles.css.
+   The palette is CHROME/SILVER — --gold* are legacy aliases, there is no
+   warm hue anywhere in this file.
+
+   PROGRESSIVE ENHANCEMENT CONTRACT
+   The server markup is a plain <ol> of four steps with real <img> tags and
+   both language spans. It is fully visible and readable on its own — this
+   file NEVER hides it behind html.js, because an html.js gate still leaves
+   the content dark if the script 404s or throws. Instead every slider rule
+   is scoped to .wp-root.is-enhanced, a class js/wave-process.js only adds
+   once it has successfully rebuilt the DOM. No JS, broken JS, or a thrown
+   exception mid-build all land on the same readable stacked fallback.
+   ===================================================================== */
+
+.wp-root{position:relative}
+
+/* ---------------------------------------------------------------------
+   Head strip — eyebrow label, slide counter, drag hint
+   --------------------------------------------------------------------- */
+.wp-head{
+  display:flex;align-items:baseline;justify-content:space-between;gap:18px;
+  flex-wrap:wrap;
+  padding-bottom:16px;margin-bottom:clamp(20px,3vw,32px);
+  border-bottom:1px solid var(--line);
+}
+.wp-eyebrow{
+  font-family:var(--font-head);text-transform:uppercase;
+  letter-spacing:.28em;font-size:.72rem;font-weight:600;
+  color:var(--text-mute);
+}
+.wp-head-right{display:flex;align-items:baseline;gap:18px}
+
+/* Counter is injected by JS (digits only — no translation needed). */
+.wp-counter{
+  font-family:var(--font-head);text-transform:uppercase;
+  letter-spacing:.18em;font-size:.78rem;font-weight:600;
+  color:var(--text-mute);font-variant-numeric:tabular-nums;
+}
+.wp-counter b{color:var(--gold);font-weight:600;font-size:1.15em;letter-spacing:.08em}
+
+/* The hint describes a gesture that only exists once JS has upgraded the
+   markup, so it is the one thing that stays hidden in the fallback. */
+.wp-hint{
+  font-family:var(--font-head);text-transform:uppercase;
+  letter-spacing:.2em;font-size:.7rem;color:var(--text-mute);opacity:.75;
+}
+.wp-root:not(.is-enhanced) .wp-hint{display:none}
+.wp-root:not(.is-enhanced) .wp-counter{display:none}
+
+/* ---------------------------------------------------------------------
+   FALLBACK (no JS / failed build) — four steps stacked, plainly readable
+   --------------------------------------------------------------------- */
+.wp-fallback{list-style:none;display:flex;flex-direction:column;gap:clamp(28px,5vw,56px)}
+.wp-item{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(20px,4vw,42px);align-items:center}
+.wp-fig{margin:0;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:var(--bg-2)}
+.wp-fig img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover}
+@media (max-width:860px){
+  .wp-item{grid-template-columns:1fr}
+}
+
+/* ---------------------------------------------------------------------
+   ENHANCED LAYOUT
+   .wp-stage holds every <img>, the canvas, the numeral and the ring.
+   .wp-below holds the cross-faded copy blocks and the controls.
+   --------------------------------------------------------------------- */
+.wp-root.is-enhanced .wp-fallback{display:none}
+
+.wp-shell{display:none}
+.wp-root.is-enhanced .wp-shell{display:block;position:relative}
+
+.wp-stage{
+  position:relative;
+  width:100%;max-width:1040px;margin:0 auto;
+  aspect-ratio:16/10;
+  border-radius:var(--radius);
+  border:1px solid var(--line-2);
+  background:var(--bg-2);
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  /* Split the gesture with the browser instead of fighting it.
+     pan-y   → vertical stays native, so the page still scrolls over the stage.
+     Horizontal is ours, so the browser stops firing pointercancel mid-drag and
+     pointermove keeps arriving cancelable. pinch-zoom is kept so the page
+     stays zoomable — an accessibility requirement. */
+  touch-action:pan-y pinch-zoom;
+  /* Drag feedback: js writes --wp-drag (px, rubber-banded). */
+  --wp-drag:0px;
+}
+.wp-stage:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+/* The whole plate slides a little with the drag; the canvas rides with it. */
+.wp-plate{
+  position:absolute;inset:0;
+  transform:translate3d(var(--wp-drag),0,0);
+  will-change:transform;
+}
+.wp-root.is-dragging .wp-plate{transition:none}
+.wp-root:not(.is-dragging) .wp-plate{transition:transform .5s var(--ease)}
+
+/* Every slide image is stacked and cross-faded. These stay in the DOM under
+   the canvas on purpose: if the canvas never goes live (reduced motion, small
+   viewport, low-capability device, or any thrown error) the photographs are
+   still the thing the visitor sees. */
+.wp-img{
+  position:absolute;inset:0;
+  width:100%;height:100%;object-fit:cover;
+  opacity:0;transition:opacity .5s var(--ease);
+}
+.wp-img.is-current{opacity:1}
+
+.wp-canvas{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  display:block;
+  opacity:0;transition:opacity .35s var(--ease);
+  pointer-events:none;
+}
+/* Only once the context exists AND a first frame has actually been painted. */
+.wp-canvas.is-live{opacity:1}
+
+/* Vignette so the numeral and the frame edge read against any photo. */
+.wp-stage::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(to top,rgba(10,10,11,.72) 0%,rgba(10,10,11,0) 46%),
+    radial-gradient(120% 90% at 50% 40%,rgba(10,10,11,0) 45%,rgba(10,10,11,.5) 100%);
+}
+
+/* ---------------------------------------------------------------------
+   Large display numeral, laid over the photograph
+   --------------------------------------------------------------------- */
+.wp-numwrap{
+  position:absolute;left:clamp(16px,3vw,34px);bottom:clamp(2px,1.4vw,10px);
+  pointer-events:none;z-index:2;
+  /* Sized here so the stacked absolute children have a box to fill. */
+  width:clamp(96px,17vw,210px);height:clamp(84px,15vw,180px);
+}
+
+/* BASE = the fallback's modest numeral above each title. It must be visible
+   on its own; only the enhanced branch below promotes it to the giant
+   overlay. Anything hidden here would stay hidden if JS never ran. */
+.wp-num{
+  display:block;margin-bottom:6px;
+  font-family:var(--font-head);font-weight:700;
+  font-size:2.3rem;line-height:1;letter-spacing:-.01em;
+  background:var(--chrome-grad);
+  -webkit-background-clip:text;background-clip:text;
+  color:transparent;-webkit-text-fill-color:transparent;
+}
+.wp-root.is-enhanced .wp-num{
+  position:absolute;left:0;bottom:0;margin:0;
+  font-size:clamp(4.6rem,13vw,10.5rem);
+  line-height:.88;letter-spacing:-.02em;
+  opacity:0;transform:translateY(14px);
+  transition:opacity .45s var(--ease),transform .45s var(--ease);
+}
+.wp-root.is-enhanced .wp-num.is-current{opacity:1;transform:none}
+
+/* ---------------------------------------------------------------------
+   Custom cursor ring — fine pointers only, never on touch
+   Positioned inside the stage (not fixed) so an ancestor transform, such as
+   the site-wide .reveal translate, can never detach it from the photograph.
+   --------------------------------------------------------------------- */
+.wp-cursor{display:none}
+@media (any-pointer:fine){
+  .wp-cursor{
+    display:block;position:absolute;top:0;left:0;z-index:3;
+    width:54px;height:54px;border-radius:50%;
+    border:1px solid rgba(200,206,216,.5);
+    background:rgba(200,206,216,.06);
+    backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);
+    pointer-events:none;opacity:0;
+    /* Centred with translate(-50%,-50%), NOT negative margins. The ring grows
+       54px -> 82px on grab, and a centring margin would have to jump -27px ->
+       -41px in the same instant; margin is not animatable in step with the
+       size here, so the ring lurched up-left at the start of every drag.
+       A percentage translate re-resolves against the current used size every
+       frame, so the ring stays centred all the way through the growth. */
+    transform:translate3d(var(--wp-cx,0px),var(--wp-cy,0px),0) translate(-50%,-50%) scale(.6);
+    transition:opacity .28s var(--ease),transform .12s linear,
+               width .28s var(--ease),height .28s var(--ease),
+               border-color .28s var(--ease),background .28s var(--ease);
+  }
+  .wp-cursor.is-on{opacity:1;transform:translate3d(var(--wp-cx,0px),var(--wp-cy,0px),0) translate(-50%,-50%) scale(1)}
+  .wp-cursor.is-grab{
+    width:82px;height:82px;
+    border-color:rgba(200,206,216,.9);background:rgba(200,206,216,.12);
+  }
+  /* The ring replaces the pointer over the plate — same pattern the homepage
+     experience already uses (.home-exp.ring-active{cursor:none}). */
+  .wp-root.is-enhanced.wp-ring .wp-stage{cursor:none}
+}
+
+/* ---------------------------------------------------------------------
+   Copy blocks — stacked and cross-faded, one per step
+   --------------------------------------------------------------------- */
+.wp-below{
+  max-width:1040px;margin:clamp(22px,3.4vw,38px) auto 0;
+  display:grid;grid-template-columns:1fr auto;gap:clamp(18px,4vw,48px);
+  align-items:end;
+}
+/* Stacking + cross-fade is an ENHANCED-ONLY behaviour. Left unscoped, these
+   rules hid every step's title and copy in the fallback — the photographs
+   showed but the words did not. The whole point of the fallback is the words. */
+.wp-root.is-enhanced .wp-copywrap{position:relative;min-height:8.5em}
+.wp-root.is-enhanced .wp-copy{
+  position:absolute;inset:0;
+  opacity:0;visibility:hidden;
+  transition:opacity .4s var(--ease),visibility .4s var(--ease);
+}
+.wp-root.is-enhanced .wp-copy.is-current{opacity:1;visibility:visible;position:relative}
+
+.wp-title{
+  font-family:var(--font-head);text-transform:uppercase;font-weight:700;
+  font-size:clamp(1.9rem,4.4vw,3.15rem);
+  line-height:.98;letter-spacing:-.015em;
+  color:var(--white);margin-bottom:14px;
+}
+.wp-desc{color:var(--text-dim);font-size:1rem;max-width:52ch;line-height:1.6}
+
+/* Split text. js/wave-process.js wraps each word of EACH language span
+   separately, so the [data-es]/[data-en] parents survive untouched and the
+   bilingual CSS keeps working. .wp-w is the clipping mask, .wp-wi the mover. */
+/* The mask box is padded and pulled straight back by an equal negative margin,
+   so layout is untouched but the clip box is taller than the .98 line box.
+   Without the top padding an uppercase Spanish accent (RESERVÁ, ELIGÍ) sits
+   above cap height and gets sliced off by overflow:hidden. The bottom padding
+   is kept under .05em on purpose: the reveal starts at translateY(105%) of a
+   .98em line box (1.029em), so the clip box bottom must stay above that or the
+   word's top edge would peek out before it slides up. */
+.wp-w{
+  display:inline-block;overflow:hidden;vertical-align:top;
+  padding:.16em .03em .04em;margin:-.16em -.03em -.04em;
+}
+/* Deliberately NO hidden resting state: the keyframes below carry their own
+   `from`, so a split word is readable at every moment except while it is
+   actually animating. If the build throws between splitting and wiring, or
+   the class is never applied, the title still reads. */
+.wp-wi{display:inline-block}
+.wp-root.is-enhanced .wp-copy.is-current .wp-title.wp-play .wp-wi{
+  animation:wp-word-in .62s var(--ease) both;
+  animation-delay:calc(var(--wp-i,0) * 42ms);
+}
+@keyframes wp-word-in{
+  from{transform:translateY(105%);opacity:0}
+  to{transform:translateY(0);opacity:1}
+}
+
+/* ---------------------------------------------------------------------
+   Controls
+   --------------------------------------------------------------------- */
+.wp-ui{display:flex;align-items:center;gap:12px}
+.wp-btn{
+  width:52px;height:52px;flex:0 0 auto;
+  display:grid;place-items:center;
+  border-radius:50%;border:1px solid var(--line-2);
+  background:transparent;color:var(--text-dim);cursor:pointer;
+  transition:color .25s var(--ease),border-color .25s var(--ease),
+             background .25s var(--ease),transform .25s var(--ease),opacity .25s var(--ease);
+}
+.wp-btn svg{width:19px;height:19px}
+.wp-btn:hover:not(:disabled){color:var(--white);border-color:var(--line-strong);transform:translateY(-1px)}
+.wp-btn:disabled{opacity:.3;cursor:default}
+
+.wp-dots{display:flex;gap:9px;margin:0 4px}
+.wp-dot{
+  width:26px;height:26px;padding:0;border:0;background:transparent;cursor:pointer;
+  display:grid;place-items:center;
+}
+.wp-dot::before{
+  content:"";width:100%;height:2px;background:rgba(200,206,216,.28);
+  transition:background .3s var(--ease),transform .3s var(--ease);
+}
+.wp-dot:hover::before{background:rgba(200,206,216,.5)}
+.wp-dot[aria-current="true"]::before{background:var(--gold-grad);transform:scaleY(2)}
+
+/* Screen-reader-only live region announcing each slide change. */
+.wp-sr{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0;
+}
+
+/* ---------------------------------------------------------------------
+   Responsive
+   --------------------------------------------------------------------- */
+@media (max-width:1080px){
+  .wp-copywrap{min-height:9.5em}
+}
+@media (max-width:860px){
+  .wp-stage{aspect-ratio:4/3}
+  /* One column: copy above, controls below it and left-aligned. */
+  .wp-below{grid-template-columns:1fr;align-items:start;gap:22px}
+  .wp-copywrap{min-height:11em}
+}
+@media (max-width:620px){
+  .wp-head{flex-direction:column;gap:8px}
+  .wp-stage{aspect-ratio:3/4;max-height:74vh}
+  .wp-btn{width:46px;height:46px}
+  .wp-copywrap{min-height:13em}
+  /* js also drops the canvas below this width — the still photo is the
+     right trade on a small, usually slower, usually metered device. */
+}
+
+/* ---------------------------------------------------------------------
+   Reduced motion — static, readable, never blank
+   js additionally skips the rAF loop entirely; these rules make sure nothing
+   is left mid-animation if the preference flips at runtime.
+   --------------------------------------------------------------------- */
+@media (prefers-reduced-motion:reduce){
+  .wp-plate{transform:none;transition:none}
+  .wp-img,.wp-num,.wp-copy{transition-duration:.001ms}
+  .wp-wi{transform:none!important;opacity:1!important;animation:none!important}
+  .wp-cursor{display:none}
+  .wp-root.is-enhanced.wp-ring .wp-stage{cursor:auto}
+  .wp-canvas{transition:none}
+}
+
+/* Coarse pointers never get the ring, belt-and-braces alongside the
+   any-pointer:fine gate above. */
+@media (pointer:coarse){
+  .wp-cursor{display:none}
+  .wp-root.is-enhanced.wp-ring .wp-stage{cursor:auto}
+}
+
+/* ---------------------------------------------------------------------
+   Print
+   Once the build succeeds there IS no fallback list to restore — js moves
+   every image, numeral and copy block out of it and then deletes it. So the
+   enhanced DOM is what has to print, un-stacked: all four copy blocks laid
+   out in flow instead of cross-faded on top of each other.
+
+   The stage does not print. All four photographs live in one absolutely
+   positioned plate, so it could only ever yield the ONE frame that happens to
+   be current — a single arbitrary photo standing in for a four-step process
+   is worse than none, and the canvas on top of them is empty on paper anyway.
+   The numerals are collateral of that (they are children of the stage), so
+   they are reconstructed from a counter next to the copy they belong to.
+
+   styles.css already prints body as #000 on #fff, so every colour here is
+   reset to inherit — --white on white paper prints as nothing at all.
+   --------------------------------------------------------------------- */
+@media print{
+  .wp-root.is-enhanced .wp-shell{display:block}
+  .wp-root.is-enhanced .wp-stage,
+  .wp-root.is-enhanced .wp-ui,
+  .wp-root.is-enhanced .wp-sr,
+  .wp-hint,.wp-counter{display:none!important}
+
+  .wp-root.is-enhanced .wp-below{display:block;margin-top:0}
+  .wp-root.is-enhanced .wp-copywrap{position:static;min-height:0;counter-reset:wp-step}
+  .wp-root.is-enhanced .wp-copy{
+    position:relative!important;inset:auto!important;
+    opacity:1!important;visibility:visible!important;
+    margin-bottom:1.6em;
+    page-break-inside:avoid;break-inside:avoid;
+  }
+  .wp-root.is-enhanced .wp-copy::before{
+    counter-increment:wp-step;
+    content:counter(wp-step,decimal-leading-zero);
+    display:block;margin-bottom:6px;
+    font-family:var(--font-head);font-weight:700;
+    font-size:2.3rem;line-height:1;letter-spacing:-.01em;
+    color:inherit;
+  }
+  /* Unscoped on purpose: the no-JS fallback prints too, and its title is
+     --white while its numeral is a gradient behind transparent text — both
+     print as nothing at all on white paper. */
+  .wp-title,.wp-desc{color:inherit}
+  .wp-num{
+    background:none;color:inherit;
+    -webkit-background-clip:border-box;background-clip:border-box;
+    -webkit-text-fill-color:currentColor;
+  }
+  /* A title caught mid-reveal would otherwise print with its words parked
+     below the mask, i.e. blank. Freeze every word at rest and open the mask. */
+  .wp-w{overflow:visible}
+  .wp-wi{animation:none!important;transform:none!important;opacity:1!important}
+}
