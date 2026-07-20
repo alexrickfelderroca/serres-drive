@@ -1,0 +1,193 @@
+/* =====================================================================
+   SERRES DRIVE — fleet-gallery.css
+   "Mouse Scale Gallery" fleet listing: cars in pairs, the two panels of a
+   row trade widths as the cursor crosses them (widths are driven by
+   --fg-a / --fg-b, eased per-frame in js/fleet-gallery.js).
+   Everything is prefixed .fg-  and uses only the tokens in css/styles.css.
+   Default state = fully visible and usable; JS opts into the animated state.
+   ===================================================================== */
+
+.fg-gallery{position:relative}
+
+/* ---------------------------------------------------------------------
+   Filter bar
+   Chips are emitted as class="chip fg-chip" so they inherit the site
+   pattern; the .fg-chip rules below repeat the same values so this file
+   still looks right on its own.
+   --------------------------------------------------------------------- */
+.fg-bar{
+  display:flex;flex-direction:column;gap:15px;
+  margin-bottom:clamp(26px,4vw,44px);
+  padding-bottom:22px;border-bottom:1px solid var(--line);
+}
+.fg-group{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.fg-group-label{
+  font-family:var(--font-head);text-transform:uppercase;letter-spacing:.22em;
+  font-size:.72rem;font-weight:600;color:var(--text-mute);
+  flex:0 0 auto;min-width:104px;
+}
+.fg-chips{display:flex;flex-wrap:wrap;gap:9px}
+
+.fg-chip{
+  font-family:var(--font-head);text-transform:uppercase;letter-spacing:.08em;
+  font-weight:600;font-size:.92rem;line-height:1.25;
+  padding:8px 17px;border-radius:100px;border:1px solid var(--line-2);
+  color:var(--text-dim);background:transparent;cursor:pointer;
+  transition:color .25s var(--ease),border-color .25s var(--ease),
+             background .25s var(--ease),transform .25s var(--ease),opacity .25s var(--ease);
+}
+.fg-chip:hover{color:var(--white);transform:translateY(-1px)}
+.fg-chip[aria-pressed="true"]{color:#0c0d11;background:var(--gold-grad);border-color:transparent}
+.fg-chip .fg-n{opacity:.6;font-size:.85em;margin-left:6px}
+/* Chip that yields nothing under the *other* active filter — still clickable. */
+.fg-chip--empty{opacity:.42}
+.fg-chip--empty[aria-pressed="true"]{opacity:1}
+
+.fg-count{
+  font-family:var(--font-head);text-transform:uppercase;letter-spacing:.18em;
+  font-size:.78rem;color:var(--text-mute);margin-top:2px;
+}
+.fg-count b{color:var(--gold);font-weight:600;letter-spacing:.06em;font-size:1.05em}
+
+/* ---------------------------------------------------------------------
+   Rows + panels
+   --------------------------------------------------------------------- */
+.fg-rows{--fg-gap:14px;display:flex;flex-direction:column;gap:var(--fg-gap)}
+
+.fg-row{
+  --fg-a:50%;--fg-b:50%;
+  display:flex;gap:var(--fg-gap);
+  height:clamp(300px,38vw,540px);
+}
+/* No transition here on purpose: the width is eased frame-by-frame in JS. */
+.fg-row>.fg-panel{flex:0 0 auto;min-width:0}
+.fg-row>.fg-panel:first-child{flex-basis:calc(var(--fg-a) - var(--fg-gap)/2)}
+.fg-row>.fg-panel:last-child{flex-basis:calc(var(--fg-b) - var(--fg-gap)/2)}
+.fg-row--solo>.fg-panel:first-child,
+.fg-row--solo>.fg-panel:last-child{flex-basis:100%}
+
+.fg-panel{
+  position:relative;display:block;overflow:hidden;
+  border-radius:var(--radius);border:1px solid var(--line);
+  background:var(--panel);
+  transition:border-color .4s var(--ease),box-shadow .4s var(--ease);
+}
+.fg-panel:hover{border-color:var(--line-strong);box-shadow:var(--shadow)}
+
+/* Neutral while the photo loads. The car's accent is deliberately NOT used
+   here: a bright body colour (the Huracán's green, say) would flash across the
+   whole tile before the image decodes. The accent is only for .fg-noimg below. */
+.fg-media{position:absolute;inset:0;display:block;background:var(--panel-2)}
+.fg-img{
+  width:100%;height:100%;object-fit:cover;object-position:center;
+  transform:scale(1.004);transform-origin:center;
+  filter:brightness(.82) saturate(.95);
+  transition:transform .6s var(--ease),filter .6s var(--ease);
+}
+.fg-panel:hover .fg-img{transform:scale(1.06);filter:brightness(.99) saturate(1.03)}
+.fg-panel:focus-visible .fg-img{transform:scale(1.06);filter:brightness(.99) saturate(1.03)}
+/* Both photo paths failed: the car's accent colour carries the panel. */
+.fg-panel.fg-noimg .fg-media{
+  background:linear-gradient(155deg,rgba(255,255,255,.10),rgba(0,0,0,.62)),var(--fg-accent,var(--panel-2));
+}
+
+.fg-scrim{
+  position:absolute;inset:0;display:block;pointer-events:none;
+  background:linear-gradient(to top,
+    rgba(6,6,8,.90) 0%,rgba(6,6,8,.58) 26%,rgba(6,6,8,.10) 58%,rgba(6,6,8,.26) 100%);
+  opacity:.86;transition:opacity .5s var(--ease);
+}
+.fg-panel:hover .fg-scrim{opacity:1}
+
+.fg-tag{
+  position:absolute;top:clamp(14px,1.6vw,20px);left:clamp(16px,2vw,26px);
+  display:inline-block;
+  font-family:var(--font-head);text-transform:uppercase;letter-spacing:.2em;
+  font-size:.7rem;font-weight:600;color:var(--gold);
+  padding:6px 13px;border:1px solid var(--line-2);border-radius:100px;
+  background:rgba(10,10,11,.42);
+  -webkit-backdrop-filter:blur(9px);backdrop-filter:blur(9px);
+}
+
+/* Name + price: hidden until the panel is hovered or focused. */
+.fg-info{
+  position:absolute;
+  left:clamp(16px,2.4vw,34px);right:clamp(16px,2.4vw,34px);bottom:clamp(16px,2.4vw,30px);
+  display:block;pointer-events:none;
+  opacity:0;transform:translateY(12px);
+  transition:opacity .45s var(--ease),transform .55s var(--ease);
+}
+.fg-panel:hover .fg-info{opacity:1;transform:translateY(0)}
+.fg-panel:focus-visible .fg-info{opacity:1;transform:translateY(0)}
+
+.fg-name{
+  display:block;
+  font-family:var(--font-head);font-weight:700;text-transform:uppercase;
+  font-size:clamp(20px,2.2vw,34px);line-height:1.02;letter-spacing:.01em;
+  background:var(--gold-grad);
+  -webkit-background-clip:text;background-clip:text;
+  color:transparent;-webkit-text-fill-color:transparent;
+}
+/* Without background-clip:text the chrome fill would render invisible. */
+@supports not ((-webkit-background-clip:text) or (background-clip:text)){
+  .fg-name{background:none;color:var(--gold-soft);-webkit-text-fill-color:currentColor}
+}
+.fg-price{
+  display:block;margin-top:8px;
+  font-family:var(--font-body);font-size:.92rem;line-height:1.35;color:var(--text-dim);
+}
+
+/* ---------------------------------------------------------------------
+   Empty state
+   --------------------------------------------------------------------- */
+.fg-empty{
+  padding:clamp(38px,7vw,80px) 22px;text-align:center;
+  border:1px dashed var(--line-2);border-radius:var(--radius);background:var(--bg-2);
+}
+.fg-empty-t{color:var(--text-dim);font-size:1.05rem}
+.fg-reset{margin-top:20px}
+
+/* ---------------------------------------------------------------------
+   Scroll reveal — opt-in only (.fg-anim is added by JS after a successful
+   init), so rows stay visible if the script never runs.
+   --------------------------------------------------------------------- */
+.fg-rows.fg-anim>.fg-row{
+  opacity:0;transform:translateY(22px);
+  transition:opacity .7s var(--ease),transform .8s var(--ease);
+}
+.fg-rows.fg-anim>.fg-row.fg-in{opacity:1;transform:none}
+
+/* ---------------------------------------------------------------------
+   Responsive — at 900px and below it is one car per row and no width trading
+   (it is a mouse effect); names are permanently visible.
+   This query and the script's trade query are exact complements: JS matches
+   (min-width:901px), so at exactly 900px only the stacked layout is live and
+   nothing writes --fg-a / --fg-b behind it.
+   --------------------------------------------------------------------- */
+@media (max-width:900px){
+  .fg-row{flex-direction:column;height:auto}
+  .fg-row>.fg-panel:first-child,
+  .fg-row>.fg-panel:last-child,
+  .fg-row--solo>.fg-panel:first-child{flex-basis:auto;width:100%;min-height:250px;aspect-ratio:16/10}
+  .fg-info{opacity:1;transform:none}
+  .fg-group{align-items:flex-start;gap:10px}
+  .fg-group-label{min-width:0;flex:1 1 100%}
+}
+
+/* Touch / no true hover: never hide the car name behind a hover state. */
+@media (hover:none),(pointer:coarse){
+  .fg-info{opacity:1;transform:none}
+  .fg-img{filter:brightness(.9) saturate(1)}
+  .fg-scrim{opacity:1}
+}
+
+@media (prefers-reduced-motion:reduce){
+  /* Static equal-width pairs; JS never starts a loop, this is belt and braces. */
+  .fg-row{--fg-a:50% !important;--fg-b:50% !important}
+  .fg-info{opacity:1;transform:none;transition:none}
+  .fg-img,.fg-scrim,.fg-panel,.fg-chip{transition:none}
+  .fg-panel:hover .fg-img{transform:none}
+  .fg-panel:focus-visible .fg-img{transform:none}
+  .fg-chip:hover{transform:none}
+  .fg-rows.fg-anim>.fg-row{opacity:1;transform:none;transition:none}
+}

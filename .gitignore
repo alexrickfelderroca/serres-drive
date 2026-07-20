@@ -1,0 +1,89 @@
+# =====================================================================
+# SERRES DRIVE — .gitignore
+# Rule of thumb: the repo holds ONLY what a browser actually requests.
+# Everything else (original downloads, working folders, duplicates) stays
+# local. Written BEFORE the first commit on purpose — once something is in
+# git history it cannot be removed without rewriting that history, and
+# Hostinger serves the repo root, so anything committed is also reachable
+# from the live domain.
+# =====================================================================
+
+# --- System / editor -------------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+
+# Credentials. There are none today; the rule is preventive.
+.env
+.env.*
+!.env.example
+
+# --- Scrape working folder (do not publish) --------------------------
+# sicurcars-scrape/ is research on a third party: RESUMEN.md documents how
+# their Instagram was captured after a 401 anti-bot block and proposes a
+# tool to finish the job; it also carries their business email and phone.
+# media/ is a byte-identical duplicate of assets/img/cars/scrape/. No page
+# on the site references any of it (grep "sicurcars-scrape" in html/css/js
+# returns nothing), and Hostinger would expose it at /sicurcars-scrape/.
+sicurcars-scrape/
+
+# --- Original 3D model downloads -------------------------------------
+# The four Sketchfab bundles are the raw material that assets/models/*.glb
+# were built from. A .glb already embeds its textures and a browser cannot
+# open a .rar, so this is 81 MB of dead weight — and redistributing a
+# vendor source/ folder is what paid model licences typically forbid.
+2020-audi-rs6-avant/
+2020-mercedes-benz-g-class-amg-g63/
+2023-bmw-m3-touring (1)/
+porsche-gt3-rs (1)/
+
+# In case a model is ever unpacked inside the repo.
+*.rar
+*.zip
+*.7z
+*.fbx
+*.blend
+*.usdz
+
+# --- Loose videos at the root ----------------------------------------
+# Animation tests no page references. The only video that plays is
+# assets/img/hero.mp4 (js/app.js:353).
+3d-animation-*.mp4
+
+# --- Unused fleet photography ----------------------------------------
+# assets/img/cars/sicurcars/ holds 31 unretouched copies that nothing
+# requests — the site reads cars/<slug>.jpg and cars/ring/<slug>.jpg.
+# They still show the SICURCARS plate, so they are the last thing that
+# belongs in a public repo. Kept on disk as the originals.
+assets/img/cars/sicurcars/
+
+# --- Instagram posters: only the 15 actually displayed ---------------
+# The folder is 134 MB, but js/media-map.js names just 15 .jpg files and
+# js/car.js:228 renders them as <img> — there is no code path for video,
+# so the 16 .mp4 files (128 MB) are requested by nobody.
+# The whole folder is ignored and the 15 used files are re-admitted below.
+# If you add a photo to media-map.js, add it HERE too with a leading "!".
+assets/img/cars/scrape/*
+!assets/img/cars/scrape/2026-01-30_DUIayrkjuP0.jpg
+!assets/img/cars/scrape/2026-02-12_DUqzW7uDcaL.jpg
+!assets/img/cars/scrape/2026-02-20_DU-RvxBDoDm.jpg
+!assets/img/cars/scrape/2026-02-27_DVRT_hDjSAV.jpg
+!assets/img/cars/scrape/2026-03-05_DVf902oDhL0.jpg
+!assets/img/cars/scrape/2026-03-05_DVg0NxTDWMO.jpg
+!assets/img/cars/scrape/2026-03-13_DV08YVODvdx.jpg
+!assets/img/cars/scrape/2026-03-18_DWBjCCLjXtQ.jpg
+!assets/img/cars/scrape/2026-04-10_DW9XTMvjaXY.jpg
+!assets/img/cars/scrape/2026-04-15_DXKhJ8UDTKH.jpg
+!assets/img/cars/scrape/2026-04-23_DXe_yzLDf4H.jpg
+!assets/img/cars/scrape/2026-05-06_DYAeFsqjRWl.jpg
+!assets/img/cars/scrape/2026-05-10_DYKxvRLDb-7.jpg
+!assets/img/cars/scrape/2026-05-17_DYc8A-dN9E3.jpg
+!assets/img/cars/scrape/2026-05-26_DY0Q91JN29-.jpg
+
+# --- No build step here, but just in case ----------------------------
+node_modules/
+dist/
+*.log

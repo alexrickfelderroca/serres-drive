@@ -1,0 +1,115 @@
+/* =====================================================================
+   SERRES DRIVE — transitions.css
+   Async slide page transitions. Outgoing content pushes LEFT (scaled +
+   dimmed), incoming content slides in from the RIGHT. Reversed on back.
+
+   Every class is prefixed pt- so nothing collides with styles.css.
+   Uses only existing tokens (--ease, --gold, --gold-grad). No new colours.
+
+   IMPORTANT — the default state below is "fully visible, no transform".
+   Nothing here can hide content. js/transitions.js opts in by adding
+   .pt-ready to <html>; if the JS never runs, these rules never apply.
+   ===================================================================== */
+
+:root{
+  /* Keep in sync with DUR in js/transitions.js. */
+  --pt-dur:.45s;
+}
+
+/* Swappable region. Neutral by default. */
+.pt-root{position:relative}
+
+html.pt-ready .pt-root{
+  transform-origin:50% 30%;
+  -webkit-backface-visibility:hidden;
+  backface-visibility:hidden;
+}
+
+/* While a transition is in flight the content sits off-canvas; make sure
+   that never produces a horizontal scrollbar or a stray click target. */
+html.pt-transitioning,
+html.pt-transitioning body{overflow-x:hidden}
+html.pt-transitioning .pt-root{pointer-events:none}
+
+/* ---------------------------------------------------------------------
+   CSS-driven fallback, used when GSAP is absent (it is only loaded on
+   index.html, so in practice this is the path every inner page takes).
+   .pt-anim is added for the duration of a tween and removed after.
+   --------------------------------------------------------------------- */
+html.pt-ready .pt-root.pt-anim{
+  transition:transform var(--pt-dur) var(--ease),opacity var(--pt-dur) var(--ease);
+  will-change:transform,opacity;
+}
+
+/* Suppress the transition while a start state is stamped on. */
+html.pt-ready .pt-root.pt-no-tween{transition:none !important}
+
+/* OUT — forward pushes left, back pushes right. */
+html.pt-ready .pt-root.pt-out-left{transform:translate3d(-8vw,0,0) scale(.94);opacity:.35}
+html.pt-ready .pt-root.pt-out-right{transform:translate3d(8vw,0,0) scale(.94);opacity:.35}
+
+/* IN start states — forward enters from the right edge, back from the left. */
+html.pt-ready .pt-root.pt-from-right{transform:translate3d(100%,0,0);opacity:1}
+html.pt-ready .pt-root.pt-from-left{transform:translate3d(-100%,0,0);opacity:1}
+
+/* ---------------------------------------------------------------------
+   Loading affordance. The outgoing page is dimmed and inert while we
+   fetch; on a slow connection that reads as a frozen page. A 2px chrome
+   bar across the top says "something is happening". Purely decorative:
+   it exists only while html.pt-transitioning is set, and transitions.js
+   removes that class on every exit path, watchdogs included.
+   --------------------------------------------------------------------- */
+html.pt-transitioning body::after{
+  content:"";
+  position:fixed;
+  top:0;left:0;right:0;
+  height:2px;
+  z-index:9999;
+  pointer-events:none;
+  transform-origin:0 50%;
+  background:var(--gold-grad,var(--gold,#c9cdd7));
+  animation:pt-progress 2.6s cubic-bezier(.2,.85,.25,1) forwards;
+}
+
+@keyframes pt-progress{
+  0%  {transform:scaleX(0);opacity:.9}
+  25% {transform:scaleX(.42)}
+  60% {transform:scaleX(.74)}
+  100%{transform:scaleX(.97);opacity:1}
+}
+
+/* Screen-reader-only route announcement (created by transitions.js). */
+.pt-live{
+  position:absolute;width:1px;height:1px;
+  margin:-1px;padding:0;overflow:hidden;
+  clip:rect(0 0 0 0);clip-path:inset(50%);
+  white-space:nowrap;border:0;
+}
+
+/* The swapped region takes focus after a navigation; never ring it. */
+.pt-root:focus{outline:none}
+
+/* ---------------------------------------------------------------------
+   Reduced motion: the navigation still WORKS (content swaps, history and
+   title update) — only the movement is removed. The progress bar stays,
+   as a static rule rather than an animated one, so the "something is
+   loading" signal is not lost.
+   --------------------------------------------------------------------- */
+@media (prefers-reduced-motion:reduce){
+  html.pt-ready .pt-root,
+  html.pt-ready .pt-root.pt-anim,
+  html.pt-ready .pt-root.pt-out-left,
+  html.pt-ready .pt-root.pt-out-right,
+  html.pt-ready .pt-root.pt-from-right,
+  html.pt-ready .pt-root.pt-from-left{
+    transition:none !important;
+    transform:none !important;
+    opacity:1 !important;
+    will-change:auto;
+  }
+  html.pt-transitioning body::after{
+    animation:none;
+    transform:none;
+    opacity:.85;
+  }
+}

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0e0e13"/><stop offset="1" stop-color="#08080a"/></linearGradient>
+    <radialGradient id="glow" cx="78%" cy="12%" r="70%"><stop offset="0" stop-color="#c9ccd4" stop-opacity=".28"/><stop offset="1" stop-color="#c9ccd4" stop-opacity="0"/></radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8a8d97"/><stop offset=".4" stop-color="#ffffff"/><stop offset=".65" stop-color="#c9ccd4"/><stop offset="1" stop-color="#a6a6b0"/></linearGradient>
+    <linearGradient id="chrome" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fdfdfe"/><stop offset=".5" stop-color="#9a9aa3"/><stop offset="1" stop-color="#e7e7ec"/></linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <g opacity=".08" stroke="#c9ccd4"><g transform="translate(600,560)"><line x1="-700" y1="0" x2="-400" y2="-380"/><line x1="-600" y1="0" x2="-260" y2="-380"/><line x1="-500" y1="0" x2="-120" y2="-380"/><line x1="-400" y1="0" x2="20" y2="-380"/><line x1="-300" y1="0" x2="160" y2="-380"/><line x1="-200" y1="0" x2="300" y2="-380"/><line x1="-100" y1="0" x2="440" y2="-380"/><line x1="0" y1="0" x2="580" y2="-380"/><line x1="100" y1="0" x2="720" y2="-380"/><line x1="200" y1="0" x2="860" y2="-380"/><line x1="300" y1="0" x2="1000" y2="-380"/><line x1="400" y1="0" x2="1140" y2="-380"/><line x1="500" y1="0" x2="1280" y2="-380"/><line x1="600" y1="0" x2="1420" y2="-380"/></g></g>
+  <line x1="90" y1="120" x2="1110" y2="120" stroke="url(#gold)" stroke-width="2" opacity=".5"/>
+  <text x="90" y="100" font-family="'Barlow Condensed',sans-serif" font-size="26" letter-spacing="8" fill="#c9ccd4">ALQUILER DE LUJO · BARCELONA</text>
+  <text x="86" y="330" font-family="'Barlow Condensed',sans-serif" font-weight="700" font-size="150" letter-spacing="-2" fill="url(#chrome)">CONDUCE TU <tspan fill="url(#gold)">SUEÑO</tspan></text>
+  <text x="90" y="400" font-family="'DM Sans',sans-serif" font-size="30" fill="#a6a6b0">Deportivos · SUV · Descapotables · Entrega a domicilio · Reserva por WhatsApp</text>
+  <text x="90" y="560" font-family="'Barlow Condensed',sans-serif" font-weight="700" font-size="52" letter-spacing="1" fill="url(#chrome)">SERRES<tspan fill="url(#gold)"> DRIVE</tspan></text>
+</svg>

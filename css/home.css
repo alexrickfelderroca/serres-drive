@@ -1,0 +1,217 @@
+/* =====================================================================
+   SERRES DRIVE — home.css
+   DARK "tumble scrollytelling" home experience, adapted from the
+   "Floating Chair" reference (oak atelier) and re-themed to Serres:
+   near-black canvas, silver/chrome accent, Barlow Condensed + DM Sans.
+
+   The GT3 RS bobs and tumbles end-over-end (fixed, centre screen) while
+   the INTRO headline, the COLLECTION list and the OUTRO scroll past it;
+   the outro reveals line-by-line. Scoped to .home-exp so the rest of the
+   site is untouched.
+
+   Fail-safe: every section holds real text (nothing hidden by default);
+   if JS/WebGL never run the sections read as clean dark panels + the GT3
+   poster, and the outro lines stay visible.
+   ===================================================================== */
+
+.home-exp{
+  --oa-mute:#55565c;          /* muted "archive" grey */
+  --oa-mute-2:#787982;
+  background:var(--bg);
+}
+
+/* ---------- Lenis smooth-scroll plumbing ----------
+   REQUIRED: without this, the site's `html{scroll-behavior:smooth}` fights
+   Lenis and wheel/trackpad scrolling silently stops working (only dragging
+   the scrollbar works). This override lets Lenis own the scroll. */
+html.lenis, html.lenis body { height: auto; }
+html.lenis, .lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: clip; }
+.lenis.lenis-smooth iframe { pointer-events: none; }
+
+/* fixed dark backdrop (subtle chrome glow, no grid) */
+.home-exp .oa-backdrop{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(120% 85% at 50% -10%, rgba(200,206,216,.10), transparent 55%),
+    radial-gradient(90% 80% at 85% 108%, rgba(90,120,180,.07), transparent 60%),
+    var(--bg);
+}
+
+/* fixed WebGL stage — the GT3 RS tumbles here, in front of the copy */
+.home-exp .sd-model{position:fixed;inset:0;height:100svh;width:100%;z-index:3;
+  pointer-events:none;opacity:0;transition:opacity .8s var(--ease)}
+.home-exp .sd-model.is-live{opacity:1}
+.home-exp .sd-model canvas{display:block;width:100%!important;height:100%!important}
+
+/* static GT3 poster (before/without WebGL) — sits BEHIND the copy so the
+   headline stays readable in the reduced-motion / no-JS fail-safe */
+.home-exp .sd-fallback{position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:center/contain no-repeat url("../assets/img/cars/renders/gt3.jpeg");
+  opacity:.9;transition:opacity .6s var(--ease)}
+/* once the live car has loaded, the poster stays hidden (incl. the outro fade) */
+.home-exp.car-loaded .sd-fallback{opacity:0}
+
+/* the copy sits above the backdrop + poster, below the live car canvas */
+.home-exp .oa-exp{position:relative;z-index:2;color:var(--text)}
+.home-exp .oa-exp section{width:100vw;min-height:100vh}
+
+/* ---------- shared type ---------- */
+.home-exp .oa-exp h1{font-family:var(--font-head);font-weight:700;text-transform:uppercase;
+  line-height:.84;letter-spacing:-.015em;font-size:clamp(2.8rem,12.5vw,11rem);white-space:nowrap}
+.home-exp .oa-exp p{font-family:var(--font-body);font-size:13px;line-height:1.35;color:var(--text)}
+
+/* =====================================================================
+   INTRO — three stacked rows; the GT3 tumbles over the middle row
+   ===================================================================== */
+.home-exp .oa-intro{display:flex;flex-direction:column;justify-content:center;
+  gap:.1em;padding:calc(var(--nav-h) + 2vh) clamp(18px,4vw,48px) 4vh}
+.home-exp .oa-row{display:flex;gap:clamp(2em,10vw,12em);align-items:center}
+.home-exp .oa-row:nth-child(1){padding-left:0}
+.home-exp .oa-row:nth-child(2){padding-left:clamp(0px,5vw,9vw)}
+.home-exp .oa-row:nth-child(3){padding-left:clamp(0px,11vw,20vw)}
+
+/* =====================================================================
+   COLLECTION — muted names scroll past the tumbling car
+   ===================================================================== */
+.home-exp .oa-collection{min-height:220vh;display:flex;flex-direction:column;
+  gap:clamp(2.4em,5vw,4em);justify-content:center;align-items:center;text-align:center;
+  padding:14vh clamp(18px,4vw,48px)}
+.home-exp .oa-collection-head p{font-family:var(--font-head);text-transform:uppercase;
+  letter-spacing:.28em;font-size:.82rem;color:var(--gold)}
+.home-exp .oa-item{display:block;text-align:center}
+.home-exp .oa-item h2{font-family:var(--font-head);text-transform:uppercase;font-weight:700;
+  font-size:clamp(2.4rem,9vw,8rem);line-height:.9;letter-spacing:-.01em;color:var(--oa-mute);
+  transition:color .4s var(--ease),opacity .4s var(--ease)}
+.home-exp .oa-item:hover h2{color:transparent;background:var(--gold-grad);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.home-exp .oa-info{display:flex;justify-content:center;gap:clamp(1.4em,6vw,5em);
+  margin-top:1.1em;flex-wrap:wrap}
+.home-exp .oa-info p{text-transform:uppercase;letter-spacing:.14em;color:var(--oa-mute-2);font-size:11px}
+
+/* =====================================================================
+   OUTRO — closing statement (line-by-line reveal) + contact + CTA
+   ===================================================================== */
+.home-exp .oa-outro{display:flex;flex-direction:column;justify-content:space-between;
+  gap:6vh;padding:clamp(5em,10vh,8em) clamp(18px,4vw,48px) 3em}
+.home-exp .oa-outro-copy h2{width:min(80%,26ch);font-family:var(--font-head);text-transform:uppercase;
+  font-weight:600;font-size:clamp(1.7rem,4.6vw,3.9rem);line-height:1.02;letter-spacing:-.005em;
+  margin-bottom:.7em}
+/* each authored line clips its inner mover (revealed from below by JS) */
+.home-exp .oa-line{display:block;overflow:hidden}
+.home-exp .oa-line-in{display:block;will-change:transform}
+.home-exp .oa-outro-copy > p{display:flex;gap:2em;margin:.9em 0;text-transform:uppercase;
+  letter-spacing:.06em;font-family:var(--font-head);font-size:.86rem;color:var(--text-dim)}
+.home-exp .oa-outro-copy > p .k{color:var(--gold);min-width:8ch}
+.home-exp .oa-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:2em}
+.home-exp .oa-footer{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;
+  text-transform:uppercase;letter-spacing:.04em}
+.home-exp .oa-footer p:nth-child(1){width:min(34ch,42%);color:var(--text-dim);line-height:1.4}
+.home-exp .oa-footer p:nth-child(2){color:var(--text-mute);font-family:var(--font-head);letter-spacing:.14em}
+
+/* =====================================================================
+   CHOOSE — the interactive 3D "ring" of cars around the Porsche.
+   Flows straight out of the collection: the tumbling GT3 settles centre,
+   the ring of car photos fades in around it, drag to spin, click a car.
+   The fixed canvas draws the ring; this section only supplies scroll
+   distance + the no-WebGL fallback grid. STAGE-B chrome lives in #chooseUI.
+   ===================================================================== */
+/* NB: needs to out-specify `.home-exp .oa-exp section{min-height:100vh}` so the
+   ring gets a tall scroll span (reveal-in → interactive hold → reveal-out). */
+.home-exp .oa-exp section.oa-choose{min-height:230vh}
+.home-exp .oa-choose{display:flex;flex-direction:column;
+  justify-content:flex-start;align-items:center;text-align:center;
+  padding:14vh clamp(18px,4vw,48px) 10vh;gap:2.4em}
+.home-exp .oa-choose-head p{font-family:var(--font-head);text-transform:uppercase;
+  letter-spacing:.28em;font-size:.82rem;color:var(--gold)}
+.home-exp .oa-choose-head h2{font-family:var(--font-head);text-transform:uppercase;font-weight:700;
+  font-size:clamp(2.4rem,9vw,7rem);line-height:.9;letter-spacing:-.01em;margin-top:.15em}
+
+/* no-WebGL / no-JS fallback: a plain grid of car links (never leaves users stranded) */
+.home-exp .oa-choose-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+  gap:14px;width:100%;max-width:1100px;margin-top:1em}
+.home-exp .oa-choose-grid a{display:flex;justify-content:space-between;align-items:center;gap:12px;
+  padding:16px 18px;border:1px solid var(--line-2);border-radius:var(--radius-sm);background:var(--panel);
+  font-family:var(--font-head);text-transform:uppercase;letter-spacing:.02em;font-size:1.05rem;
+  color:var(--text);transition:border-color .3s var(--ease),transform .3s var(--ease),color .3s var(--ease)}
+.home-exp .oa-choose-grid a:hover{border-color:var(--line-strong);transform:translateY(-2px);color:var(--white)}
+.home-exp .oa-choose-grid a .px{font-size:.8rem;color:var(--gold)}
+/* once the live ring is running, hide the fallback grid + heading (canvas takes over,
+   the fixed #chooseUI supplies the interactive title) */
+.home-exp.sd-home .oa-choose-grid{display:none}
+.home-exp.sd-home .oa-choose-head{display:none}
+
+/* STAGE-B chrome overlay — above the canvas, never blocks the drag */
+.sd-choose-ui{position:fixed;inset:0;z-index:5;pointer-events:none;opacity:0;
+  transition:opacity .6s var(--ease);font-family:var(--font-head)}
+.sd-choose-ui.is-on{opacity:1}
+.sd-choose-ui .cu-title{position:absolute;top:clamp(84px,12vh,140px);left:0;right:0;text-align:center;
+  text-transform:uppercase;letter-spacing:.06em;color:var(--white);mix-blend-mode:difference}
+.sd-choose-ui .cu-title > span{display:block}
+.sd-choose-ui .cu-kicker{font-size:.8rem;letter-spacing:.32em;color:var(--gold);margin-bottom:.4em}
+.sd-choose-ui .cu-h{font-size:clamp(1.8rem,5vw,3.4rem);font-weight:700;line-height:.95}
+.sd-choose-ui .cu-hint{position:absolute;bottom:clamp(24px,6vh,64px);left:0;right:0;text-align:center;
+  text-transform:uppercase;letter-spacing:.18em;font-size:.72rem;color:var(--text-dim);
+  display:flex;gap:.6em;align-items:center;justify-content:center}
+.sd-choose-ui .cu-hint svg{width:15px;height:15px;color:var(--gold)}
+
+/* car-name tooltip that tracks the pointer over a tile */
+.sd-tooltip{position:fixed;left:0;top:0;z-index:6;pointer-events:none;opacity:0;
+  transform:translate3d(-50%,-140%,0);transition:opacity .18s linear;
+  padding:9px 13px;border-radius:100px;background:rgba(10,10,12,.82);backdrop-filter:blur(14px);
+  border:1px solid var(--line-2);color:var(--white);font-family:var(--font-head);
+  text-transform:uppercase;letter-spacing:.06em;font-size:.82rem;white-space:nowrap;
+  box-shadow:0 10px 30px -12px rgba(0,0,0,.8)}
+.sd-tooltip.is-on{opacity:1}
+.sd-tooltip .tt-px{color:var(--gold);margin-left:.5em}
+
+/* custom cursor while the ring is interactive */
+.sd-cursor{position:fixed;left:0;top:0;z-index:6;width:16px;height:16px;border-radius:50%;
+  background:var(--gold);mix-blend-mode:difference;pointer-events:none;opacity:0;
+  transform:translate3d(-50%,-50%,0);transition:opacity .2s linear,width .2s var(--ease),height .2s var(--ease)}
+.sd-cursor.is-on{opacity:1}
+.sd-cursor.is-over{width:46px;height:46px;background:transparent;border:1.5px solid var(--gold)}
+
+/* while the ring is interactive the canvas listens for pointer + hides the OS cursor */
+.home-exp .sd-model.is-interactive{pointer-events:auto;cursor:none}
+.home-exp.ring-active{cursor:none}
+
+@media (prefers-reduced-motion:reduce){
+  .sd-choose-ui,.sd-tooltip,.sd-cursor{transition:none}
+}
+/* touch devices: keep the native cursor, drop the custom dot */
+@media (pointer:coarse){
+  .sd-cursor{display:none}
+  .home-exp .sd-model.is-interactive{cursor:auto}
+  .home-exp.ring-active{cursor:auto}
+  .home-exp .oa-exp section.oa-choose{min-height:200vh}
+}
+
+/* =====================================================================
+   RESPONSIVE
+   ===================================================================== */
+@media (max-width:900px){
+  .home-exp .oa-row{gap:1.2em}
+  .home-exp .oa-row:nth-child(2),.home-exp .oa-row:nth-child(3){padding-left:0}
+  .home-exp .oa-outro-copy h2{width:100%}
+}
+@media (max-width:640px){
+  .home-exp .oa-intro{justify-content:flex-start;padding-top:calc(var(--nav-h) + 4vh);gap:.05em}
+  .home-exp .oa-exp h1{font-size:clamp(2.6rem,15vw,4rem)}
+  .home-exp .oa-row{flex-direction:column;align-items:flex-start;gap:.3em}
+  .home-exp .oa-info{gap:1.1em}
+  .home-exp .oa-footer{flex-direction:column;align-items:flex-start;gap:14px}
+  .home-exp .oa-footer p:nth-child(1){width:100%}
+  .home-exp .oa-cta{flex-direction:column;align-items:stretch;width:100%;max-width:340px}
+  .home-exp .oa-cta .btn{justify-content:center}
+}
+
+/* =====================================================================
+   FAIL-SAFE / REDUCED MOTION — never hide the outro lines
+   ===================================================================== */
+@media (prefers-reduced-motion:reduce){
+  .home-exp .oa-line-in{transform:none!important}
+  .home-exp .sd-model{transition:none}
+}
+/* only the full JS experience arms the reveal; without JS lines stay put */
+html:not(.js) .home-exp .oa-line-in{transform:none}

@@ -1,0 +1,251 @@
+/* =====================================================================
+   SERRES DRIVE — nav-ink.css
+   "Ink Blot Circle Reveal" mobile navigation.
+   Two synced layers: an SVG <circle> clipping a near-black <rect>, and a
+   CSS clip-path circle on the interactive panel — both driven from the
+   same centre (--ink-x/--ink-y) and radius (--ink-r) by js/nav-ink.js.
+   All classes prefixed .ink- · uses existing design tokens only.
+   Load AFTER css/styles.css.
+   ===================================================================== */
+
+/* ---------------------------------------------------------------------
+   No-JS / script-failed safety net.
+   Everything stays hidden until nav-ink.js adds html.ink-ready, and the
+   header links come back on small screens so the site is still navigable.
+   --------------------------------------------------------------------- */
+.ink-toggle,
+.ink-nav { display: none; }
+
+@media (max-width: 860px) {
+  html:not(.ink-ready) .nav-links {
+    display: flex;
+    gap: 18px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  html:not(.ink-ready) .nav-links::-webkit-scrollbar { display: none; }
+  html:not(.ink-ready) .nav-links a { font-size: .82rem; letter-spacing: .06em; white-space: nowrap; }
+}
+
+/* ---------------------------------------------------------------------
+   Toggle button (replaces .burger — same 44px hit target)
+   --------------------------------------------------------------------- */
+html.ink-ready .ink-toggle {
+  display: none;
+  width: 46px;
+  height: 46px;
+  border: 1px solid var(--line-2);
+  border-radius: 50%;
+  position: relative;
+  flex: none;
+  background: rgba(255, 255, 255, .03);
+  transition: border-color .3s var(--ease), background .3s var(--ease);
+}
+@media (max-width: 860px) {
+  html.ink-ready .ink-toggle { display: inline-flex; }
+}
+html.ink-ready .ink-toggle:hover { border-color: var(--line-strong); background: rgba(255, 255, 255, .06); }
+.ink-toggle:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+/* two bars → plus → rotated 45° (reads as a close X) */
+.ink-bars {
+  position: absolute;
+  inset: 0;
+  transition: transform .5s var(--ease);
+}
+.ink-bars i {
+  position: absolute;
+  left: 13px;
+  right: 13px;
+  height: 1.5px;
+  background: var(--gold-soft);
+  transition: transform .5s var(--ease), width .4s var(--ease);
+}
+.ink-bars i:nth-child(1) { top: 19px; }
+.ink-bars i:nth-child(2) { top: 26px; }
+
+html.ink-open .ink-bars { transform: rotate(45deg); }
+html.ink-open .ink-bars i:nth-child(1) { transform: translateY(3.5px); }
+html.ink-open .ink-bars i:nth-child(2) { transform: translateY(-3.5px) rotate(90deg); }
+
+/* the header must sit above the ink so the toggle stays reachable */
+html.ink-open .nav {
+  z-index: 90;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-bottom-color: transparent;
+}
+/* ...but ONLY the toggle. Raising .nav also lifts .brand, .lang and #nav-wa
+   above the ink, where they stay clickable and tabbable outside the focus
+   ring. visibility:hidden is required — it is what removes them from
+   sequential focus navigation; opacity/pointer-events would not. */
+html.ink-open .nav .brand,
+html.ink-open .nav .lang,
+html.ink-open .nav #nav-wa {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* ---------------------------------------------------------------------
+   Overlay root
+   --------------------------------------------------------------------- */
+html.ink-ready .ink-nav {
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  visibility: hidden;
+  pointer-events: none;
+  --ink-x: 50%;
+  --ink-y: 0px;
+  --ink-r: 0px;
+}
+html.ink-ready .ink-nav.is-open {
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* layer 1 — the ink blot itself */
+.ink-blot {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.ink-fill { fill: #0c0d11; }
+
+/* layer 2 — the interactive panel, clipped to the identical circle */
+.ink-panel {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(20px, 4vh, 40px);
+  padding: calc(var(--nav-h) + 20px) var(--gutter) calc(var(--gutter) + 12px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-clip-path: circle(var(--ink-r) at var(--ink-x) var(--ink-y));
+  clip-path: circle(var(--ink-r) at var(--ink-x) var(--ink-y));
+}
+/* only while the blot is on screen — avoids a permanent compositor layer */
+html.ink-open .ink-panel { will-change: clip-path; }
+
+/* ---------------------------------------------------------------------
+   Links
+   --------------------------------------------------------------------- */
+/* auto margins centre the group but collapse when the content overflows,
+   so a short viewport scrolls instead of cropping the first link */
+.ink-links { display: block; flex: none; margin-top: auto; }
+.ink-foot  { flex: none; margin-bottom: auto; }
+.ink-links a {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: clamp(14px, 4vw, 26px);
+  padding: clamp(10px, 1.6vh, 18px) clamp(10px, 3vw, 20px);
+  border-bottom: 1px solid var(--line);
+  color: var(--white);
+  overflow: hidden;
+}
+.ink-links a:first-child { border-top: 1px solid var(--line); }
+
+.ink-num {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .06em;
+  color: rgba(255, 255, 255, .5);
+  flex: none;
+  transition: color .35s var(--ease), transform .45s var(--ease);
+}
+.ink-label {
+  font-family: var(--font-head);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: clamp(48px, 10.5vw, 88px);
+  line-height: .96;
+  letter-spacing: -.005em;
+  transition: color .35s var(--ease), transform .45s var(--ease);
+}
+
+/* gooey chrome wash behind the row on hover */
+.ink-links a::before {
+  content: "";
+  position: absolute;
+  inset: 3px 0;
+  z-index: -1;
+  background: linear-gradient(100deg, rgba(201, 205, 215, .18), rgba(201, 205, 215, .02) 70%, transparent);
+  border-radius: 46% 54% 58% 42% / 52% 44% 56% 48%;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform .55s var(--ease), opacity .4s var(--ease);
+  opacity: 0;
+}
+.ink-links a:hover::before,
+.ink-links a:focus-visible::before {
+  transform: scaleX(1);
+  opacity: 1;
+  animation: ink-goo 7s ease-in-out infinite;
+}
+@keyframes ink-goo {
+  0%, 100% { border-radius: 46% 54% 58% 42% / 52% 44% 56% 48%; }
+  33%      { border-radius: 58% 42% 44% 56% / 44% 56% 42% 58%; }
+  66%      { border-radius: 40% 60% 52% 48% / 58% 42% 60% 40%; }
+}
+
+.ink-links a:hover .ink-label,
+.ink-links a:focus-visible .ink-label { color: var(--gold); transform: translateX(6px); }
+.ink-links a:hover .ink-num,
+.ink-links a:focus-visible .ink-num { color: var(--gold); transform: translateY(-3px); }
+.ink-links a[aria-current="page"] .ink-label { color: var(--gold); }
+
+/* ---------------------------------------------------------------------
+   Footer of the panel (language toggle)
+   styles.css hides .lang below 860px — re-enable it inside the overlay.
+   --------------------------------------------------------------------- */
+.ink-foot { display: flex; align-items: center; justify-content: flex-start; }
+.ink-panel .lang { display: inline-flex; width: max-content; }
+
+/* ---------------------------------------------------------------------
+   Link entrance — CSS path, used only when GSAP is unavailable.
+   With GSAP present (html.ink-gsap) the timeline owns these properties.
+   --------------------------------------------------------------------- */
+html:not(.ink-gsap):not(.ink-reduce) .ink-links a,
+html:not(.ink-gsap):not(.ink-reduce) .ink-foot {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity .5s var(--ease), transform .5s var(--ease);
+}
+html:not(.ink-gsap):not(.ink-reduce).ink-open .ink-links a,
+html:not(.ink-gsap):not(.ink-reduce).ink-open .ink-foot {
+  opacity: 1;
+  transform: none;
+}
+/* Delays match the GSAP timeline (links at DUR * LINKS_AT = .495s, .06 step).
+   Starting at .30s put the links at full opacity while the power3.inOut blot
+   was still at ~14% of R, so the sweep revealed finished text and no stagger
+   was ever visible on the six pages that do not load GSAP. */
+html:not(.ink-gsap):not(.ink-reduce) .ink-links a:nth-child(1) { transition-delay: .50s; }
+html:not(.ink-gsap):not(.ink-reduce) .ink-links a:nth-child(2) { transition-delay: .56s; }
+html:not(.ink-gsap):not(.ink-reduce) .ink-links a:nth-child(3) { transition-delay: .62s; }
+html:not(.ink-gsap):not(.ink-reduce) .ink-links a:nth-child(4) { transition-delay: .68s; }
+html:not(.ink-gsap):not(.ink-reduce) .ink-links a:nth-child(5) { transition-delay: .74s; }
+html:not(.ink-gsap):not(.ink-reduce) .ink-foot          { transition-delay: .82s; }
+/* closing: collapse together, no stagger */
+html:not(.ink-gsap):not(.ink-reduce):not(.ink-open) .ink-links a,
+html:not(.ink-gsap):not(.ink-reduce):not(.ink-open) .ink-foot { transition-delay: 0s; transition-duration: .25s; }
+
+/* ---------------------------------------------------------------------
+   Reduced motion — the menu simply appears. Still fully functional.
+   --------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .ink-bars, .ink-bars i, .ink-num, .ink-label, .ink-links a::before { transition: none; }
+  .ink-links a:hover::before, .ink-links a:focus-visible::before { animation: none; }
+  html.ink-reduce .ink-links a,
+  html.ink-reduce .ink-foot { opacity: 1; transform: none; transition: none; }
+}
+
+@media print { .ink-toggle, .ink-nav { display: none !important; } }

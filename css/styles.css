@@ -1,0 +1,705 @@
+/* =====================================================================
+   SERRES DRIVE — Luxury car rental (Barcelona)
+   Visual continuation of Serres Wrap Center (serreswrapcenter.es)
+   Brand DNA: near-black canvas · classic silver / chrome accent
+   Type: Barlow Condensed (display) + DM Sans (body)
+   ===================================================================== */
+
+/* ---------- Tokens ---------- */
+:root{
+  /* canvas */
+  --bg:#0a0a0b;
+  --bg-2:#0d0d10;
+  --bg-3:#101116;
+  --panel:#121319;
+  --panel-2:#16171e;
+  --line:rgba(255,255,255,.08);
+  --line-2:rgba(255,255,255,.14);
+  --line-strong:rgba(255,255,255,.22);
+
+  /* text */
+  --white:#fdfdfe;
+  --text:#e7e7ec;
+  --text-dim:#a6a6b0;
+  --text-mute:#71717a;
+
+  /* classic silver / chrome accent (--gold* names kept for compatibility) */
+  --gold:#c9cdd7;
+  --gold-soft:#eef0f4;
+  --gold-deep:#8a8d97;
+  --gold-grad:linear-gradient(105deg,#8a8d97 0%,#c9ccd4 18%,#ffffff 38%,#d0d3da 52%,#8a8d97 70%,#eef0f4 88%,#a6a6b0 100%);
+  --gold-line:linear-gradient(90deg,transparent,var(--gold) 20%,var(--gold-soft) 50%,var(--gold) 80%,transparent);
+
+  /* brushed chrome (wordmark) */
+  --chrome-grad:linear-gradient(176deg,#fdfdfe 0%,#cfcfd6 32%,#8d8d97 52%,#f0f0f4 72%,#a6a6b0 100%);
+
+  /* whatsapp */
+  --wa:#25d366;
+  --wa-dark:#1ebe57;
+
+  /* geometry */
+  --maxw:1240px;
+  --gutter:clamp(18px,5vw,64px);
+  --radius:16px;
+  --radius-sm:11px;
+  --nav-h:74px;
+
+  --shadow:0 24px 60px -24px rgba(0,0,0,.85);
+  --shadow-gold:0 18px 48px -20px rgba(200,206,216,.35);
+
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --font-head:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
+  --font-body:"DM Sans",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+}
+
+/* ---------- Reset ---------- */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{
+  font-family:var(--font-body);
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+  font-size:16px;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+img,svg,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer;background:none;border:none}
+ul{list-style:none}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
+::selection{background:rgba(200,206,216,.28);color:#fff}
+
+/* ---------- Type helpers ---------- */
+.display{
+  font-family:var(--font-head);
+  font-weight:700;
+  line-height:.94;
+  letter-spacing:-.01em;
+  text-transform:uppercase;
+}
+.eyebrow{
+  font-family:var(--font-head);
+  text-transform:uppercase;
+  letter-spacing:.28em;
+  font-weight:600;
+  font-size:.8rem;
+  color:var(--gold);
+}
+.chrome-text{
+  background:var(--chrome-grad);
+  -webkit-background-clip:text;background-clip:text;
+  color:transparent;
+  -webkit-text-fill-color:transparent;
+}
+.gold-text{
+  background:var(--gold-grad);
+  -webkit-background-clip:text;background-clip:text;
+  color:transparent;-webkit-text-fill-color:transparent;
+}
+
+/* ---------- Layout ---------- */
+.wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gutter)}
+section{position:relative}
+.section{padding-block:clamp(64px,9vw,128px)}
+.section-head{max-width:720px;margin-bottom:clamp(32px,5vw,56px)}
+.section-head.center{margin-inline:auto;text-align:center}
+.section-title{
+  font-family:var(--font-head);font-weight:700;text-transform:uppercase;
+  font-size:clamp(2rem,5.2vw,3.5rem);line-height:.98;letter-spacing:-.01em;
+  margin-top:14px;
+}
+.section-sub{color:var(--text-dim);margin-top:16px;font-size:1.05rem;max-width:56ch}
+.section-head.center .section-sub{margin-inline:auto}
+
+.hairline{height:1px;border:0;background:var(--gold-line);opacity:.5}
+
+/* ---------- Buttons ---------- */
+.btn{
+  --_bg:transparent;
+  display:inline-flex;align-items:center;gap:.6em;
+  font-family:var(--font-head);text-transform:uppercase;letter-spacing:.06em;
+  font-weight:600;font-size:1.02rem;line-height:1;
+  padding:15px 26px;border-radius:100px;border:1px solid var(--line-2);
+  background:var(--_bg);color:var(--white);
+  transition:transform .3s var(--ease),border-color .3s var(--ease),background .3s var(--ease),box-shadow .3s var(--ease),color .3s var(--ease);
+  white-space:nowrap;
+}
+.btn svg{width:1.15em;height:1.15em;flex:none}
+.btn:hover{transform:translateY(-2px)}
+.btn.ghost:hover{border-color:var(--gold);color:var(--gold)}
+.btn.gold{
+  border-color:transparent;color:#0c0d11;
+  background:var(--gold-grad);background-size:180% 180%;
+  box-shadow:var(--shadow-gold);font-weight:700;
+}
+.btn.gold:hover{background-position:100% 50%;box-shadow:0 22px 54px -18px rgba(200,206,216,.5)}
+/* Glass: the booking CTAs are frosted, not green. Green is reserved for the
+   floating WhatsApp bubble alone, so it stays the single unmistakable action. */
+.btn.wa{
+  border-color:rgba(255,255,255,.22);
+  color:var(--white);
+  background:rgba(255,255,255,.07);
+  -webkit-backdrop-filter:blur(16px) saturate(160%);
+  backdrop-filter:blur(16px) saturate(160%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.20),
+             inset 0 -1px 0 rgba(255,255,255,.05),
+             0 18px 44px -24px rgba(0,0,0,.9);
+  font-weight:700;
+}
+.btn.wa:hover{
+  background:rgba(255,255,255,.13);
+  border-color:rgba(255,255,255,.38);
+  color:var(--white);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.28),
+             0 22px 52px -22px rgba(0,0,0,.95);
+}
+/* No backdrop-filter (older Safari/Firefox): fall back to a flat translucent fill. */
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .btn.wa{background:rgba(255,255,255,.11)}
+  .btn.wa:hover{background:rgba(255,255,255,.17)}
+}
+.btn.sm{padding:11px 18px;font-size:.92rem}
+.btn.block{width:100%;justify-content:center}
+
+/* ---------- Nav ---------- */
+.nav{
+  position:fixed;inset:0 0 auto 0;z-index:60;height:var(--nav-h);
+  display:flex;align-items:center;
+  transition:background .4s var(--ease),border-color .4s var(--ease),backdrop-filter .4s var(--ease);
+  border-bottom:1px solid transparent;
+}
+.nav.scrolled{
+  background:rgba(9,9,11,.82);backdrop-filter:blur(16px) saturate(140%);
+  border-bottom-color:var(--line);
+}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;width:100%;gap:20px}
+.brand{display:flex;align-items:baseline;gap:.42em;font-family:var(--font-head);font-weight:700;
+  text-transform:uppercase;font-size:1.72rem;letter-spacing:.02em;line-height:1}
+/* SERRES and DRIVE are now one continuous wordmark: same brushed-chrome fill,
+   same size, separated only by the flex gap above (no dot). */
+.brand .b-drive{font-size:1em}
+.nav-links{display:flex;align-items:center;gap:30px}
+.nav-links a{
+  font-family:var(--font-head);text-transform:uppercase;letter-spacing:.09em;
+  font-size:1rem;font-weight:500;color:var(--text-dim);position:relative;padding:4px 0;
+  transition:color .25s var(--ease);
+}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:-2px;height:1.5px;width:0;background:var(--gold-grad);transition:width .3s var(--ease)}
+.nav-links a:hover{color:var(--white)}
+.nav-links a:hover::after{width:100%}
+.nav-links a[aria-current="page"]{color:var(--white)}
+.nav-links a[aria-current="page"]::after{width:100%}
+.mobile-menu a[aria-current="page"]{color:var(--gold)}
+.nav-actions{display:flex;align-items:center;gap:14px}
+
+/* language toggle */
+.lang{display:inline-flex;border:1px solid var(--line-2);border-radius:100px;overflow:hidden;font-family:var(--font-head);font-weight:600}
+.lang button{padding:7px 12px;font-size:.86rem;letter-spacing:.05em;color:var(--text-mute);text-transform:uppercase;transition:color .25s,background .25s}
+.lang button[aria-pressed="true"]{color:#0c0d11;background:var(--gold-grad)}
+
+/* hamburger */
+.burger{display:none;width:44px;height:44px;border:1px solid var(--line-2);border-radius:12px;position:relative}
+.burger span{position:absolute;left:11px;right:11px;height:2px;background:var(--text);transition:transform .3s var(--ease),opacity .2s}
+.burger span:nth-child(1){top:15px}
+.burger span:nth-child(2){top:21px}
+.burger span:nth-child(3){top:27px}
+.burger.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+
+/* mobile overlay */
+.mobile-menu{
+  position:fixed;inset:0;z-index:55;background:rgba(8,8,10,.97);backdrop-filter:blur(10px);
+  display:flex;flex-direction:column;justify-content:center;gap:8px;padding:var(--gutter);
+  transform:translateY(-100%);transition:transform .5s var(--ease);
+}
+.mobile-menu.open{transform:translateY(0)}
+.mobile-menu a{font-family:var(--font-head);text-transform:uppercase;font-size:2rem;font-weight:600;
+  padding:12px 0;border-bottom:1px solid var(--line);color:var(--text)}
+.mobile-menu a .idx{color:var(--gold);font-size:.8rem;margin-right:14px;vertical-align:super}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;isolation:isolate}
+.hero-media{position:absolute;inset:0;z-index:-3}
+.hero-media img,.hero-media video{width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s var(--ease)} /* real photo/video when added */
+/* when a real photo/video is present, calm the CSS scene so it doesn't clash */
+.hero.has-media .hero-grid,.hero.has-media .hero-sweep{opacity:0}
+.hero.has-media .hero-scene{opacity:.35}
+.hero.has-media .hero-vignette{background:
+  linear-gradient(90deg,rgba(0,0,0,.85) 0%,rgba(0,0,0,.55) 32%,rgba(0,0,0,.12) 60%,rgba(0,0,0,.42) 100%),
+  radial-gradient(120% 100% at 50% 28%,transparent 42%,rgba(0,0,0,.66) 100%),
+  linear-gradient(180deg,rgba(0,0,0,.5),transparent 22%)}
+.hero-scene{position:absolute;inset:0;z-index:-3;
+  background:
+    radial-gradient(120% 90% at 78% 8%,rgba(200,206,216,.16),transparent 46%),
+    radial-gradient(90% 80% at 12% 100%,rgba(90,120,180,.10),transparent 55%),
+    linear-gradient(180deg,#000 0%,#050506 30%,#08080a 62%,#0a0a0b 100%);
+}
+/* perspective road grid */
+.hero-grid{position:absolute;inset:auto 0 0 0;height:62%;z-index:-2;
+  background-image:
+    linear-gradient(rgba(200,206,216,.10) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(200,206,216,.07) 1px,transparent 1px);
+  background-size:64px 64px;
+  transform:perspective(620px) rotateX(66deg) scale(2.1);
+  transform-origin:bottom center;
+  mask-image:linear-gradient(180deg,transparent 6%,#000 60%,transparent 98%);
+  -webkit-mask-image:linear-gradient(180deg,transparent 6%,#000 60%,transparent 98%);
+  opacity:.7;
+  animation:gridflow 3.2s linear infinite;
+}
+/* flowing perspective grid = subtle "driving" motion under the headline */
+@keyframes gridflow{from{background-position:0 0,0 0}to{background-position:0 64px,0 0}}
+/* sweeping gold light */
+.hero-sweep{position:absolute;top:-30%;right:-10%;width:70%;height:150%;z-index:-2;
+  background:radial-gradient(closest-side,rgba(224,228,236,.20),rgba(200,206,216,.06) 55%,transparent 75%);
+  filter:blur(8px);animation:float 12s var(--ease) infinite alternate}
+@keyframes float{from{transform:translate3d(0,0,0)}to{transform:translate3d(-4%,3%,0) scale(1.06)}}
+.hero-glow-line{position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--gold-line);opacity:.6;z-index:-1}
+.hero-vignette{position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(120% 100% at 50% 40%,transparent 55%,rgba(0,0,0,.55) 100%)}
+.grain{position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+.hero-inner{padding-block:clamp(120px,16vh,180px) clamp(48px,8vh,84px);width:100%}
+.hero-badge{display:inline-flex;align-items:center;gap:10px;padding:8px 16px;border:1px solid var(--line-2);
+  border-radius:100px;font-family:var(--font-head);text-transform:uppercase;letter-spacing:.14em;
+  font-size:.8rem;color:var(--text-dim);margin-bottom:26px;background:rgba(255,255,255,.02)}
+.hero-badge .b-dot{width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold)}
+.hero h1{font-family:var(--font-head);font-weight:700;text-transform:uppercase;
+  font-size:clamp(3rem,10vw,7.6rem);line-height:.9;letter-spacing:-.015em;max-width:15ch}
+.hero h1 .line{display:block;overflow:hidden}
+.hero h1 .line > span{display:block}
+.hero p.lede{margin-top:26px;max-width:52ch;color:var(--text-dim);font-size:clamp(1.05rem,1.7vw,1.28rem)}
+.hero-cta{margin-top:38px;display:flex;flex-wrap:wrap;gap:14px}
+/* Hero CTAs — clean transparent outline (like serreswrapcenter.es) */
+.hero-cta .btn{
+  background:transparent;
+  -webkit-backdrop-filter:none;backdrop-filter:none;
+  border:1px solid rgba(255,255,255,.55);
+  color:var(--white);
+  box-shadow:none;
+  text-shadow:0 1px 10px rgba(0,0,0,.4);
+}
+.hero-cta .btn svg{color:var(--white)}
+.hero-cta .btn:hover{background:rgba(255,255,255,.08);border-color:#fff;transform:translateY(-2px)}
+/* WhatsApp button: same outline, keeps its glyph */
+.hero-cta .btn.wa{background:transparent;border-color:rgba(255,255,255,.55);box-shadow:none}
+.hero-cta .btn.wa:hover{background:rgba(255,255,255,.08);border-color:#fff}
+.hero-cta .btn.wa svg{color:var(--white)}
+.hero-scroll{margin-top:46px;display:inline-flex;align-items:center;gap:12px;color:var(--text-mute);
+  font-family:var(--font-head);text-transform:uppercase;letter-spacing:.2em;font-size:.78rem}
+.hero-scroll .mouse{width:24px;height:38px;border:1.5px solid var(--line-strong);border-radius:14px;position:relative}
+.hero-scroll .mouse::after{content:"";position:absolute;left:50%;top:7px;width:3px;height:7px;border-radius:2px;
+  background:var(--gold);transform:translateX(-50%);animation:scrolldot 1.8s var(--ease) infinite}
+@keyframes scrolldot{0%{opacity:0;transform:translate(-50%,0)}30%{opacity:1}70%{opacity:1;transform:translate(-50%,10px)}100%{opacity:0;transform:translate(-50%,12px)}}
+
+/* ---------- Marquee ---------- */
+.marquee{border-block:1px solid var(--line);background:var(--bg-2);overflow:hidden;padding-block:20px}
+.marquee-track{display:flex;gap:44px;width:max-content;animation:marquee 34s linear infinite}
+.marquee:hover .marquee-track{animation-play-state:paused}
+@keyframes marquee{to{transform:translateX(-50%)}}
+.marquee span{font-family:var(--font-head);text-transform:uppercase;letter-spacing:.12em;font-size:1.15rem;
+  color:var(--text-mute);display:inline-flex;align-items:center;gap:44px}
+.marquee span::after{content:"◆";color:var(--gold);font-size:.6em}
+
+/* ---------- Stats ---------- */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.stat{background:var(--bg-2);padding:clamp(22px,3vw,34px);text-align:center}
+.stat .num{font-family:var(--font-head);font-weight:700;font-size:clamp(2.2rem,5vw,3.4rem);line-height:1}
+.stat .lbl{color:var(--text-dim);text-transform:uppercase;letter-spacing:.14em;font-size:.76rem;margin-top:8px;font-family:var(--font-head)}
+
+/* ---------- Filters ---------- */
+.filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:34px}
+.chip{
+  font-family:var(--font-head);text-transform:uppercase;letter-spacing:.08em;font-weight:600;font-size:.94rem;
+  padding:9px 18px;border-radius:100px;border:1px solid var(--line-2);color:var(--text-dim);
+  transition:color .25s,border-color .25s,background .25s,transform .25s;
+}
+.chip:hover{color:var(--white);transform:translateY(-1px)}
+.chip[aria-pressed="true"]{color:#0c0d11;background:var(--gold-grad);border-color:transparent}
+.chip .count{opacity:.6;font-size:.85em;margin-left:5px}
+
+/* ---------- Fleet grid ---------- */
+.fleet-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.car{
+  position:relative;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+  overflow:hidden;display:flex;flex-direction:column;
+  transition:transform .45s var(--ease),border-color .45s var(--ease),box-shadow .45s var(--ease);
+}
+.car:hover{transform:translateY(-6px);border-color:var(--line-strong);box-shadow:var(--shadow)}
+.car-media{position:relative;aspect-ratio:16/10;overflow:hidden;background:#0b0b0d}
+.car-media img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease)}
+.car:hover .car-media img{transform:scale(1.05)}
+.car-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(10,10,12,.55) 100%)}
+.car-cat{position:absolute;top:12px;left:12px;z-index:2;font-family:var(--font-head);text-transform:uppercase;
+  letter-spacing:.12em;font-size:.72rem;font-weight:600;padding:6px 12px;border-radius:100px;
+  background:rgba(9,9,11,.7);backdrop-filter:blur(6px);border:1px solid var(--line-2);color:var(--text)}
+.car-fav{position:absolute;top:10px;right:12px;z-index:2;font-family:var(--font-head);font-size:.72rem;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--gold);opacity:.9}
+.car-body{padding:20px;display:flex;flex-direction:column;gap:14px;flex:1}
+.car-name{font-family:var(--font-head);text-transform:uppercase;font-weight:700;font-size:1.5rem;line-height:1;letter-spacing:-.005em}
+.car-tag{color:var(--text-dim);font-size:.92rem;line-height:1.45;min-height:2.6em}
+.car-specs{display:flex;flex-wrap:wrap;gap:7px}
+.spec{display:inline-flex;align-items:center;gap:6px;font-size:.8rem;color:var(--text-dim);
+  border:1px solid var(--line);border-radius:8px;padding:5px 10px;background:var(--bg-2)}
+.spec b{color:var(--white);font-weight:600}
+.spec svg{width:14px;height:14px;color:var(--gold);opacity:.85}
+.car-foot{margin-top:auto;display:flex;align-items:flex-end;justify-content:space-between;gap:12px;
+  padding-top:14px;border-top:1px solid var(--line)}
+.car-price .from{display:block;font-size:.7rem;text-transform:uppercase;letter-spacing:.14em;color:var(--text-mute);font-family:var(--font-head)}
+.car-price .amt{font-family:var(--font-head);font-weight:700;font-size:1.9rem;line-height:1}
+.car-price .amt small{font-size:.5em;color:var(--text-dim);font-weight:500;letter-spacing:.02em}
+.car-actions{display:flex;gap:8px}
+.icon-btn{width:42px;height:42px;border:1px solid var(--line-2);border-radius:11px;display:grid;place-items:center;
+  color:var(--text-dim);transition:color .25s,border-color .25s,background .25s}
+.icon-btn:hover{color:var(--gold);border-color:var(--gold)}
+.icon-btn svg{width:18px;height:18px}
+
+/* rates popover inside card */
+.car-rates{border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);
+  gap:1px;background:var(--line);max-height:0;overflow:hidden;transition:max-height .45s var(--ease)}
+.car.rates-open .car-rates{max-height:120px}
+.car-rates div{background:var(--panel-2);padding:11px 6px;text-align:center}
+.car-rates .rk{font-family:var(--font-head);text-transform:uppercase;font-size:.62rem;letter-spacing:.08em;color:var(--text-mute)}
+.car-rates .rv{font-family:var(--font-head);font-weight:700;font-size:1.02rem;margin-top:3px}
+
+/* Visible by default: its only remaining use is the <noscript> message on
+   fleet.html, which must show precisely when no JS can un-hide it. */
+.fleet-empty{text-align:center;color:var(--text-mute);padding:60px 0;font-family:var(--font-head);text-transform:uppercase;letter-spacing:.1em}
+.hidden{display:none!important}
+
+/* ---------- Tarifas table ---------- */
+.rates-panel{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--bg-2)}
+.rates-scroll{overflow-x:auto}
+table.rates{width:100%;border-collapse:collapse;min-width:660px}
+table.rates th,table.rates td{padding:14px 16px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+table.rates thead th{font-family:var(--font-head);text-transform:uppercase;letter-spacing:.1em;font-size:.78rem;
+  color:var(--gold);background:var(--bg-3);position:sticky;top:0}
+table.rates th:first-child,table.rates td:first-child{text-align:left;position:sticky;left:0;background:var(--bg-2)}
+table.rates thead th:first-child{background:var(--bg-3)}
+table.rates tbody tr:hover td{background:rgba(255,255,255,.02)}
+table.rates tbody tr:hover td:first-child{background:#141419}
+.rates .car-cell{font-family:var(--font-head);text-transform:uppercase;font-weight:600;font-size:1.02rem;color:var(--white)}
+.rates .car-cell small{display:block;font-family:var(--font-body);text-transform:none;letter-spacing:0;
+  font-size:.74rem;color:var(--text-mute);font-weight:400;margin-top:2px}
+.rates td .euro{font-family:var(--font-head);font-weight:600}
+.rates-note{display:flex;flex-wrap:wrap;gap:12px 26px;padding:18px;border-top:1px solid var(--line);
+  color:var(--text-dim);font-size:.9rem;align-items:center}
+.rates-note .k{color:var(--gold);font-family:var(--font-head);text-transform:uppercase;letter-spacing:.08em;margin-right:6px}
+
+/* ---------- Steps ---------- */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;counter-reset:s}
+.step{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius);padding:26px 22px;position:relative;overflow:hidden}
+.step::before{counter-increment:s;content:"0" counter(s);position:absolute;top:-10px;right:10px;
+  font-family:var(--font-head);font-weight:700;font-size:5rem;line-height:1;color:rgba(255,255,255,.035)}
+.step .s-ic{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;margin-bottom:16px;
+  border:1px solid var(--line-2);color:var(--gold)}
+.step .s-ic svg{width:22px;height:22px}
+.step h3{font-family:var(--font-head);text-transform:uppercase;font-size:1.35rem;letter-spacing:-.005em;margin-bottom:8px}
+.step p{color:var(--text-dim);font-size:.94rem}
+
+/* ---------- Why / feature split ---------- */
+.split{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,5vw,64px);align-items:center}
+.feat-list{display:flex;flex-direction:column;gap:8px;margin-top:26px}
+.feat{display:flex;gap:16px;padding:18px;border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--bg-2);
+  transition:border-color .3s var(--ease),transform .3s var(--ease)}
+.feat:hover{border-color:var(--line-strong);transform:translateX(4px)}
+.feat .f-ic{width:40px;height:40px;flex:none;border-radius:10px;display:grid;place-items:center;color:var(--gold);border:1px solid var(--line-2)}
+.feat .f-ic svg{width:20px;height:20px}
+.feat h4{font-family:var(--font-head);text-transform:uppercase;font-size:1.15rem;letter-spacing:.01em;margin-bottom:3px}
+.feat p{color:var(--text-dim);font-size:.9rem}
+.split-visual{position:relative;aspect-ratio:4/5;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);
+  background:
+    radial-gradient(90% 60% at 70% 15%,rgba(200,206,216,.16),transparent 55%),
+    linear-gradient(180deg,#111117,#0a0a0c);
+  display:grid;place-items:center}
+.split-visual .badge-lg{text-align:center;padding:30px}
+.split-visual .badge-lg .k{font-family:var(--font-head);font-size:clamp(3rem,7vw,5rem);font-weight:700;line-height:.9}
+.split-visual .badge-lg .v{color:var(--text-dim);text-transform:uppercase;letter-spacing:.2em;font-size:.8rem;margin-top:10px;font-family:var(--font-head)}
+.split-visual .shine{position:absolute;inset:0;background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.06) 50%,transparent 60%)}
+
+/* ---------- CTA band ---------- */
+.cta-band{position:relative;border:1px solid var(--line);border-radius:calc(var(--radius) + 6px);overflow:hidden;
+  padding:clamp(40px,7vw,80px) var(--gutter);text-align:center;
+  background:radial-gradient(80% 120% at 50% 0%,rgba(200,206,216,.12),transparent 60%),var(--bg-2)}
+.cta-band h2{font-family:var(--font-head);text-transform:uppercase;font-weight:700;font-size:clamp(2rem,6vw,4rem);line-height:.98}
+.cta-band p{color:var(--text-dim);margin:16px auto 30px;max-width:52ch}
+.cta-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* ---------- Footer ---------- */
+.footer{border-top:1px solid var(--line);background:var(--bg-2);padding-block:clamp(48px,7vw,80px) 34px}
+.foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:40px}
+.foot-brand .brand{font-size:2rem;margin-bottom:16px}
+.foot-brand p{color:var(--text-dim);font-size:.94rem;max-width:34ch}
+.foot-col h5{font-family:var(--font-head);text-transform:uppercase;letter-spacing:.14em;font-size:.82rem;color:var(--gold);margin-bottom:16px}
+.foot-col a,.foot-col p{display:block;color:var(--text-dim);font-size:.94rem;padding:5px 0;transition:color .25s}
+.foot-col a:hover{color:var(--white)}
+.foot-social{display:flex;gap:10px;margin-top:6px}
+.foot-social a{width:42px;height:42px;border:1px solid var(--line-2);border-radius:11px;display:grid;place-items:center;color:var(--text-dim)}
+.foot-social a:hover{color:var(--gold);border-color:var(--gold)}
+.foot-social svg{width:19px;height:19px}
+.foot-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:44px;padding-top:24px;
+  border-top:1px solid var(--line);color:var(--text-mute);font-size:.82rem}
+.foot-bottom a:hover{color:var(--text)}
+
+/* ---------- Floating WhatsApp ---------- */
+.wa-float{position:fixed;right:22px;bottom:22px;z-index:50;width:58px;height:58px;border-radius:50%;
+  background:var(--wa);color:#fff;display:grid;place-items:center;box-shadow:0 14px 34px -10px rgba(37,211,102,.6);
+  transition:transform .3s var(--ease)}
+.wa-float:hover{transform:scale(1.08)}
+.wa-float svg{width:30px;height:30px}
+.wa-float::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--wa);animation:ping 2.4s var(--ease) infinite}
+@keyframes ping{0%{transform:scale(1);opacity:.6}100%{transform:scale(1.7);opacity:0}}
+
+/* ---------- Reveal (fail-safe: only hides when JS is active) ---------- */
+html.js .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+html.js .reveal.in{opacity:1;transform:none}
+.reveal[data-d="1"]{transition-delay:.08s}
+.reveal[data-d="2"]{transition-delay:.16s}
+.reveal[data-d="3"]{transition-delay:.24s}
+.reveal[data-d="4"]{transition-delay:.32s}
+
+/* ---------- Language visibility ---------- */
+[data-en]{display:none}
+html[lang="en"] [data-es]{display:none}
+html[lang="en"] [data-en]{display:revert}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1080px){
+  .fleet-grid{grid-template-columns:repeat(2,1fr)}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  .steps{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:860px){
+  .nav-links{display:none}
+  .burger{display:block}
+  .lang{display:none}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .split{grid-template-columns:1fr}
+  .split-visual{aspect-ratio:16/10;order:-1}
+}
+@media (max-width:620px){
+  .fleet-grid{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr}
+  .hero-cta{flex-direction:column;align-items:stretch}
+  .hero-cta .btn{justify-content:center}
+  .car-rates{grid-template-columns:repeat(5,1fr)}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  /* Must out-specify `html.js .reveal{opacity:0}` above, or this safety net is dead. */
+  html.js .reveal,.reveal{opacity:1;transform:none}
+}
+
+/* ---------- Print ---------- */
+@media print{
+  .nav,.wa-float,.hero-cta,.mobile-menu,.burger{display:none}
+  body{background:#fff;color:#000}
+}
+
+/* =====================================================================
+   3D SCROLL-SCAN EXPERIENCE  ·  home hero  ·  scoped .sd-*
+   ---------------------------------------------------------------------
+   A three.js / GSAP ScrollTrigger / Lenis experience: the GT3 RS floats
+   down the page, then "scans" into a booking-confirmation card.
+   Re-themed from a generic product-scan concept to the Serres Drive
+   chrome-on-black identity (uses existing --tokens only — no new palette).
+   Fail-safe: every section holds real text, so content survives even if
+   JS or WebGL never run. Motion collapses under prefers-reduced-motion.
+   ===================================================================== */
+
+/* fixed dark scene behind the car (grid + chrome glow) */
+.sd-backdrop{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(120% 90% at 78% 6%,rgba(200,206,216,.14),transparent 46%),
+    radial-gradient(90% 80% at 10% 100%,rgba(90,120,180,.09),transparent 55%),
+    linear-gradient(180deg,#000 0%,#050506 30%,#08080a 62%,#0a0a0b 100%);}
+.sd-backdrop::before{content:"";position:absolute;inset:auto 0 0 0;height:60%;
+  background-image:
+    linear-gradient(rgba(200,206,216,.09) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(200,206,216,.06) 1px,transparent 1px);
+  background-size:64px 64px;
+  transform:perspective(620px) rotateX(66deg) scale(2.1);transform-origin:bottom center;
+  mask-image:linear-gradient(180deg,transparent 6%,#000 60%,transparent 98%);
+  -webkit-mask-image:linear-gradient(180deg,transparent 6%,#000 60%,transparent 98%);
+  opacity:.6;animation:gridflow 3.2s linear infinite}
+
+/* fixed WebGL stage — the GT3 RS is rendered here */
+.sd-model{position:fixed;inset:0;height:100svh;width:100%;z-index:1;pointer-events:none;
+  opacity:0;transition:opacity .7s var(--ease)}
+.sd-model.is-live{opacity:1}
+.sd-model canvas{display:block;width:100%!important;height:100%!important}
+
+/* static poster shown until the live scene takes over (and forever without JS/WebGL) */
+.sd-fallback{position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:center/contain no-repeat url("../assets/img/cars/renders/gt3.jpeg");
+  opacity:.98;transition:opacity .6s var(--ease)}
+.sd-model.is-live ~ .sd-fallback,.sd-exp.live .sd-fallback{opacity:0}
+
+/* the experience wrapper stacks its copy above the stage */
+.sd-exp{position:relative;z-index:2}
+.sd-sec{position:relative;min-height:100svh;display:flex;flex-direction:column;
+  align-items:center;text-align:center;padding:calc(var(--nav-h) + 4vh) var(--gutter) 8vh}
+
+/* HERO — centred stack (matches the reference's text placement); the four
+   cars read behind the copy, and the GT3 RS ends up dead-centre */
+.sd-hero{justify-content:center;gap:clamp(.5em,1.4vh,1em)}
+.sd-hero h1{font-family:var(--font-head);font-weight:700;text-transform:uppercase;
+  font-size:clamp(3rem,10.5vw,8rem);line-height:.88;letter-spacing:-.02em;
+  text-shadow:0 6px 40px rgba(0,0,0,.6)}
+.sd-hero .sd-sub{font-family:var(--font-head);text-transform:uppercase;font-weight:500;
+  letter-spacing:.16em;font-size:clamp(.85rem,2vw,1.3rem);color:var(--text-dim);
+  text-shadow:0 2px 16px rgba(0,0,0,.7)}
+.sd-hero .sd-lede{max-width:46ch;color:var(--text-dim);font-size:clamp(1rem,1.6vw,1.2rem);
+  margin-top:.4em;text-shadow:0 2px 16px rgba(0,0,0,.7)}
+.sd-cta{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:1em}
+.sd-scrollcue{position:absolute;left:50%;bottom:3.4vh;transform:translateX(-50%);
+  display:inline-flex;align-items:center;gap:12px;color:var(--text-mute);
+  font-family:var(--font-head);text-transform:uppercase;letter-spacing:.2em;font-size:.74rem}
+.sd-scrollcue .mouse{width:24px;height:38px;border:1.5px solid var(--line-strong);border-radius:14px;position:relative}
+.sd-scrollcue .mouse::after{content:"";position:absolute;left:50%;top:7px;width:3px;height:7px;border-radius:2px;
+  background:var(--gold);transform:translateX(-50%);animation:scrolldot 1.8s var(--ease) infinite}
+
+/* INFO — brand statement, car turntables behind */
+.sd-info{justify-content:center;gap:clamp(2em,6vh,5em)}
+.sd-tags{display:flex;flex-wrap:wrap;gap:14px 30px;justify-content:center}
+.sd-tags span{font-family:var(--font-head);text-transform:uppercase;letter-spacing:.12em;
+  font-size:.85rem;color:var(--text-dim)}
+.sd-tags span::before{content:"◆";color:var(--gold);font-size:.6em;margin-right:12px;vertical-align:middle}
+.sd-info h2{font-family:var(--font-head);text-transform:uppercase;font-weight:600;
+  font-size:clamp(1.5rem,3.4vw,2.6rem);line-height:1.02;max-width:20ch;
+  text-shadow:0 4px 30px rgba(0,0,0,.75)}
+.sd-info .sd-note{max-width:56ch;color:var(--text-dim);font-size:1rem;text-shadow:0 2px 14px rgba(0,0,0,.7)}
+
+/* SCANNER — pinned; the car shrinks into this frame, spins, "confirms" */
+.sd-scan{justify-content:center}
+.sd-scan-head{position:absolute;top:calc(var(--nav-h) + 2vh);left:0;right:0;
+  display:flex;justify-content:space-between;align-items:flex-start;padding:0 var(--gutter);gap:16px}
+.sd-scan-id{font-family:var(--font-head);font-weight:700;text-transform:uppercase;letter-spacing:.02em;
+  font-size:clamp(1.6rem,3vw,2.4rem);line-height:1}
+.sd-scan-id small{display:block;font-size:.42em;letter-spacing:.24em;color:var(--gold);font-weight:600;margin-top:6px}
+.sd-scan-desc{text-align:right;font-family:var(--font-head);text-transform:uppercase;letter-spacing:.14em;
+  font-size:.8rem;color:var(--text-dim);max-width:16ch;line-height:1.5}
+.sd-scan-frame{position:relative;width:min(300px,74vw);height:min(460px,64vh);border-radius:16px;
+  border:1px solid var(--line-2)}
+.sd-scan-frame::before,.sd-scan-frame::after{content:"";position:absolute;width:26px;height:26px;
+  border:2px solid var(--gold)}
+.sd-scan-frame::before{top:-1px;left:-1px;border-right:0;border-bottom:0;border-radius:16px 0 0 0}
+.sd-scan-frame::after{bottom:-1px;right:-1px;border-left:0;border-top:0;border-radius:0 0 16px 0}
+.sd-corner{position:absolute;width:26px;height:26px;border:2px solid var(--gold)}
+.sd-corner.tr{top:-1px;right:-1px;border-left:0;border-bottom:0;border-radius:0 16px 0 0}
+.sd-corner.bl{bottom:-1px;left:-1px;border-right:0;border-top:0;border-radius:0 0 0 16px}
+/* scan line sweeps while the frame is active */
+.sd-scan-line{position:absolute;left:8px;right:8px;top:8px;height:2px;border-radius:2px;
+  background:linear-gradient(90deg,transparent,var(--gold-soft),transparent);
+  box-shadow:0 0 14px 2px rgba(200,206,216,.5);opacity:0}
+.sd-scan.scanning .sd-scan-line{opacity:1;animation:sdScan 1.05s var(--ease) 2}
+@keyframes sdScan{0%{top:8px}100%{top:calc(100% - 10px)}}
+/* barcode (CSS, re-themed as a plate/VIN strip) */
+.sd-barcode{position:absolute;bottom:calc(8vh + 8px);left:var(--gutter);width:190px}
+.sd-barcode .bars{height:64px;border-radius:5px;
+  background:repeating-linear-gradient(90deg,var(--text) 0 2px,transparent 2px 4px,var(--text) 4px 7px,transparent 7px 9px,var(--text) 9px 11px,transparent 11px 16px);
+  opacity:.85;filter:grayscale(1)}
+.sd-barcode .code{margin-top:8px;font-family:var(--font-head);text-transform:uppercase;letter-spacing:.34em;
+  font-size:.72rem;color:var(--text-dim)}
+/* confirmation stamp (re-theme of "purchased") */
+.sd-stamp{position:absolute;bottom:calc(8vh + 8px);right:var(--gutter);
+  display:inline-flex;align-items:center;gap:10px;padding:12px 26px;border-radius:100px;
+  border:1px solid var(--gold);color:var(--gold-soft);background:rgba(200,206,216,.06);
+  font-family:var(--font-head);text-transform:uppercase;letter-spacing:.14em;font-weight:600;font-size:.9rem;
+  opacity:0;transform:scale(.85)}
+.sd-stamp svg{width:1.15em;height:1.15em}
+.sd-scan.confirmed .sd-stamp{opacity:1;transform:scale(1);transition:opacity .5s var(--ease),transform .5s var(--ease)}
+
+/* OUTRO */
+.sd-outro{justify-content:center;gap:2em}
+.sd-outro h2{font-family:var(--font-head);text-transform:uppercase;font-weight:600;
+  font-size:clamp(1.6rem,3.6vw,2.8rem);line-height:1.02;max-width:22ch;
+  text-shadow:0 4px 30px rgba(0,0,0,.75)}
+
+/* sound / mute toggle */
+.sd-sound{position:fixed;left:22px;bottom:22px;z-index:50;width:46px;height:46px;border-radius:50%;
+  border:1px solid var(--line-2);background:rgba(9,9,11,.7);backdrop-filter:blur(8px);color:var(--text-dim);
+  display:none;place-items:center;transition:color .25s,border-color .25s}
+.sd-exp.live ~ .sd-sound,body.sd-home .sd-sound{display:grid}
+.sd-sound:hover{color:var(--gold);border-color:var(--gold)}
+.sd-sound svg{width:20px;height:20px}
+.sd-sound .on{display:none}.sd-sound.muted .on{display:block}.sd-sound.muted .off{display:none}
+
+/* =====================================================================
+   FLAGSHIP SHOWCASE  ·  the featured cars (alternating editorial bands)
+   ===================================================================== */
+/* everything below the fixed 3D stage needs a solid, raised surface */
+.sd-below{position:relative;z-index:2;background:var(--bg)}
+.sd-showcase{position:relative;z-index:2;background:var(--bg)}
+.sd-show{display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:clamp(28px,5vw,64px);
+  padding-block:clamp(48px,8vw,96px)}
+.sd-show + .sd-show{border-top:1px solid var(--line)}
+.sd-show:nth-child(even) .sd-show-visual{order:2}
+.sd-show-visual{position:relative;aspect-ratio:16/10;border-radius:var(--radius);overflow:hidden;
+  border:1px solid var(--line);background:
+    radial-gradient(90% 70% at 70% 20%,rgba(200,206,216,.12),transparent 55%),
+    linear-gradient(180deg,#111117,#0a0a0c)}
+.sd-show-visual img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.sd-show:hover .sd-show-visual img{transform:scale(1.04)}
+.sd-show-visual .shine{position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(115deg,transparent 42%,rgba(255,255,255,.05) 50%,transparent 58%)}
+.sd-show-copy .eyebrow{display:block;margin-bottom:12px}
+.sd-show-copy h3{font-family:var(--font-head);text-transform:uppercase;font-weight:700;
+  font-size:clamp(1.9rem,4.4vw,3.1rem);line-height:.96;letter-spacing:-.01em}
+.sd-show-copy .sd-show-tag{color:var(--text-dim);margin:14px 0 18px;max-width:46ch;font-size:1.02rem}
+.sd-show-specs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.sd-show-foot{display:flex;flex-wrap:wrap;align-items:center;gap:16px}
+.sd-show-price .from{display:block;font-size:.7rem;text-transform:uppercase;letter-spacing:.14em;
+  color:var(--text-mute);font-family:var(--font-head)}
+.sd-show-price .amt{font-family:var(--font-head);font-weight:700;font-size:1.7rem;line-height:1}
+.sd-show-price .amt small{font-size:.5em;color:var(--text-dim);font-weight:500}
+
+/* =====================================================================
+   SUB-PAGE HEADER  ·  fleet / rates / how / why / contact
+   ===================================================================== */
+.page-header{position:relative;padding:calc(var(--nav-h) + clamp(48px,10vh,96px)) 0 clamp(32px,5vw,56px);
+  border-bottom:1px solid var(--line);overflow:hidden;isolation:isolate}
+.page-header::before{content:"";position:absolute;inset:0;z-index:-1;
+  background:radial-gradient(90% 120% at 80% -10%,rgba(200,206,216,.12),transparent 55%),
+    linear-gradient(180deg,#0c0c0f,var(--bg))}
+.page-header h1{font-family:var(--font-head);text-transform:uppercase;font-weight:700;
+  font-size:clamp(2.4rem,6.5vw,4.6rem);line-height:.94;letter-spacing:-.015em;margin-top:12px}
+.page-header .lede{color:var(--text-dim);margin-top:16px;max-width:60ch;font-size:1.05rem}
+.breadcrumb{display:flex;gap:8px;align-items:center;font-family:var(--font-head);text-transform:uppercase;
+  letter-spacing:.14em;font-size:.74rem;color:var(--text-mute);margin-bottom:6px}
+.breadcrumb a:hover{color:var(--gold)}
+.breadcrumb .sep{color:var(--line-strong)}
+
+/* =====================================================================
+   RESPONSIVE + ACCESSIBILITY for the new blocks
+   ===================================================================== */
+@media (max-width:860px){
+  .sd-show{grid-template-columns:1fr;gap:22px}
+  .sd-show:nth-child(even) .sd-show-visual{order:0}
+  .sd-scan-desc{display:none}
+  .sd-barcode{width:150px}
+}
+@media (max-width:620px){
+  .sd-cta{flex-direction:column;align-items:stretch;width:100%;max-width:340px}
+  .sd-cta .btn{justify-content:center}
+  .sd-stamp{padding:10px 18px;font-size:.8rem}
+}
+
+/* If motion is reduced OR JS never runs: freeze to a clean static hero.
+   The poster stays visible, the pin/scan are neutralised, copy is fully shown. */
+@media (prefers-reduced-motion:reduce){
+  .sd-backdrop::before{animation:none}
+  .sd-scan.scanning .sd-scan-line{animation:none;opacity:.6}
+  .sd-model{transition:none}
+}
+html:not(.js) .sd-model{display:none}
+html:not(.js) .sd-sound{display:none}
+/* without JS the sections simply read as full-height text panels over the poster */
