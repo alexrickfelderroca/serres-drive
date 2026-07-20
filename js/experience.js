@@ -297,6 +297,17 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
     animate();
   }, undefined, function (err) {
     console.warn("[Serres] GT3 model failed:", err);
+    // The Draco decoder is a third-party CDN fetch, so this path is reachable on
+    // any flaky connection. Removing the canvas alone was not enough: body still
+    // carried .sd-home (added up at init), and home.css hides .oa-choose-grid and
+    // .oa-choose-head under it — leaving a fixed full-screen Porsche JPEG over an
+    // empty 200vh section with no heading and no links out. Give the real grid
+    // back and stop the placeholder loop, which only ever got cancelled on the
+    // success path.
+    running = false;
+    if (typeof basicRAF !== "undefined" && basicRAF) cancelAnimationFrame(basicRAF);
+    setInteractive(false);
+    document.body.classList.remove("sd-home");
     mount.remove();
   });
 
@@ -314,7 +325,9 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
   }
   ScrollTrigger.create({
     trigger: ".oa-outro", start: "top 52%",
-    onEnter: function () { mount.classList.remove("is-live"); running = false; },
+    // Hand interaction back BEFORE parking the render loop — once running is
+    // false animate() returns early and can no longer do it itself.
+    onEnter: function () { setInteractive(false); mount.classList.remove("is-live"); running = false; },
     onLeaveBack: function () { if (ready) { mount.classList.add("is-live"); running = true; } }
   });
 
@@ -406,17 +419,60 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
     if (dragId !== null && e && e.pointerId === dragId) {
       try { mount.releasePointerCapture(e.pointerId); } catch (x) {}
     }
-    if (interactive && !dragging && movedDist < 8 && e && e.pointerId === dragId) {
+
+    // What counts as a tap: the gesture never resolved into a direction, barely
+    // moved, and was NOT cancelled by the browser.
+    //
+    // The dragAxis and pointercancel checks are the mobile fix. pointercancel
+    // fires the moment the browser takes a touch over to scroll the page, and it
+    // arrives with dragging === false and movedDist === 0 — so the old condition
+    // passed on every scroll flick and navigated to whatever car happened to be
+    // under the finger. That page load is what looked like "the cylinder bugs out
+    // and leaves a weird loading screen". A vertical gesture that we classified
+    // ourselves (dragAxis === "v") is a scroll too, never a tap.
+    const cancelled = !e || e.type === "pointercancel";
+    const isTap = interactive && !cancelled && e.pointerId === dragId &&
+                  !dragging && dragAxis === null && movedDist < 8;
+
+    if (isTap) {
       setNdcFromEvent(e);
       const t = pickTile();
       if (t) { window.location.href = "car.html?slug=" + encodeURIComponent(t.slug); return; }
     }
+
+    // Touch has no hover. Park the ray off-screen when a touch gesture ends, or
+    // ndc keeps pointing at the last touched pixel and the render loop raycasts
+    // ~160 tiles plus the whole un-BVH'd GLB every frame, forever — the "one
+    // subtle touch and it goes slow" half of the bug. Mouse keeps its hover.
+    if (!e || e.pointerType !== "mouse") { ndc.set(-2, -2); hoverTile = null; }
+
     dragging = false; dragAxis = null; dragId = null;
   }
   mount.addEventListener("pointerdown", onDown);
   window.addEventListener("pointermove", onMove, { passive: false });
   window.addEventListener("pointerup", endDrag);
   window.addEventListener("pointercancel", endDrag);
+
+  // Single owner of the interactive state, so it can be torn down from outside
+  // the render loop. It used to live inline in animate(), which meant that when
+  // `running` went false at the outro the loop returned before ever reaching it:
+  // the canvas kept .is-interactive (pointer-events:auto, fixed, full viewport,
+  // z-index 3) while fading to opacity 0, so an invisible sheet sat over the CTA
+  // band and the footer and swallowed every tap. That was the "freeze".
+  function setInteractive(next) {
+    interactive = next;
+    mount.classList.toggle("is-interactive", next);
+    document.body.classList.toggle("ring-active", next);
+    if (chooseUI) chooseUI.classList.toggle("is-on", next);
+    if (cursorEl) cursorEl.classList.toggle("is-on", next);
+    if (!next) {
+      hoverTile = null;
+      ndc.set(-2, -2);
+      dragging = false; dragAxis = null; dragId = null;
+      if (tooltipEl) tooltipEl.classList.remove("is-on");
+      if (cursorEl) cursorEl.classList.remove("is-over");
+    }
+  }
 
   /* Sideways wheel / two-finger trackpad swipe spins the cylinder.
      The idle spin keeps running underneath; this just adds momentum.
@@ -583,18 +639,7 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 
     /* -- interactive state + hover -- */
     const wantInteractive = reveal > 0.72;
-    if (wantInteractive !== interactive) {
-      interactive = wantInteractive;
-      mount.classList.toggle("is-interactive", interactive);
-      document.body.classList.toggle("ring-active", interactive);
-      if (chooseUI) chooseUI.classList.toggle("is-on", interactive);
-      if (cursorEl) cursorEl.classList.toggle("is-on", interactive);
-      if (!interactive) {
-        hoverTile = null;
-        if (tooltipEl) tooltipEl.classList.remove("is-on");
-        if (cursorEl) cursorEl.classList.remove("is-over");
-      }
-    }
+    if (wantInteractive !== interactive) setInteractive(wantInteractive);
 
     if (interactive && !dragging) {
       const t2 = pickTile();
@@ -625,14 +670,60 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
   /* ------------------------------------------------------------------ *
    * 10 · Resize + refresh                                             *
    * ------------------------------------------------------------------ */
-  window.addEventListener("resize", function () {
-    camera.aspect = window.innerWidth / window.innerHeight;
+  // Don't let ScrollTrigger re-measure on the mobile URL-bar show/hide either.
+  ScrollTrigger.config({ ignoreMobileResize: true });
+
+  // On phones, scrolling shows/hides the URL bar, which fires `resize` over and
+  // over with an unchanged WIDTH. The old handler ran the full path on every one
+  // of those: reallocate the WebGL back buffer at DPR 2, reframe, re-measure and
+  // force a synchronous ScrollTrigger.refresh(). That is the jank/freeze, and the
+  // repeated buffer churn is the usual way to lose the GL context outright.
+  //
+  // So: debounce, and on a coarse pointer ignore height-only changes. A real
+  // rotation or window resize always changes the width, and a height change with
+  // the same width on touch is only ever browser chrome.
+  var lastW = window.innerWidth, lastH = window.innerHeight, resizeTimer = null;
+  var coarse = window.matchMedia("(pointer: coarse)").matches;
+
+  function applyResize() {
+    resizeTimer = null;
+    var w = window.innerWidth, h = window.innerHeight;
+    lastW = w; lastH = h;
+    camera.aspect = w / h;
     camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(w, h);
     frameCamera();
-    if (carMaxDim && loopHeight) VSCROLL = loopHeight / (window.innerHeight * 0.9);
+    if (carMaxDim && loopHeight) VSCROLL = loopHeight / (h * 0.9);
     measure();
     ScrollTrigger.refresh();
+  }
+
+  window.addEventListener("resize", function () {
+    var w = window.innerWidth, h = window.innerHeight;
+    if (coarse && w === lastW && h !== lastH) { lastH = h; return; }  // URL bar only
+    if (w === lastW && h === lastH) return;
+    if (resizeTimer) clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(applyResize, 180);
   });
+
+  // A lost context leaves a permanently blank canvas with no way back. Stop the
+  // loop, show the still fallback, and rebuild when the GPU hands the context
+  // back rather than stranding the visitor on an empty dark screen.
+  const canvasEl = renderer.domElement;
+  canvasEl.addEventListener("webglcontextlost", function (e) {
+    e.preventDefault();
+    running = false;
+    setInteractive(false);
+    document.body.classList.remove("car-loaded");
+    mount.classList.remove("is-live");
+  }, false);
+  canvasEl.addEventListener("webglcontextrestored", function () {
+    try {
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      frameCamera();
+      if (ready) { document.body.classList.add("car-loaded"); mount.classList.add("is-live"); running = true; }
+    } catch (x) { /* stay on the fallback */ }
+  }, false);
+
   window.addEventListener("load", function () { measure(); ScrollTrigger.refresh(); });
 })();

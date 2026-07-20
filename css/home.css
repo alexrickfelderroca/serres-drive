@@ -176,6 +176,15 @@ html.lenis, .lenis.lenis-smooth { scroll-behavior: auto !important; }
 .home-exp .sd-model.is-interactive{pointer-events:auto;cursor:none}
 .home-exp.ring-active{cursor:none}
 
+/* Split the gesture with the browser instead of fighting it.
+   pan-y   → vertical stays native, so the page scrolls normally over the ring.
+   Horizontal is ours, so the browser stops firing pointercancel mid-drag and
+   pointermove keeps arriving cancelable — previously it claimed the whole
+   gesture (touch-action defaulted to auto), killed the drag, and the cancel
+   event was being mistaken for a tap.
+   pinch-zoom is kept so the page stays zoomable — an accessibility requirement. */
+.home-exp .sd-model.is-interactive{touch-action:pan-y pinch-zoom}
+
 @media (prefers-reduced-motion:reduce){
   .sd-choose-ui,.sd-tooltip,.sd-cursor{transition:none}
 }
