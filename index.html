@@ -19,6 +19,14 @@
 <link rel="stylesheet" href="css/styles.css">
 <link rel="stylesheet" href="css/nav-ink.css">
 <link rel="stylesheet" href="css/home.css">
+<!-- Preloader: home page only, once per session. The script builds its own
+     overlay, so nothing is left behind if it never runs — and it is loaded
+     here, blocking, rather than at the end of <body> so the overlay exists
+     before the page gets a chance to paint. It waits for <body> on animation
+     frames and polls briefly for GSAP (loaded further down) before falling
+     back to its CSS keyframe path. -->
+<link rel="stylesheet" href="css/preloader.css">
+<script src="js/preloader.js"></script>
 </head>
 <body id="top" class="home-exp">
 <a href="#showcase" class="btn" style="position:absolute;left:-999px;top:0">Saltar al contenido</a>
