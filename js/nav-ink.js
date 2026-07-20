@@ -239,9 +239,18 @@
     return [toggle].concat(toArr(menu.querySelectorAll('a[href], button:not([disabled])')));
   }
 
+  // Move focus INTO the overlay without landing on a link.
+  //
+  // This used to focus the first link (FLOTA). On touch the browser cannot infer
+  // the input modality of a programmatic focus, so it resolved :focus-visible and
+  // painted the gooey chrome wash + the global focus ring behind that one row —
+  // the "weird shade on the first option" on phones. Focusing the panel itself
+  // keeps the screen-reader announcement and the tab trap working while leaving
+  // every link unstyled. trap() handles activeElement === panel via its i === -1
+  // branch, so the first Tab lands on the toggle and the ring proceeds normally.
   function focusFirst() {
-    var f = menu.querySelector("a[href]");
-    if (f) { try { f.focus({ preventScroll: true }); } catch (e) { f.focus(); } }
+    if (!panel) return;
+    try { panel.focus({ preventScroll: true }); } catch (e) { panel.focus(); }
   }
 
   // Deterministic trap. A boundary-only trap leaks: the toggle sits early in the
@@ -270,6 +279,11 @@
     linkEls = toArr(menu.querySelectorAll(".ink-links a"));
     footEl = q(".ink-foot", menu);
     if (!circle || !panel) { root.classList.remove("ink-ready"); return; }
+
+    // Set here rather than in the markup so all 7 pages stay in sync from one
+    // place. -1 keeps the panel out of the Tab order but lets focusFirst() land
+    // on it — see the note there.
+    panel.setAttribute("tabindex", "-1");
 
     reduce = window.matchMedia("(prefers-reduced-motion:reduce)").matches;
     if (reduce) root.classList.add("ink-reduce");

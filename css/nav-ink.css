@@ -184,7 +184,17 @@ html.ink-open .ink-panel { will-change: clip-path; }
   transition: transform .55s var(--ease), opacity .4s var(--ease);
   opacity: 0;
 }
-.ink-links a:hover::before,
+/* Hover is gated on a real hover-capable pointer. Without the guard a touch
+   device latches the :hover state after a tap and the wash stays painted behind
+   the row until you tap elsewhere. :focus-visible stays ungated — it is the
+   keyboard affordance, and the panel (not a link) now takes focus on open. */
+@media (hover: hover) {
+  .ink-links a:hover::before {
+    transform: scaleX(1);
+    opacity: 1;
+    animation: ink-goo 7s ease-in-out infinite;
+  }
+}
 .ink-links a:focus-visible::before {
   transform: scaleX(1);
   opacity: 1;
@@ -196,11 +206,18 @@ html.ink-open .ink-panel { will-change: clip-path; }
   66%      { border-radius: 40% 60% 52% 48% / 58% 42% 60% 40%; }
 }
 
-.ink-links a:hover .ink-label,
+@media (hover: hover) {
+  .ink-links a:hover .ink-label { color: var(--gold); transform: translateX(6px); }
+  .ink-links a:hover .ink-num { color: var(--gold); transform: translateY(-3px); }
+}
 .ink-links a:focus-visible .ink-label { color: var(--gold); transform: translateX(6px); }
-.ink-links a:hover .ink-num,
 .ink-links a:focus-visible .ink-num { color: var(--gold); transform: translateY(-3px); }
 .ink-links a[aria-current="page"] .ink-label { color: var(--gold); }
+
+/* The panel is a focus target, not a control — it must not draw the global
+   chrome focus ring from styles.css:73 when focusFirst() lands on it. */
+.ink-panel:focus,
+.ink-panel:focus-visible { outline: none; }
 
 /* ---------------------------------------------------------------------
    Footer of the panel (language toggle)
