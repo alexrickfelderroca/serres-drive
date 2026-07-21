@@ -89,6 +89,54 @@
     return '<svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16.04 3C9.4 3 4 8.4 4 15.04c0 2.12.56 4.18 1.62 6L4 29l8.16-1.58a12 12 0 0 0 3.88.64C22.7 28.06 28.1 22.66 28.1 16.02 28.1 8.4 22.68 3 16.04 3Zm5.39 14.57c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.66.15-.2.3-.76.96-.93 1.15-.17.2-.34.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.3-.02-.46.13-.61.13-.13.3-.34.45-.51.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.66-1.6-.9-2.18-.24-.58-.48-.5-.66-.5l-.56-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.22 3.08.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.08 1.75-.71 2-1.4.25-.69.25-1.28.17-1.4-.07-.13-.27-.2-.57-.35Z"/></svg>';
   }
 
+  /* SEO: describe the rendered car as a schema.org Product. Built with
+     JSON.stringify from the car object — never concatenated into the JSON —
+     and re-injected on every render (language switches re-render, so the
+     previous copy is removed first via its id). */
+  var SITE = "https://serresdrive.com/";
+  function injectJsonLd(car) {
+    var prev = document.getElementById("car-jsonld");
+    if (prev && prev.parentNode) prev.parentNode.removeChild(prev);
+
+    var pageUrl = SITE + "car.html?slug=" + encodeURIComponent(car.slug);
+    var offer = {
+      "@type": "Offer",
+      "url": pageUrl,
+      "priceCurrency": "EUR",
+      "availability": "https://schema.org/InStock",
+      "seller": { "@type": "AutoRental", "name": "Serres Drive" }
+    };
+    if (car.prices && car.prices.d1 != null) {
+      offer.priceSpecification = {
+        "@type": "UnitPriceSpecification",
+        "price": car.prices.d1,
+        "priceCurrency": "EUR",
+        "referenceQuantity": { "@type": "QuantitativeValue", "value": 1, "unitCode": "DAY" }
+      };
+    }
+    var data = {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": car.name,
+      "brand": { "@type": "Brand", "name": car.brand },
+      "image": SITE + "assets/img/cars/" + encodeURIComponent(car.slug) + ".jpg",
+      "url": pageUrl,
+      "description": car.taglineEs || "",
+      "offers": offer
+    };
+
+    var s = document.createElement("script");
+    s.type = "application/ld+json";
+    s.id = "car-jsonld";
+    s.textContent = JSON.stringify(data);
+    document.head.appendChild(s);
+
+    // Keep the canonical in step with the rendered car so the slug URLs in
+    // sitemap.xml are not all collapsed into the bare car.html shell.
+    var canon = document.querySelector('link[rel="canonical"]');
+    if (canon) canon.setAttribute("href", pageUrl);
+  }
+
   function render(car) {
     var root = document.getElementById("carDetail");
     if (!root) return;
@@ -234,6 +282,7 @@
 
     root.innerHTML = heroHtml + posterHtml + specHtml + priceHtml + hlHtml + galHtml;
     document.title = car.name + " · SERRES DRIVE — " + (document.documentElement.lang === "en" ? "Luxury car rental in Barcelona" : "Alquiler de coches de lujo en Barcelona");
+    injectJsonLd(car);
   }
 
   function showFallback() {
