@@ -245,46 +245,9 @@ html.pl-lock body{overflow:hidden}
 }
 
 
-/* ---------- Tag words ----------
-   Positioned in viewport percentages against .pl-vp (see above), well
-   clear of the centre band the lockup occupies. */
-.pl-tag{
-  position:absolute;
-  top:var(--pl-top,20%);
-  left:var(--pl-left,12%);
-  font-family:var(--font-head,"Barlow Condensed","Arial Narrow",system-ui,sans-serif);
-  font-weight:600;
-  text-transform:uppercase;
-  letter-spacing:.2em;
-  font-size:.72rem;
-  line-height:1;
-  color:var(--text-mute,#71717a);
-  white-space:nowrap;
-  opacity:0;
-  transform:translate(var(--pl-dx,0px),8px);
-  will-change:transform,opacity;
-}
-/* Right-anchored tags grow leftwards, so a long EN string can never
-   push past the right edge on a narrow phone. */
-.pl-tag--right{left:auto;right:var(--pl-right,12%)}
-
-/* Vertical placement is authored HERE rather than emitted inline by
-   preloader.js. An inline custom property beats any author-stylesheet
-   rule without !important, so a style="--pl-top:80%" would make the
-   (max-height:520px) block at the foot of this file dead CSS — the
-   landscape-phone adjustment would simply not exist at runtime. data-i
-   mirrors the index in the TAGS array; the two lists move together. */
-.pl-tag[data-i="0"]{--pl-top:17%}
-.pl-tag[data-i="1"]{--pl-top:29%}
-.pl-tag[data-i="2"]{--pl-top:80%}
-
-/* The bilingual swap, restated locally. styles.css already declares it
-   site-wide, but this file must not depend on load order or on being
-   paired at all: on its own, .pl-tag{white-space:nowrap} would render
-   both sibling spans concatenated ("BarcelonaBarcelona"). */
-.pl-tag [data-en]{display:none}
-html[lang="en"] .pl-tag [data-es]{display:none}
-html[lang="en"] .pl-tag [data-en]{display:inline}
+/* (The auxiliary tag words — Barcelona / Flota premium / Entrega a
+   domicilio — were removed on request: the overlay shows the SERRES DRIVE
+   lockup and nothing else.) */
 
 
 /* =====================================================================
@@ -295,15 +258,8 @@ html[lang="en"] .pl-tag [data-en]{display:inline}
    Easings mirror the JS ones; the split uses the literal "hop" curve.
    ===================================================================== */
 
-/* t=0.0 — tags in */
-.pl--css .pl-tag{
-  transition:opacity .7s cubic-bezier(.2,.7,.3,1),transform .7s cubic-bezier(.2,.7,.3,1);
-  transition-delay:calc(var(--i,0) * .12s);
-}
-.pl--css.is-tags .pl-tag{opacity:1;transform:translate(0,0)}
-
-/* t=0.5 — the speed wipe lays SERRES down */
-.pl--css .pl-word--serres{transition:clip-path 1.25s cubic-bezier(.65,0,.35,1)}
+/* t=0.2 — the speed wipe lays SERRES down */
+.pl--css .pl-word--serres{transition:clip-path 1.15s cubic-bezier(.65,0,.35,1)}
 .pl--css.is-serres .pl-word--serres{clip-path:inset(0% 0% 0% 0%)}
 
 /* t=2.3 — DRIVE arrives and the lockup re-centres around it */
@@ -312,20 +268,11 @@ html[lang="en"] .pl-tag [data-en]{display:inline}
 .pl--css.is-drive .pl-word--drive{transform:translateX(0)}
 .pl--css.is-drive .pl-shift{transform:translateX(0)}
 
-/* t=3.6 — the assembled lockup settles/tightens */
-.pl--css .pl-lockup{transition:transform .7s cubic-bezier(.45,.05,.25,1)}
+/* t=2.7 — the assembled lockup settles/tightens */
+.pl--css .pl-lockup{transition:transform .6s cubic-bezier(.45,.05,.25,1)}
 .pl--css.is-settle .pl-lockup{transform:scale(.94)}
 
-/* t=4.2 — tags leave the way they came.
-   Same specificity as .is-tags above, so this must stay below it. */
-.pl--css.is-tagsout .pl-tag{
-  opacity:0;
-  transform:translate(var(--pl-dx,0px),8px);
-  transition-duration:.5s;
-  transition-delay:calc(var(--i,0) * .08s);
-}
-
-/* t=4.4 — THE SPLIT */
+/* t=3.3 — THE SPLIT */
 .pl--css .pl-half{transition:transform 1s cubic-bezier(.8,0,.3,1)}
 .pl--css.is-split .pl-half--top{transform:translateY(-100%)}
 .pl--css.is-split .pl-half--bot{transform:translateY(100%)}
@@ -341,7 +288,6 @@ html[lang="en"] .pl-tag [data-en]{display:inline}
 .pl--reduced .pl-word--drive,
 .pl--reduced .pl-shift,
 .pl--reduced .pl-lockup{transform:none}
-.pl--reduced .pl-tag{opacity:1;transform:none}
 /* the wipe must be fully open, or reduced motion would show a blank mark */
 .pl--reduced .pl-word--serres{clip-path:none}
 
@@ -350,7 +296,6 @@ html[lang="en"] .pl-tag [data-en]{display:inline}
      inside the overlay may animate. The root's opacity fade is left
      alone on purpose — it is how the overlay gets out of the way. */
   .pl *{animation:none !important}
-  .pl--css .pl-tag,
   .pl--css .pl-word--serres,
   .pl--css .pl-word--drive,
   .pl--css .pl-shift,
@@ -369,22 +314,6 @@ html[lang="en"] .pl-tag [data-en]{display:inline}
 /* =====================================================================
    BREAKPOINTS — the site uses 1080 / 860 / 620, no tokens exist.
    ===================================================================== */
-@media (max-width:860px){
-  .pl-tag{font-size:.68rem;letter-spacing:.18em}
-}
 @media (max-width:620px){
-  .pl-tag{font-size:.62rem;letter-spacing:.16em}
-  /* Pull the scattered tags in towards the edges so a long Spanish
-     string ("Entrega a domicilio") still clears the viewport. */
-  .pl-tag{left:7%}
-  .pl-tag--right{left:auto;right:7%}
   .pl-lockup{gap:.6em}
-}
-/* Short/landscape viewports: the lockup grows with vw, so on a wide but
-   shallow screen it can reach up towards the tags. Push them outward. */
-@media (max-height:520px){
-  /* Attribute-qualified to match the specificity of the [data-i] defaults
-     above (0,2,0) — source order then decides, which is what we want. */
-  .pl-tag[data-i]{--pl-top:10%}
-  .pl-tag--low[data-i]{--pl-top:87%}
 }

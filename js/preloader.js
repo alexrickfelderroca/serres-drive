@@ -61,23 +61,10 @@
   var SKIP_FADE  = 300;   // ms — must match .pl--out in preloader.css
   var REDUCED_MS = 600;   // ms — static hold under prefers-reduced-motion
 
-  /* Tag words. Authored as data-es/data-en sibling spans exactly like the
-     rest of the site: the bilingual swap is pure CSS driven by <html lang>,
-     so these self-correct the moment app.js publishes the stored language.
-
-     No vertical position here on purpose. --pl-top is authored in
-     css/preloader.css keyed off data-i, because an inline custom property
-     outranks every author rule without !important — emitting it here made
-     the (max-height:520px) landscape adjustment dead CSS. Adding a tag
-     means adding its --pl-top rule alongside. */
-  var TAGS = [
-    { es: "Barcelona",           en: "Barcelona",
-      side: "left",  inset: "12%", dx: "-26px", low: false },
-    { es: "Flota premium",       en: "Premium fleet",
-      side: "right", inset: "11%", dx: "26px",  low: false },
-    { es: "Entrega a domicilio", en: "Door-to-door delivery",
-      side: "left",  inset: "16%", dx: "-26px", low: true  }
-  ];
+  /* No auxiliary tag words: the overlay shows the SERRES DRIVE lockup and
+     nothing else. The floating "Barcelona / Flota premium / Entrega a
+     domicilio" words were removed on request — with them went ~1.1s of
+     runway, so every beat below moved earlier. */
 
   var root = null;      // the overlay element
   var tl = null;        // GSAP timeline, when GSAP is available
@@ -149,24 +136,6 @@
     return out;
   }
 
-  function tagsHTML() {
-    var out = "", i, t, pos;
-    for (i = 0; i < TAGS.length; i++) {
-      t = TAGS[i];
-      // --i and --pl-dx stay inline: genuinely per-instance, and nothing
-      // in a media query needs to override them.
-      pos = "--i:" + i + ";--pl-dx:" + t.dx + ";" +
-            (t.side === "right" ? "--pl-right:" + t.inset : "--pl-left:" + t.inset);
-      out += '<span class="pl-tag' +
-               (t.side === "right" ? " pl-tag--right" : "") +
-               (t.low ? " pl-tag--low" : "") +
-             '" data-i="' + i + '" style="' + pos + '">' +
-               "<span data-es>" + t.es + "</span><span data-en>" + t.en + "</span>" +
-             "</span>";
-    }
-    return out;
-  }
-
   function lockupHTML() {
     return '<div class="pl-lockup-pos"><div class="pl-shift"><div class="pl-lockup">' +
              '<span class="pl-word pl-word--serres">' + markHTML() + "</span>" +
@@ -186,7 +155,7 @@
     half.className = "pl-half pl-half--" + which;
     var vp = document.createElement("div");
     vp.className = "pl-vp";
-    vp.innerHTML = tagsHTML() + lockupHTML();
+    vp.innerHTML = lockupHTML();
     half.appendChild(vp);
     return half;
   }
@@ -308,20 +277,9 @@
   function onDismiss() { skip(); }
 
   /* ---------- GSAP path ----------
-     Advanced stagger: the flat node list is [half1 chars…, half2 chars…],
-     so a plain `stagger` value would run the bottom half after the top
-     half and tear the wordmark in two. Keying the delay off data-i makes
-     both copies move as one. */
-  function byIndex(step) {
-    return function (i, el) {
-      var n = parseInt(el.getAttribute("data-i"), 10);
-      return (isNaN(n) ? i : n) * step;
-    };
-  }
-
+     Only the lockup animates now, so no per-element stagger is needed. */
   function runGsap(gsap) {
     var all    = function (sel) { return root.querySelectorAll(sel); };
-    var tags   = all(".pl-tag");
     var marks  = all(".pl-word--serres");
     var drive  = all(".pl-word--drive");
     var shifts = all(".pl-shift");
@@ -332,61 +290,43 @@
     var WIPE_HID = "inset(0% 100% 0% 0%)";
     var WIPE_VIS = "inset(0% 0% 0% 0%)";
 
-    /* Re-assert the start state as inline transforms. The CSS already
-       declares it (so there is no unstyled frame), but getComputedStyle
-       hands GSAP a px matrix, not the authored percentages — tweening
-       yPercent against that would compound the two. Setting it
-       explicitly makes the start state unambiguous. */
+    /* Re-assert the start state inline. The CSS already declares it (so
+       there is no unstyled frame); setting it again makes the start state
+       unambiguous to GSAP regardless of what the computed style resolves. */
     gsap.set(marks,  { clipPath: WIPE_HID, webkitClipPath: WIPE_HID });
     gsap.set(drive,  { xPercent: 105,  x: 0 });
     // .pl-shift is deliberately NOT pre-set: leaving the em-based CSS
     // transform in place keeps it correct across a rotation right up
-    // until the tween below claims it at t=2.3, at which point GSAP
-    // reads the resolved px off the computed matrix.
-    gsap.set(tags,   { opacity: 0, y: 8, x: function (i, el) {
-      return parseFloat((el.style.getPropertyValue("--pl-dx") || "0")) || 0;
-    } });
+    // until the tween below claims it, at which point GSAP reads the
+    // resolved px off the computed matrix.
 
     tl = gsap.timeline({ onComplete: destroy });
 
-    // t=0.0 — tags drift in
-    tl.to(tags, { opacity: 1, x: 0, y: 0, duration: 0.7, ease: "power2.out",
-                  stagger: byIndex(0.12) }, 0);
-
-    // t=0.5 — the speed wipe lays SERRES down left to right
+    // t=0.2 — the speed wipe lays SERRES down left to right
     tl.to(marks, { clipPath: WIPE_VIS, webkitClipPath: WIPE_VIS,
-                   duration: 1.25, ease: "power3.inOut" }, 0.5);
+                   duration: 1.15, ease: "power3.inOut" }, 0.2);
 
-    // t=2.3 — DRIVE joins and the lockup re-centres around the finished
+    // t=1.55 — DRIVE joins and the lockup re-centres around the finished
     // wordmark. Both tweens share a duration so they read as one move.
-    tl.to(drive,  { xPercent: 0, duration: 0.9, ease: "power3.out" }, 2.3);
-    tl.to(shifts, { x: 0,        duration: 0.9, ease: "power3.out" }, 2.3);
+    tl.to(drive,  { xPercent: 0, duration: 0.8, ease: "power3.out" }, 1.55);
+    tl.to(shifts, { x: 0,        duration: 0.8, ease: "power3.out" }, 1.55);
 
-    // t=3.6 — settle/tighten
-    tl.to(locks, { scale: 0.94, duration: 0.7, ease: "power2.inOut" }, 3.6);
+    // t=2.7 — settle/tighten
+    tl.to(locks, { scale: 0.94, duration: 0.6, ease: "power2.inOut" }, 2.7);
 
-    // t=4.2 — tags leave the way they came
-    tl.to(tags, { opacity: 0, y: 8, duration: 0.5, ease: "power2.in",
-                  stagger: byIndex(0.08),
-                  x: function (i, el) {
-                    return parseFloat((el.style.getPropertyValue("--pl-dx") || "0")) || 0;
-                  } }, 4.2);
-
-    // t=4.4 — THE SPLIT
-    tl.to(all(".pl-half--top"), { yPercent: -100, duration: 1, ease: HOP }, 4.4);
-    tl.to(all(".pl-half--bot"), { yPercent:  100, duration: 1, ease: HOP }, 4.4);
+    // t=3.3 — THE SPLIT
+    tl.to(all(".pl-half--top"), { yPercent: -100, duration: 1, ease: HOP }, 3.3);
+    tl.to(all(".pl-half--bot"), { yPercent:  100, duration: 1, ease: HOP }, 3.3);
   }
 
   /* ---------- CSS fallback path ----------
      Same beats, driven by classes on the root. Every transition is gated
      on .pl--css in the stylesheet so it can never compete with GSAP. */
   var BEATS = [
-    [0,    "is-tags"],
-    [500,  "is-serres"],
-    [2300, "is-drive"],
-    [3600, "is-settle"],
-    [4200, "is-tagsout"],
-    [4400, "is-split"]
+    [200,  "is-serres"],
+    [1550, "is-drive"],
+    [2700, "is-settle"],
+    [3300, "is-split"]
   ];
 
   function runCss() {
@@ -404,10 +344,10 @@
     }
     /* skip(), not destroy(): these beats are wall-clock timers but the
        transitions they trigger are not, so a stalled main thread can put
-       the split behind schedule. Fading out covers that case; at 5400 on
+       the split behind schedule. Fading out covers that case; at 4400 on
        a healthy frame budget the halves are already off screen, so the
        fade is invisible and costs nothing. */
-    timers.push(setTimeout(skip, 5400));
+    timers.push(setTimeout(skip, 4400));
   }
 
   /* ---------- reduced motion ----------
