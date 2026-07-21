@@ -28,14 +28,22 @@
  * ------------------------------------------------------------------ */
 .fc-sec{background:var(--bg)}
 
+/* "Destacados" is the section's marquee, not a whisper: big condensed caps
+   in the brand's chrome gradient, with a heavier rule before it. It overlays
+   the photos top-left while the carousel runs (.fc-on .fc-head), where the
+   size + gradient keep it legible over any paintwork. */
 .fc-sec p.fc-eyebrow{
-  display:inline-flex;align-items:center;gap:12px;
-  font-family:var(--font-head);font-size:.8rem;font-weight:600;
-  letter-spacing:.28em;text-transform:uppercase;line-height:1.2;
-  color:var(--gold);
+  display:inline-flex;align-items:center;gap:clamp(12px,1.6vw,20px);
+  font-family:var(--font-head);font-size:clamp(1.6rem,4.2vw,3rem);font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;line-height:1;
+  background:var(--gold-grad);
+  -webkit-background-clip:text;background-clip:text;
+  color:transparent;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 3px 14px rgba(0,0,0,.55));
 }
 .fc-sec p.fc-eyebrow::before{
-  content:"";width:26px;height:1px;background:var(--gold);opacity:.7;
+  content:"";width:clamp(30px,4.5vw,58px);height:2px;flex:none;
+  background:var(--gold-grad);opacity:.9;
 }
 
 .fc-slide{display:block;color:var(--white)}

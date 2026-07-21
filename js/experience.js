@@ -253,7 +253,9 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
   function frameCamera() {
     if (!carMaxDim) return;
     const a = window.innerWidth / window.innerHeight;
-    const f = a < 0.8 ? 3.2 : a < 1.3 ? 2.55 : 2.05;
+    // ~8% closer than the original 3.2 / 2.55 / 2.05 so the car reads a
+    // touch larger behind the headline on every breakpoint.
+    const f = a < 0.8 ? 2.95 : a < 1.3 ? 2.36 : 1.9;
     baseCamY = carMaxDim * 0.16;
     baseCamZ = carMaxDim * f;
     camera.position.set(0, baseCamY, baseCamZ);
