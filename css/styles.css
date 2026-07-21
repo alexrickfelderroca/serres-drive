@@ -200,16 +200,35 @@ section{position:relative}
 }
 /* The mark is ~11:1, so at nav size the lockup is wide. On phones it shares
    the bar with the RESERVAR pill and the burger; step --brand-h down so all
-   three fit on one row with air — the lockup must never wrap or overlap. */
+   three fit on one row with air — the lockup must never wrap or overlap.
+   Budgets measured against the pill (108px with icon, ~99px without) and the
+   44px burger: the mark alone needs 11.18 x --brand-h of width, DRIVE ~2.9 x. */
 .brand{flex-wrap:nowrap}
+/* If flexbox ever squeezes the <img> below its natural width (the global
+   max-width:100% reset lets it), scale the artwork instead of stretching it —
+   a distorted logotype is worse than a small one. */
+.brand .b-mark{object-fit:contain;object-position:left center}
 @media (max-width:860px){
   .brand{--brand-h:.9rem;gap:.5em}
 }
-@media (max-width:480px){
-  .brand{--brand-h:.76rem;gap:.44em}
-  .brand .b-drive{letter-spacing:.2em;margin-right:-.2em}
-  /* the booking pill gives up a little padding before anything overlaps */
+@media (max-width:600px){
+  .brand{--brand-h:.78rem;gap:.46em}
+  .brand .b-drive{letter-spacing:.22em;margin-right:-.22em}
+  .nav .wrap{gap:14px}
+  .nav-actions{gap:10px}
   .nav .btn.sm{padding:10px 13px;font-size:.86rem}
+}
+@media (max-width:430px){
+  .brand{--brand-h:.7rem}
+  /* the pill's WhatsApp icon is the cheapest 24px on the row */
+  .nav .btn.sm svg{display:none}
+  .nav .wrap{gap:12px}
+}
+@media (max-width:374px){
+  /* below iPhone-SE width the descriptor goes before the logotype shrinks
+     into illegibility — SERRES alone still carries the brand */
+  .brand .b-drive{display:none}
+  .brand{--brand-h:.62rem}
 }
 .nav-links{display:flex;align-items:center;gap:30px}
 .nav-links a{
@@ -421,6 +440,33 @@ table.rates tbody tr:hover td:first-child{background:#141419}
 .rates-note{display:flex;flex-wrap:wrap;gap:12px 26px;padding:18px;border-top:1px solid var(--line);
   color:var(--text-dim);font-size:.9rem;align-items:center}
 
+/* ---------- Rates search ---------- */
+.rates-tools{
+  position:relative;
+  max-width:420px;
+  margin-bottom:18px;
+}
+.rates-tools svg{
+  position:absolute;left:16px;top:50%;transform:translateY(-50%);
+  width:17px;height:17px;color:var(--text-mute);pointer-events:none;
+}
+.rates-search{
+  width:100%;
+  font-family:var(--font-body);font-size:.95rem;color:var(--text);
+  background:var(--bg-2);
+  border:1px solid var(--line-2);border-radius:100px;
+  padding:12px 18px 12px 44px;
+  transition:border-color .3s var(--ease),background .3s var(--ease);
+}
+.rates-search::placeholder{color:var(--text-mute)}
+.rates-search:focus{outline:none;border-color:var(--gold);background:var(--bg-3)}
+/* the UA's own clear button clashes with the dark theme; the input still
+   clears with select-all + delete, and Esc works in most engines */
+.rates-search::-webkit-search-cancel-button{-webkit-appearance:none}
+.rates-empty{
+  text-align:left;color:var(--text-dim);font-size:.94rem;padding:22px 18px;
+}
+
 /* ---------- Rates on phones: cards, not a sideways table ----------
    Below 700px (the table's min-width is 660px + padding) the five columns
    cannot fit, and a horizontally scrolling table with a sticky first cell
@@ -448,7 +494,10 @@ table.rates tbody tr:hover td:first-child{background:#141419}
     padding:9px 0;text-align:right;border-bottom:1px solid var(--line);
     position:static;background:none;
   }
-  table.rates td:first-child{display:block;text-align:left;padding:12px 0 10px}
+  /* background:none repeated here on purpose: the desktop sticky-column rule
+     (td:first-child{background:var(--bg-2)}) has higher specificity than the
+     generic td neutraliser above and would paint a darker box in every card */
+  table.rates td:first-child{display:block;text-align:left;padding:12px 0 10px;background:none}
   table.rates td:last-child{border-bottom:0}
   /* the duration label, from the data written by renderRates() */
   table.rates td[data-label-es]::before{

@@ -71,6 +71,12 @@
     return null;
   }
   function el(html) { var t = document.createElement("template"); t.innerHTML = html.trim(); return t.content.firstChild; }
+  // For interpolating free text (the rates search query) into template HTML.
+  function esc(s) {
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
   function tr(key) { return T[key] ? (T[key][lang] || T[key].es) : key; }
   function svg(paths, opts) {
     return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">' + paths + '</svg>';
@@ -199,11 +205,47 @@
   /* ==================================================================
      RENDER: rates table
      ================================================================== */
+  /* Live search over the rate table. Accent-insensitive so "hurac" finds the
+     Huracán; matches name, category in both languages, and the brand word. */
+  var ratesQuery = "";
+  function fold(s) {
+    s = String(s || "").toLowerCase();
+    try { s = s.normalize("NFD").replace(/[̀-ͯ]/g, ""); } catch (e) { /* old engines */ }
+    return s;
+  }
+  function rateMatches(car) {
+    if (!ratesQuery) return true;
+    var hay = fold(car.name + " " + car.category + " " + engCat(car.category));
+    var terms = fold(ratesQuery).split(/\s+/);
+    for (var i = 0; i < terms.length; i++) {
+      if (terms[i] && hay.indexOf(terms[i]) === -1) return false;
+    }
+    return true;
+  }
+
   function renderRates() {
     var body = document.getElementById("ratesBody");
     if (!body) return;
+
+    // The search input lives outside the tbody, so it survives re-renders;
+    // only its placeholder follows the language.
+    var search = document.getElementById("ratesSearch");
+    if (search) {
+      search.placeholder = lang === "en" ? "Search by car or brand…" : "Busca por coche o marca…";
+      if (!search.getAttribute("data-bound")) {
+        search.setAttribute("data-bound", "1");
+        search.addEventListener("input", function () {
+          ratesQuery = search.value.trim();
+          renderRates();
+        });
+      }
+    }
+
     body.innerHTML = "";
+    var shown = 0;
     FLEET.forEach(function (car) {
+      if (!rateMatches(car)) return;
+      shown++;
       var waHref = waLink(T.waCar[lang] ? T.waCar[lang](car.name) : T.waCar.es(car.name));
       // data-label-es/-en feed the phone card layout: below 700px the table
       // linearises into per-car cards (styles.css) and each price row prints
@@ -225,6 +267,16 @@
       });
       body.appendChild(row);
     });
+
+    // A search with no hits must say so, never show a silently empty panel.
+    if (!shown) {
+      body.appendChild(el(
+        '<tr><td class="rates-empty" colspan="5">' +
+          '<span data-es>Ningún coche coincide con «' + esc(ratesQuery) + '». Prueba con la marca — Ferrari, Porsche, AMG…</span>' +
+          '<span data-en>No car matches “' + esc(ratesQuery) + '”. Try the brand — Ferrari, Porsche, AMG…</span>' +
+        '</td></tr>'
+      ));
+    }
   }
 
   /* ==================================================================
