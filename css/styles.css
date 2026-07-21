@@ -198,6 +198,19 @@ section{position:relative}
      form whose visual centre sits slightly above its box centre */
   transform:translateY(.06em);
 }
+/* The mark is ~11:1, so at nav size the lockup is wide. On phones it shares
+   the bar with the RESERVAR pill and the burger; step --brand-h down so all
+   three fit on one row with air — the lockup must never wrap or overlap. */
+.brand{flex-wrap:nowrap}
+@media (max-width:860px){
+  .brand{--brand-h:.9rem;gap:.5em}
+}
+@media (max-width:480px){
+  .brand{--brand-h:.76rem;gap:.44em}
+  .brand .b-drive{letter-spacing:.2em;margin-right:-.2em}
+  /* the booking pill gives up a little padding before anything overlaps */
+  .nav .btn.sm{padding:10px 13px;font-size:.86rem}
+}
 .nav-links{display:flex;align-items:center;gap:30px}
 .nav-links a{
   font-family:var(--font-head);text-transform:uppercase;letter-spacing:.09em;
@@ -407,6 +420,47 @@ table.rates tbody tr:hover td:first-child{background:#141419}
 .rates td .euro{font-family:var(--font-head);font-weight:600}
 .rates-note{display:flex;flex-wrap:wrap;gap:12px 26px;padding:18px;border-top:1px solid var(--line);
   color:var(--text-dim);font-size:.9rem;align-items:center}
+
+/* ---------- Rates on phones: cards, not a sideways table ----------
+   Below 700px (the table's min-width is 660px + padding) the five columns
+   cannot fit, and a horizontally scrolling table with a sticky first cell
+   reads as broken on a phone. Linearise it: one card per car, the four
+   durations as labelled rows. The labels come from data-label-es/-en set
+   in js/app.js, switched by the same html[lang] mechanism as all copy —
+   the visual thead is hidden but stays in the DOM for assistive tech. */
+@media (max-width:700px){
+  .rates-scroll{overflow-x:visible}
+  table.rates{display:block;min-width:0}
+  table.rates thead{position:absolute;left:-9999px;top:0}   /* visually hidden, still announced */
+  table.rates tbody{display:block;padding:14px}
+  table.rates tbody tr{
+    display:block;
+    background:var(--bg-3);
+    border:1px solid var(--line);
+    border-radius:var(--radius-sm);
+    padding:4px 16px 10px;
+    margin-bottom:12px;
+  }
+  table.rates tbody tr:last-child{margin-bottom:0}
+  table.rates th,table.rates td{white-space:normal}
+  table.rates td{
+    display:flex;justify-content:space-between;align-items:baseline;gap:14px;
+    padding:9px 0;text-align:right;border-bottom:1px solid var(--line);
+    position:static;background:none;
+  }
+  table.rates td:first-child{display:block;text-align:left;padding:12px 0 10px}
+  table.rates td:last-child{border-bottom:0}
+  /* the duration label, from the data written by renderRates() */
+  table.rates td[data-label-es]::before{
+    content:attr(data-label-es);
+    font-family:var(--font-head);text-transform:uppercase;letter-spacing:.1em;
+    font-size:.74rem;color:var(--text-mute);
+  }
+  html[lang="en"] table.rates td[data-label-en]::before{content:attr(data-label-en)}
+  /* hover styles assume a table row; neutralise inside cards */
+  table.rates tbody tr:hover td,
+  table.rates tbody tr:hover td:first-child{background:none}
+}
 .rates-note .k{color:var(--gold);font-family:var(--font-head);text-transform:uppercase;letter-spacing:.08em;margin-right:6px}
 
 /* ---------- Steps ---------- */

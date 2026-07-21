@@ -205,14 +205,18 @@
     body.innerHTML = "";
     FLEET.forEach(function (car) {
       var waHref = waLink(T.waCar[lang] ? T.waCar[lang](car.name) : T.waCar.es(car.name));
+      // data-label-es/-en feed the phone card layout: below 700px the table
+      // linearises into per-car cards (styles.css) and each price row prints
+      // its own column header via td::before{content:attr(data-label-*)},
+      // language picked by the same html[lang] switch as everything else.
       var row = el(
         '<tr style="cursor:pointer" title="' + tr("reserve") + ' · ' + car.name + '">' +
           '<td><a class="car-cell" href="' + waHref + '" target="_blank" rel="noopener">' + car.name +
             '<small>' + (lang === "en" ? engCat(car.category) : car.category) + ' · ' + car.powerCv + ' ' + cv() + '</small></a></td>' +
-          '<td><span class="euro">' + eur(car.prices.d1) + '</span></td>' +
-          '<td><span class="euro">' + eur(car.prices.w1) + '</span></td>' +
-          '<td><span class="euro">' + eur(car.prices.d15) + '</span></td>' +
-          '<td><span class="euro">' + eur(car.prices.m1) + '</span></td>' +
+          '<td data-label-es="1 día" data-label-en="1 day"><span class="euro">' + eur(car.prices.d1) + '</span></td>' +
+          '<td data-label-es="1 semana" data-label-en="1 week"><span class="euro">' + eur(car.prices.w1) + '</span></td>' +
+          '<td data-label-es="15 días" data-label-en="15 days"><span class="euro">' + eur(car.prices.d15) + '</span></td>' +
+          '<td data-label-es="1 mes" data-label-en="1 month"><span class="euro">' + eur(car.prices.m1) + '</span></td>' +
         '</tr>'
       );
       row.addEventListener("click", function (e) {
@@ -228,7 +232,7 @@
      ================================================================== */
   function refreshWaLinks() {
     var href = waLink(T.waBase[lang]);
-    ["nav-wa", "hero-wa", "cta-wa", "foot-wa", "wa-float"].forEach(function (id) {
+    ["nav-wa", "hero-wa", "intro-wa", "cta-wa", "foot-wa", "wa-float"].forEach(function (id) {
       var a = document.getElementById(id);
       if (a) a.href = href;
     });
@@ -265,11 +269,21 @@
       els.forEach(function (e) { e.classList.add("in"); }); return;
     }
     if (!revObserver) {
+      // Two thresholds. 0.12 is the design intent — reveal once ~12% shows.
+      // But an element TALLER than the viewport can never reach 12% visible
+      // (the phone rates panel, linearised into cards, is ~8000px tall and
+      // tops out around 10%), so for those any intersection at all counts —
+      // otherwise they sit at opacity:0 forever.
       revObserver = new IntersectionObserver(function (entries) {
         entries.forEach(function (en) {
-          if (en.isIntersecting) { en.target.classList.add("in"); revObserver.unobserve(en.target); }
+          if (!en.isIntersecting) return;
+          var tall = en.boundingClientRect.height > window.innerHeight;
+          if (en.intersectionRatio >= 0.12 || tall) {
+            en.target.classList.add("in");
+            revObserver.unobserve(en.target);
+          }
         });
-      }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+      }, { threshold: [0, 0.12], rootMargin: "0px 0px -8% 0px" });
     }
     els.forEach(function (e) { revObserver.observe(e); });
   }

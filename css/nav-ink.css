@@ -200,6 +200,20 @@ html.ink-open .ink-panel { will-change: clip-path; }
   opacity: 1;
   animation: ink-goo 7s ease-in-out infinite;
 }
+
+/* Belt and braces for touch devices: no wash, no focus ring, no grey tap
+   flash on the menu rows — ever. iOS resolves :focus-visible by heuristics
+   of its own after programmatic focus, and one stale cached script is all
+   it takes for the old focus-the-first-link path to run; this makes the
+   "shade on FLOTA" state unreachable regardless of what focuses what.
+   Keyboard users are on hover-capable hardware, which keeps its affordance. */
+.ink-links a { -webkit-tap-highlight-color: transparent; }
+@media (hover: none) {
+  .ink-links a::before { display: none; }
+  .ink-links a:focus-visible { outline: none; }
+  .ink-links a:focus-visible .ink-label { color: var(--white); transform: none; }
+  .ink-links a:focus-visible .ink-num { color: rgba(255, 255, 255, .5); transform: none; }
+}
 @keyframes ink-goo {
   0%, 100% { border-radius: 46% 54% 58% 42% / 52% 44% 56% 48%; }
   33%      { border-radius: 58% 42% 44% 56% / 44% 56% 42% 58%; }
