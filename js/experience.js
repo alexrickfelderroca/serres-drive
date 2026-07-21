@@ -10,8 +10,8 @@
      of car photos around it (re-creating the "Scroll-Driven Image Tube"
      reference). Scroll flows the tube vertically (infinite loop); it
      rotates gently; drag spins it; the Porsche turns slowly with it.
-     Hover a photo for its name, click ANY photo (front or back) to open
-     that car's page. Plain dark Serres backdrop — no grid.
+     Hover a photo for its name and price — the ring is spin-only; tiles
+     do not navigate. Plain dark Serres backdrop — no grid.
 
    three.js (module) + GSAP ScrollTrigger + Lenis (globals).
 
@@ -331,6 +331,22 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
     onLeaveBack: function () { if (ready) { mount.classList.add("is-live"); running = true; } }
   });
 
+  /* The featured carousel owns the screen between the intro and the ring:
+     the Porsche fades out while it plays and fades back in for the ring.
+     Only the .is-live class is toggled (an 0.8s opacity transition in CSS) —
+     `running` stays true, so unlike the outro parking above there is no
+     early-return state to get wrong; the car keeps rendering behind the
+     opaque slides and is simply invisible. */
+  if (document.querySelector(".fc-sec")) {
+    ScrollTrigger.create({
+      trigger: ".fc-sec", start: "top 55%", end: "bottom 45%",
+      onEnter:     function () { mount.classList.remove("is-live"); },
+      onEnterBack: function () { mount.classList.remove("is-live"); },
+      onLeave:     function () { if (ready && running) mount.classList.add("is-live"); },
+      onLeaveBack: function () { if (ready && running) mount.classList.add("is-live"); }
+    });
+  }
+
   /* ------------------------------------------------------------------ *
    * 7 · Scroll measurements                                            *
    * ------------------------------------------------------------------ */
@@ -350,20 +366,25 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
     const scrolled = -rect.top;
     const total = rect.height - vh;
     if (total <= 0) return clamp(1 - Math.abs(rect.top) / vh, 0, 1);
-    const inLen = Math.min(vh * 0.75, total * 0.34);
-    const outLen = Math.min(vh * 0.75, total * 0.34);
+    /* Shorter ramps = longer plateau. The old 34%-per-ramp split left only
+       ~a third of the section fully revealed, and interactivity is gated on
+       the reveal — on phones that read as "sometimes it won't let me spin".
+       With ~22% ramps the middle ~56% of a much taller section holds at
+       reveal 1, so the spin window more than tripled. */
+    const inLen = Math.min(vh * 0.65, total * 0.22);
+    const outLen = Math.min(vh * 0.65, total * 0.22);
     const rin = clamp(scrolled / inLen, 0, 1);
     const rout = clamp((scrolled - (total - outLen)) / outLen, 0, 1);
     return smooth(rin) * (1 - smooth(rout));
   }
 
   /* ------------------------------------------------------------------ *
-   * 8 · Interaction (Act B) — drag to spin, hover, click ANY tile      *
+   * 8 · Interaction (Act B) — drag to spin, hover for the tooltip      *
    * ------------------------------------------------------------------ */
   const raycaster = new THREE.Raycaster();
   const ndc = new THREE.Vector2(-2, -2);
   let interactive = false;
-  let dragAxis = null, dragId = null, lastX = 0, startX = 0, startY = 0, movedDist = 0, dragging = false;
+  let dragAxis = null, dragId = null, lastX = 0, startX = 0, startY = 0, dragging = false;
   let hoverTile = null;
   const cursor = { x: 0, y: 0, tx: 0, ty: 0 };
 
@@ -391,7 +412,7 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 
   function onDown(e) {
     if (!interactive) return;
-    startX = lastX = e.clientX; startY = e.clientY; movedDist = 0;
+    startX = lastX = e.clientX; startY = e.clientY;
     dragAxis = null; dragId = e.pointerId; dragging = false;
     setNdcFromEvent(e);
   }
@@ -411,7 +432,6 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
         tubeAngle += step * DRAG_TO_ANGLE;
         tubeSpinVel = step * DRAG_TO_ANGLE * 60;
         lastX = e.clientX;
-        movedDist += Math.abs(step);
       }
     }
   }
@@ -501,7 +521,12 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
     const rawDt = clock.getDelta();
     const dt = Math.min(rawDt, 0.05);
     const t = clock.elapsedTime;
-    const p = clamp(currentScroll / tumbleEnd, 0, 1);
+    /* A degenerate tumble window (the ring section sitting one viewport
+       from the top leaves tumbleEnd at ~1px) would turn p into a step
+       function: an 18% scale pop on the first scrolled pixel and a twitch
+       every time Lenis decays across scrollY 0–1. Treat anything without
+       real runway as "already settled". */
+    const p = tumbleEnd > 4 ? clamp(currentScroll / tumbleEnd, 0, 1) : 1;
     const reveal = computeReveal();
     lastReveal = reveal;                 // read by the sideways-wheel handler
     applyScrollDamping(reveal);
@@ -565,7 +590,16 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
     /* -- camera eases back so the whole cylinder fits -- */
     camera.position.z = baseCamZ * (1 + reveal * 0.85);
     camera.position.y = baseCamY + reveal * carMaxDim * 0.05;
-    camera.lookAt(0, 0, 0);
+    /* Portrait phones: the canvas draws above the page copy, and the hero
+       CTAs live in the intro — aiming slightly above the car renders it
+       below the buttons. The offset fades with the ring reveal so the
+       cylinder still forms dead centre. ONE lookAt, here, before the
+       hover raycast below: pickTile() must test against the same camera
+       orientation the frame is rendered with, or the tooltip hit-test is
+       vertically offset from what's on screen. */
+    const aimY = (window.innerWidth < window.innerHeight && carMaxDim)
+      ? carMaxDim * 0.24 * (1 - reveal) : 0;
+    camera.lookAt(0, aimY, 0);
 
     /* -- tube: vertical scroll flow (infinite loop) + gentle rotation -- */
     if (tubeGroup) {
@@ -625,7 +659,11 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
     }
 
     /* -- interactive state + hover -- */
-    const wantInteractive = reveal > 0.72;
+    /* 0.55, not 0.72: the ring is clearly formed well before full reveal,
+       and every frame above the threshold is a frame the visitor can spin.
+       Earlier engagement is what makes the cylinder feel responsive on
+       phones instead of refusing the gesture near its edges. */
+    const wantInteractive = reveal > 0.55;
     if (wantInteractive !== interactive) setInteractive(wantInteractive);
 
     if (interactive && !dragging) {
@@ -650,16 +688,6 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
       tooltipEl.classList.remove("is-on"); hoverTile = null;
       if (cursorEl) cursorEl.classList.remove("is-over");
     }
-
-    /* Portrait phones: the canvas draws above the page copy, and with the
-       hero CTAs now living in the intro the centred car sat directly on
-       top of the second button. Aiming the camera slightly above the car
-       renders it lower in the viewport, clear of the buttons; the offset
-       fades with the ring reveal so the cylinder still forms dead centre.
-       In landscape the target is (0,0,0), exactly as before. */
-    const portrait = window.innerWidth < window.innerHeight;
-    const aimY = portrait && carMaxDim ? carMaxDim * 0.24 * (1 - reveal) : 0;
-    camera.lookAt(0, aimY, 0);
 
     renderer.render(scene, camera);
   }

@@ -1,0 +1,142 @@
+/* =====================================================================
+   SERRES DRIVE — featured.css
+   "Split-reveal studio carousel" for the three flagship cars on the
+   home page (#featured). Two layout modes, gated on .fc-on:
+
+   1) DEFAULT (no JS / reduced motion / GSAP failed): the markup in
+      index.html renders as three stacked, static, readable photo links.
+      Nothing is sticky, nothing is 320vh, nothing is hidden — the
+      progress dots and the "keep scrolling" hint are the only things
+      suppressed, because they are carousel chrome that would lie
+      without the carousel behind them.
+
+   2) ENHANCED (.fc-on, added only by js/featured.js): the section grows
+      to 320vh, .fc-pin becomes a sticky full-viewport stage and the
+      slides stack absolutely; featured.js drives the clip-path wipes
+      off scroll progress.
+
+   Everything here is scoped under .fc- (per site convention: never
+   restyle .oa-* / .sd-* / .pl-* / .wp-* / .swc-* / .ink-*).
+
+   NB on specificity: home.css ships `.home-exp .oa-exp p{font-size:13px}`
+   (0,2,1). The eyebrow/hint rules below use `p.fc-…` selectors to tie
+   that (this file loads after home.css, so the tie resolves our way).
+   ===================================================================== */
+
+/* ------------------------------------------------------------------ *
+ * Shared (both modes)                                                 *
+ * ------------------------------------------------------------------ */
+.fc-sec{background:var(--bg)}
+
+.fc-sec p.fc-eyebrow{
+  display:inline-flex;align-items:center;gap:12px;
+  font-family:var(--font-head);font-size:.8rem;font-weight:600;
+  letter-spacing:.28em;text-transform:uppercase;line-height:1.2;
+  color:var(--gold);
+}
+.fc-sec p.fc-eyebrow::before{
+  content:"";width:26px;height:1px;background:var(--gold);opacity:.7;
+}
+
+.fc-slide{display:block;color:var(--white)}
+
+/* Bottom scrim: keeps the big title readable over any paintwork, in
+   both the static fallback and the fullscreen stage. */
+.fc-slide::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:52%;
+  background:linear-gradient(to top,rgba(10,10,11,.86) 0%,rgba(10,10,11,.42) 46%,transparent 100%);
+  pointer-events:none;z-index:2;
+}
+
+.fc-slide .fc-title{
+  position:absolute;z-index:3;left:clamp(16px,4vw,52px);
+  font-family:var(--font-head);font-weight:700;text-transform:uppercase;
+  letter-spacing:-.01em;line-height:.9;white-space:nowrap;
+  color:var(--white);
+}
+
+/* Character spans created by featured.js. inline-block so transforms
+   apply; spaces are emitted as NBSP so they keep their width. */
+.fc-ch{display:inline-block}
+
+/* ------------------------------------------------------------------ *
+ * Mode 1 — static stacked fallback (no .fc-on)                        *
+ * ------------------------------------------------------------------ */
+.fc-sec:not(.fc-on) .fc-pin{
+  max-width:var(--maxw);margin-inline:auto;
+  padding:calc(var(--nav-h) + 28px) var(--gutter) clamp(48px,8vh,84px);
+  display:flex;flex-direction:column;gap:clamp(20px,3.5vh,34px);
+}
+.fc-sec:not(.fc-on) .fc-stage{
+  display:flex;flex-direction:column;gap:clamp(18px,3vw,32px);
+}
+.fc-sec:not(.fc-on) .fc-slide{
+  position:relative;overflow:hidden;
+  border-radius:var(--radius);border:1px solid var(--line);
+  background:var(--bg-2);
+}
+.fc-sec:not(.fc-on) .fc-slide img{
+  width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;
+}
+.fc-sec:not(.fc-on) .fc-title{
+  bottom:clamp(14px,3vw,26px);
+  font-size:clamp(2.2rem,7vw,4.5rem);
+}
+/* Carousel chrome is meaningless without the carousel. */
+.fc-sec:not(.fc-on) .fc-progress,
+.fc-sec:not(.fc-on) .fc-hint{display:none}
+
+/* ------------------------------------------------------------------ *
+ * Mode 2 — sticky fullscreen stage (.fc-on, JS only)                  *
+ * ------------------------------------------------------------------ */
+/* section.fc-sec.fc-on out-specifies home.css's generic
+   `.home-exp .oa-exp section{min-height:100vh}` for height purposes;
+   320vh of section = 220vh of pinned travel for the two wipes. */
+section.fc-sec.fc-on{height:320vh}
+
+.fc-on .fc-pin{
+  position:sticky;top:0;
+  height:100vh;height:100svh;   /* svh: stable under iOS URL-bar collapse */
+  overflow:hidden;               /* imgs counter-translate ±500px — clip them */
+}
+.fc-on .fc-stage{position:absolute;inset:0}
+
+/* Opaque background so the hidden car never ghosts through the wipe
+   (the fixed WebGL canvas behind fades out elsewhere, but slides must
+   stand alone). Initial clip/visibility handled by featured.js. */
+.fc-on .fc-slide{
+  position:absolute;inset:0;margin:0;border:0;border-radius:0;
+  background:var(--bg);overflow:hidden;
+}
+.fc-on .fc-slide img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  will-change:transform;
+}
+.fc-on .fc-slide .fc-title{
+  bottom:clamp(84px,13vh,128px);          /* clears hint + dots below */
+  font-size:clamp(3rem,15vw,9.5rem);
+}
+
+.fc-on .fc-head{
+  position:absolute;z-index:5;pointer-events:none;
+  top:calc(var(--nav-h) + 6px);left:clamp(16px,4vw,52px);
+}
+
+.fc-on .fc-progress{
+  position:absolute;z-index:5;pointer-events:none;
+  left:50%;bottom:clamp(18px,4vh,34px);transform:translateX(-50%);
+  display:flex;gap:9px;
+}
+.fc-on .fc-progress i{
+  width:26px;height:2px;background:var(--line-2);
+  transition:background .45s var(--ease),width .45s var(--ease);
+}
+.fc-on .fc-progress i.is-on{width:46px;background:var(--gold)}
+
+.fc-sec.fc-on p.fc-hint{
+  position:absolute;z-index:5;pointer-events:none;
+  left:50%;bottom:clamp(40px,8.2vh,66px);transform:translateX(-50%);
+  font-family:var(--font-head);font-size:.7rem;font-weight:600;
+  letter-spacing:.24em;text-transform:uppercase;white-space:nowrap;
+  color:var(--text-dim);
+}

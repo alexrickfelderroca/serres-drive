@@ -10,23 +10,88 @@
 <meta property="og:title" content="SERRES DRIVE · Conduce tu sueño">
 <meta property="og:description" content="Alquiler de coches de lujo en Barcelona. Flota premium, experiencia 3D, entrega a domicilio, reserva por WhatsApp.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="assets/img/og-cover.svg">
+<meta property="og:image" content="https://serresdrive.com/assets/img/og-cover.png">
+<meta property="og:url" content="https://serresdrive.com/">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="SERRES DRIVE">
+<link rel="canonical" href="https://serresdrive.com/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SERRES DRIVE · Conduce tu sueño">
+<meta name="twitter:description" content="Alquiler de coches de lujo en Barcelona. Flota premium, experiencia 3D, entrega a domicilio, reserva por WhatsApp.">
+<meta name="twitter:image" content="https://serresdrive.com/assets/img/og-cover.png">
 <link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/brand/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,600;1,700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=20260721">
-<link rel="stylesheet" href="css/nav-ink.css?v=20260721">
-<link rel="stylesheet" href="css/home.css?v=20260721">
+<link rel="stylesheet" href="css/styles.css?v=20260721b">
+<link rel="stylesheet" href="css/nav-ink.css?v=20260721b">
+<link rel="stylesheet" href="css/home.css?v=20260721b">
+<link rel="stylesheet" href="css/featured.css?v=20260721b">
 <!-- Preloader: home page only, once per session. The script builds its own
      overlay, so nothing is left behind if it never runs — and it is loaded
      here, blocking, rather than at the end of <body> so the overlay exists
      before the page gets a chance to paint. It waits for <body> on animation
      frames and polls briefly for GSAP (loaded further down) before falling
      back to its CSS keyframe path. -->
-<link rel="stylesheet" href="css/preloader.css?v=20260721">
-<script src="js/preloader.js?v=20260721"></script>
+<link rel="stylesheet" href="css/preloader.css?v=20260721b">
+<script src="js/preloader.js?v=20260721b"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "AutoRental",
+      "@id": "https://serresdrive.com/#business",
+      "name": "Serres Drive",
+      "url": "https://serresdrive.com/",
+      "telephone": "+34621244469",
+      "email": "info@serreswrapcenter.es",
+      "image": "https://serresdrive.com/assets/img/og-cover.png",
+      "priceRange": "€€€",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Av. Can Fatjó dels Aurons 15",
+        "postalCode": "08174",
+        "addressLocality": "Sant Cugat del Vallès",
+        "addressRegion": "Barcelona",
+        "addressCountry": "ES"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 41.4711,
+        "longitude": 2.0508
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "09:00",
+          "closes": "19:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "10:00",
+          "closes": "14:00"
+        }
+      ],
+      "areaServed": "Barcelona",
+      "sameAs": [
+        "https://www.instagram.com/serres.wrap.center/",
+        "https://serreswrapcenter.es/"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://serresdrive.com/#website",
+      "url": "https://serresdrive.com/",
+      "name": "SERRES DRIVE",
+      "alternateName": "Serres Drive Barcelona"
+    }
+  ]
+}
+</script>
 </head>
 <body id="top" class="home-exp">
 <a href="#showcase" class="btn" style="position:absolute;left:-999px;top:0">Saltar al contenido</a>
@@ -95,6 +160,10 @@
         <span data-es>Reserva tu vehículo</span><span data-en>Book your car</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
+      <a href="fleet.html" class="btn ghost">
+        <span data-es>Ver la flota</span><span data-en>View the fleet</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
       <a href="https://serreswrapcenter.es/" class="btn ghost" target="_blank" rel="noopener">
         Serres Wrap Center
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
@@ -102,10 +171,42 @@
     </div>
   </section>
 
-  <!-- CHOOSE — straight from the intro into the interactive ring: the tumble
-       "links" into it, the fixed WebGL stage draws the ring around the
-       settled Porsche, and this section supplies scroll distance + a
-       no-WebGL fallback grid. The ring is spin-only — tiles don't navigate. -->
+  <!-- FEATURED — split-reveal carousel of the three flagship cars.
+       Scroll-driven: the section is several viewports tall, the stage is
+       sticky, and scrolling wipes from one car to the next (clip-path
+       reveal + character-cascade title). Clicking a slide opens that car.
+       The Porsche canvas fades out while this section owns the screen and
+       fades back in for the ring below (trigger lives in experience.js).
+       This markup is the no-JS fallback: three stacked, readable, linked
+       photos. js/featured.js progressively upgrades it. -->
+  <section class="fc-sec" id="featured">
+    <div class="fc-pin">
+      <div class="fc-head">
+        <p class="fc-eyebrow"><span data-es>Destacados</span><span data-en>Featured</span></p>
+      </div>
+      <div class="fc-stage">
+        <a class="fc-slide" href="car.html?slug=lamborghini-urus">
+          <img src="assets/img/cars/lamborghini-urus.jpg" alt="Lamborghini Urus" loading="lazy" decoding="async" width="1280" height="853">
+          <h2 class="fc-title">Urus</h2>
+        </a>
+        <a class="fc-slide" href="car.html?slug=ferrari-f8-spider">
+          <img src="assets/img/cars/ferrari-f8-spider.jpg" alt="Ferrari F8 Spider" loading="lazy" decoding="async" width="1280" height="853">
+          <h2 class="fc-title">F8 Spider</h2>
+        </a>
+        <a class="fc-slide" href="car.html?slug=mercedes-amg-g63">
+          <img src="assets/img/cars/mercedes-amg-g63.jpg" alt="Mercedes-AMG G 63" loading="lazy" decoding="async" width="1280" height="853">
+          <h2 class="fc-title">AMG G 63</h2>
+        </a>
+      </div>
+      <div class="fc-progress" aria-hidden="true"><i></i><i></i><i></i></div>
+      <p class="fc-hint"><span data-es>Sigue bajando</span><span data-en>Keep scrolling</span></p>
+    </div>
+  </section>
+
+  <!-- CHOOSE — from the carousel into the interactive ring: the fixed WebGL
+       stage draws the ring around the settled Porsche, and this section
+       supplies scroll distance + a no-WebGL fallback grid. The ring is
+       spin-only — tiles don't navigate. -->
   <section class="oa-choose" id="choose">
     <div class="oa-choose-head">
       <p><span data-es>Elige tu coche</span><span data-en>Choose your car</span></p>
@@ -116,59 +217,10 @@
     </div>
   </section>
 
-  <!-- COLLECTION -->
-  <section class="oa-collection">
-    <div class="oa-collection-head"><p><span data-es>La flota</span><span data-en>The fleet</span></p></div>
-
-    <a class="oa-item" href="car.html?slug=lamborghini-urus">
-      <h2>Urus</h2>
-      <div class="oa-info"><p>BCN · ESP</p><p>SUV</p><p>650 CV</p><p>AWD</p></div>
-    </a>
-    <a class="oa-item" href="car.html?slug=ferrari-f8-spider">
-      <h2>F8 Spider</h2>
-      <div class="oa-info"><p>BCN · ESP</p><p><span data-es>Descapotable</span><span data-en>Convertible</span></p><p>720 CV</p><p>V8</p></div>
-    </a>
-    <a class="oa-item" href="car.html?slug=mercedes-amg-g63">
-      <h2>AMG G 63</h2>
-      <div class="oa-info"><p>BCN · ESP</p><p>SUV</p><p>585 CV</p><p>4MATIC</p></div>
-    </a>
-    <a class="oa-item" href="car.html?slug=lamborghini-huracan-coupe">
-      <h2>Huracán</h2>
-      <div class="oa-info"><p>BCN · ESP</p><p><span data-es>Deportivo</span><span data-en>Sports</span></p><p>640 CV</p><p>V10</p></div>
-    </a>
-    <a class="oa-item" href="car.html?slug=porsche-911-targa-gts">
-      <h2>911 Targa GTS</h2>
-      <div class="oa-info"><p>BCN · ESP</p><p><span data-es>Deportivo</span><span data-en>Sports</span></p><p>480 CV</p><p>PDK</p></div>
-    </a>
-    <a class="oa-item" href="car.html?slug=aston-martin-dbx-707">
-      <h2>DBX 707</h2>
-      <div class="oa-info"><p>BCN · ESP</p><p>SUV</p><p>707 CV</p><p>AWD</p></div>
-    </a>
-  </section>
-
-  <!-- OUTRO (staggered line reveals) -->
+  <!-- OUTRO — a single closing line. The featured carousel above now carries
+       the flagship cars, so the old list + copy block are gone; the Wrap
+       Center band and CTA below (.sd-below) close the page. -->
   <section class="oa-outro">
-    <div class="oa-outro-copy">
-      <h2 class="oa-reveal">
-        <span class="oa-line"><span class="oa-line-in"><span data-es>Elige el coche.</span><span data-en>Choose the car.</span></span></span>
-        <span class="oa-line"><span class="oa-line-in"><span data-es>Nosotros nos ocupamos del resto —</span><span data-en>We handle the rest —</span></span></span>
-        <span class="oa-line"><span class="oa-line-in"><span data-es>del brillo del capó a las llaves</span><span data-en>from the shine on the hood to the keys</span></span></span>
-        <span class="oa-line"><span class="oa-line-in"><span data-es>en tu mano, con la obsesión de Serres.</span><span data-en>in your hand, with Serres' obsession.</span></span></span>
-      </h2>
-      <p><span class="k"><span data-es>Reserva</span><span data-en>Book</span></span> <span>WhatsApp · +34 621 24 44 69</span></p>
-      <p><span class="k"><span data-es>Contacto</span><span data-en>Contact</span></span> <span>info@serreswrapcenter.es</span></p>
-      <div class="oa-cta">
-        <a href="fleet.html" class="btn gold">
-          <span data-es>Ver la flota</span><span data-en>View the fleet</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
-        <a href="#" class="btn wa" id="hero-wa" target="_blank" rel="noopener">
-          <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16.04 3C9.4 3 4 8.4 4 15.04c0 2.12.56 4.18 1.62 6L4 29l8.16-1.58a12 12 0 0 0 3.88.64C22.7 28.06 28.1 22.66 28.1 16.02 28.1 8.4 22.68 3 16.04 3Zm5.39 14.57c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.66.15-.2.3-.76.96-.93 1.15-.17.2-.34.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.3-.02-.46.13-.61.13-.13.3-.34.45-.51.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.66-1.6-.9-2.18-.24-.58-.48-.5-.66-.5l-.56-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.22 3.08.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.08 1.75-.71 2-1.4.25-.69.25-1.28.17-1.4-.07-.13-.27-.2-.57-.35Z"/></svg>
-          <span data-es>Reservar por WhatsApp</span><span data-en>Book on WhatsApp</span>
-        </a>
-      </div>
-    </div>
-
     <div class="oa-footer">
       <p><span data-es>Serres Drive — alquiler de coches de lujo en Barcelona, del detailing al volante.</span><span data-en>Serres Drive — luxury car rental in Barcelona, from detailing to the driver's seat.</span></p>
       <p>© 2026 · BCN</p>
@@ -321,10 +373,11 @@
   "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
 }}
 </script>
-<script type="module" src="js/experience.js?v=20260721"></script>
-<script src="js/fleet.js?v=20260721"></script>
-<script src="js/app.js?v=20260721"></script>
-<script src="js/nav-ink.js?v=20260721"></script>
+<script type="module" src="js/experience.js?v=20260721b"></script>
+<script src="js/featured.js?v=20260721b"></script>
+<script src="js/fleet.js?v=20260721b"></script>
+<script src="js/app.js?v=20260721b"></script>
+<script src="js/nav-ink.js?v=20260721b"></script>
 <!-- Populate the .oa-choose fallback grid from the fleet (no-WebGL / no-JS safe:
      the static "Ver la flota" link stays if this never runs). -->
 <script>

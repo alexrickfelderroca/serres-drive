@@ -94,8 +94,13 @@ html.lenis, .lenis.lenis-smooth { scroll-behavior: auto !important; }
 /* =====================================================================
    OUTRO — closing statement (line-by-line reveal) + contact + CTA
    ===================================================================== */
-.home-exp .oa-outro{display:flex;flex-direction:column;justify-content:space-between;
-  gap:6vh;padding:clamp(5em,10vh,8em) clamp(18px,4vw,48px) 3em}
+.home-exp .oa-outro{display:flex;flex-direction:column;justify-content:flex-end;
+  gap:6vh;padding:clamp(4em,8vh,6em) clamp(18px,4vw,48px) 3em}
+/* The outro is a single closing line now, not a full statement block —
+   it needs enough height to park the Porsche (the running=false trigger
+   keys off it) but nowhere near a full viewport. Out-specifies the
+   generic `.oa-exp section{min-height:100vh}`. */
+.home-exp .oa-exp section.oa-outro{min-height:52vh}
 .home-exp .oa-outro-copy h2{width:min(80%,26ch);font-family:var(--font-head);text-transform:uppercase;
   font-weight:600;font-size:clamp(1.7rem,4.6vw,3.9rem);line-height:1.02;letter-spacing:-.005em;
   margin-bottom:.7em}
@@ -114,13 +119,13 @@ html.lenis, .lenis.lenis-smooth { scroll-behavior: auto !important; }
 /* =====================================================================
    CHOOSE — the interactive 3D "ring" of cars around the Porsche.
    Flows straight out of the collection: the tumbling GT3 settles centre,
-   the ring of car photos fades in around it, drag to spin, click a car.
+   the ring of car photos fades in around it; drag or swipe to spin.
    The fixed canvas draws the ring; this section only supplies scroll
    distance + the no-WebGL fallback grid. STAGE-B chrome lives in #chooseUI.
    ===================================================================== */
 /* NB: needs to out-specify `.home-exp .oa-exp section{min-height:100vh}` so the
    ring gets a tall scroll span (reveal-in → interactive hold → reveal-out). */
-.home-exp .oa-exp section.oa-choose{min-height:230vh}
+.home-exp .oa-exp section.oa-choose{min-height:340vh}
 .home-exp .oa-choose{display:flex;flex-direction:column;
   justify-content:flex-start;align-items:center;text-align:center;
   padding:14vh clamp(18px,4vw,48px) 10vh;gap:2.4em}
@@ -195,7 +200,7 @@ html.lenis, .lenis.lenis-smooth { scroll-behavior: auto !important; }
   .sd-cursor{display:none}
   .home-exp .sd-model.is-interactive{cursor:auto}
   .home-exp.ring-active{cursor:auto}
-  .home-exp .oa-exp section.oa-choose{min-height:200vh}
+  .home-exp .oa-exp section.oa-choose{min-height:320vh}
 }
 
 /* =====================================================================
