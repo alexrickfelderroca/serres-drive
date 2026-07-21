@@ -246,6 +246,7 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
   const BASE_YAW = -0.6, BASE_TILT = 0.20, BASE_ROLL = 0.05;
   const FLOAT_AMP = 0.09, FLOAT_SPEED = 1.35, SPINS = Math.PI * 4;
   let model = null, ready = false, running = true, carMaxDim = 0;
+  let fcFade = null;  // the featured-carousel fade trigger — see the guard at model-ready
   let baseCamY = 0, baseCamZ = 6;
   const popState = { v: 0 };
 
@@ -290,7 +291,12 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
     gsap.to(popState, { v: 1, duration: 1.1, ease: "power2.out" });
 
     ready = true;
-    mount.classList.add("is-live");
+    /* NOT unconditional. The GLB takes seconds on a phone network, and by the
+       time it lands the visitor may be inside the featured carousel (whose
+       trigger only toggles is-live on CROSSINGS) or past the outro (running
+       false). An unconditional add painted the tumbling Porsche fully opaque
+       on top of the slides until the next trigger edge. */
+    if (running && !(fcFade && fcFade.isActive)) mount.classList.add("is-live");
     document.body.classList.add("car-loaded");
 
     cancelAnimationFrame(basicRAF);
@@ -338,7 +344,7 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
      early-return state to get wrong; the car keeps rendering behind the
      opaque slides and is simply invisible. */
   if (document.querySelector(".fc-sec")) {
-    ScrollTrigger.create({
+    fcFade = ScrollTrigger.create({
       trigger: ".fc-sec", start: "top 55%", end: "bottom 45%",
       onEnter:     function () { mount.classList.remove("is-live"); },
       onEnterBack: function () { mount.classList.remove("is-live"); },
@@ -746,7 +752,13 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
     try {
       renderer.setSize(window.innerWidth, window.innerHeight);
       frameCamera();
-      if (ready) { document.body.classList.add("car-loaded"); mount.classList.add("is-live"); running = true; }
+      if (ready) {
+        document.body.classList.add("car-loaded");
+        running = true;
+        // same carousel guard as at model-ready — a context restored while
+        // the slides own the screen must not paint the car over them
+        if (!(fcFade && fcFade.isActive)) mount.classList.add("is-live");
+      }
     } catch (x) { /* stay on the fallback */ }
   }, false);
 

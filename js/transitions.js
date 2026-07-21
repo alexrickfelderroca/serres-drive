@@ -328,6 +328,17 @@
       cur.setAttribute("content", next.getAttribute("content") || "");
     }
 
+    // car.js rewrites the canonical to its ?slug= URL and injects a per-car
+    // Product JSON-LD. Neither belongs to the NEXT page: restore the
+    // canonical from the incoming document and drop the car schema, or a
+    // soft-nav from a car page leaves fleet.html claiming to canonically be
+    // car.html?slug=….
+    var nc = doc.querySelector('link[rel="canonical"]');
+    var cc = document.querySelector('link[rel="canonical"]');
+    if (nc && cc) cc.setAttribute("href", nc.getAttribute("href") || "");
+    var jl = document.getElementById("car-jsonld");
+    if (jl && jl.parentNode) jl.parentNode.removeChild(jl);
+
     // Pages carry their own skip-link target (#main vs #carDetail).
     var newSkip = doc.querySelector('body > a[href^="#"]');
     var oldSkip = document.querySelector('body > a[href^="#"]');

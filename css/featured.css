@@ -96,7 +96,11 @@ section.fc-sec.fc-on{height:320vh}
 
 .fc-on .fc-pin{
   position:sticky;top:0;
-  height:100vh;height:100svh;   /* svh: stable under iOS URL-bar collapse */
+  /* dvh, not svh: mid-page the mobile toolbar is collapsed and the visual
+     viewport is TALLER than 100svh — an svh pin left a flat background
+     strip under the photos for the whole pinned travel. dvh tracks the
+     bar; vh is the no-dvh fallback. */
+  height:100vh;height:100dvh;
   overflow:hidden;               /* imgs counter-translate ±500px — clip them */
 }
 .fc-on .fc-stage{position:absolute;inset:0}
@@ -139,4 +143,35 @@ section.fc-sec.fc-on{height:320vh}
   font-family:var(--font-head);font-size:.7rem;font-weight:600;
   letter-spacing:.24em;text-transform:uppercase;white-space:nowrap;
   color:var(--text-dim);
+}
+
+/* ------------------------------------------------------------------ *
+ * Portrait (phones): the photo shows WHOLE, never cropped             *
+ * ------------------------------------------------------------------ *
+ * object-fit:cover of a ~3:2 landscape photograph in a portrait
+ * viewport throws away two thirds of the car. In portrait the slide
+ * box (and its wipe) stays fullscreen, but the photograph inside
+ * becomes a full-width band at its own intrinsic ratio (the width/
+ * height attributes), sitting just above centre with the title below
+ * it over the plain background. Nothing is cropped, nothing overlaps.
+ * The bottom scrim is dropped: the title no longer sits on the image,
+ * and black-on-black gradient would only dull the photo's lower edge. */
+@media (orientation:portrait){
+  .fc-on .fc-slide img{
+    inset:auto;left:0;right:0;
+    top:44%;
+    /* the CSS `translate` property, NOT transform: featured.js animates
+       the wipe's counter-slide through GSAP's transform x, which would
+       overwrite a transform-based centring. The two properties compose.
+       (Engines without `translate` support just show the band a touch
+       lower — nothing breaks.) */
+    translate:0 -50%;
+    width:100%;height:auto;
+    object-fit:contain;
+  }
+  .fc-on .fc-slide::after{display:none}
+  .fc-on .fc-slide .fc-title{
+    top:auto;bottom:clamp(96px,15vh,150px);
+    font-size:clamp(2.6rem,12.5vw,5rem);
+  }
 }

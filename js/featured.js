@@ -60,15 +60,17 @@
 
   /* Split a title into character <span>s so the cascade can stagger.
      The titles are plain text (no bilingual spans inside), so this is
-     safe. The h2 becomes aria-hidden and the parent link carries the
-     full name in aria-label, so screen readers hear "Lamborghini Urus",
-     never "U r u s". Spaces become NBSP: inline-block spans would
+     safe. The h2 keeps its HEADING role — aria-hidden here would delete
+     all the car headings from the accessibility outline in enhanced mode.
+     Instead the h2 gets an aria-label with the intact name, which
+     supersedes the char-span soup, so heading navigation still announces
+     "Urus", never "U r u s". Spaces become NBSP: inline-block spans would
      otherwise collapse them to zero width. */
   function splitChars(title) {
     var text = title.textContent || "";
     var frag = document.createDocumentFragment();
     var chars = [], i, s, ch;
-    title.setAttribute("aria-hidden", "true");
+    title.setAttribute("aria-label", text);
     title.textContent = "";
     for (i = 0; i < text.length; i++) {
       ch = text.charAt(i);
@@ -120,6 +122,13 @@
 
     sec.classList.add("fc-on");
 
+    /* Scroll runway scales with the slide count: one viewport on stage
+       plus ~110vh of travel per wipe. The 320vh in featured.css is only
+       the no-JS-never-happens fallback for this rule; with 5 slides the
+       section is 540vh. Inline style so adding a slide in the HTML is the
+       whole job — nothing else needs retuning. */
+    sec.style.height = (100 + (N - 1) * 110) + "vh";
+
     var cur = 0;          /* active slide index */
     var tl = null;        /* running transition timeline */
     var booted = false;   /* first progress report applies instantly */
@@ -129,6 +138,13 @@
        Read live (not cached) so a rotate/resize mid-session uses the
        right value on the next wipe. */
     function offset() { return window.innerWidth < 1000 ? 100 : 500; }
+
+    /* Zoom slack: in landscape/desktop the imgs are object-fit:cover and
+       oversized 4% so the ±offset counter-translate can never expose an
+       edge. In portrait the photo is shown WHOLE (object-fit:contain,
+       featured.css) — any scale would crop the very edges it exists to
+       protect, and the slide's own background absorbs the translate. */
+    function slack() { return window.innerWidth < window.innerHeight ? 1 : 1.04; }
 
     function setDots(idx) {
       for (var k = 0; k < dots.length; k++) dots[k].className = k === idx ? "is-on" : "";
@@ -156,7 +172,7 @@
       for (var k = 0; k < N; k++) {
         var m = meta[k];
         gsap.set(m.el, { clipPath: k === idx ? FULL : FROM_R, autoAlpha: k === idx ? 1 : 0, zIndex: k === idx ? 2 : 1 });
-        if (m.img) gsap.set(m.img, { x: 0, scale: 1.04 });
+        if (m.img) gsap.set(m.img, { x: 0, scale: slack() });
         if (m.title) gsap.set(m.title, { opacity: 1 });
         if (m.chars.length) gsap.set(m.chars, { y: 0, opacity: 1, filter: "blur(0px)" });
       }
@@ -186,7 +202,7 @@
         gsap.set(meta[k].el, { autoAlpha: 0, zIndex: 1 });
       }
       gsap.set(out.el, { clipPath: FULL, autoAlpha: 1, zIndex: 1 });
-      if (out.img) gsap.set(out.img, { x: 0, scale: 1.04 });
+      if (out.img) gsap.set(out.img, { x: 0, scale: slack() });
       gsap.set(inn.el, { clipPath: down ? FROM_R : FROM_L, autoAlpha: 1, zIndex: 2 });
       if (inn.title) gsap.set(inn.title, { opacity: 1 });
 
@@ -215,8 +231,8 @@
         { clipPath: FULL, duration: WIPE_S, ease: hopEase }, 0);
       if (inn.img) {
         tl.fromTo(inn.img,
-          { x: down ? off : -off, scale: 1.04 },
-          { x: 0, scale: 1.04, duration: WIPE_S, ease: hopEase }, 0);
+          { x: down ? off : -off, scale: slack() },
+          { x: 0, scale: slack(), duration: WIPE_S, ease: hopEase }, 0);
       }
       if (out.img) {
         tl.to(out.img, { x: down ? -off * 0.6 : off * 0.6, duration: WIPE_S, ease: hopEase }, 0);
@@ -250,20 +266,38 @@
       if (t !== cur) goTo(t);
     }
 
-    apply(0);
+    /* Everything past .fc-on hides slides — if any of it throws (a GSAP
+       version conflict, a plugin gone missing), fall back HARD to the
+       static stack rather than stranding two slides at visibility:hidden.
+       Content is never allowed to be the casualty of an enhancement. */
+    var st;
+    try {
+      apply(0);
 
-    /* No pin here — position:sticky already pins; ScrollTrigger is only
-       the progress meter (it also hears Lenis via the scrollerless
-       lenis.on('scroll', ScrollTrigger.update) hookup in experience.js,
-       and plain native scroll when Lenis never boots). */
-    var st = ScrollTrigger.create({
-      trigger: sec,
-      start: "top top",
-      end: "bottom bottom",
-      onUpdate: function (self) { evaluate(self.progress); },
-      onRefresh: function (self) { evaluate(self.progress); }
-    });
-    evaluate(st.progress);
+      /* No pin here — position:sticky already pins; ScrollTrigger is only
+         the progress meter (it also hears Lenis via the scrollerless
+         lenis.on('scroll', ScrollTrigger.update) hookup in experience.js,
+         and plain native scroll when Lenis never boots). */
+      st = ScrollTrigger.create({
+        trigger: sec,
+        start: "top top",
+        end: "bottom bottom",
+        onUpdate: function (self) { evaluate(self.progress); },
+        onRefresh: function (self) { evaluate(self.progress); }
+      });
+      evaluate(st.progress);
+    } catch (err) {
+      sec.classList.remove("fc-on");
+      sec.style.height = "";
+      for (i = 0; i < N; i++) {
+        meta[i].el.removeAttribute("style");
+        meta[i].el.removeAttribute("aria-hidden");
+        meta[i].el.removeAttribute("tabindex");
+        if (meta[i].img) meta[i].img.removeAttribute("style");
+      }
+      if (window.console && console.error) console.error("[featured] enhance failed, static fallback:", err);
+      return;
+    }
 
     state = {
       teardown: function () {

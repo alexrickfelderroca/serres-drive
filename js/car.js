@@ -91,8 +91,8 @@
 
   /* SEO: describe the rendered car as a schema.org Product. Built with
      JSON.stringify from the car object — never concatenated into the JSON —
-     and re-injected on every render (language switches re-render, so the
-     previous copy is removed first via its id). */
+     and re-injected on every render (soft navigation between car pages
+     re-renders, so the previous copy is removed first via its id). */
   var SITE = "https://serresdrive.com/";
   function injectJsonLd(car) {
     var prev = document.getElementById("car-jsonld");
@@ -131,10 +131,15 @@
     s.textContent = JSON.stringify(data);
     document.head.appendChild(s);
 
-    // Keep the canonical in step with the rendered car so the slug URLs in
-    // sitemap.xml are not all collapsed into the bare car.html shell.
+    // Keep the canonical — and its og twins — in step with the rendered car
+    // so the slug URLs in sitemap.xml are not all collapsed into the bare
+    // car.html shell, and the rendered head stays self-consistent.
     var canon = document.querySelector('link[rel="canonical"]');
     if (canon) canon.setAttribute("href", pageUrl);
+    var ogu = document.querySelector('meta[property="og:url"]');
+    if (ogu) ogu.setAttribute("content", pageUrl);
+    var ogt = document.querySelector('meta[property="og:title"]');
+    if (ogt) ogt.setAttribute("content", car.name + " · SERRES DRIVE");
   }
 
   function render(car) {
