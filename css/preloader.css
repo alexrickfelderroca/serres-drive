@@ -118,9 +118,21 @@ html.pl-lock body{overflow:hidden}
   transform:translateY(-50%);
   display:flex;
   justify-content:center;
-  /* font-size lives HERE, not on .pl-lockup, so that .pl-shift below
-     inherits it and can express its offset in em. See --pl-shift. */
-  font-size:clamp(2.2rem,11vw,7rem);
+  /* --brand-h is the logotype's height and the single scale knob for the
+     whole lockup, exactly as in the nav (.brand in styles.css). Everything
+     else — DRIVE's size, the word gap, the measured shift — is derived from
+     it, so the mark and the type can never drift out of proportion.
+
+     The mark is ~11.2:1, far wider per unit height than the six characters
+     of type it replaces, so --brand-h is much smaller than the old
+     font-size: at 62px the artwork alone is ~693px across.
+
+     font-size lives HERE, not on .pl-lockup, so that .pl-shift below
+     inherits it and can express its offset in em. Because font-size is a
+     fixed multiple of --brand-h, the em ratio --pl-shift depends on stays
+     constant at every viewport width. See --pl-shift. */
+  --brand-h:clamp(20px,5.6vw,58px);
+  font-size:calc(var(--brand-h) * .82);
 }
 .pl-shift{
   display:flex;
@@ -140,8 +152,10 @@ html.pl-lock body{overflow:hidden}
 }
 .pl-lockup{
   display:flex;
-  align-items:flex-end;
-  gap:.28em;                 /* the word space between SERRES and DRIVE */
+  /* centre, not baseline: the mark is artwork with no baseline to sit on.
+     Matches the nav lockup. */
+  align-items:center;
+  gap:.75em;                 /* = .62 x --brand-h, same optical gap as the nav */
   font-family:var(--font-head,"Barlow Condensed","Arial Narrow",system-ui,sans-serif);
   font-weight:700;
   text-transform:uppercase;
@@ -157,18 +171,24 @@ html.pl-lock body{overflow:hidden}
 .pl-word{display:inline-block;line-height:1;white-space:nowrap}
 
 
-/* ---------- Per-character mask (SERRES only) ----------
-   padding-top gives the mask a little headroom above the cap line so no
-   font's overshoot can be clipped at line-height:1; the matching
-   negative margin cancels it out of the layout. Both halves get exactly
-   the same treatment, so even if a font disagreed the two copies would
-   disagree identically and the seam would still line up. */
-.pl-glyph{
-  display:inline-block;
-  overflow:hidden;
-  vertical-align:bottom;
-  padding-top:.12em;
-  margin-top:-.12em;
+/* ---------- The logotype ----------
+   Sized off --brand-h, aspect preserved by the SVG's own viewBox. The
+   width/height attributes on the <img> give it the right aspect before it
+   has loaded, so the lockup never reflows underneath the measurement. */
+.pl-mark{
+  display:block;
+  height:var(--brand-h);
+  width:auto;
+}
+/* The wipe. Declared in CSS so there is no frame where the mark is
+   visible un-wiped; the GSAP path re-asserts the identical value with
+   gsap.set() before tweening, so both engines start the same.
+
+   Guarded on @supports: where clip-path is unavailable this rule never
+   applies and the mark is simply present from the start. It must never
+   be the reason the logotype cannot be seen. */
+@supports (clip-path:inset(0 0 0 0)){
+  .pl-word--serres{clip-path:inset(0% 100% 0% 0%)}
 }
 
 /* ---------- Brushed chrome fill ----------
@@ -207,20 +227,22 @@ html.pl-lock body{overflow:hidden}
   }
 }
 
-/* Start state for the SERRES characters: parked above their own mask.
-   Declared in CSS (not JS) so there is no frame where they are visible
-   in the wrong place. The GSAP path re-asserts the same value with
-   gsap.set() before tweening, so both engines start identically. */
-.pl-char--up{transform:translateY(-115%)}
-
-/* DRIVE slides in as one word, masked at its own edge. */
+/* DRIVE slides in as one word, masked at its own edge. Tracked out as a
+   descriptor exactly as in the nav lockup; the negative right margin
+   cancels the trailing space the tracking adds after the final E, so the
+   lockup is optically centred rather than sitting left of its box. */
 .pl-drive-mask{
   display:inline-block;
   overflow:hidden;
   padding-top:.12em;
   margin-top:-.12em;
 }
-.pl-word--drive{vertical-align:bottom;transform:translateX(105%)}
+.pl-word--drive{
+  vertical-align:bottom;
+  transform:translateX(105%);
+  letter-spacing:.30em;
+  margin-right:-.30em;
+}
 
 
 /* ---------- Tag words ----------
@@ -280,12 +302,9 @@ html[lang="en"] .pl-tag [data-en]{display:inline}
 }
 .pl--css.is-tags .pl-tag{opacity:1;transform:translate(0,0)}
 
-/* t=0.5 — SERRES, character by character */
-.pl--css .pl-char--up{
-  transition:transform .85s cubic-bezier(.16,1,.3,1);
-  transition-delay:calc(var(--i,0) * .05s);
-}
-.pl--css.is-serres .pl-char--up{transform:translateY(0)}
+/* t=0.5 — the speed wipe lays SERRES down */
+.pl--css .pl-word--serres{transition:clip-path 1.25s cubic-bezier(.65,0,.35,1)}
+.pl--css.is-serres .pl-word--serres{clip-path:inset(0% 0% 0% 0%)}
 
 /* t=2.3 — DRIVE arrives and the lockup re-centres around it */
 .pl--css .pl-word--drive,
@@ -319,11 +338,12 @@ html[lang="en"] .pl-tag [data-en]{display:inline}
    whole overlay out via .pl--out. Degrading to a STATIC READABLE state,
    never a blank one.
    ===================================================================== */
-.pl--reduced .pl-char--up,
 .pl--reduced .pl-word--drive,
 .pl--reduced .pl-shift,
 .pl--reduced .pl-lockup{transform:none}
 .pl--reduced .pl-tag{opacity:1;transform:none}
+/* the wipe must be fully open, or reduced motion would show a blank mark */
+.pl--reduced .pl-word--serres{clip-path:none}
 
 @media (prefers-reduced-motion:reduce){
   /* Belt and braces: even if the JS branch were somehow missed, nothing
@@ -331,7 +351,7 @@ html[lang="en"] .pl-tag [data-en]{display:inline}
      alone on purpose — it is how the overlay gets out of the way. */
   .pl *{animation:none !important}
   .pl--css .pl-tag,
-  .pl--css .pl-char--up,
+  .pl--css .pl-word--serres,
   .pl--css .pl-word--drive,
   .pl--css .pl-shift,
   .pl--css .pl-lockup,
@@ -340,6 +360,9 @@ html[lang="en"] .pl-tag [data-en]{display:inline}
     transform:none !important;
     opacity:1 !important;
   }
+  /* transform:none above cannot open a clip-path — say it explicitly, or
+     the mark stays wiped out under reduced motion. */
+  .pl-word--serres{clip-path:none !important}
 }
 
 
@@ -355,7 +378,7 @@ html[lang="en"] .pl-tag [data-en]{display:inline}
      string ("Entrega a domicilio") still clears the viewport. */
   .pl-tag{left:7%}
   .pl-tag--right{left:auto;right:7%}
-  .pl-lockup{gap:.24em}
+  .pl-lockup{gap:.6em}
 }
 /* Short/landscape viewports: the lockup grows with vw, so on a wide but
    shallow screen it can reach up towards the tags. Push them outward. */

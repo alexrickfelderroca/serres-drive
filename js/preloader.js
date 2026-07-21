@@ -131,17 +131,14 @@
 
   /* ---------- markup ---------- */
 
-  // SERRES: every character gets its own overflow:hidden box so it can
-  // slide down out of nothing. --i drives the CSS-fallback stagger,
-  // data-i drives the GSAP one (see byIndex).
-  function glyphs(word) {
-    var out = "", i;
-    for (i = 0; i < word.length; i++) {
-      out += '<span class="pl-glyph" style="--i:' + i + '">' +
-               '<span class="pl-char pl-char--up" data-i="' + i + '">' + word.charAt(i) + '</span>' +
-             '</span>';
-    }
-    return out;
+  // SERRES is the real logotype, so it cannot be split into characters the
+  // way type can. It is revealed instead by a clip-path edge travelling
+  // left-to-right across it — which suits an italic, forward-leaning mark
+  // far better than a per-letter drop: it reads as the word being laid
+  // down at speed.
+  function markHTML() {
+    return '<img class="pl-mark" src="assets/brand/serres-wordmark.svg" alt="" ' +
+           'width="1000" height="89" decoding="async">';
   }
 
   // DRIVE arrives as one word behind a single mask, so its characters
@@ -172,7 +169,7 @@
 
   function lockupHTML() {
     return '<div class="pl-lockup-pos"><div class="pl-shift"><div class="pl-lockup">' +
-             '<span class="pl-word pl-word--serres">' + glyphs("SERRES") + "</span>" +
+             '<span class="pl-word pl-word--serres">' + markHTML() + "</span>" +
              '<span class="pl-drive-mask"><span class="pl-word pl-word--drive">' +
                plainChars("DRIVE") +
              "</span></span>" +
@@ -325,17 +322,22 @@
   function runGsap(gsap) {
     var all    = function (sel) { return root.querySelectorAll(sel); };
     var tags   = all(".pl-tag");
-    var chars  = all(".pl-char--up");
+    var marks  = all(".pl-word--serres");
     var drive  = all(".pl-word--drive");
     var shifts = all(".pl-shift");
     var locks  = all(".pl-lockup");
+
+    // The wipe edge. Both properties are set: Safari still wants the
+    // prefixed one, and a half-applied clip would leave the mark hidden.
+    var WIPE_HID = "inset(0% 100% 0% 0%)";
+    var WIPE_VIS = "inset(0% 0% 0% 0%)";
 
     /* Re-assert the start state as inline transforms. The CSS already
        declares it (so there is no unstyled frame), but getComputedStyle
        hands GSAP a px matrix, not the authored percentages — tweening
        yPercent against that would compound the two. Setting it
        explicitly makes the start state unambiguous. */
-    gsap.set(chars,  { yPercent: -115, y: 0 });
+    gsap.set(marks,  { clipPath: WIPE_HID, webkitClipPath: WIPE_HID });
     gsap.set(drive,  { xPercent: 105,  x: 0 });
     // .pl-shift is deliberately NOT pre-set: leaving the em-based CSS
     // transform in place keeps it correct across a rotation right up
@@ -351,9 +353,9 @@
     tl.to(tags, { opacity: 1, x: 0, y: 0, duration: 0.7, ease: "power2.out",
                   stagger: byIndex(0.12) }, 0);
 
-    // t=0.5 — SERRES, character by character
-    tl.to(chars, { yPercent: 0, duration: 0.85, ease: "power3.out",
-                   stagger: byIndex(0.05) }, 0.5);
+    // t=0.5 — the speed wipe lays SERRES down left to right
+    tl.to(marks, { clipPath: WIPE_VIS, webkitClipPath: WIPE_VIS,
+                   duration: 1.25, ease: "power3.inOut" }, 0.5);
 
     // t=2.3 — DRIVE joins and the lockup re-centres around the finished
     // wordmark. Both tweens share a duration so they read as one move.
