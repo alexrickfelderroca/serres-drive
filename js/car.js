@@ -147,7 +147,7 @@
           '<img class="serres-poster__img" alt="" src="' + hero + '" onerror="' + imgOnErr + '">' +
           '<div class="serres-poster__in">' +
             '<div class="serres-poster__top">' +
-              '<span class="serres-poster__brandmark"><span class="chrome-text">SERRES</span> <span class="chrome-text">DRIVE</span></span>' +
+              '<span class="serres-poster__brandmark"><img class="b-mark" src="assets/brand/serres-wordmark.svg" alt="Serres" width="1000" height="89" decoding="async"><span class="b-drive chrome-text">Drive</span></span>' +
               '<span class="serres-poster__kicker">' + lbl("Alquiler de coches de lujo", "Luxury car rental") + '</span>' +
               '<span class="serres-poster__hairline"></span>' +
             '</div>' +

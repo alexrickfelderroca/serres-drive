@@ -67,9 +67,13 @@
   justify-content:space-between;padding:clamp(20px,4.5%,30px);text-align:center;color:var(--white);
 }
 .serres-poster__top{display:flex;flex-direction:column;align-items:center;gap:6px}
-.serres-poster__brandmark{font-family:var(--font-head);font-weight:700;letter-spacing:.12em;
-  font-size:1.15rem;text-transform:uppercase;display:inline-flex;align-items:center;gap:.4em}
-.serres-poster__brandmark .b-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);display:inline-block}
+/* Same lockup as the nav, just centred and sized for the poster. The old
+   .b-dot rule here styled a separator that no longer exists in the markup. */
+.serres-poster__brandmark{--brand-h:.92rem;
+  display:inline-flex;align-items:center;justify-content:center;gap:.62em;line-height:1}
+.serres-poster__brandmark .b-mark{display:block;height:var(--brand-h);width:auto;flex:none}
+.serres-poster__brandmark .b-drive{font-family:var(--font-head);font-weight:700;text-transform:uppercase;
+  font-size:calc(var(--brand-h) * .82);letter-spacing:.30em;margin-right:-.30em;transform:translateY(.06em)}
 .serres-poster__kicker{font-family:var(--font-head);text-transform:uppercase;letter-spacing:.34em;
   font-size:.6rem;color:var(--gold);opacity:.85}
 .serres-poster__hairline{width:120px;height:1px;background:var(--gold-line);opacity:.7;margin:2px auto 0}

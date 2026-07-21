@@ -177,11 +177,27 @@ section{position:relative}
   border-bottom-color:var(--line);
 }
 .nav .wrap{display:flex;align-items:center;justify-content:space-between;width:100%;gap:20px}
-.brand{display:flex;align-items:baseline;gap:.42em;font-family:var(--font-head);font-weight:700;
-  text-transform:uppercase;font-size:1.72rem;letter-spacing:.02em;line-height:1}
-/* SERRES and DRIVE are now one continuous wordmark: same brushed-chrome fill,
-   same size, separated only by the flex gap above (no dot). */
-.brand .b-drive{font-size:1em}
+/* Brand lockup: the SERRES logotype (real artwork) + DRIVE as a tracked-out
+   descriptor in Barlow Condensed. The logotype is an <img> carrying its own
+   baked chrome gradient rather than a CSS mask, so there is no mask-support
+   failure mode where the mark could render as a bare gradient block.
+   --brand-h drives everything; the footer only has to override that one value. */
+.brand{--brand-h:1.02rem;
+  display:flex;align-items:center;gap:.62em;line-height:1;text-decoration:none}
+.brand .b-mark{display:block;height:var(--brand-h);width:auto;flex:none}
+.brand .b-drive{
+  font-family:var(--font-head);font-weight:700;text-transform:uppercase;
+  /* the logotype's cap height is the reference; DRIVE is set to read as a
+     descriptor beneath it in the hierarchy, not as a second logotype */
+  font-size:calc(var(--brand-h) * .82);
+  letter-spacing:.30em;
+  /* the tracking adds a trailing gap after the final E — pull it back so the
+     lockup is optically centred rather than sitting left of its box */
+  margin-right:-.30em;
+  /* nudged to sit on the logotype's optical baseline: the mark is an italic
+     form whose visual centre sits slightly above its box centre */
+  transform:translateY(.06em);
+}
 .nav-links{display:flex;align-items:center;gap:30px}
 .nav-links a{
   font-family:var(--font-head);text-transform:uppercase;letter-spacing:.09em;
@@ -435,7 +451,7 @@ table.rates tbody tr:hover td:first-child{background:#141419}
 /* ---------- Footer ---------- */
 .footer{border-top:1px solid var(--line);background:var(--bg-2);padding-block:clamp(48px,7vw,80px) 34px}
 .foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:40px}
-.foot-brand .brand{font-size:2rem;margin-bottom:16px}
+.foot-brand .brand{--brand-h:1.24rem;margin-bottom:16px}
 .foot-brand p{color:var(--text-dim);font-size:.94rem;max-width:34ch}
 .foot-col h5{font-family:var(--font-head);text-transform:uppercase;letter-spacing:.14em;font-size:.82rem;color:var(--gold);margin-bottom:16px}
 .foot-col a,.foot-col p{display:block;color:var(--text-dim);font-size:.94rem;padding:5px 0;transition:color .25s}
