@@ -420,25 +420,12 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
       try { mount.releasePointerCapture(e.pointerId); } catch (x) {}
     }
 
-    // What counts as a tap: the gesture never resolved into a direction, barely
-    // moved, and was NOT cancelled by the browser.
-    //
-    // The dragAxis and pointercancel checks are the mobile fix. pointercancel
-    // fires the moment the browser takes a touch over to scroll the page, and it
-    // arrives with dragging === false and movedDist === 0 — so the old condition
-    // passed on every scroll flick and navigated to whatever car happened to be
-    // under the finger. That page load is what looked like "the cylinder bugs out
-    // and leaves a weird loading screen". A vertical gesture that we classified
-    // ourselves (dragAxis === "v") is a scroll too, never a tap.
-    const cancelled = !e || e.type === "pointercancel";
-    const isTap = interactive && !cancelled && e.pointerId === dragId &&
-                  !dragging && dragAxis === null && movedDist < 8;
-
-    if (isTap) {
-      setNdcFromEvent(e);
-      const t = pickTile();
-      if (t) { window.location.href = "car.html?slug=" + encodeURIComponent(t.slug); return; }
-    }
+    // The ring is spin-only. Taps used to navigate to the tapped car's page,
+    // which on touch misfired constantly (pointercancel during a scroll flick
+    // read as a tap and sent the visitor to a random car). Rather than keep
+    // patching tap heuristics, tiles no longer navigate at all — the tooltip
+    // still names the car and shows its price on hover, and the fleet pages
+    // remain one click away everywhere else.
 
     // Touch has no hover. Park the ray off-screen when a touch gesture ends, or
     // ndc keeps pointing at the last touched pixel and the render loop raycasts
@@ -663,6 +650,16 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
       tooltipEl.classList.remove("is-on"); hoverTile = null;
       if (cursorEl) cursorEl.classList.remove("is-over");
     }
+
+    /* Portrait phones: the canvas draws above the page copy, and with the
+       hero CTAs now living in the intro the centred car sat directly on
+       top of the second button. Aiming the camera slightly above the car
+       renders it lower in the viewport, clear of the buttons; the offset
+       fades with the ring reveal so the cylinder still forms dead centre.
+       In landscape the target is (0,0,0), exactly as before. */
+    const portrait = window.innerWidth < window.innerHeight;
+    const aimY = portrait && carMaxDim ? carMaxDim * 0.24 * (1 - reveal) : 0;
+    camera.lookAt(0, aimY, 0);
 
     renderer.render(scene, camera);
   }

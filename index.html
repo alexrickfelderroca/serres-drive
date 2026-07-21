@@ -16,17 +16,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,600;1,700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css">
-<link rel="stylesheet" href="css/nav-ink.css">
-<link rel="stylesheet" href="css/home.css">
+<link rel="stylesheet" href="css/styles.css?v=20260721">
+<link rel="stylesheet" href="css/nav-ink.css?v=20260721">
+<link rel="stylesheet" href="css/home.css?v=20260721">
 <!-- Preloader: home page only, once per session. The script builds its own
      overlay, so nothing is left behind if it never runs — and it is loaded
      here, blocking, rather than at the end of <body> so the overlay exists
      before the page gets a chance to paint. It waits for <body> on animation
      frames and polls briefly for GSAP (loaded further down) before falling
      back to its CSS keyframe path. -->
-<link rel="stylesheet" href="css/preloader.css">
-<script src="js/preloader.js"></script>
+<link rel="stylesheet" href="css/preloader.css?v=20260721">
+<script src="js/preloader.js?v=20260721"></script>
 </head>
 <body id="top" class="home-exp">
 <a href="#showcase" class="btn" style="position:absolute;left:-999px;top:0">Saltar al contenido</a>
@@ -90,6 +90,30 @@
     <div class="oa-row"><h1><span data-es>Alquiler</span><span data-en>Luxury</span></h1></div>
     <div class="oa-row"><h1><span data-es>de coches</span><span data-en>car</span></h1></div>
     <div class="oa-row"><h1><span data-es>de lujo</span><span data-en>rental</span></h1></div>
+    <div class="oa-cta oa-intro-cta">
+      <a href="#" class="btn gold" id="intro-wa" target="_blank" rel="noopener">
+        <span data-es>Reserva tu vehículo</span><span data-en>Book your car</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a href="https://serreswrapcenter.es/" class="btn ghost" target="_blank" rel="noopener">
+        Serres Wrap Center
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- CHOOSE — straight from the intro into the interactive ring: the tumble
+       "links" into it, the fixed WebGL stage draws the ring around the
+       settled Porsche, and this section supplies scroll distance + a
+       no-WebGL fallback grid. The ring is spin-only — tiles don't navigate. -->
+  <section class="oa-choose" id="choose">
+    <div class="oa-choose-head">
+      <p><span data-es>Elige tu coche</span><span data-en>Choose your car</span></p>
+      <h2><span data-es>Toda la flota, en movimiento</span><span data-en>The whole fleet, in motion</span></h2>
+    </div>
+    <div class="oa-choose-grid" id="chooseGrid" aria-label="Flota">
+      <a href="fleet.html"><span data-es>Ver la flota completa</span><span data-en>View the full fleet</span></a>
+    </div>
   </section>
 
   <!-- COLLECTION -->
@@ -120,19 +144,6 @@
       <h2>DBX 707</h2>
       <div class="oa-info"><p>BCN · ESP</p><p>SUV</p><p>707 CV</p><p>AWD</p></div>
     </a>
-  </section>
-
-  <!-- CHOOSE — the tumble "links" into an interactive ring of the fleet.
-       The fixed WebGL stage draws the ring around the settled Porsche;
-       this section supplies scroll distance + a no-WebGL fallback grid. -->
-  <section class="oa-choose" id="choose">
-    <div class="oa-choose-head">
-      <p><span data-es>Elige tu coche</span><span data-en>Choose your car</span></p>
-      <h2><span data-es>Toda la flota, en movimiento</span><span data-en>The whole fleet, in motion</span></h2>
-    </div>
-    <div class="oa-choose-grid" id="chooseGrid" aria-label="Flota">
-      <a href="fleet.html"><span data-es>Ver la flota completa</span><span data-en>View the full fleet</span></a>
-    </div>
   </section>
 
   <!-- OUTRO (staggered line reveals) -->
@@ -173,7 +184,7 @@
   </div>
   <div class="cu-hint">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M8 12h8M8 12l3-3M8 12l3 3M16 12l-3-3M16 12l-3 3"/></svg>
-    <span data-es>Arrastra o desliza en horizontal para girar · Toca un coche</span><span data-en>Drag or scroll sideways to spin · tap a car</span>
+    <span data-es>Desliza para girar</span><span data-en>Swipe to spin</span>
   </div>
 </div>
 <div class="sd-tooltip" role="status" aria-live="polite"></div>
@@ -310,10 +321,10 @@
   "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
 }}
 </script>
-<script type="module" src="js/experience.js"></script>
-<script src="js/fleet.js"></script>
-<script src="js/app.js"></script>
-<script src="js/nav-ink.js"></script>
+<script type="module" src="js/experience.js?v=20260721"></script>
+<script src="js/fleet.js?v=20260721"></script>
+<script src="js/app.js?v=20260721"></script>
+<script src="js/nav-ink.js?v=20260721"></script>
 <!-- Populate the .oa-choose fallback grid from the fleet (no-WebGL / no-JS safe:
      the static "Ver la flota" link stays if this never runs). -->
 <script>

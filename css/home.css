@@ -70,6 +70,8 @@ html.lenis, .lenis.lenis-smooth { scroll-behavior: auto !important; }
 .home-exp .oa-row:nth-child(1){padding-left:0}
 .home-exp .oa-row:nth-child(2){padding-left:clamp(0px,5vw,9vw)}
 .home-exp .oa-row:nth-child(3){padding-left:clamp(0px,11vw,20vw)}
+/* the two hero CTAs under the headline (Reserva tu vehículo / Wrap Center) */
+.home-exp .oa-intro-cta{margin-top:clamp(1.4em,4.5vh,2.6em)}
 
 /* =====================================================================
    COLLECTION — muted names scroll past the tumbling car
