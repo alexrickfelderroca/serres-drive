@@ -4,35 +4,78 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>document.documentElement.classList.add('js');</script>
-<title>Tarifas de alquiler de coches de lujo · SERRES DRIVE</title>
+<title>Tarifas de alquiler de coches de lujo en Barcelona · SERRES DRIVE</title>
 <meta name="description" content="Tarifas de alquiler de coches de lujo en Barcelona: precios por 1 día, 1 semana, 15 días y 1 mes, fianza y entrega a domicilio. Consulta y reserva por WhatsApp.">
 <meta name="theme-color" content="#0a0a0b">
 <link rel="canonical" href="https://serresdrive.com/rates.html">
-<meta property="og:title" content="Tarifas de alquiler de coches de lujo · SERRES DRIVE">
+<meta property="og:title" content="Tarifas de alquiler de coches de lujo en Barcelona · SERRES DRIVE">
 <meta property="og:description" content="Tarifas de alquiler de coches de lujo en Barcelona: precios por 1 día, 1 semana, 15 días y 1 mes, fianza y entrega a domicilio. Consulta y reserva por WhatsApp.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://serresdrive.com/rates.html">
 <meta property="og:image" content="https://serresdrive.com/assets/img/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="SERRES DRIVE — alquiler de coches de lujo en Barcelona">
 <meta property="og:locale" content="es_ES">
 <meta property="og:site_name" content="SERRES DRIVE">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Tarifas de alquiler de coches de lujo · SERRES DRIVE">
+<meta name="twitter:title" content="Tarifas de alquiler de coches de lujo en Barcelona · SERRES DRIVE">
 <meta name="twitter:description" content="Tarifas de alquiler de coches de lujo en Barcelona: precios por 1 día, 1 semana, 15 días y 1 mes, fianza y entrega a domicilio. Consulta y reserva por WhatsApp.">
 <meta name="twitter:image" content="https://serresdrive.com/assets/img/og-cover.jpg">
 <link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/brand/favicon-96.png" type="image/png" sizes="96x96">
+<link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,600;1,700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=20260721c">
-<link rel="stylesheet" href="css/nav-ink.css?v=20260721c">
-<link rel="stylesheet" href="css/transitions.css?v=20260721c">
+<link rel="stylesheet" href="css/styles.css?v=20260721d">
+<link rel="stylesheet" href="css/nav-ink.css?v=20260721d">
+<link rel="stylesheet" href="css/transitions.css?v=20260721d">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "Inicio",
+   "item": "https://serresdrive.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Tarifas",
+   "item": "https://serresdrive.com/rates.html"
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "AutoRental",
+ "@id": "https://serresdrive.com/#business",
+ "name": "Serres Drive",
+ "url": "https://serresdrive.com/",
+ "telephone": "+34621244469",
+ "address": {
+  "@type": "PostalAddress",
+  "streetAddress": "Av. Can Fatjó dels Aurons 15",
+  "postalCode": "08174",
+  "addressLocality": "Sant Cugat del Vallès",
+  "addressRegion": "Barcelona",
+  "addressCountry": "ES"
+ }
+}
+</script>
 </head>
 <body>
 <a href="#main" class="btn" style="position:absolute;left:-999px;top:0">Saltar al contenido</a>
 
 <header class="nav scrolled" id="nav">
   <div class="wrap">
-    <a href="index.html" class="brand" aria-label="Serres Drive — inicio">
+    <a href="/" class="brand" aria-label="Serres Drive — inicio">
       <img class="b-mark" src="assets/brand/serres-wordmark.svg" alt="Serres" width="1000" height="89" decoding="async"><span class="b-drive chrome-text">Drive</span>
     </a>
     <nav class="nav-links" aria-label="Principal">
@@ -79,7 +122,7 @@
 <header class="page-header">
   <div class="wrap">
     <nav class="breadcrumb" aria-label="Ruta">
-      <a href="index.html"><span data-es>Inicio</span><span data-en>Home</span></a><span class="sep">/</span>
+      <a href="/"><span data-es>Inicio</span><span data-en>Home</span></a><span class="sep">/</span>
       <span data-es>Tarifas</span><span data-en>Rates</span>
     </nav>
     <span class="eyebrow"><span data-es>Tarifas tienda</span><span data-en>Store rates</span></span>
@@ -108,7 +151,43 @@
             <th><span data-es>1 mes</span><span data-en>1 month</span></th>
           </tr>
         </thead>
-        <tbody id="ratesBody"></tbody>
+        <!-- Static rows so the price table is crawlable in first-wave HTML;
+             js/app.js renderRates() rebuilds this tbody on init (search,
+             language, WhatsApp row actions). Regenerated by
+             tools/build-seo-pages.js from js/fleet.js. -->
+        <tbody id="ratesBody"><!-- BUILD:RATES-STATIC:START -->
+        <tr><td><a class="car-cell" href="alquiler-ferrari-458-spider-barcelona.html">Ferrari 458 Spider<small>Descapotable · 570 CV</small></a></td><td data-label-es="1 día" data-label-en="1 day"><span class="euro">3.900 €</span></td><td data-label-es="1 semana" data-label-en="1 week"><span data-es>Consúltanos</span><span data-en>On request</span></td><td data-label-es="15 días" data-label-en="15 days"><span data-es>Consúltanos</span><span data-en>On request</span></td><td data-label-es="1 mes" data-label-en="1 month"><span data-es>Consúltanos</span><span data-en>On request</span></td></tr>
+        <tr><td><a class="car-cell" href="alquiler-mercedes-amg-g63-barcelona.html">Mercedes-AMG G 63<small>SUV · 585 CV</small></a></td><td data-label-es="1 día" data-label-en="1 day"><span class="euro">2.900 €</span></td><td data-label-es="1 semana" data-label-en="1 week"><span data-es>Consúltanos</span><span data-en>On request</span></td><td data-label-es="15 días" data-label-en="15 days"><span data-es>Consúltanos</span><span data-en>On request</span></td><td data-label-es="1 mes" data-label-en="1 month"><span data-es>Consúltanos</span><span data-en>On request</span></td></tr>
+        <tr><td><a class="car-cell" href="alquiler-ferrari-f8-spider-barcelona.html">Ferrari F8 Spider<small>Descapotable · 720 CV</small></a></td><td data-label-es="1 día" data-label-en="1 day"><span class="euro">1.200 €</span></td><td data-label-es="1 semana" data-label-en="1 week"><span class="euro">6.500 €</span></td><td data-label-es="15 días" data-label-en="15 days"><span class="euro">6.500 €</span></td><td data-label-es="1 mes" data-label-en="1 month"><span class="euro">14.000 €</span></td></tr>
+        <tr><td><a class="car-cell" href="alquiler-ferrari-488-gtb-barcelona.html">Ferrari 488 GTB<small>Deportivo · 670 CV</small></a></td><td data-label-es="1 día" data-label-en="1 day"><span class="euro">1.200 €</span></td><td data-label-es="1 semana" data-label-en="1 week"><span class="euro">7.000 €</span></td><td data-label-es="15 días" data-label-en="15 days"><span data-es>Consúltanos</span><span data-en>On request</span></td><td data-label-es="1 mes" data-label-en="1 month"><span class="euro">15.000 €</span></td></tr>
+        <tr><td><a class="car-cell" href="alquiler-mercedes-amg-g63-plus-barcelona.html">Mercedes-AMG G63 Plus<small>Lujo · 585 CV</small></a></td><td data-label-es="1 día" data-label-en="1 day"><span class="euro">1.000 €</span></td><td data-label-es="1 semana" data-label-en="1 week"><span class="euro">6.000 €</span></td><td data-label-es="15 días" data-label-en="15 days"><span class="euro">9.000 €</span></td><td data-label-es="1 mes" data-label-en="1 month"><span class="euro">12.000 €</span></td></tr>
+        <tr><td><a class="car-cell" href="alquiler-mclaren-570s-gt-barcelona.html">McLaren 570S<small>Deportivo · 570 CV</small></a></td><td data-label-es="1 día" data-label-en="1 day"><span class="euro">900 €</span></td><td data-label-es="1 semana" data-label-en="1 week"><span class="euro">4.550 €</span></td><td data-label-es="15 días" data-label-en="15 days"><span data-es>Consúltanos</span><span data-en>On request</span></td><td data-label-es="1 mes" data-label-en="1 month"><span class="euro">12.000 €</span></td></tr>
+        <tr><td><a class="car-cell" href="alquiler-porsche-911-targa-gts-barcelona.html">Porsche 911 Targa GTS<small>Deportivo · 480 CV</small></a></td><td data-label-es="1 día" data-label-en="1 day"><span class="euro">800 €</span></td><td data-label-es="1 semana" data-label-en="1 week"><span class="euro">4.200 €</span></td><td data-label-es="15 días" data-label-en="15 days"><span data-es>Consúltanos</span><span data-en>On request</span></td><td data-label-es="1 mes" data-label-en="1 month"><span class="euro">8.010 €</span></td></tr>
+        <tr><td><a class="car-cell" href="alquiler-aston-martin-dbx-707-barcelona.html">Aston Martin DBX 707<small>SUV · 707 CV</small></a></td><td data-label-es="1 día" data-label-en="1 day"><span class="euro">800 €</span></td><td data-label-es="1 semana" data-label-en="1 week"><span class="euro">3.500 €</span></td><td data-label-es="15 días" data-label-en="15 days"><span data-es>Consúltanos</span><span data-en>On request</span></td><td data-label-es="1 mes" data-label-en="1 month"><span class="euro">9.000 €</span></td></tr>
+        <tr><td><a class="car-cell" href="alquiler-bmw-m8-competition-cabrio-barcelona.html">BMW M8 Competition Cabrio<small>Descapotable · 625 CV</small></a></td><td data-label-es="1 día" data-label-en="1 day"><span class="euro">700 €</span></td><td data-label-es="1 semana" data-label-en="1 week"><span class="euro">3.500 €</span></td><td data-label-es="15 días" data-label-en="15 days"><span data-es>Consúltanos</span><span data-en>On request</span></td><td data-label-es="1 mes" data-label-en="1 month"><span class="euro">7.500 €</span></td></tr>
+        <tr><td><a class="car-cell" href="alquiler-porsche-911-carrera-992-barcelona.html">Porsche 911 Carrera (992)<small>Lujo · 385 CV</small></a></td><td data-label-es="1 día" data-label-en="1 day"><span class="euro">700 €</span></td><td data-label-es="1 semana" data-label-en="1 week"><span class="euro">4.500 €</span></td><td data-label-es="15 días" data-label-en="15 days"><span class="euro">3.600 €</span></td><td data-label-es="1 mes" data-label-en="1 month"><span class="euro">9.000 €</span></td></tr>
+        <tr><td><a class="car-cell" href="alquiler-lamborghini-urus-barcelona.html">Lamborghini Urus<small>SUV · 650 CV</small></a></td><td data-label-es="1 día" data-label-en="1 day"><span data-es>Consúltanos</span><span data-en>On request</span></td><td data-label-es="1 semana" data-label-en="1 week"><span data-es>Consúltanos</span><span data-en>On request</span></td><td data-label-es="15 días" data-label-en="15 days"><span class="euro">10.000 €</span></td><td data-label-es="1 mes" data-label-en="1 month"><span class="euro">15.000 €</span></td></tr>
+        <tr><td><a class="car-cell" href="alquiler-ferrari-portofino-m-barcelona.html">Ferrari Portofino M<small>Descapotable · 620 CV</small></a></td><td data-label-es="1 día" data-label-en="1 day"><span data-es>Consúltanos</span><span data-en>On request</span></td><td data-label-es="1 semana" data-label-en="1 week"><span data-es>Consúltanos</span><span data-en>On request</span></td><td data-label-es="15 días" data-label-en="15 days"><span class="euro">9.000 €</span></td><td data-label-es="1 mes" data-label-en="1 month"><span class="euro">14.000 €</span></td></tr>
+        <tr><td><a class="car-cell" href="alquiler-porsche-cayenne-turbo-gt-barcelona.html">Porsche Cayenne Turbo GT<small>SUV · 660 CV</small></a></td><td data-label-es="1 día" data-label-en="1 day"><span class="euro">600 €</span></td><td data-label-es="1 semana" data-label-en="1 week"><span class="euro">2.800 €</span></td><td data-label-es="15 días" data-label-en="15 days"><span class="euro">4.000 €</span></td><td data-label-es="1 mes" data-label-en="1 month"><span class="euro">7.000 €</span></td></tr>
+        <tr><td><a class="car-cell" href="alquiler-lamborghini-huracan-coupe-barcelona.html">Lamborghini Huracán Coupé<small>Deportivo · 640 CV</small></a></td><td data-label-es="1 día" data-label-en="1 day"><span data-es>Consúltanos</span><span data-en>On request</span></td><td data-label-es="1 semana" data-label-en="1 week"><span data-es>Consúltanos</span><span data-en>On request</span></td><td data-label-es="15 días" data-label-en="15 days"><span class="euro">9.000 €</span></td><td data-label-es="1 mes" data-label-en="1 month"><span class="euro">13.000 €</span></td></tr>
+        <tr><td><a class="car-cell" href="alquiler-bmw-x7-m60i-barcelona.html">BMW X7 M60i<small>Lujo · 530 CV</small></a></td><td data-label-es="1 día" data-label-en="1 day"><span class="euro">500 €</span></td><td data-label-es="1 semana" data-label-en="1 week"><span class="euro">2.800 €</span></td><td data-label-es="15 días" data-label-en="15 days"><span data-es>Consúltanos</span><span data-en>On request</span></td><td data-label-es="1 mes" data-label-en="1 month"><span class="euro">5.400 €</span></td></tr>
+        <tr><td><a class="car-cell" href="alquiler-bmw-m4-competition-barcelona.html">BMW M4 Competition<small>Lujo · 510 CV</small></a></td><td data-label-es="1 día" data-label-en="1 day"><span class="euro">500 €</span></td><td data-label-es="1 semana" data-label-en="1 week"><span class="euro">2.450 €</span></td><td data-label-es="15 días" data-label-en="15 days"><span data-es>Consúltanos</span><span data-en>On request</span></td><td data-label-es="1 mes" data-label-en="1 month"><span class="euro">6.000 €</span></td></tr>
+        <tr><td><a class="car-cell" href="alquiler-audi-rs6-avant-barcelona.html">Audi RS 6 Avant<small>Deportivo · 600 CV</small></a></td><td data-label-es="1 día" data-label-en="1 day"><span class="euro">500 €</span></td><td data-label-es="1 semana" data-label-en="1 week"><span class="euro">2.800 €</span></td><td data-label-es="15 días" data-label-en="15 days"><span data-es>Consúltanos</span><span data-en>On request</span></td><td data-label-es="1 mes" data-label-en="1 month"><span class="euro">7.500 €</span></td></tr>
+        <tr><td><a class="car-cell" href="alquiler-alfa-romeo-stelvio-quadrifoglio-barcelona.html">Alfa Romeo Stelvio Quadrifoglio<small>SUV · 510 CV</small></a></td><td data-label-es="1 día" data-label-en="1 day"><span class="euro">500 €</span></td><td data-label-es="1 semana" data-label-en="1 week"><span class="euro">2.296 €</span></td><td data-label-es="15 días" data-label-en="15 days"><span data-es>Consúltanos</span><span data-en>On request</span></td><td data-label-es="1 mes" data-label-en="1 month"><span class="euro">4.500 €</span></td></tr>
+        <tr><td><a class="car-cell" href="alquiler-porsche-718-spyder-barcelona.html">Porsche 718 Spyder<small>Descapotable · 420 CV</small></a></td><td data-label-es="1 día" data-label-en="1 day"><span class="euro">450 €</span></td><td data-label-es="1 semana" data-label-en="1 week"><span class="euro">2.000 €</span></td><td data-label-es="15 días" data-label-en="15 days"><span class="euro">2.500 €</span></td><td data-label-es="1 mes" data-label-en="1 month"><span class="euro">5.500 €</span></td></tr>
+        <tr><td><a class="car-cell" href="alquiler-audi-rs-q3-barcelona.html">Audi RS Q3<small>SUV · 400 CV</small></a></td><td data-label-es="1 día" data-label-en="1 day"><span class="euro">450 €</span></td><td data-label-es="1 semana" data-label-en="1 week"><span class="euro">2.000 €</span></td><td data-label-es="15 días" data-label-en="15 days"><span data-es>Consúltanos</span><span data-en>On request</span></td><td data-label-es="1 mes" data-label-en="1 month"><span class="euro">5.000 €</span></td></tr>
+        <tr><td><a class="car-cell" href="alquiler-audi-rsq3-sportback-barcelona.html">Audi RS Q3 Sportback<small>SUV · 400 CV</small></a></td><td data-label-es="1 día" data-label-en="1 day"><span class="euro">450 €</span></td><td data-label-es="1 semana" data-label-en="1 week"><span class="euro">2.000 €</span></td><td data-label-es="15 días" data-label-en="15 days"><span data-es>Consúltanos</span><span data-en>On request</span></td><td data-label-es="1 mes" data-label-en="1 month"><span class="euro">5.000 €</span></td></tr>
+        <tr><td><a class="car-cell" href="alquiler-audi-rs3-barcelona.html">Audi RS 3<small>Deportivo · 400 CV</small></a></td><td data-label-es="1 día" data-label-en="1 day"><span class="euro">450 €</span></td><td data-label-es="1 semana" data-label-en="1 week"><span class="euro">2.000 €</span></td><td data-label-es="15 días" data-label-en="15 days"><span data-es>Consúltanos</span><span data-en>On request</span></td><td data-label-es="1 mes" data-label-en="1 month"><span class="euro">5.000 €</span></td></tr>
+        <tr><td><a class="car-cell" href="alquiler-mercedes-amg-a45-s-barcelona.html">Mercedes-AMG A45 S<small>Deportivo · 425 CV</small></a></td><td data-label-es="1 día" data-label-en="1 day"><span class="euro">450 €</span></td><td data-label-es="1 semana" data-label-en="1 week"><span class="euro">2.000 €</span></td><td data-label-es="15 días" data-label-en="15 days"><span data-es>Consúltanos</span><span data-en>On request</span></td><td data-label-es="1 mes" data-label-en="1 month"><span class="euro">5.000 €</span></td></tr>
+        <tr><td><a class="car-cell" href="alquiler-audi-rs4-avant-barcelona.html">Audi RS 4 Avant<small>Deportivo · 450 CV</small></a></td><td data-label-es="1 día" data-label-en="1 day"><span class="euro">400 €</span></td><td data-label-es="1 semana" data-label-en="1 week"><span class="euro">2.100 €</span></td><td data-label-es="15 días" data-label-en="15 days"><span data-es>Consúltanos</span><span data-en>On request</span></td><td data-label-es="1 mes" data-label-en="1 month"><span class="euro">5.400 €</span></td></tr>
+        <tr><td><a class="car-cell" href="alquiler-volkswagen-golf-r-barcelona.html">Volkswagen Golf R<small>Deportivo · 333 CV</small></a></td><td data-label-es="1 día" data-label-en="1 day"><span class="euro">400 €</span></td><td data-label-es="1 semana" data-label-en="1 week"><span class="euro">1.800 €</span></td><td data-label-es="15 días" data-label-en="15 days"><span data-es>Consúltanos</span><span data-en>On request</span></td><td data-label-es="1 mes" data-label-en="1 month"><span class="euro">4.500 €</span></td></tr>
+        <tr><td><a class="car-cell" href="alquiler-maserati-levante-gransport-barcelona.html">Maserati Levante GranSport<small>SUV · 350 CV</small></a></td><td data-label-es="1 día" data-label-en="1 day"><span class="euro">300 €</span></td><td data-label-es="1 semana" data-label-en="1 week"><span class="euro">1.540 €</span></td><td data-label-es="15 días" data-label-en="15 days"><span data-es>Consúltanos</span><span data-en>On request</span></td><td data-label-es="1 mes" data-label-en="1 month"><span class="euro">3.600 €</span></td></tr>
+        <tr><td><a class="car-cell" href="alquiler-audi-a5-avant-barcelona.html">Audi A5 Avant<small>Lujo · 204 CV</small></a></td><td data-label-es="1 día" data-label-en="1 day"><span class="euro">300 €</span></td><td data-label-es="1 semana" data-label-en="1 week"><span class="euro">1.800 €</span></td><td data-label-es="15 días" data-label-en="15 days"><span data-es>Consúltanos</span><span data-en>On request</span></td><td data-label-es="1 mes" data-label-en="1 month"><span class="euro">5.000 €</span></td></tr>
+        <tr><td><a class="car-cell" href="alquiler-porsche-cayenne-gts-coupe-barcelona.html">Porsche Cayenne GTS Coupé<small>SUV · 460 CV</small></a></td><td data-label-es="1 día" data-label-en="1 day"><span data-es>Consúltanos</span><span data-en>On request</span></td><td data-label-es="1 semana" data-label-en="1 week"><span data-es>Consúltanos</span><span data-en>On request</span></td><td data-label-es="15 días" data-label-en="15 days"><span data-es>Consúltanos</span><span data-en>On request</span></td><td data-label-es="1 mes" data-label-en="1 month"><span class="euro">5.940 €</span></td></tr>
+        <tr><td><a class="car-cell" href="alquiler-bmw-m135i-xdrive-barcelona.html">BMW M135i xDrive<small>Deportivo · 306 CV</small></a></td><td data-label-es="1 día" data-label-en="1 day"><span class="euro">250 €</span></td><td data-label-es="1 semana" data-label-en="1 week"><span class="euro">1.400 €</span></td><td data-label-es="15 días" data-label-en="15 days"><span data-es>Consúltanos</span><span data-en>On request</span></td><td data-label-es="1 mes" data-label-en="1 month"><span class="euro">3.500 €</span></td></tr>
+        <tr><td><a class="car-cell" href="alquiler-mercedes-c220d-cabrio-barcelona.html">Mercedes C 220 d Cabrio<small>Descapotable · 194 CV</small></a></td><td data-label-es="1 día" data-label-en="1 day"><span class="euro">250 €</span></td><td data-label-es="1 semana" data-label-en="1 week"><span class="euro">1.400 €</span></td><td data-label-es="15 días" data-label-en="15 days"><span data-es>Consúltanos</span><span data-en>On request</span></td><td data-label-es="1 mes" data-label-en="1 month"><span class="euro">3.500 €</span></td></tr>
+        <tr><td><a class="car-cell" href="alquiler-abarth-595-competizione-barcelona.html">Abarth 595 Competizione<small>Deportivo · 180 CV</small></a></td><td data-label-es="1 día" data-label-en="1 day"><span class="euro">120 €</span></td><td data-label-es="1 semana" data-label-en="1 week"><span class="euro">700 €</span></td><td data-label-es="15 días" data-label-en="15 days"><span data-es>Consúltanos</span><span data-en>On request</span></td><td data-label-es="1 mes" data-label-en="1 month"><span class="euro">1.740 €</span></td></tr>
+    <!-- BUILD:RATES-STATIC:END --></tbody>
       </table>
     </div>
     <div class="rates-note">
@@ -153,7 +232,7 @@
         </div>
       </div>
       <div class="foot-col">
-        <h5><span data-es>Flota</span><span data-en>Fleet</span></h5>
+        <p class="foot-h"><span data-es>Flota</span><span data-en>Fleet</span></p>
         <a href="fleet.html?cat=Deportivo"><span data-es>Deportivos</span><span data-en>Sports</span></a>
         <a href="fleet.html?cat=Descapotable"><span data-es>Descapotables</span><span data-en>Convertibles</span></a>
         <a href="fleet.html?cat=SUV">SUV</a>
@@ -161,14 +240,14 @@
         <a href="rates.html"><span data-es>Ver tarifas</span><span data-en>View rates</span></a>
       </div>
       <div class="foot-col">
-        <h5><span data-es>Enlaces</span><span data-en>Links</span></h5>
+        <p class="foot-h"><span data-es>Enlaces</span><span data-en>Links</span></p>
         <a href="how.html"><span data-es>Cómo funciona</span><span data-en>How it works</span></a>
         <a href="why.html"><span data-es>Por qué Serres</span><span data-en>Why Serres</span></a>
         <a href="https://serreswrapcenter.es/" target="_blank" rel="noopener">Serres Wrap Center</a>
         <a href="https://www.instagram.com/sicurcars/" target="_blank" rel="noopener"><span data-es>Flota · Sicurcars</span><span data-en>Fleet · Sicurcars</span></a>
       </div>
       <div class="foot-col">
-        <h5><span data-es>Contacto</span><span data-en>Contact</span></h5>
+        <p class="foot-h"><span data-es>Contacto</span><span data-en>Contact</span></p>
         <a href="tel:+34621244469">+34 621 24 44 69</a>
         <a href="mailto:info@serreswrapcenter.es">info@serreswrapcenter.es</a>
         <a href="https://www.google.com/maps/search/?api=1&query=Serres+Wrap+Center+Sant+Cugat+del+Vall%C3%A8s" target="_blank" rel="noopener">Av. Can Fatjó dels Aurons, 15<br>08174 Sant Cugat del Vallès</a>
@@ -185,9 +264,9 @@
 
 <a class="wa-float" id="wa-float" href="#" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.04 3C9.4 3 4 8.4 4 15.04c0 2.12.56 4.18 1.62 6L4 29l8.16-1.58a12 12 0 0 0 3.88.64C22.7 28.06 28.1 22.66 28.1 16.02 28.1 8.4 22.68 3 16.04 3Zm0 21.9c-1.18 0-2.34-.22-3.43-.66l-.25-.1-4.84.94.97-4.72-.16-.25a9.74 9.74 0 0 1-1.49-5.18c0-5.4 4.4-9.8 9.83-9.8 5.4 0 9.8 4.4 9.8 9.8 0 5.4-4.4 9.8-9.82 9.8Zm5.39-7.33c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.66.15-.2.3-.76.96-.93 1.15-.17.2-.34.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.3-.02-.46.13-.61.13-.13.3-.34.45-.51.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.66-1.6-.9-2.18-.24-.58-.48-.5-.66-.5l-.56-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.22 3.08.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.08 1.75-.71 2-1.4.25-.69.25-1.28.17-1.4-.07-.13-.27-.2-.57-.35Z"/></svg></a>
 
-<script src="js/fleet.js?v=20260721c"></script>
-<script src="js/app.js?v=20260721c"></script>
-<script src="js/nav-ink.js?v=20260721c"></script>
-<script src="js/transitions.js?v=20260721c"></script>
+<script src="js/fleet.js?v=20260721d"></script>
+<script src="js/app.js?v=20260721d"></script>
+<script src="js/nav-ink.js?v=20260721d"></script>
+<script src="js/transitions.js?v=20260721d"></script>
 </body>
 </html>

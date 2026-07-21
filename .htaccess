@@ -1,0 +1,43 @@
+# =====================================================================
+# SERRES DRIVE — .htaccess (Hostinger / LiteSpeed)
+# Canonical-host + legacy-URL redirects, branded 404, cache policy.
+# Deployed from the GitHub repo like everything else.
+# =====================================================================
+
+RewriteEngine On
+
+# --- one canonical host: www → apex (301) -----------------------------
+# Without this, www.serresdrive.com serves the whole site with 200 and
+# splits crawl + link equity across two hostnames.
+RewriteCond %{HTTP_HOST} ^www\.serresdrive\.com$ [NC]
+RewriteRule ^(.*)$ https://serresdrive.com/$1 [R=301,L]
+
+# --- /index.html → / (301) --------------------------------------------
+# THE_REQUEST guard: only redirect direct requests, never an internally
+# rewritten one (avoids loops with DirectoryIndex).
+RewriteCond %{THE_REQUEST} \s/index\.html[?\s] [NC]
+RewriteRule ^index\.html$ / [R=301,L]
+
+# --- legacy car URLs: car.html?slug=X → /alquiler-X-barcelona.html ----
+# The query-param fichas are replaced by pre-generated static pages
+# (tools/build-seo-pages.js). One generic rule covers every slug; an
+# unknown slug 301s to a URL that 404s into the branded 404 page, which
+# is the correct signal for a car that no longer exists.
+RewriteCond %{QUERY_STRING} ^slug=([a-zA-Z0-9-]+)$
+RewriteRule ^car\.html$ /alquiler-%1-barcelona.html? [R=301,L]
+
+# --- branded 404 ------------------------------------------------------
+ErrorDocument 404 /404.html
+
+# --- caching ----------------------------------------------------------
+# Static assets are referenced with ?v= cache-busters (bumped on every
+# change per the deploy convention), so they can be immutable for a year.
+# HTML/XML must revalidate so deploys are visible immediately.
+<IfModule mod_headers.c>
+  <FilesMatch "\.(css|js|jpg|jpeg|png|webp|avif|svg|mp4|glb|woff|woff2|ico)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "\.(html|xml|txt)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>

@@ -15,7 +15,8 @@ window.SERRES_MEDIA = {
   "audi-rs6-avant":            ["2026-05-26_DY0Q91JN29-.jpg"],
   "audi-rs3":                  ["2026-05-17_DYc8A-dN9E3.jpg"],
   "porsche-911-carrera-992":   ["2026-05-10_DYKxvRLDb-7.jpg", "2026-02-20_DU-RvxBDoDm.jpg"],
-  "porsche-911-targa-gts":     ["2026-05-06_DYAeFsqjRWl.jpg"],
+  /* porsche-911-targa-gts removed: 2026-05-06_DYAeFsqjRWl.jpg is actually a
+     Mercedes C220 Cabrio poster (visually verified) — wrong car, wrong price. */
   "porsche-cayenne-turbo-gt":  ["2026-04-23_DXe_yzLDf4H.jpg"],
   "audi-rsq3-sportback":       ["2026-04-15_DXKhJ8UDTKH.jpg", "2026-03-13_DV08YVODvdx.jpg", "2026-02-27_DVRT_hDjSAV.jpg"],
   "mercedes-amg-g63":          ["2026-04-10_DW9XTMvjaXY.jpg", "2026-03-05_DVg0NxTDWMO.jpg"],

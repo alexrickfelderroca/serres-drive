@@ -54,6 +54,12 @@
   letter-spacing:-.01em;line-height:.9;white-space:nowrap;
   color:var(--white);
 }
+/* the make, as a small eyebrow above the big model name — keeps the heading
+   (and its link's anchor text) "Lamborghini Urus" instead of a bare "Urus" */
+.fc-slide .fc-title .fc-brand{
+  display:block;font-size:clamp(.72rem,1.8vw,1.05rem);font-weight:600;
+  letter-spacing:.32em;color:var(--gold);margin-bottom:.5em;
+}
 
 /* Character spans created by featured.js. inline-block so transforms
    apply; spaces are emitted as NBSP so they keep their width. */

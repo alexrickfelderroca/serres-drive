@@ -422,6 +422,18 @@ section{position:relative}
 .fleet-empty{text-align:center;color:var(--text-mute);padding:60px 0;font-family:var(--font-head);text-transform:uppercase;letter-spacing:.1em}
 .hidden{display:none!important}
 
+/* Static, crawlable fleet list (generated into fleet.html by
+   tools/build-seo-pages.js). fleet-gallery.js replaces it wholesale on init,
+   so with JS this exists only for the first paint-frames; without JS it is
+   the fleet — keep it a clean, readable list of links. */
+.fleet-static{display:flex;flex-direction:column;gap:2px;padding:0}
+.fleet-static a{
+  display:block;padding:14px 16px;border:1px solid var(--line);border-radius:var(--radius-sm);
+  background:var(--bg-2);color:var(--text-dim);font-size:.96rem;
+  transition:color .25s,border-color .25s;
+}
+.fleet-static a:hover{color:var(--white);border-color:var(--line-strong)}
+
 /* ---------- Tarifas table ---------- */
 .rates-panel{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--bg-2)}
 .rates-scroll{overflow-x:auto}
@@ -512,6 +524,19 @@ table.rates tbody tr:hover td:first-child{background:#141419}
 }
 .rates-note .k{color:var(--gold);font-family:var(--font-head);text-transform:uppercase;letter-spacing:.08em;margin-right:6px}
 
+/* ---------- FAQ (how.html) ---------- */
+.faq-list{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.faq-item{
+  background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius-sm);
+  padding:22px 24px;
+}
+.faq-item h3{
+  font-family:var(--font-head);text-transform:uppercase;font-size:1.12rem;
+  letter-spacing:.01em;margin-bottom:8px;color:var(--white);
+}
+.faq-item p{color:var(--text-dim);font-size:.95rem}
+@media (max-width:780px){.faq-list{grid-template-columns:1fr}}
+
 /* ---------- Steps ---------- */
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;counter-reset:s}
 .step{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius);padding:26px 22px;position:relative;overflow:hidden}
@@ -531,7 +556,7 @@ table.rates tbody tr:hover td:first-child{background:#141419}
 .feat:hover{border-color:var(--line-strong);transform:translateX(4px)}
 .feat .f-ic{width:40px;height:40px;flex:none;border-radius:10px;display:grid;place-items:center;color:var(--gold);border:1px solid var(--line-2)}
 .feat .f-ic svg{width:20px;height:20px}
-.feat h4{font-family:var(--font-head);text-transform:uppercase;font-size:1.15rem;letter-spacing:.01em;margin-bottom:3px}
+.feat h4,.feat .feat-h{font-family:var(--font-head);text-transform:uppercase;font-size:1.15rem;letter-spacing:.01em;margin-bottom:3px}
 .feat p{color:var(--text-dim);font-size:.9rem}
 .split-visual{position:relative;aspect-ratio:4/5;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);
   background:
@@ -556,7 +581,10 @@ table.rates tbody tr:hover td:first-child{background:#141419}
 .foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:40px}
 .foot-brand .brand{--brand-h:1.24rem;margin-bottom:16px}
 .foot-brand p{color:var(--text-dim);font-size:.94rem;max-width:34ch}
-.foot-col h5{font-family:var(--font-head);text-transform:uppercase;letter-spacing:.14em;font-size:.82rem;color:var(--gold);margin-bottom:16px}
+/* .foot-h replaced the old h5s: the column labels are navigation labels, not
+   document sections — as h5 they sat in every page's heading outline with no
+   h3/h4 ancestors. Same look, no outline entry. */
+.foot-col h5,.foot-col .foot-h{font-family:var(--font-head);text-transform:uppercase;letter-spacing:.14em;font-size:.82rem;color:var(--gold);margin-bottom:16px}
 .foot-col a,.foot-col p{display:block;color:var(--text-dim);font-size:.94rem;padding:5px 0;transition:color .25s}
 .foot-col a:hover{color:var(--white)}
 .foot-social{display:flex;gap:10px;margin-top:6px}

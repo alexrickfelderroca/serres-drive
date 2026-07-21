@@ -67,11 +67,18 @@
      "Urus", never "U r u s". Spaces become NBSP: inline-block spans would
      otherwise collapse them to zero width. */
   function splitChars(title) {
+    /* The h2 may carry a leading .fc-brand span (the make, kept small for
+       SEO-meaningful headings) - preserve it whole and cascade only the
+       model-name text after it. aria-label carries the intact full name so
+       heading navigation announces "Lamborghini Urus", never char soup. */
+    var brand = title.querySelector(".fc-brand");
+    if (brand) brand.parentNode.removeChild(brand);
     var text = title.textContent || "";
     var frag = document.createDocumentFragment();
     var chars = [], i, s, ch;
-    title.setAttribute("aria-label", text);
+    title.setAttribute("aria-label", (brand ? brand.textContent + " " : "") + text);
     title.textContent = "";
+    if (brand) title.appendChild(brand);
     for (i = 0; i < text.length; i++) {
       ch = text.charAt(i);
       s = document.createElement("span");

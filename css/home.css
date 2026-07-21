@@ -38,11 +38,18 @@ html.lenis, .lenis.lenis-smooth { scroll-behavior: auto !important; }
     var(--bg);
 }
 
-/* fixed WebGL stage — the GT3 RS tumbles here, in front of the copy */
-.home-exp .sd-model{position:fixed;inset:0;height:100svh;width:100%;z-index:3;
+/* fixed WebGL stage — the GT3 RS tumbles here, BEHIND the copy: the headline
+   and the glass CTAs read over the car, and the buttons' backdrop-filter picks
+   the car up through the blur */
+.home-exp .sd-model{position:fixed;inset:0;height:100svh;width:100%;z-index:1;
   pointer-events:none;opacity:0;transition:opacity .8s var(--ease)}
 .home-exp .sd-model.is-live{opacity:1}
 .home-exp .sd-model canvas{display:block;width:100%!important;height:100%!important}
+/* While the ring is interactive the canvas must come back above the (empty)
+   .oa-choose section to receive the drag — pointerdown is bound to the mount,
+   so behind the copy it would never be hit. Nothing readable is covered: the
+   choose head/grid are hidden under .sd-home and the fixed chrome sits at z5. */
+.home-exp .sd-model.is-interactive{z-index:3}
 
 /* static GT3 poster (before/without WebGL) — sits BEHIND the copy so the
    headline stays readable in the reduced-motion / no-JS fail-safe */
@@ -52,13 +59,17 @@ html.lenis, .lenis.lenis-smooth { scroll-behavior: auto !important; }
 /* once the live car has loaded, the poster stays hidden (incl. the outro fade) */
 .home-exp.car-loaded .sd-fallback{opacity:0}
 
-/* the copy sits above the backdrop + poster, below the live car canvas */
+/* the copy sits above everything fixed — backdrop, poster AND the live car —
+   so the Porsche always reads through/behind the letters, never over them */
 .home-exp .oa-exp{position:relative;z-index:2;color:var(--text)}
 .home-exp .oa-exp section{width:100vw;min-height:100vh}
 
 /* ---------- shared type ---------- */
+/* The silver GT3 now tumbles BEHIND these letters; the soft dark halo keeps
+   the headline legible whenever a bright panel of the car passes under it. */
 .home-exp .oa-exp h1{font-family:var(--font-head);font-weight:700;text-transform:uppercase;
-  line-height:.84;letter-spacing:-.015em;font-size:clamp(2.8rem,12.5vw,11rem);white-space:nowrap}
+  line-height:.84;letter-spacing:-.015em;font-size:clamp(2.8rem,12.5vw,11rem);white-space:nowrap;
+  text-shadow:0 4px 34px rgba(0,0,0,.55),0 1px 8px rgba(0,0,0,.35)}
 .home-exp .oa-exp p{font-family:var(--font-body);font-size:13px;line-height:1.35;color:var(--text)}
 
 /* =====================================================================
@@ -66,12 +77,59 @@ html.lenis, .lenis.lenis-smooth { scroll-behavior: auto !important; }
    ===================================================================== */
 .home-exp .oa-intro{display:flex;flex-direction:column;justify-content:center;
   gap:.1em;padding:calc(var(--nav-h) + 2vh) clamp(18px,4vw,48px) 4vh}
+/* ONE h1 wraps the staggered rows (it used to be three h1 fragments — a
+   broken heading outline and no "Barcelona" anywhere in the page's h1). */
+.home-exp .oa-title{display:flex;flex-direction:column;gap:.1em}
 .home-exp .oa-row{display:flex;gap:clamp(2em,10vw,12em);align-items:center}
 .home-exp .oa-row:nth-child(1){padding-left:0}
 .home-exp .oa-row:nth-child(2){padding-left:clamp(0px,5vw,9vw)}
 .home-exp .oa-row:nth-child(3){padding-left:clamp(0px,11vw,20vw)}
-/* the two hero CTAs under the headline (Reserva tu vehículo / Wrap Center) */
+/* the geo row completes the query ("…en Barcelona") without shouting —
+   smaller, silver, tracked out, continuing the stagger */
+.home-exp .oa-row.oa-row-geo{padding-left:clamp(0px,17vw,30vw);
+  font-size:clamp(1.05rem,3.4vw,2.4rem);letter-spacing:.22em;
+  color:var(--gold);margin-top:.28em}
+/* the hero CTAs under the headline (Reserva / Ver la flota / Wrap Center) */
 .home-exp .oa-intro-cta{margin-top:clamp(1.4em,4.5vh,2.6em)}
+
+/* Frosted-glass hero CTAs — the Porsche renders behind the copy, so the
+   buttons are see-through: a faint white fill + backdrop blur that picks the
+   car up as it tumbles past. Overrides .btn.gold's opaque chrome gradient
+   (this selector out-specifies it) so all three read as one glass family;
+   the primary keeps a brighter fill + border for hierarchy. */
+.home-exp .oa-intro-cta .btn{
+  border-color:rgba(255,255,255,.26);
+  color:var(--white);
+  background:rgba(255,255,255,.07);
+  -webkit-backdrop-filter:blur(18px) saturate(170%);
+  backdrop-filter:blur(18px) saturate(170%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.22),
+             inset 0 -1px 0 rgba(255,255,255,.05),
+             0 18px 44px -24px rgba(0,0,0,.9);
+}
+.home-exp .oa-intro-cta .btn svg{color:var(--white)}
+.home-exp .oa-intro-cta .btn:hover{
+  background:rgba(255,255,255,.14);
+  border-color:rgba(255,255,255,.42);
+  color:var(--white);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.3),
+             0 22px 52px -22px rgba(0,0,0,.95);
+}
+.home-exp .oa-intro-cta .btn.gold{
+  background:rgba(255,255,255,.13);
+  border-color:rgba(255,255,255,.44);
+  font-weight:700;
+}
+.home-exp .oa-intro-cta .btn.gold:hover{
+  background:rgba(255,255,255,.2);
+  border-color:rgba(255,255,255,.62);
+}
+/* No backdrop-filter (older Safari/Firefox): a slightly stronger flat fill so
+   the labels stay readable over the bright car without any blur behind them. */
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .home-exp .oa-intro-cta .btn{background:rgba(14,15,19,.62)}
+  .home-exp .oa-intro-cta .btn.gold{background:rgba(255,255,255,.16)}
+}
 
 /* =====================================================================
    COLLECTION — muted names scroll past the tumbling car

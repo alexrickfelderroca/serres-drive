@@ -141,7 +141,7 @@
     var card = el(
       '<article class="car" data-cat="' + car.category + '">' +
         '<div class="car-media">' +
-          '<img loading="lazy" alt="' + name + '" src="' + jpg + '" ' +
+          '<img loading="lazy" alt="' + name + (lang === "en" ? " for rent in Barcelona" : " de alquiler en Barcelona") + '" src="' + jpg + '" ' +
                'onerror="this.onerror=null;this.src=\'' + ph + '\'">' +
           '<span class="car-cat">' + (lang === "en" ? engCat(car.category) : car.category) + '</span>' +
           (car.featured ? '<span class="car-fav">★ ' + (lang === "en" ? "Top pick" : "Destacado") + '</span>' : '') +
@@ -251,9 +251,11 @@
       // linearises into per-car cards (styles.css) and each price row prints
       // its own column header via td::before{content:attr(data-label-*)},
       // language picked by the same html[lang] switch as everything else.
+      // The car name links to its own page (internal link equity + a way to
+      // the full ficha); tapping anywhere else on the row still opens WhatsApp.
       var row = el(
         '<tr style="cursor:pointer" title="' + tr("reserve") + ' · ' + car.name + '">' +
-          '<td><a class="car-cell" href="' + waHref + '" target="_blank" rel="noopener">' + car.name +
+          '<td><a class="car-cell" href="alquiler-' + car.slug + '-barcelona.html">' + car.name +
             '<small>' + (lang === "en" ? engCat(car.category) : car.category) + ' · ' + car.powerCv + ' ' + cv() + '</small></a></td>' +
           '<td data-label-es="1 día" data-label-en="1 day"><span class="euro">' + eur(car.prices.d1) + '</span></td>' +
           '<td data-label-es="1 semana" data-label-en="1 week"><span class="euro">' + eur(car.prices.w1) + '</span></td>' +

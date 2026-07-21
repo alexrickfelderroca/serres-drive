@@ -178,13 +178,14 @@
     var accent = /^#[0-9a-f]{3,8}$/i.test(String(car.accent || "")) ? car.accent : "";
     var path = encodeURIComponent(slug);
 
-    return '<a class="fg-panel" href="car.html?slug=' + path + '"' +
+    return '<a class="fg-panel" href="alquiler-' + path + '-barcelona.html"' +
              (accent ? ' style="--fg-accent:' + esc(accent) + '"' : '') + '>' +
              '<span class="fg-media">' +
-               /* Decorative: the model name is already the link's own text in
-                  .fg-name, and opacity:0 does not hide it from the a11y tree,
-                  so an alt here would make the name announce twice. */
-               '<img class="fg-img" alt="" loading="lazy" decoding="async"' +
+               /* The alt deliberately does NOT repeat the model name (that is
+                  already the link's own text in .fg-name) — it adds the rental
+                  + location context, so image search gets a signal and screen
+                  readers hear complementary rather than duplicate text. */
+               '<img class="fg-img" alt="' + (document.documentElement.lang === "en" ? name + " for rent in Barcelona" : "Alquiler de " + name + " en Barcelona") + '" loading="lazy" decoding="async"' +
                     ' data-src1="assets/img/cars/' + path + '.jpg"' +
                     ' data-src2="assets/img/cars/ring/' + path + '.jpg">' +
              '</span>' +

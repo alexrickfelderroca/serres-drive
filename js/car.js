@@ -89,41 +89,79 @@
     return '<svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16.04 3C9.4 3 4 8.4 4 15.04c0 2.12.56 4.18 1.62 6L4 29l8.16-1.58a12 12 0 0 0 3.88.64C22.7 28.06 28.1 22.66 28.1 16.02 28.1 8.4 22.68 3 16.04 3Zm5.39 14.57c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.66.15-.2.3-.76.96-.93 1.15-.17.2-.34.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.3-.02-.46.13-.61.13-.13.3-.34.45-.51.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.66-1.6-.9-2.18-.24-.58-.48-.5-.66-.5l-.56-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.22 3.08.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.08 1.75-.71 2-1.4.25-.69.25-1.28.17-1.4-.07-.13-.27-.2-.57-.35Z"/></svg>';
   }
 
-  /* SEO: describe the rendered car as a schema.org Product. Built with
-     JSON.stringify from the car object — never concatenated into the JSON —
-     and re-injected on every render (soft navigation between car pages
-     re-renders, so the previous copy is removed first via its id). */
+  /* SEO: describe the rendered car as schema.org Product+Car with every
+     published price tier, plus its BreadcrumbList — one @graph block, built
+     with JSON.stringify from the car object (never concatenated into the
+     JSON) and re-injected on every render (soft navigation between car pages
+     re-renders, so the previous copy is removed first via its id).
+     The canonical URL of a car is its pre-generated static page
+     (alquiler-<slug>-barcelona.html, built by tools/build-seo-pages.js);
+     legacy car.html?slug= views canonicalize there too, consolidating any
+     equity the old query URLs collected. */
   var SITE = "https://serresdrive.com/";
+  function carUrl(slug) { return "alquiler-" + slug + "-barcelona.html"; }
+  var DRIVE_CFG = {
+    RWD: "https://schema.org/RearWheelDriveConfiguration",
+    AWD: "https://schema.org/AllWheelDriveConfiguration",
+    FWD: "https://schema.org/FrontWheelDriveConfiguration"
+  };
   function injectJsonLd(car) {
     var prev = document.getElementById("car-jsonld");
     if (prev && prev.parentNode) prev.parentNode.removeChild(prev);
 
-    var pageUrl = SITE + "car.html?slug=" + encodeURIComponent(car.slug);
+    var pageUrl = SITE + carUrl(car.slug);
+    // Every published tier, not just the daily rate — four cars have no d1
+    // and an Offer without a price fails Google's Product requirements.
+    var TIERS = [["d1", 1, "DAY"], ["w1", 1, "WEE"], ["d15", 15, "DAY"], ["m1", 1, "MON"]];
+    var specs = TIERS.filter(function (t) { return car.prices && car.prices[t[0]] != null; })
+      .map(function (t) {
+        return {
+          "@type": "UnitPriceSpecification",
+          "price": car.prices[t[0]],
+          "priceCurrency": "EUR",
+          "referenceQuantity": { "@type": "QuantitativeValue", "value": t[1], "unitCode": t[2] }
+        };
+      });
     var offer = {
       "@type": "Offer",
       "url": pageUrl,
       "priceCurrency": "EUR",
       "availability": "https://schema.org/InStock",
-      "seller": { "@type": "AutoRental", "name": "Serres Drive" }
+      "seller": { "@id": SITE + "#business" }
     };
-    if (car.prices && car.prices.d1 != null) {
-      offer.priceSpecification = {
-        "@type": "UnitPriceSpecification",
-        "price": car.prices.d1,
-        "priceCurrency": "EUR",
-        "referenceQuantity": { "@type": "QuantitativeValue", "value": 1, "unitCode": "DAY" }
-      };
-    }
-    var data = {
-      "@context": "https://schema.org",
-      "@type": "Product",
+    if (specs.length) { offer.price = specs[0].price; offer.priceSpecification = specs; }
+
+    var nm = splitName(car.name);
+    var product = {
+      "@type": ["Product", "Car"],
+      "@id": pageUrl + "#car",
       "name": car.name,
       "brand": { "@type": "Brand", "name": car.brand },
+      "model": nm.model || car.name,
+      "vehicleModelDate": String(car.year),
+      "bodyType": car.bodyType,
+      "vehicleTransmission": car.transmission,
+      "driveWheelConfiguration": DRIVE_CFG[car.drivetrain] || car.drivetrain,
+      "seatingCapacity": car.seats,
+      "fuelType": car.fuel,
+      "vehicleEngine": {
+        "@type": "EngineSpecification",
+        "enginePower": { "@type": "QuantitativeValue", "value": car.powerCv, "unitText": "CV" }
+      },
       "image": SITE + "assets/img/cars/" + encodeURIComponent(car.slug) + ".jpg",
       "url": pageUrl,
-      "description": car.taglineEs || "",
+      "description": (isEn() && car.taglineEn) ? car.taglineEn : (car.taglineEs || ""),
       "offers": offer
     };
+    var crumbs = {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": SITE },
+        { "@type": "ListItem", "position": 2, "name": "Flota", "item": SITE + "fleet.html" },
+        { "@type": "ListItem", "position": 3, "name": car.name, "item": pageUrl }
+      ]
+    };
+    var data = { "@context": "https://schema.org", "@graph": [product, crumbs] };
 
     var s = document.createElement("script");
     s.type = "application/ld+json";
@@ -131,15 +169,15 @@
     s.textContent = JSON.stringify(data);
     document.head.appendChild(s);
 
-    // Keep the canonical — and its og twins — in step with the rendered car
-    // so the slug URLs in sitemap.xml are not all collapsed into the bare
-    // car.html shell, and the rendered head stays self-consistent.
+    // Keep the canonical — and its og twins — in step with the rendered car:
+    // on the static pages this is a no-op (the baked head already says it),
+    // on legacy car.html?slug= views it consolidates onto the static URL.
     var canon = document.querySelector('link[rel="canonical"]');
     if (canon) canon.setAttribute("href", pageUrl);
     var ogu = document.querySelector('meta[property="og:url"]');
     if (ogu) ogu.setAttribute("content", pageUrl);
     var ogt = document.querySelector('meta[property="og:title"]');
-    if (ogt) ogt.setAttribute("content", car.name + " · SERRES DRIVE");
+    if (ogt) ogt.setAttribute("content", "Alquiler " + car.name + " en Barcelona · SERRES DRIVE");
   }
 
   function render(car) {
@@ -159,14 +197,14 @@
     var heroHtml =
       '<a class="back-link" href="fleet.html">' + svg('<path d="M19 12H5M11 6l-6 6 6 6"/>', 2) + lbl("Volver a la flota", "Back to the fleet") + '</a>' +
       '<nav class="breadcrumb" aria-label="Ruta" style="margin:8px 0 4px">' +
-        '<a href="index.html">' + lbl("Inicio", "Home") + '</a><span class="sep">/</span>' +
+        '<a href="/">' + lbl("Inicio", "Home") + '</a><span class="sep">/</span>' +
         '<a href="fleet.html">' + lbl("Flota", "Fleet") + '</a><span class="sep">/</span>' +
         '<span>' + esc(car.name) + '</span>' +
       '</nav>' +
       '<div class="car-hero">' +
         '<div class="car-hero-media">' +
           '<span class="car-hero-cat">' + lbl(esc(car.category), esc(engCat(car.category))) + '</span>' +
-          '<img alt="' + esc(car.name) + '" src="' + hero + '" onerror="' + imgOnErr + '">' +
+          '<img alt="' + esc(car.name) + (isEn() ? " for rent in Barcelona — Serres Drive" : " de alquiler en Barcelona — Serres Drive") + '" src="' + hero + '" onerror="' + imgOnErr + '">' +
         '</div>' +
         '<div class="car-hero-info">' +
           '<span class="eyebrow">' + lbl("Serres Drive · Barcelona", "Serres Drive · Barcelona") + '</span>' +
@@ -292,13 +330,34 @@
 
   function showFallback() {
     var fb = document.getElementById("carFallback");
-    if (fb) fb.classList.remove("hidden");
+    if (fb) {
+      fb.classList.remove("hidden");
+      // 'Coche no encontrado' otherwise returns 200 with thin content — a
+      // soft 404. Google honors JS-injected noindex at render time. Only on
+      // pages that actually have the fallback block (the car.html shell);
+      // soft-navigating to a non-car page must never noindex it.
+      if (!document.querySelector('meta[name="robots"]')) {
+        var m = document.createElement("meta");
+        m.name = "robots";
+        m.content = "noindex";
+        document.head.appendChild(m);
+      }
+    }
   }
 
   function boot() {
     var FLEET = window.SERRES_FLEET || [];
     var slug = "";
     try { slug = new URLSearchParams(location.search).get("slug") || ""; } catch (e) {}
+    // Static per-car pages carry the slug in their filename instead of the
+    // query string (alquiler-<slug>-barcelona.html) — works for hard loads
+    // and soft navigations alike, no inline script needed. Brand pages match
+    // the pattern too but their pseudo-slug is never in FLEET, and they have
+    // neither #carDetail nor #carFallback, so both branches no-op there.
+    if (!slug) {
+      var m = location.pathname.match(/(?:^|\/)alquiler-([a-z0-9-]+)-barcelona\.html$/i);
+      if (m) slug = m[1];
+    }
     var car = FLEET.filter(function (c) { return c.slug === slug; })[0];
     if (car) render(car); else showFallback();
   }
