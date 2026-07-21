@@ -2,11 +2,11 @@
    SERRES DRIVE — css/preloader.css
    "SERRES → DRIVE" split-overlay preloader.
 
-   Sequence: three tag words drift in → SERRES reveals character by
-   character out of per-glyph masks → DRIVE slides in to its right and
-   completes the lockup → the lockup tightens → tags leave → the overlay
-   splits through its horizontal centre (top half peels up, bottom half
-   peels down) and the untouched page is revealed underneath.
+   Sequence: a speed wipe lays the SERRES logotype down left to right →
+   DRIVE slides in to its right and completes the lockup → the lockup
+   tightens → the overlay splits through its horizontal centre (top half
+   peels up, bottom half peels down) and the untouched page is revealed
+   underneath.
 
    ---------------------------------------------------------------------
    WHY THE OVERLAY SPLITS INSTEAD OF THE PAGE BEING CLIPPED
@@ -262,9 +262,9 @@ html.pl-lock body{overflow:hidden}
 .pl--css .pl-word--serres{transition:clip-path 1.15s cubic-bezier(.65,0,.35,1)}
 .pl--css.is-serres .pl-word--serres{clip-path:inset(0% 0% 0% 0%)}
 
-/* t=2.3 — DRIVE arrives and the lockup re-centres around it */
+/* t=1.55 — DRIVE arrives and the lockup re-centres around it */
 .pl--css .pl-word--drive,
-.pl--css .pl-shift{transition:transform .9s cubic-bezier(.16,1,.3,1)}
+.pl--css .pl-shift{transition:transform .8s cubic-bezier(.16,1,.3,1)}
 .pl--css.is-drive .pl-word--drive{transform:translateX(0)}
 .pl--css.is-drive .pl-shift{transform:translateX(0)}
 

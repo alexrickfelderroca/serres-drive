@@ -3,15 +3,13 @@
    "SERRES → DRIVE" split-overlay preloader.
 
    TIMELINE (seconds)
-     0.0  three tag words drift in at scattered positions
-     0.5  SERRES reveals character by character out of per-glyph masks
-     2.3  DRIVE slides in to SERRES' right; the lockup re-centres around
+     0.2  the speed wipe lays the SERRES logotype down left to right
+     1.55 DRIVE slides in to SERRES' right; the lockup re-centres around
           the finished SERRES DRIVE wordmark
-     3.6  the assembled lockup settles — a slight scale-down/tighten
-     4.2  tag words leave the way they came
-     4.4  THE SPLIT — top half peels up, bottom half peels down, opening
+     2.7  the assembled lockup settles — a slight scale-down/tighten
+     3.3  THE SPLIT — top half peels up, bottom half peels down, opening
           a letterbox slit at the centre (1s, "hop" cubic-bezier)
-     5.4  overlay removed, scroll handed back
+     4.3  overlay removed, scroll handed back
 
    ---------------------------------------------------------------------
    WHY THE OVERLAY SPLITS RATHER THAN THE PAGE BEING CLIPPED
@@ -54,7 +52,7 @@
      not wall-clock — two shader-compile stalls would otherwise let this
      fire mid-split. */
   var HARD_CAP   = 10000; // ms — watchdog; nothing may outlive this
-  /* Both gates below are pre-roll ON TOP of the 5.4s timeline, so they
+  /* Both gates below are pre-roll ON TOP of the 4.3s timeline, so they
      are what decide the worst case. */
   var FONT_CAP   = 500;   // ms — max wait for webfonts before measuring
   var ENGINE_CAP = 600;   // ms — max wait for the GSAP CDN (see whenEngineReady)

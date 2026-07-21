@@ -60,6 +60,13 @@
 
   /* ---------- helpers (js/app.js house style) ---------- */
   function abs(u) { var a = document.createElement("a"); a.href = u; return a.href; }
+  /* Identity of an asset for dedupe purposes: the URL WITHOUT its query.
+     Local css/js carry a ?v= cache-bust that changes on deploys. A visitor
+     holding a pre-deploy page in cache who soft-navigates to a post-deploy
+     page must not have app.js/nav-ink.js injected and run a SECOND time
+     (duplicate listeners → the burger opens-and-closes on one tap). The
+     query only matters to the HTTP cache, not to "is this script loaded". */
+  function assetKey(u) { return abs(u).split("?")[0]; }
   function parse(u) { var a = document.createElement("a"); a.href = u; return a; }
   function root() { return document.getElementById(ROOT_ID); }
   function once(fn) { var done = false; return function () { if (done) return; done = true; fn(); }; }
@@ -229,13 +236,13 @@
   function preloadStyles(doc, cb) {
     var have = {}, pending = 0, go = once(cb), i;
     var mine = document.querySelectorAll('link[rel~="stylesheet"][href]');
-    for (i = 0; i < mine.length; i++) have[abs(mine[i].getAttribute("href"))] = true;
+    for (i = 0; i < mine.length; i++) have[assetKey(mine[i].getAttribute("href"))] = true;
 
     var incoming = doc.querySelectorAll('link[rel~="stylesheet"][href]');
     for (i = 0; i < incoming.length; i++) {
       var href = abs(incoming[i].getAttribute("href"));
-      if (have[href]) continue;
-      have[href] = true;
+      if (have[assetKey(href)]) continue;
+      have[assetKey(href)] = true;
       pending++;
       var n = document.createElement("link");
       n.rel = "stylesheet";
@@ -253,12 +260,12 @@
   function pruneStyles(doc) {
     var want = {}, i, n, href;
     var incoming = doc.querySelectorAll('link[rel~="stylesheet"][href]');
-    for (i = 0; i < incoming.length; i++) want[abs(incoming[i].getAttribute("href"))] = true;
+    for (i = 0; i < incoming.length; i++) want[assetKey(incoming[i].getAttribute("href"))] = true;
 
     var mine = document.querySelectorAll("link[data-pt-injected]");
     for (i = mine.length - 1; i >= 0; i--) {
       n = mine[i];
-      href = abs(n.getAttribute("href") || "");
+      href = assetKey(n.getAttribute("href") || "");
       if (!want[href] && n.parentNode) n.parentNode.removeChild(n);
     }
   }
@@ -269,15 +276,15 @@
   function loadScripts(doc, cb) {
     var have = {}, go = once(cb), queue = [], i;
     var mine = document.querySelectorAll("script[src]");
-    for (i = 0; i < mine.length; i++) have[abs(mine[i].getAttribute("src"))] = true;
+    for (i = 0; i < mine.length; i++) have[assetKey(mine[i].getAttribute("src"))] = true;
 
     var incoming = doc.querySelectorAll("script[src]");
     for (i = 0; i < incoming.length; i++) {
       // type=module is experience.js only, and we never swap into that page.
       if (incoming[i].getAttribute("type") === "module") continue;
       var src = abs(incoming[i].getAttribute("src"));
-      if (have[src]) continue;
-      have[src] = true;
+      if (have[assetKey(src)]) continue;
+      have[assetKey(src)] = true;
       queue.push(src);
     }
     if (!queue.length) { go(); return; }
