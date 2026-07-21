@@ -1,0 +1,15 @@
+# The HTML files were a mix of CRLF and LF, so any script that rewrote one
+# produced a whole-file diff and buried the real change. Normalise text to LF
+# in the repository; editors on Windows still work fine with LF.
+* text=auto eol=lf
+
+# Binary — never touch these.
+*.jpg  binary
+*.jpeg binary
+*.png  binary
+*.webp binary
+*.mp4  binary
+*.glb  binary
+*.zip  binary
+*.woff  binary
+*.woff2 binary
