@@ -234,6 +234,16 @@ RewriteRule ^why\.html$ /por-que-serres/ [R=301,L]
 # stale ad spends its click on the fleet instead of a dead end.
 RewriteRule ^alquiler-[a-z0-9-]+-barcelona\.html$ /flota/ [R=301,L]
 
+# --- documentacion interna: nunca servirla -----------------------------
+# "seo y google ads/" (plan de campanas, keywords, presupuestos, TZ) entro
+# una vez en el repo por error. Se saco de git, pero el deploy de Hostinger
+# NO borro la carpeta del servidor — los archivos con espacios en la ruta
+# sobrevivieron a la sincronizacion. Se bloquea aqui para que deje de ser
+# accesible; borrarla del servidor por hPanel sigue pendiente.
+# "_build/" son los generadores: ninguna pagina los pide.
+RewriteRule "^seo y google ads(/|$)" - [R=404,L]
+RewriteRule "^_build(/|$)" - [R=404,L]
+
 # --- branded 404 -------------------------------------------------------
 ErrorDocument 404 /404.html
 
