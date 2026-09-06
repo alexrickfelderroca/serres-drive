@@ -1,0 +1,312 @@
+<title>Serres Drive SEO</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --bg: #EEF0F2; --surface: #FFFFFF; --ink: #15191D; --ink-2: #4B555E; --line: #D3D8DD;
+    --accent: #B8121F; --accent-ink: #8F0E18;
+    --code-bg: #1A1E23; --code-ink: #E6E9ED; --code-dim: #8C96A0;
+    --mark-bg: #FBE3E6; --mark-ink: #7A0B14; --th-bg: #E4E8EB;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #111417; --surface: #181C20; --ink: #E7EAED; --ink-2: #9AA4AD; --line: #2A3036;
+      --accent: #E5404D; --accent-ink: #F27C85;
+      --code-bg: #0B0D10; --code-ink: #DCE1E6; --code-dim: #7B8590;
+      --mark-bg: #3A171B; --mark-ink: #FFB3B9; --th-bg: #1F2429;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #111417; --surface: #181C20; --ink: #E7EAED; --ink-2: #9AA4AD; --line: #2A3036;
+    --accent: #E5404D; --accent-ink: #F27C85;
+    --code-bg: #0B0D10; --code-ink: #DCE1E6; --code-dim: #7B8590;
+    --mark-bg: #3A171B; --mark-ink: #FFB3B9; --th-bg: #1F2429;
+  }
+  body { background: var(--bg); color: var(--ink); font-family: "DM Sans", "Helvetica Neue", Arial, sans-serif; font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  .page { max-width: 880px; margin: 0 auto; padding: 40px 24px 96px; display: flex; flex-direction: column; gap: 56px; }
+  .mast { display: flex; flex-direction: column; gap: 18px; border-bottom: 2px solid var(--ink); padding-bottom: 28px; }
+  .eyebrow { font-family: "Barlow Condensed", "Arial Narrow", sans-serif; font-weight: 600; font-size: 14px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+  h1 { font-family: "Barlow Condensed", "Arial Narrow", sans-serif; font-weight: 700; font-size: clamp(38px, 6vw, 60px); line-height: .98; letter-spacing: -.01em; margin: 0; text-wrap: balance; max-width: 16ch; }
+  .sub { font-size: 18px; color: var(--ink-2); margin: 0; max-width: 60ch; }
+  .meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px 24px; margin-top: 8px; }
+  .meta div { border-top: 1px solid var(--line); padding-top: 8px; }
+  .meta dt { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); margin: 0 0 2px; }
+  .meta dd { margin: 0; font-weight: 500; }
+  .lead { font-size: 17px; max-width: 64ch; margin: 0; }
+  .lead strong { color: var(--accent-ink); }
+  .toc { background: var(--surface); border: 1px solid var(--line); padding: 20px 24px; }
+  .toc h2 { margin: 0 0 12px; }
+  .toc ol { margin: 0; padding: 0; list-style: none; columns: 2; column-gap: 32px; }
+  .toc li { break-inside: avoid; padding: 5px 0; border-bottom: 1px solid var(--line); }
+  .toc a { color: var(--ink); text-decoration: none; display: flex; gap: 12px; align-items: baseline; }
+  .toc a:hover, .toc a:focus-visible { color: var(--accent-ink); }
+  .toc .n { font-family: "JetBrains Mono", monospace; font-size: 13px; color: var(--accent); min-width: 2ch; text-align: right; }
+  section { display: flex; flex-direction: column; gap: 18px; scroll-margin-top: 24px; }
+  h2 { font-family: "Barlow Condensed", "Arial Narrow", sans-serif; font-weight: 700; font-size: 30px; line-height: 1.05; margin: 0; text-wrap: balance; display: flex; gap: 14px; align-items: baseline; }
+  h2 .n { font-family: "JetBrains Mono", monospace; font-size: 16px; font-weight: 500; color: var(--accent); }
+  h3 { font-family: "Barlow Condensed", "Arial Narrow", sans-serif; font-weight: 600; font-size: 21px; margin: 8px 0 0; letter-spacing: .01em; }
+  p { margin: 0; max-width: 68ch; }
+  ul, ol { margin: 0; padding-left: 22px; max-width: 68ch; display: flex; flex-direction: column; gap: 6px; }
+  li::marker { color: var(--ink-2); }
+  a { color: var(--accent-ink); }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .tbl { overflow-x: auto; border: 1px solid var(--line); background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: 15px; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { background: var(--th-bg); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); font-weight: 600; }
+  tr:last-child td { border-bottom: 0; }
+  td code, li code, p code, dd code { font-family: "JetBrains Mono", monospace; font-size: .88em; }
+  .ph { font-family: "JetBrains Mono", monospace; font-size: .88em; background: var(--mark-bg); color: var(--mark-ink); padding: 1px 5px; border-radius: 2px; white-space: nowrap; }
+  pre.code { background: var(--code-bg); color: var(--code-ink); font-family: "JetBrains Mono", monospace; font-size: 13.5px; line-height: 1.5; padding: 18px 20px; margin: 0; overflow-x: auto; border-left: 3px solid var(--accent); }
+  pre.code .c { color: var(--code-dim); }
+  pre.code .ph { background: transparent; color: #FFB4B9; padding: 0; text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 3px; }
+  .note { border-left: 3px solid var(--accent); padding: 4px 0 4px 16px; max-width: 68ch; }
+  .note strong { color: var(--accent-ink); }
+  .kpi { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+  .kpi div { background: var(--surface); border: 1px solid var(--line); padding: 12px 14px; }
+  .kpi b { display: block; font-family: "Barlow Condensed", "Arial Narrow", sans-serif; font-size: 28px; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; }
+  .kpi span { font-size: 13px; color: var(--ink-2); }
+  .check { list-style: none; padding: 0; counter-reset: chk; max-width: 72ch; }
+  .check li { counter-increment: chk; display: grid; grid-template-columns: 28px 1fr; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+  .check li::before { content: counter(chk); font-family: "JetBrains Mono", monospace; font-size: 13px; color: var(--accent); border: 1px solid var(--line); width: 24px; height: 24px; display: grid; place-items: center; }
+  footer { border-top: 1px solid var(--line); padding-top: 16px; color: var(--ink-2); font-size: 14px; }
+  @media (max-width: 640px) { .toc ol { columns: 1; } .page { padding: 28px 16px 72px; gap: 44px; } }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+</style>
+
+<div class="page">
+  <header class="mast">
+    <div class="eyebrow">Especificación técnica SEO · serresdrive.com · rediseño</div>
+    <h1>URLs, metadatos y datos estructurados</h1>
+    <p class="sub">Cómo conservar lo que ya posiciona el sitio actual y corregir lo que hoy le resta: coches inexistentes, precios erróneos y dos idiomas en cada H1.</p>
+    <dl class="meta">
+      <div><dt>Para</dt><dd>Programador del rediseño</dd></div>
+      <div><dt>Versión</dt><dd>03.09.2026</dd></div>
+      <div><dt>Complementa</dt><dd>Especificación de tracking (Consent Mode, eventos)</dd></div>
+      <div><dt>Fuente de datos</dt><dd><code>seo-meta.json</code> · <code>fleet.json</code></dd></div>
+    </dl>
+  </header>
+
+  <p class="lead">El sitio actual tiene buena base técnica: canonical, schema, <code>alt</code>, sitemap. Pero Google recibe hoy <strong>más de 20 páginas de coches que no existen</strong>, precios que no son, y cada H1 en dos idiomas a la vez. El rediseño conserva lo bueno y corrige esto sin perder las URLs que ya tienen antigüedad.</p>
+
+  <div class="tbl"><table>
+    <thead><tr><th>Archivo (carpeta <code>seo/</code>)</th><th>Uso</th></tr></thead>
+    <tbody>
+      <tr><td><code>seo-meta.json</code></td><td><code>&lt;title&gt;</code>, <code>description</code>, <code>h1</code>, <code>canonical</code>, tipos de schema, migas de pan y enlaces internos de <strong>cada</strong> página. Renderizar el <code>&lt;head&gt;</code> desde aquí, no a mano.</td></tr>
+      <tr><td><code>sitemap.xml</code></td><td>Sitemap del sitio nuevo (29 URLs). Actualizar <code>&lt;lastmod&gt;</code> con la fecha real de publicación.</td></tr>
+      <tr><td><code>redirects/_redirects</code> · <code>redirects/htaccess.txt</code></td><td>52 redirecciones 301 del sitio antiguo al nuevo, en dos formatos.</td></tr>
+      <tr><td><code>../fleet.json</code></td><td>Los 13 vehículos, precios, slugs. Única fuente de precios y nombres.</td></tr>
+    </tbody>
+  </table></div>
+
+  <nav class="toc" aria-label="Contenido">
+    <h2>Contenido</h2>
+    <ol>
+      <li><a href="#s1"><span class="n">1</span>URLs</a></li>
+      <li><a href="#s2"><span class="n">2</span>Un idioma por URL</a></li>
+      <li><a href="#s3"><span class="n">3</span>Head de cada página</a></li>
+      <li><a href="#s4"><span class="n">4</span>Encabezados y texto</a></li>
+      <li><a href="#s5"><span class="n">5</span>Datos estructurados</a></li>
+      <li><a href="#s6"><span class="n">6</span>Enlaces internos</a></li>
+      <li><a href="#s7"><span class="n">7</span>Imágenes</a></li>
+      <li><a href="#s8"><span class="n">8</span>Rendimiento</a></li>
+      <li><a href="#s9"><span class="n">9</span>Sitemap y robots</a></li>
+      <li><a href="#s10"><span class="n">10</span>Redirecciones 301</a></li>
+      <li><a href="#s11"><span class="n">11</span>Verificación</a></li>
+    </ol>
+  </nav>
+
+  <section id="s1">
+    <h2><span class="n">1</span>URLs</h2>
+    <ul>
+      <li>Sin <code>.html</code>, minúsculas, guiones, <strong>sin barra final</strong>: <code>/flota</code>, <code>/flota/porsche</code>, <code>/coches/porsche-911-carrera-s</code>. Barra final o mayúsculas → 301 a la forma canónica.</li>
+      <li><strong>Páginas de marca estáticas</strong>: <code>/flota/porsche</code>, <code>/flota/lamborghini</code>, <code>/flota/mercedes-amg</code>, <code>/flota/audi</code>, <code>/flota/range-rover</code>, <code>/flota/volkswagen</code>. Cada una es HTML propio con su <code>&lt;head&gt;</code>, no un estado JavaScript de <code>/flota</code>.</li>
+      <li><code>/flota?marca=porsche</code> → 301 a la página estática (incluido en <code>redirects/</code>). Si la URL trae otros parámetros (<code>?marca=porsche&amp;gclid=…</code>), <code>/flota</code> aplica el filtro en el cliente y <strong>no</strong> redirige.</li>
+      <li>Slugs de coche: exactamente los de <code>fleet.json</code>. Son también los destinos de los anuncios.</li>
+      <li>Una URL por página. Nada de <code>#seccion</code> como destino de menú para contenido indexable.</li>
+      <li>404 personalizada (código HTTP 404, no 200) con enlaces a <code>/flota</code> y WhatsApp.</li>
+    </ul>
+  </section>
+
+  <section id="s2">
+    <h2><span class="n">2</span>Un idioma por URL</h2>
+    <p>El sitio actual mete español e inglés en el mismo DOM y Google ve <code>&lt;h1&gt;Alquiler Porsche en BarcelonaRent a Porsche in Barcelona&lt;/h1&gt;</code>.</p>
+    <ul>
+      <li><strong>Fase 1: solo español.</strong> <code>&lt;html lang="es"&gt;</code>. Eliminar el conmutador ES/EN y todo el texto en inglés del HTML.</li>
+      <li>Fase 2 (cuando se decida): versión inglesa como páginas separadas bajo <code>/en/…</code> con el mismo slug y, en <strong>ambas</strong> versiones:</li>
+    </ul>
+<pre class="code"><code>&lt;link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/porsche-911-carrera-s"&gt;
+&lt;link rel="alternate" hreflang="en" href="https://serresdrive.com/en/cars/porsche-911-carrera-s"&gt;
+&lt;link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/porsche-911-carrera-s"&gt;</code></pre>
+    <p>Hasta entonces, <strong>ningún</strong> <code>hreflang</code>.</p>
+  </section>
+
+  <section id="s3">
+    <h2><span class="n">3</span>Head de cada página, desde <code>seo-meta.json</code></h2>
+    <p>Para la página cuyo campo <code>url</code> coincide con la ruta actual:</p>
+<pre class="code"><code>&lt;title&gt;{title}&lt;/title&gt;
+&lt;meta name="description" content="{description}"&gt;
+&lt;link rel="canonical" href="{canonical}"&gt;
+&lt;meta name="robots" content="index, follow, max-image-preview:large"&gt;
+&lt;meta property="og:type" content="website"&gt;
+&lt;meta property="og:title" content="{title}"&gt;
+&lt;meta property="og:description" content="{description}"&gt;
+&lt;meta property="og:url" content="{canonical}"&gt;
+&lt;meta property="og:image" content="https://serresdrive.com{og_image o imagen hero}"&gt;
+&lt;meta property="og:locale" content="es_ES"&gt;
+&lt;meta name="twitter:card" content="summary_large_image"&gt;</code></pre>
+    <div class="note">Límites ya respetados en el JSON: <strong>title ≤ 65</strong> caracteres, <strong>description 110–160</strong>. Si cambia un precio en <code>fleet.json</code>, se regenera el JSON (<code>python3 build_seo_meta.py</code>); no editar títulos a mano.</div>
+  </section>
+
+  <section id="s4">
+    <h2><span class="n">4</span>Encabezados y texto</h2>
+    <ul>
+      <li><strong>Un solo <code>&lt;h1&gt;</code></strong> por página = campo <code>h1</code> del JSON. En la ficha de coche: <code>Alquiler {modelo} en Barcelona</code>, no solo el nombre del modelo como ahora.</li>
+      <li>Ficha de coche, orden fijo de <code>&lt;h2&gt;</code>: Tarifas → Especificaciones → Para quién es este coche → Cómo reservar → Preguntas frecuentes → También te puede interesar.</li>
+      <li>El precio por día y el botón de WhatsApp están <strong>antes</strong> del primer <code>&lt;h2&gt;</code>, visibles sin scroll en móvil.</li>
+      <li>Texto mínimo: ficha 400 palabras, marca 300, hub 250. Los textos los entrega el propietario según <code>content-plan.md</code>; no publicar fichas con solo tabla y foto.</li>
+      <li>Nada de texto oculto (<code>display:none</code>, pestañas cerradas con contenido SEO). Lo que Google debe leer, el usuario lo ve.</li>
+    </ul>
+  </section>
+
+  <section id="s5">
+    <h2><span class="n">5</span>Datos estructurados (JSON-LD)</h2>
+    <p>Un bloque <code>&lt;script type="application/ld+json"&gt;</code> por página con un <code>@graph</code>. Los tipos por página están en el campo <code>schema</code> del JSON.</p>
+    <h3>En todas las páginas: la organización</h3>
+<pre class="code"><code>{
+  "@type": "AutoRental",
+  "@id": "https://serresdrive.com/#org",
+  "name": "Serres Drive",
+  "url": "https://serresdrive.com/",
+  "telephone": "<span class="ph">+34XXXXXXXXX</span>",
+  "email": "<span class="ph">EMAIL_SERRES_DRIVE</span>",
+  "image": "https://serresdrive.com/<span class="ph">RUTA/og-home.jpg</span>",
+  "address": { "@type": "PostalAddress", "streetAddress": "Av. Can Fatjó dels Aurons, 15",
+               "postalCode": "08174", "addressLocality": "Sant Cugat del Vallès",
+               "addressRegion": "Barcelona", "addressCountry": "ES" },
+  "areaServed": ["Barcelona", "Sant Cugat del Vallès", "Aeropuerto de Barcelona-El Prat"],
+  "priceRange": "80 € - 1.000 € / día",
+  "sameAs": ["<span class="ph">URL_INSTAGRAM_SERRES_DRIVE</span>"]
+}</code></pre>
+    <h3>Migas de pan (todas menos la home)</h3>
+    <p>Del campo <code>breadcrumb</code> más la página actual:</p>
+<pre class="code"><code>{ "@type": "BreadcrumbList", "itemListElement": [
+  { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://serresdrive.com/" },
+  { "@type": "ListItem", "position": 2, "name": "Flota", "item": "https://serresdrive.com/flota" },
+  { "@type": "ListItem", "position": 3, "name": "Porsche", "item": "https://serresdrive.com/flota/porsche" },
+  { "@type": "ListItem", "position": 4, "name": "Porsche 911 Carrera S" } ] }</code></pre>
+    <h3><code>/flota</code> y páginas de marca</h3>
+    <p><code>ItemList</code> con un <code>ListItem</code> por coche (<code>url</code> = ficha, <code>name</code> = nombre).</p>
+    <h3>Ficha de coche</h3>
+    <p><code>Product</code> con la oferta por día y las demás duraciones, datos de <code>fleet.json</code>:</p>
+<pre class="code"><code>{
+  "@type": "Product",
+  "name": "Porsche 911 Carrera S",
+  "brand": { "@type": "Brand", "name": "Porsche" },
+  "category": "Alquiler de coches de lujo",
+  "image": ["https://serresdrive.com/<span class="ph">RUTA/porsche-911-carrera-s-1.jpg</span>"],
+  "url": "https://serresdrive.com/coches/porsche-911-carrera-s",
+  "offers": {
+    "@type": "Offer",
+    "url": "https://serresdrive.com/coches/porsche-911-carrera-s",
+    "priceCurrency": "EUR",
+    "price": "700",
+    "priceSpecification": [
+      { "@type": "UnitPriceSpecification", "price": "700",  "priceCurrency": "EUR", "unitCode": "DAY", "name": "1 día" },
+      { "@type": "UnitPriceSpecification", "price": "3500", "priceCurrency": "EUR", "unitCode": "WEE", "name": "1 semana" },
+      { "@type": "UnitPriceSpecification", "price": "7500", "priceCurrency": "EUR", "unitCode": "MON", "name": "1 mes" }
+    ],
+    "availability": "https://schema.org/InStock",
+    "seller": { "@id": "https://serresdrive.com/#org" }
+  }
+}</code></pre>
+    <h3>FAQ y HowTo</h3>
+    <p><code>FAQPage</code> en fichas, marcas, <code>/como-funciona</code>, <code>/condiciones-de-alquiler</code> y landings, con las preguntas visibles en la página y las mismas palabras. En <code>/como-funciona</code>, además <code>HowTo</code> con los 4 pasos.</p>
+    <div class="note"><strong>No</strong> marcar como <code>Product</code> coches que no estén en <code>fleet.json</code>. <strong>No</strong> usar <code>AggregateRating</code> sin reseñas reales visibles en la página.</div>
+  </section>
+
+  <section id="s6">
+    <h2><span class="n">6</span>Enlaces internos</h2>
+    <ul>
+      <li>Menú: Flota · Tarifas · Cómo funciona · Por qué Serres · Contacto. Footer: los mismos + legales + una sola línea «Serres Wrap Center».</li>
+      <li>Home: 6 tarjetas de marca → <code>/flota/{marca}</code> (Porsche, Lamborghini, Mercedes-AMG, Audi, Range Rover, Volkswagen).</li>
+      <li>Cada ficha enlaza a: su página de marca, 2–3 coches relacionados (campo <code>links_to</code>), <code>/tarifas</code>, <code>/como-funciona</code>, <code>/condiciones-de-alquiler</code>.</li>
+      <li>Cada página de marca enlaza a todas sus fichas y a las otras marcas.</li>
+      <li>Migas de pan <strong>visibles</strong> (no solo en JSON-LD), con enlaces reales.</li>
+      <li>Textos de enlace descriptivos: «Alquiler Porsche 911 Carrera S», nunca «ver más» ni «aquí».</li>
+      <li>Reservar un bloque «Guías relacionadas» al final de cada ficha para los artículos del blog (fase 3), vacío hasta entonces.</li>
+    </ul>
+  </section>
+
+  <section id="s7">
+    <h2><span class="n">7</span>Imágenes</h2>
+    <ul>
+      <li>Nombre de archivo: <code>alquiler-{slug}-barcelona-{n}.jpg</code>, p. ej. <code>alquiler-mercedes-amg-g63-barcelona-1.jpg</code>.</li>
+      <li><code>alt</code> obligatorio y descriptivo: «Mercedes-AMG G63 de alquiler en Barcelona, vista frontal».</li>
+      <li>WebP/AVIF con <code>&lt;picture&gt;</code> y respaldo JPG; <code>srcset</code> con 480/960/1440 px; <code>width</code> y <code>height</code> siempre (sin CLS).</li>
+      <li>Hero de la ficha: <code>&lt;link rel="preload" as="image"&gt;</code> + <code>fetchpriority="high"</code>. Resto: <code>loading="lazy"</code>.</li>
+      <li>Peso objetivo: hero ≤ 150 KB, tarjetas ≤ 60 KB.</li>
+      <li>Rellenar <code>image</code> en <code>fleet.json</code> con la ruta del hero de cada coche: de ahí salen <code>og:image</code>, <code>Product.image</code> y el feed de Performance Max.</li>
+      <li>Ninguna foto de coches que no estén en la flota, ni siquiera decorativa.</li>
+    </ul>
+  </section>
+
+  <section id="s8">
+    <h2><span class="n">8</span>Rendimiento</h2>
+    <p>Objetivos en móvil (Lighthouse / PageSpeed Insights):</p>
+    <div class="kpi">
+      <div><b>&lt; 2,5 s</b><span>LCP</span></div>
+      <div><b>&lt; 0,1</b><span>CLS</span></div>
+      <div><b>&lt; 200 ms</b><span>INP</span></div>
+      <div><b>≥ 90</b><span>Puntuación móvil</span></div>
+    </div>
+    <ul>
+      <li>Eliminar GSAP (71 KB), Lenis (13 KB, servido desde unpkg) y los scripts de sliders, parallax y preloader del sitio actual: el rediseño no tiene esas animaciones.</li>
+      <li>Presupuesto JS propio ≤ 60 KB; CSS crítico inline, el resto en un archivo.</li>
+      <li>Máximo dos familias tipográficas, <code>font-display: swap</code>, <code>preconnect</code> a <code>fonts.gstatic.com</code>.</li>
+      <li>Todo el HTML se sirve renderizado (estático o SSR). Nada del contenido indexable depende de JavaScript.</li>
+      <li>Cache: <code>Cache-Control</code> largo para assets con hash en el nombre; HTML sin cache larga.</li>
+    </ul>
+  </section>
+
+  <section id="s9">
+    <h2><span class="n">9</span>Sitemap y robots</h2>
+    <ul>
+      <li>Publicar <code>seo/sitemap.xml</code> en <code>/sitemap.xml</code> con <code>&lt;lastmod&gt;</code> reales. Solo URLs canónicas con 200 e indexables; sin las páginas de fase 2 hasta que existan.</li>
+      <li>Sin <code>noindex</code> en ninguna página de fase 1, legales incluidas.</li>
+    </ul>
+<pre class="code"><code>User-agent: *
+Allow: /
+Disallow: /gracias
+Sitemap: https://serresdrive.com/sitemap.xml</code></pre>
+    <p><code>/gracias</code> = página de confirmación del formulario, si existe; no indexar.</p>
+  </section>
+
+  <section id="s10">
+    <h2><span class="n">10</span>Redirecciones 301</h2>
+    <ul>
+      <li>Aplicar <code>redirects/_redirects</code> (Netlify, Cloudflare Pages, Vercel con adaptación) <strong>o</strong> <code>redirects/htaccess.txt</code> (Apache). Nginx: misma tabla con <code>return 301</code>.</li>
+      <li>Las páginas de coches que ya no están en la flota van a su marca (si sigue existiendo) o a <code>/flota</code>; nunca a la home.</li>
+      <li>Mantener las reglas <strong>al menos 12 meses</strong>. Nada de cadenas (A → B → C) ni redirecciones 302.</li>
+    </ul>
+<pre class="code"><code>curl -I https://serresdrive.com/alquiler-porsche-barcelona.html          <span class="c">→ 301 → /flota/porsche</span>
+curl -I https://serresdrive.com/alquiler-ferrari-f8-spider-barcelona.html <span class="c">→ 301 → /flota</span>
+curl -I https://serresdrive.com/fleet.html                                <span class="c">→ 301 → /flota</span>
+curl -I "https://serresdrive.com/flota?marca=porsche"                     <span class="c">→ 301 → /flota/porsche</span></code></pre>
+  </section>
+
+  <section id="s11">
+    <h2><span class="n">11</span>Verificación antes de entregar</h2>
+    <ol class="check">
+      <li><code>curl -s URL | grep -c "&lt;h1"</code> = 1 en cada página, y el H1 no contiene texto en inglés.</li>
+      <li>Rich Results Test de Google en una ficha, una marca, <code>/como-funciona</code> y <code>/flota</code>: sin errores en Product, BreadcrumbList, FAQPage, ItemList.</li>
+      <li>PageSpeed Insights móvil de <code>/coches/mercedes-amg-g63</code>: ≥ 90 y LCP &lt; 2,5 s.</li>
+      <li><code>/sitemap.xml</code> válido, todas las URLs responden 200 y coinciden con su canonical.</li>
+      <li>Los 4 <code>curl -I</code> de la sección 10 devuelven 301 a la URL correcta, sin cadenas.</li>
+      <li>Ninguna página contiene <code>serreswrapcenter.es</code> como email o teléfono, ni menciona Ferrari, Huracán, BMW, McLaren, Aston Martin, Maserati, Alfa Romeo, Abarth, Macan, 718, Clio ni motos.</li>
+      <li>Buscar <code>data-lang</code> en el HTML de todas las páginas → 0 resultados.</li>
+      <li>Propietario: propiedad de Search Console para <code>serresdrive.com</code> verificada por DNS, sitemap enviado, «Solicitar indexación» en <code>/</code>, <code>/flota</code>, las 6 marcas y las 4 fichas prioritarias (G63, Urus, RS6, 911).</li>
+    </ol>
+  </section>
+
+  <footer>Serres Drive · especificación SEO · 03.09.2026 · fuente de datos: <code>seo-meta.json</code> generado desde <code>fleet.json</code></footer>
+</div>

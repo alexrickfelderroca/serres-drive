@@ -19,7 +19,16 @@ const seo = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/seo-meta.json'), 'u
 const { origin } = fleet.site;
 const C = fleet.contact;
 const T = fleet.terms;
-const V = 'v=20260906';                       // cache-buster, bumped per deploy
+/* Cache-buster derived from the CONTENT of the assets, never typed by hand.
+   .htaccess serves css/js as `immutable, max-age=31536000`, so a stale URL is
+   cached for a YEAR. Twice already the stylesheet changed while this string
+   stayed at v=20260906, and every browser that had visited kept the old CSS —
+   the footer icons rendered at their intrinsic size because the rules sizing
+   them were in a file those browsers refused to re-fetch. Hashing the files
+   makes forgetting impossible: change the CSS and the URL changes with it. */
+const assetHash = (...files) => require('crypto').createHash('sha1')
+  .update(files.map(f => fs.readFileSync(path.join(ROOT, f))).join('')).digest('hex').slice(0, 10);
+const V = 'v=' + assetHash('css/serres.css', 'js/site.js');
 
 /* ---------- helpers -------------------------------------------------- */
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
@@ -38,9 +47,16 @@ const depositText = c => c.deposit === null ? T.depositUnknownText : `Fianza: ${
 const ICON = {
   arrow: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
   wa: '<svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16.04 3C9.4 3 4 8.4 4 15.04c0 2.12.56 4.18 1.62 6L4 29l8.16-1.58a12 12 0 0 0 3.88.64C22.7 28.06 28.1 22.66 28.1 16.02 28.1 8.4 22.68 3 16.04 3Zm5.39 14.57c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.66.15-.2.3-.76.96-.93 1.15-.17.2-.34.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.3-.02-.46.13-.61.13-.13.3-.34.45-.51.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.66-1.6-.9-2.18-.24-.58-.48-.5-.66-.5l-.56-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.22 3.08.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.08 1.75-.71 2-1.4.25-.69.25-1.28.17-1.4-.07-.13-.27-.2-.57-.35Z"/></svg>',
-  ig: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="2.6" y="2.6" width="18.8" height="18.8" rx="5.4"/><circle cx="12" cy="12" r="4.1"/><circle cx="17.4" cy="6.6" r="1.15" fill="currentColor" stroke="none"/></svg>',
-  mail: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2.6"/><path d="m3.4 6.4 7.5 5.6a2 2 0 0 0 2.2 0l7.5-5.6"/></svg>',
+  /* Official marks, in their own colours. The Instagram gradient lives once
+     per page in the sprite below, so three copies of the icon do not mean
+     three elements sharing an id. */
+  ig: '<svg class="ico-brand" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="6.4" fill="url(#igGrad)"/><g fill="none" stroke="#fff" stroke-width="1.62"><rect x="5.2" y="5.2" width="13.6" height="13.6" rx="4.3"/><circle cx="12" cy="12" r="3.36"/></g><circle cx="16.62" cy="7.46" r="1.06" fill="#fff"/></svg>',
+  gmail: '<svg class="ico-brand" viewBox="0 0 512 384" aria-hidden="true"><path fill="#4285f4" d="M395.64 383.9h81.45c19.3 0 34.91-15.64 34.91-34.91V98.75L395.64 186.2z"/><path fill="#34a853" d="M34.91 383.9h81.45V186.2L0 98.75v250.24c0 19.3 15.64 34.91 34.91 34.91z"/><path fill="#fbbc04" d="M395.64 34.99V186.2L512 98.75V52.36c0-43.01-49.11-67.53-83.51-41.73z"/><path fill="#ea4335" d="M116.36 186.2V34.99L256 139.68 395.64 34.99V186.2L256 290.89z"/><path fill="#c5221f" d="M0 52.36v46.39l116.36 87.45V34.99L83.51 10.63C49.05-15.17 0 9.35 0 52.36z"/></svg>',
+  waColor: '<svg class="ico-brand" viewBox="0 0 32 32" aria-hidden="true"><path fill="#25D366" d="M16.04 3C9.4 3 4 8.4 4 15.04c0 2.12.56 4.18 1.62 6L4 29l8.16-1.58a12 12 0 0 0 3.88.64C22.7 28.06 28.1 22.66 28.1 16.02 28.1 8.4 22.68 3 16.04 3Z"/><path fill="#fff" d="M21.43 17.57c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.66.15-.2.3-.76.96-.93 1.15-.17.2-.34.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.3-.02-.46.13-.61.13-.13.3-.34.45-.51.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.66-1.6-.9-2.18-.24-.58-.48-.5-.66-.5l-.56-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.22 3.08.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.08 1.75-.71 2-1.4.25-.69.25-1.28.17-1.4-.07-.13-.27-.2-.57-.35Z"/></svg>',
 };
+
+/* Defined once per page; every Instagram icon points at it. */
+const SVG_SPRITE = '<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute"><defs><radialGradient id="igGrad" cx=".28" cy="1.03" r="1.25"><stop offset="0" stop-color="#FFD776"/><stop offset=".22" stop-color="#F8A650"/><stop offset=".42" stop-color="#EF4A5B"/><stop offset=".62" stop-color="#D62976"/><stop offset=".8" stop-color="#962FBF"/><stop offset="1" stop-color="#4F5BD5"/></radialGradient></defs></svg>';
 const btnArrow = `<span class="disc">${ICON.arrow}</span>`;
 
 /* Depth of a URL like /coches/x/ -> how many ../ to reach the site root. */
@@ -97,8 +113,8 @@ function footer(r) {
     </div>
     <div class="footer-social">
       <a href="${C.instagram}" target="_blank" rel="noopener">${ICON.ig}<span>${esc(C.instagramHandle)}</span></a>
-      <a href="${waGeneral}" target="_blank" rel="noopener">${ICON.wa}<span>WhatsApp ${C.phoneDisplay}</span></a>
-      <a href="mailto:${C.email}">${ICON.mail}<span>${C.email}</span></a>
+      <a href="${waGeneral}" target="_blank" rel="noopener">${ICON.waColor}<span>WhatsApp ${C.phoneDisplay}</span></a>
+      <a href="mailto:${C.email}">${ICON.gmail}<span>${C.email}</span></a>
     </div>
     <div class="bottom">
       <span>© ${new Date().getFullYear()} Serres Drive · ${C.address.locality}, ${C.address.region}</span>
@@ -146,6 +162,7 @@ function page({ url, body, schema = [], bodyClass = '', current = '' }) {
 ${ld}
 </head>
 <body${bodyClass ? ` class="${bodyClass}"` : ''}>
+${SVG_SPRITE}
 <a class="skip" href="#main">Saltar al contenido</a>
 ${header(r, current)}
 <main id="main">
@@ -358,7 +375,7 @@ const write = (url, html) => {
       </div>
       <div class="footer-social" style="margin-top:18px">
         <a href="${C.instagram}" target="_blank" rel="noopener">${ICON.ig}<span>${esc(C.instagramHandle)}</span></a>
-        <a href="mailto:${C.email}">${ICON.mail}<span>${C.email}</span></a>
+        <a href="mailto:${C.email}">${ICON.gmail}<span>${C.email}</span></a>
       </div>
     </div>
     <div class="panel">
@@ -690,13 +707,13 @@ ${others.length ? `<section class="section--tight" style="padding-top:0">
       <p class="lede">${esc(meta.description)}</p>
       <div class="hero-cta">
         <a class="btn btn--wa" href="${waGeneral}" target="_blank" rel="noopener">${ICON.wa}<span>${C.phoneDisplay}</span></a>
-        <a class="btn btn--secondary" href="mailto:${C.email}">${ICON.mail}<span>Escríbenos un correo</span></a>
+        <a class="btn btn--secondary" href="mailto:${C.email}">${ICON.gmail}<span>Escríbenos un correo</span></a>
         <a class="btn btn--secondary" href="${C.instagram}" target="_blank" rel="noopener" aria-label="Instagram ${esc(C.instagramHandle)}">${ICON.ig}<span>Instagram</span></a>
       </div>
       <ul class="terms-list" style="margin-top:24px">
         <li><span class="k">Dónde</span><span class="v">${esc(C.address.street)}, ${C.address.postalCode} ${esc(C.address.locality)} (${esc(C.address.region)})</span></li>
         <li><span class="k">Entrega</span><span class="v">Área metropolitana de Barcelona · ${eur(T.deliveryFee)}</span></li>
-        <li><span class="k">Correo</span><span class="v"><a class="ico-link" href="mailto:${C.email}">${ICON.mail}<span>${C.email}</span></a></span></li>
+        <li><span class="k">Correo</span><span class="v"><a class="ico-link" href="mailto:${C.email}">${ICON.gmail}<span>${C.email}</span></a></span></li>
         <li><span class="k">Instagram</span><span class="v"><a class="ico-link" href="${C.instagram}" target="_blank" rel="noopener">${ICON.ig}<span>${esc(C.instagramHandle)}</span></a></span></li>
       </ul>
     </div>
@@ -760,6 +777,7 @@ ${others.length ? `<section class="section--tight" style="padding-top:0">
 <link rel="stylesheet" href="/css/serres.css?${V}">
 </head>
 <body>
+${SVG_SPRITE}
 <a class="skip" href="#main">Saltar al contenido</a>
 ${header('/', '').replace(/href="\/\//g, 'href="/')}
 <main id="main">

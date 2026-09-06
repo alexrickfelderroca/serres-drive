@@ -1,0 +1,1428 @@
+{
+ "site": {
+  "base_url": "https://serresdrive.com",
+  "name": "Serres Drive",
+  "lang": "es",
+  "generated": "2026-09-04",
+  "source": "fleet.json",
+  "title_max": 65,
+  "description_range": [
+   110,
+   160
+  ]
+ },
+ "pages": [
+  {
+   "url": "/",
+   "canonical": "https://serresdrive.com/",
+   "type": "home",
+   "index": true,
+   "title": "Alquiler de coches de lujo en Barcelona | Serres Drive",
+   "description": "Porsche 911, Mercedes-AMG G63, Lamborghini Urus, Audi RS6 y Range Rover Velar. Entrega en tu hotel o en el aeropuerto de El Prat. Reserva por WhatsApp.",
+   "h1": "Alquiler de coches de lujo en Barcelona",
+   "schema": [
+    "Organization",
+    "AutoRental",
+    "WebSite"
+   ],
+   "breadcrumb": [],
+   "links_to": [
+    "/flota",
+    "/flota/porsche",
+    "/flota/lamborghini",
+    "/flota/mercedes-amg",
+    "/flota/audi",
+    "/flota/range-rover",
+    "/flota/volkswagen",
+    "/tarifas",
+    "/como-funciona",
+    "/contacto"
+   ],
+   "sitemap": {
+    "priority": 1.0,
+    "changefreq": "weekly"
+   }
+  },
+  {
+   "url": "/flota",
+   "canonical": "https://serresdrive.com/flota",
+   "type": "flota",
+   "index": true,
+   "title": "Flota: 13 coches de lujo de alquiler en Barcelona | Serres Drive",
+   "description": "Toda la flota disponible hoy: Porsche, Lamborghini, Mercedes-AMG, Audi, Range Rover y Volkswagen. Precio por día en cada ficha. Filtra por marca.",
+   "h1": "Flota de coches de lujo en Barcelona",
+   "schema": [
+    "ItemList",
+    "BreadcrumbList"
+   ],
+   "breadcrumb": [
+    [
+     "Inicio",
+     "/"
+    ]
+   ],
+   "links_to": [
+    "/coches/mercedes-amg-g63",
+    "/coches/lamborghini-urus",
+    "/coches/audi-rs6-avant",
+    "/coches/porsche-911-cabrio",
+    "/coches/porsche-911-carrera-s",
+    "/coches/porsche-cayenne-hybrid",
+    "/coches/mercedes-amg-a45",
+    "/coches/audi-rs3-sportback",
+    "/coches/audi-rsq3",
+    "/coches/volkswagen-golf-r",
+    "/coches/range-rover-velar",
+    "/coches/mercedes-glc",
+    "/coches/mercedes-a200-4matic",
+    "/flota/porsche",
+    "/flota/lamborghini",
+    "/flota/mercedes-amg",
+    "/flota/audi",
+    "/flota/range-rover",
+    "/flota/volkswagen",
+    "/tarifas"
+   ],
+   "sitemap": {
+    "priority": 0.9,
+    "changefreq": "weekly"
+   }
+  },
+  {
+   "url": "/flota/porsche",
+   "canonical": "https://serresdrive.com/flota/porsche",
+   "type": "brand",
+   "index": true,
+   "title": "Alquiler Porsche en Barcelona desde 700 €/día | Serres Drive",
+   "description": "Tres Porsche de alquiler en Barcelona: 911 Cabrio (992), 911 Carrera S (991), Cayenne Hybrid. Precios por día, semana y mes. Entrega en hotel o aeropuerto por 1",
+   "h1": "Alquiler Porsche en Barcelona",
+   "schema": [
+    "ItemList",
+    "BreadcrumbList",
+    "FAQPage"
+   ],
+   "breadcrumb": [
+    [
+     "Inicio",
+     "/"
+    ],
+    [
+     "Flota",
+     "/flota"
+    ]
+   ],
+   "links_to": [
+    "/coches/porsche-911-cabrio",
+    "/coches/porsche-911-carrera-s",
+    "/coches/porsche-cayenne-hybrid",
+    "/flota",
+    "/tarifas",
+    "/como-funciona"
+   ],
+   "sitemap": {
+    "priority": 0.8,
+    "changefreq": "weekly"
+   },
+   "brand_slug": "porsche",
+   "cars": [
+    "porsche-911-cabrio",
+    "porsche-911-carrera-s",
+    "porsche-cayenne-hybrid"
+   ],
+   "min_price_1d": 700
+  },
+  {
+   "url": "/flota/lamborghini",
+   "canonical": "https://serresdrive.com/flota/lamborghini",
+   "type": "brand",
+   "index": true,
+   "title": "Alquiler Lamborghini en Barcelona desde 1.100 €/día",
+   "description": "Un Lamborghini de alquiler en Barcelona: Urus. Precios por día, semana y mes. Entrega en hotel o aeropuerto por 100 €. Reserva por WhatsApp.",
+   "h1": "Alquiler Lamborghini en Barcelona",
+   "schema": [
+    "ItemList",
+    "BreadcrumbList",
+    "FAQPage"
+   ],
+   "breadcrumb": [
+    [
+     "Inicio",
+     "/"
+    ],
+    [
+     "Flota",
+     "/flota"
+    ]
+   ],
+   "links_to": [
+    "/coches/lamborghini-urus",
+    "/flota",
+    "/tarifas",
+    "/como-funciona"
+   ],
+   "sitemap": {
+    "priority": 0.8,
+    "changefreq": "weekly"
+   },
+   "brand_slug": "lamborghini",
+   "cars": [
+    "lamborghini-urus"
+   ],
+   "min_price_1d": 1100
+  },
+  {
+   "url": "/flota/mercedes-amg",
+   "canonical": "https://serresdrive.com/flota/mercedes-amg",
+   "type": "brand",
+   "index": true,
+   "title": "Alquiler Mercedes-AMG en Barcelona desde 150 €/día | Serres Drive",
+   "description": "Cuatro Mercedes-AMG de alquiler en Barcelona: G63, A45 S, GLC, A200 4Matic. Precios por día, semana y mes. Entrega en hotel o aeropuerto por 100 €. Reserva por ",
+   "h1": "Alquiler Mercedes-AMG en Barcelona",
+   "schema": [
+    "ItemList",
+    "BreadcrumbList",
+    "FAQPage"
+   ],
+   "breadcrumb": [
+    [
+     "Inicio",
+     "/"
+    ],
+    [
+     "Flota",
+     "/flota"
+    ]
+   ],
+   "links_to": [
+    "/coches/mercedes-amg-g63",
+    "/coches/mercedes-amg-a45",
+    "/coches/mercedes-glc",
+    "/coches/mercedes-a200-4matic",
+    "/flota",
+    "/tarifas",
+    "/como-funciona"
+   ],
+   "sitemap": {
+    "priority": 0.8,
+    "changefreq": "weekly"
+   },
+   "brand_slug": "mercedes-amg",
+   "cars": [
+    "mercedes-amg-g63",
+    "mercedes-amg-a45",
+    "mercedes-glc",
+    "mercedes-a200-4matic"
+   ],
+   "min_price_1d": 150
+  },
+  {
+   "url": "/flota/audi",
+   "canonical": "https://serresdrive.com/flota/audi",
+   "type": "brand",
+   "index": true,
+   "title": "Alquiler Audi en Barcelona desde 450 €/día | Serres Drive",
+   "description": "Tres Audi de alquiler en Barcelona: RS6 Avant, RS3 Sportback, RS Q3. Precios por día, semana y mes. Entrega en hotel o aeropuerto por 100 €. Reserva por WhatsAp",
+   "h1": "Alquiler Audi en Barcelona",
+   "schema": [
+    "ItemList",
+    "BreadcrumbList",
+    "FAQPage"
+   ],
+   "breadcrumb": [
+    [
+     "Inicio",
+     "/"
+    ],
+    [
+     "Flota",
+     "/flota"
+    ]
+   ],
+   "links_to": [
+    "/coches/audi-rs6-avant",
+    "/coches/audi-rs3-sportback",
+    "/coches/audi-rsq3",
+    "/flota",
+    "/tarifas",
+    "/como-funciona"
+   ],
+   "sitemap": {
+    "priority": 0.8,
+    "changefreq": "weekly"
+   },
+   "brand_slug": "audi",
+   "cars": [
+    "audi-rs6-avant",
+    "audi-rs3-sportback",
+    "audi-rsq3"
+   ],
+   "min_price_1d": 450
+  },
+  {
+   "url": "/flota/range-rover",
+   "canonical": "https://serresdrive.com/flota/range-rover",
+   "type": "brand",
+   "index": true,
+   "title": "Alquiler Range Rover en Barcelona desde 350 €/día | Serres Drive",
+   "description": "Un Range Rover de alquiler en Barcelona: Velar. Precios por día, semana y mes. Entrega en hotel o aeropuerto por 100 €. Reserva por WhatsApp.",
+   "h1": "Alquiler Range Rover en Barcelona",
+   "schema": [
+    "ItemList",
+    "BreadcrumbList",
+    "FAQPage"
+   ],
+   "breadcrumb": [
+    [
+     "Inicio",
+     "/"
+    ],
+    [
+     "Flota",
+     "/flota"
+    ]
+   ],
+   "links_to": [
+    "/coches/range-rover-velar",
+    "/flota",
+    "/tarifas",
+    "/como-funciona"
+   ],
+   "sitemap": {
+    "priority": 0.8,
+    "changefreq": "weekly"
+   },
+   "brand_slug": "range-rover",
+   "cars": [
+    "range-rover-velar"
+   ],
+   "min_price_1d": 350
+  },
+  {
+   "url": "/flota/volkswagen",
+   "canonical": "https://serresdrive.com/flota/volkswagen",
+   "type": "brand",
+   "index": true,
+   "title": "Alquiler Volkswagen en Barcelona desde 400 €/día | Serres Drive",
+   "description": "Un Volkswagen de alquiler en Barcelona: Golf 8.5 R. Precios por día, semana y mes. Entrega en hotel o aeropuerto por 100 €. Reserva por WhatsApp.",
+   "h1": "Alquiler Volkswagen en Barcelona",
+   "schema": [
+    "ItemList",
+    "BreadcrumbList",
+    "FAQPage"
+   ],
+   "breadcrumb": [
+    [
+     "Inicio",
+     "/"
+    ],
+    [
+     "Flota",
+     "/flota"
+    ]
+   ],
+   "links_to": [
+    "/coches/volkswagen-golf-r",
+    "/flota",
+    "/tarifas",
+    "/como-funciona"
+   ],
+   "sitemap": {
+    "priority": 0.8,
+    "changefreq": "weekly"
+   },
+   "brand_slug": "volkswagen",
+   "cars": [
+    "volkswagen-golf-r"
+   ],
+   "min_price_1d": 400
+  },
+  {
+   "url": "/coches/mercedes-amg-g63",
+   "canonical": "https://serresdrive.com/coches/mercedes-amg-g63",
+   "type": "car",
+   "index": true,
+   "title": "Alquiler Mercedes-AMG G63 en Barcelona desde 1.000 €/día",
+   "description": "Alquila el Mercedes-AMG G63 en Barcelona: 1.000 € por día, 1.700 € dos días, 6.000 € por semana. Entrega en hotel o aeropuerto por 100 €. Reserva por WhatsApp.",
+   "h1": "Alquiler Mercedes-AMG G63 en Barcelona",
+   "schema": [
+    "Product",
+    "Offer",
+    "BreadcrumbList",
+    "FAQPage"
+   ],
+   "breadcrumb": [
+    [
+     "Inicio",
+     "/"
+    ],
+    [
+     "Flota",
+     "/flota"
+    ],
+    [
+     "Mercedes-AMG",
+     "/flota/mercedes-amg"
+    ]
+   ],
+   "links_to": [
+    "/flota/mercedes-amg",
+    "/coches/lamborghini-urus",
+    "/coches/porsche-cayenne-hybrid",
+    "/coches/range-rover-velar",
+    "/tarifas",
+    "/como-funciona",
+    "/condiciones-de-alquiler"
+   ],
+   "sitemap": {
+    "priority": 0.8,
+    "changefreq": "monthly"
+   },
+   "slug": "mercedes-amg-g63",
+   "brand": "Mercedes-AMG",
+   "price": {
+    "1d": 1000,
+    "2d": 1700,
+    "3d": 2700,
+    "week": 6000,
+    "month": 12000
+   },
+   "price_source": "docx",
+   "deposit_eur": 5000,
+   "og_image": null
+  },
+  {
+   "url": "/coches/lamborghini-urus",
+   "canonical": "https://serresdrive.com/coches/lamborghini-urus",
+   "type": "car",
+   "index": true,
+   "title": "Alquiler Lamborghini Urus en Barcelona desde 1.100 €/día",
+   "description": "Alquila el Lamborghini Urus en Barcelona: 1.100 € por día, 1.900 € dos días, 6.500 € por semana. Entrega en hotel o aeropuerto por 100 €. Reserva por WhatsApp.",
+   "h1": "Alquiler Lamborghini Urus en Barcelona",
+   "schema": [
+    "Product",
+    "Offer",
+    "BreadcrumbList",
+    "FAQPage"
+   ],
+   "breadcrumb": [
+    [
+     "Inicio",
+     "/"
+    ],
+    [
+     "Flota",
+     "/flota"
+    ],
+    [
+     "Lamborghini",
+     "/flota/lamborghini"
+    ]
+   ],
+   "links_to": [
+    "/flota/lamborghini",
+    "/coches/mercedes-amg-g63",
+    "/coches/audi-rs6-avant",
+    "/coches/porsche-cayenne-hybrid",
+    "/tarifas",
+    "/como-funciona",
+    "/condiciones-de-alquiler"
+   ],
+   "sitemap": {
+    "priority": 0.8,
+    "changefreq": "monthly"
+   },
+   "slug": "lamborghini-urus",
+   "brand": "Lamborghini",
+   "price": {
+    "1d": 1100,
+    "2d": 1900,
+    "3d": 3000,
+    "week": 6500,
+    "month": 13000
+   },
+   "price_source": "derived (G63 + ~10 %)",
+   "deposit_eur": null,
+   "og_image": null
+  },
+  {
+   "url": "/coches/audi-rs6-avant",
+   "canonical": "https://serresdrive.com/coches/audi-rs6-avant",
+   "type": "car",
+   "index": true,
+   "title": "Alquiler Audi RS6 Avant en Barcelona desde 900 €/día",
+   "description": "Alquila el Audi RS6 Avant en Barcelona: 900 € por día, 1.600 € dos días, 5.500 € por semana. Entrega en hotel o aeropuerto por 100 €. Reserva por WhatsApp.",
+   "h1": "Alquiler Audi RS6 Avant en Barcelona",
+   "schema": [
+    "Product",
+    "Offer",
+    "BreadcrumbList",
+    "FAQPage"
+   ],
+   "breadcrumb": [
+    [
+     "Inicio",
+     "/"
+    ],
+    [
+     "Flota",
+     "/flota"
+    ],
+    [
+     "Audi",
+     "/flota/audi"
+    ]
+   ],
+   "links_to": [
+    "/flota/audi",
+    "/coches/lamborghini-urus",
+    "/coches/porsche-911-carrera-s",
+    "/coches/audi-rs3-sportback",
+    "/tarifas",
+    "/como-funciona",
+    "/condiciones-de-alquiler"
+   ],
+   "sitemap": {
+    "priority": 0.8,
+    "changefreq": "monthly"
+   },
+   "slug": "audi-rs6-avant",
+   "brand": "Audi",
+   "price": {
+    "1d": 900,
+    "2d": 1600,
+    "3d": 2500,
+    "week": 5500,
+    "month": 11000
+   },
+   "price_source": "derived (G63 − ~10 %)",
+   "deposit_eur": null,
+   "og_image": null
+  },
+  {
+   "url": "/coches/porsche-911-cabrio",
+   "canonical": "https://serresdrive.com/coches/porsche-911-cabrio",
+   "type": "car",
+   "index": true,
+   "title": "Alquiler Porsche 911 Cabrio en Barcelona desde 800 €/día",
+   "description": "Alquila el Porsche 911 Cabrio (992) en Barcelona: 800 € por día, 4.600 € por semana. Entrega en hotel o aeropuerto por 100 €. Reserva por WhatsApp.",
+   "h1": "Alquiler Porsche 911 Cabrio (992) en Barcelona",
+   "schema": [
+    "Product",
+    "Offer",
+    "BreadcrumbList",
+    "FAQPage"
+   ],
+   "breadcrumb": [
+    [
+     "Inicio",
+     "/"
+    ],
+    [
+     "Flota",
+     "/flota"
+    ],
+    [
+     "Porsche",
+     "/flota/porsche"
+    ]
+   ],
+   "links_to": [
+    "/flota/porsche",
+    "/coches/audi-rs6-avant",
+    "/coches/porsche-911-carrera-s",
+    "/coches/porsche-cayenne-hybrid",
+    "/tarifas",
+    "/como-funciona",
+    "/condiciones-de-alquiler"
+   ],
+   "sitemap": {
+    "priority": 0.8,
+    "changefreq": "monthly"
+   },
+   "slug": "porsche-911-cabrio",
+   "brand": "Porsche",
+   "price": {
+    "1d": 800,
+    "2d": 1500,
+    "3d": 2200,
+    "week": 4600,
+    "month": 9000
+   },
+   "price_source": "docx (Porsche 992 Cabrio) — folder 'Porsche 911', mapping assumed",
+   "deposit_eur": 2000,
+   "og_image": null
+  },
+  {
+   "url": "/coches/porsche-911-carrera-s",
+   "canonical": "https://serresdrive.com/coches/porsche-911-carrera-s",
+   "type": "car",
+   "index": true,
+   "title": "Alquiler Porsche 911 Carrera S en Barcelona desde 700 €/día",
+   "description": "Alquila el Porsche 911 Carrera S (991) en Barcelona: 700 € por día, 3.500 € por semana. Entrega en hotel o aeropuerto por 100 €. Reserva por WhatsApp.",
+   "h1": "Alquiler Porsche 911 Carrera S (991) en Barcelona",
+   "schema": [
+    "Product",
+    "Offer",
+    "BreadcrumbList",
+    "FAQPage"
+   ],
+   "breadcrumb": [
+    [
+     "Inicio",
+     "/"
+    ],
+    [
+     "Flota",
+     "/flota"
+    ],
+    [
+     "Porsche",
+     "/flota/porsche"
+    ]
+   ],
+   "links_to": [
+    "/flota/porsche",
+    "/coches/audi-rs6-avant",
+    "/coches/porsche-911-cabrio",
+    "/coches/mercedes-amg-a45",
+    "/tarifas",
+    "/como-funciona",
+    "/condiciones-de-alquiler"
+   ],
+   "sitemap": {
+    "priority": 0.8,
+    "changefreq": "monthly"
+   },
+   "slug": "porsche-911-carrera-s",
+   "brand": "Porsche",
+   "price": {
+    "1d": 700,
+    "2d": 1300,
+    "3d": 2000,
+    "week": 3500,
+    "month": 7500
+   },
+   "price_source": "docx (Porsche 911 Carrera S) — folder '911 991', mapping assumed",
+   "deposit_eur": 2000,
+   "og_image": null
+  },
+  {
+   "url": "/coches/porsche-cayenne-hybrid",
+   "canonical": "https://serresdrive.com/coches/porsche-cayenne-hybrid",
+   "type": "car",
+   "index": true,
+   "title": "Alquiler Porsche Cayenne Hybrid en Barcelona desde 700 €/día",
+   "description": "Alquila el Porsche Cayenne Hybrid en Barcelona: 700 € por día, 3.500 € por semana. Entrega en hotel o aeropuerto por 100 €. Reserva por WhatsApp.",
+   "h1": "Alquiler Porsche Cayenne Hybrid en Barcelona",
+   "schema": [
+    "Product",
+    "Offer",
+    "BreadcrumbList",
+    "FAQPage"
+   ],
+   "breadcrumb": [
+    [
+     "Inicio",
+     "/"
+    ],
+    [
+     "Flota",
+     "/flota"
+    ],
+    [
+     "Porsche",
+     "/flota/porsche"
+    ]
+   ],
+   "links_to": [
+    "/flota/porsche",
+    "/coches/mercedes-amg-g63",
+    "/coches/lamborghini-urus",
+    "/coches/range-rover-velar",
+    "/tarifas",
+    "/como-funciona",
+    "/condiciones-de-alquiler"
+   ],
+   "sitemap": {
+    "priority": 0.8,
+    "changefreq": "monthly"
+   },
+   "slug": "porsche-cayenne-hybrid",
+   "brand": "Porsche",
+   "price": {
+    "1d": 700,
+    "2d": 1300,
+    "3d": 2000,
+    "week": 3500,
+    "month": 7500
+   },
+   "price_source": "docx",
+   "deposit_eur": 2000,
+   "og_image": null
+  },
+  {
+   "url": "/coches/mercedes-amg-a45",
+   "canonical": "https://serresdrive.com/coches/mercedes-amg-a45",
+   "type": "car",
+   "index": true,
+   "title": "Alquiler Mercedes-AMG A45 S en Barcelona desde 450 €/día",
+   "description": "Alquila el Mercedes-AMG A45 S en Barcelona: 450 € por día, 800 € dos días, 2.000 € por semana. Entrega en hotel o aeropuerto por 100 €. Reserva por WhatsApp.",
+   "h1": "Alquiler Mercedes-AMG A45 S en Barcelona",
+   "schema": [
+    "Product",
+    "Offer",
+    "BreadcrumbList",
+    "FAQPage"
+   ],
+   "breadcrumb": [
+    [
+     "Inicio",
+     "/"
+    ],
+    [
+     "Flota",
+     "/flota"
+    ],
+    [
+     "Mercedes-AMG",
+     "/flota/mercedes-amg"
+    ]
+   ],
+   "links_to": [
+    "/flota/mercedes-amg",
+    "/coches/audi-rs3-sportback",
+    "/coches/audi-rsq3",
+    "/coches/volkswagen-golf-r",
+    "/tarifas",
+    "/como-funciona",
+    "/condiciones-de-alquiler"
+   ],
+   "sitemap": {
+    "priority": 0.8,
+    "changefreq": "monthly"
+   },
+   "slug": "mercedes-amg-a45",
+   "brand": "Mercedes-AMG",
+   "price": {
+    "1d": 450,
+    "2d": 800,
+    "3d": 1100,
+    "week": 2000,
+    "month": 5000
+   },
+   "price_source": "docx",
+   "deposit_eur": 2000,
+   "og_image": null
+  },
+  {
+   "url": "/coches/audi-rs3-sportback",
+   "canonical": "https://serresdrive.com/coches/audi-rs3-sportback",
+   "type": "car",
+   "index": true,
+   "title": "Alquiler Audi RS3 Sportback en Barcelona desde 450 €/día",
+   "description": "Alquila el Audi RS3 Sportback en Barcelona: 450 € por día, 800 € dos días, 2.000 € por semana. Entrega en hotel o aeropuerto por 100 €. Reserva por WhatsApp.",
+   "h1": "Alquiler Audi RS3 Sportback en Barcelona",
+   "schema": [
+    "Product",
+    "Offer",
+    "BreadcrumbList",
+    "FAQPage"
+   ],
+   "breadcrumb": [
+    [
+     "Inicio",
+     "/"
+    ],
+    [
+     "Flota",
+     "/flota"
+    ],
+    [
+     "Audi",
+     "/flota/audi"
+    ]
+   ],
+   "links_to": [
+    "/flota/audi",
+    "/coches/mercedes-amg-a45",
+    "/coches/audi-rsq3",
+    "/coches/volkswagen-golf-r",
+    "/tarifas",
+    "/como-funciona",
+    "/condiciones-de-alquiler"
+   ],
+   "sitemap": {
+    "priority": 0.8,
+    "changefreq": "monthly"
+   },
+   "slug": "audi-rs3-sportback",
+   "brand": "Audi",
+   "price": {
+    "1d": 450,
+    "2d": 800,
+    "3d": 1100,
+    "week": 2000,
+    "month": 5000
+   },
+   "price_source": "docx",
+   "deposit_eur": 2000,
+   "og_image": null
+  },
+  {
+   "url": "/coches/audi-rsq3",
+   "canonical": "https://serresdrive.com/coches/audi-rsq3",
+   "type": "car",
+   "index": true,
+   "title": "Alquiler Audi RS Q3 en Barcelona desde 450 €/día | Serres Drive",
+   "description": "Alquila el Audi RS Q3 en Barcelona: 450 € por día, 800 € dos días, 2.000 € por semana. Entrega en hotel o aeropuerto por 100 €. Reserva por WhatsApp.",
+   "h1": "Alquiler Audi RS Q3 en Barcelona",
+   "schema": [
+    "Product",
+    "Offer",
+    "BreadcrumbList",
+    "FAQPage"
+   ],
+   "breadcrumb": [
+    [
+     "Inicio",
+     "/"
+    ],
+    [
+     "Flota",
+     "/flota"
+    ],
+    [
+     "Audi",
+     "/flota/audi"
+    ]
+   ],
+   "links_to": [
+    "/flota/audi",
+    "/coches/mercedes-amg-a45",
+    "/coches/audi-rs3-sportback",
+    "/coches/range-rover-velar",
+    "/tarifas",
+    "/como-funciona",
+    "/condiciones-de-alquiler"
+   ],
+   "sitemap": {
+    "priority": 0.8,
+    "changefreq": "monthly"
+   },
+   "slug": "audi-rsq3",
+   "brand": "Audi",
+   "price": {
+    "1d": 450,
+    "2d": 800,
+    "3d": 1100,
+    "week": 2000,
+    "month": 5000
+   },
+   "price_source": "rate-card 17.07 (450/día); 2d/3d assumed same tier as RS3/A45",
+   "deposit_eur": 2000,
+   "og_image": null
+  },
+  {
+   "url": "/coches/volkswagen-golf-r",
+   "canonical": "https://serresdrive.com/coches/volkswagen-golf-r",
+   "type": "car",
+   "index": true,
+   "title": "Alquiler Volkswagen Golf 8.5 R en Barcelona desde 400 €/día",
+   "description": "Alquila el Volkswagen Golf 8.5 R en Barcelona: 400 € por día, 750 € dos días, 1.800 € por semana. Entrega en hotel o aeropuerto por 100 €. Reserva por WhatsApp.",
+   "h1": "Alquiler Volkswagen Golf 8.5 R en Barcelona",
+   "schema": [
+    "Product",
+    "Offer",
+    "BreadcrumbList",
+    "FAQPage"
+   ],
+   "breadcrumb": [
+    [
+     "Inicio",
+     "/"
+    ],
+    [
+     "Flota",
+     "/flota"
+    ],
+    [
+     "Volkswagen",
+     "/flota/volkswagen"
+    ]
+   ],
+   "links_to": [
+    "/flota/volkswagen",
+    "/coches/mercedes-amg-a45",
+    "/coches/audi-rs3-sportback",
+    "/coches/mercedes-a200-4matic",
+    "/tarifas",
+    "/como-funciona",
+    "/condiciones-de-alquiler"
+   ],
+   "sitemap": {
+    "priority": 0.8,
+    "changefreq": "monthly"
+   },
+   "slug": "volkswagen-golf-r",
+   "brand": "Volkswagen",
+   "price": {
+    "1d": 400,
+    "2d": 750,
+    "3d": 1000,
+    "week": 1800,
+    "month": 4500
+   },
+   "price_source": "docx",
+   "deposit_eur": 2000,
+   "og_image": null
+  },
+  {
+   "url": "/coches/range-rover-velar",
+   "canonical": "https://serresdrive.com/coches/range-rover-velar",
+   "type": "car",
+   "index": true,
+   "title": "Alquiler Range Rover Velar en Barcelona desde 350 €/día",
+   "description": "Alquila el Range Rover Velar en Barcelona: 350 € por día, 700 € dos días, 1.800 € por semana. Entrega en hotel o aeropuerto por 100 €. Reserva por WhatsApp.",
+   "h1": "Alquiler Range Rover Velar en Barcelona",
+   "schema": [
+    "Product",
+    "Offer",
+    "BreadcrumbList",
+    "FAQPage"
+   ],
+   "breadcrumb": [
+    [
+     "Inicio",
+     "/"
+    ],
+    [
+     "Flota",
+     "/flota"
+    ],
+    [
+     "Range Rover",
+     "/flota/range-rover"
+    ]
+   ],
+   "links_to": [
+    "/flota/range-rover",
+    "/coches/porsche-cayenne-hybrid",
+    "/coches/audi-rsq3",
+    "/coches/mercedes-glc",
+    "/tarifas",
+    "/como-funciona",
+    "/condiciones-de-alquiler"
+   ],
+   "sitemap": {
+    "priority": 0.8,
+    "changefreq": "monthly"
+   },
+   "slug": "range-rover-velar",
+   "brand": "Range Rover",
+   "price": {
+    "1d": 350,
+    "2d": 700,
+    "3d": 900,
+    "week": 1800,
+    "month": 4300
+   },
+   "price_source": "docx",
+   "deposit_eur": 2000,
+   "og_image": null
+  },
+  {
+   "url": "/coches/mercedes-glc",
+   "canonical": "https://serresdrive.com/coches/mercedes-glc",
+   "type": "car",
+   "index": true,
+   "title": "Alquiler Mercedes GLC en Barcelona desde 200 €/día | Serres Drive",
+   "description": "Alquila el Mercedes GLC en Barcelona: 200 € por día, 350 € dos días, 1.000 € por semana. Entrega en hotel o aeropuerto por 100 €. Reserva por WhatsApp.",
+   "h1": "Alquiler Mercedes GLC en Barcelona",
+   "schema": [
+    "Product",
+    "Offer",
+    "BreadcrumbList",
+    "FAQPage"
+   ],
+   "breadcrumb": [
+    [
+     "Inicio",
+     "/"
+    ],
+    [
+     "Flota",
+     "/flota"
+    ],
+    [
+     "Mercedes-AMG",
+     "/flota/mercedes-amg"
+    ]
+   ],
+   "links_to": [
+    "/flota/mercedes-amg",
+    "/coches/audi-rsq3",
+    "/coches/range-rover-velar",
+    "/coches/mercedes-a200-4matic",
+    "/tarifas",
+    "/como-funciona",
+    "/condiciones-de-alquiler"
+   ],
+   "sitemap": {
+    "priority": 0.8,
+    "changefreq": "monthly"
+   },
+   "slug": "mercedes-glc",
+   "brand": "Mercedes-Benz",
+   "price": {
+    "1d": 200,
+    "2d": 350,
+    "3d": 550,
+    "week": 1000,
+    "month": 2500
+   },
+   "price_source": "docx",
+   "deposit_eur": 2000,
+   "og_image": null
+  },
+  {
+   "url": "/coches/mercedes-a200-4matic",
+   "canonical": "https://serresdrive.com/coches/mercedes-a200-4matic",
+   "type": "car",
+   "index": true,
+   "title": "Alquiler Mercedes A200 4Matic en Barcelona desde 150 €/día",
+   "description": "Alquila el Mercedes A200 4Matic en Barcelona: 150 € por día, 250 € dos días, 900 € por semana. Entrega en hotel o aeropuerto por 100 €. Reserva por WhatsApp.",
+   "h1": "Alquiler Mercedes A200 4Matic en Barcelona",
+   "schema": [
+    "Product",
+    "Offer",
+    "BreadcrumbList",
+    "FAQPage"
+   ],
+   "breadcrumb": [
+    [
+     "Inicio",
+     "/"
+    ],
+    [
+     "Flota",
+     "/flota"
+    ],
+    [
+     "Mercedes-AMG",
+     "/flota/mercedes-amg"
+    ]
+   ],
+   "links_to": [
+    "/flota/mercedes-amg",
+    "/coches/mercedes-amg-a45",
+    "/coches/volkswagen-golf-r",
+    "/coches/mercedes-glc",
+    "/tarifas",
+    "/como-funciona",
+    "/condiciones-de-alquiler"
+   ],
+   "sitemap": {
+    "priority": 0.8,
+    "changefreq": "monthly"
+   },
+   "slug": "mercedes-a200-4matic",
+   "brand": "Mercedes-Benz",
+   "price": {
+    "1d": 150,
+    "2d": 250,
+    "3d": 400,
+    "week": 900,
+    "month": 1800
+   },
+   "price_source": "docx",
+   "deposit_eur": 2000,
+   "og_image": null
+  },
+  {
+   "url": "/tarifas",
+   "canonical": "https://serresdrive.com/tarifas",
+   "type": "tarifas",
+   "index": true,
+   "title": "Tarifas de alquiler de coches de lujo en Barcelona | Serres Drive",
+   "description": "Precios por 1, 2 y 3 días, semana y mes de los 13 coches: desde 150 €/día (Mercedes A200) hasta el Lamborghini Urus. Fianza desde 2.000 €. Sin sorpresas.",
+   "h1": "Tarifas de alquiler",
+   "schema": [
+    "Table",
+    "BreadcrumbList"
+   ],
+   "breadcrumb": [
+    [
+     "Inicio",
+     "/"
+    ]
+   ],
+   "links_to": [
+    "/coches/mercedes-amg-g63",
+    "/coches/lamborghini-urus",
+    "/coches/audi-rs6-avant",
+    "/coches/porsche-911-cabrio",
+    "/coches/porsche-911-carrera-s",
+    "/coches/porsche-cayenne-hybrid",
+    "/coches/mercedes-amg-a45",
+    "/coches/audi-rs3-sportback",
+    "/coches/audi-rsq3",
+    "/coches/volkswagen-golf-r",
+    "/coches/range-rover-velar",
+    "/coches/mercedes-glc",
+    "/coches/mercedes-a200-4matic",
+    "/como-funciona",
+    "/condiciones-de-alquiler"
+   ],
+   "sitemap": {
+    "priority": 0.8,
+    "changefreq": "weekly"
+   }
+  },
+  {
+   "url": "/como-funciona",
+   "canonical": "https://serresdrive.com/como-funciona",
+   "type": "como-funciona",
+   "index": true,
+   "title": "Cómo funciona: elige, reserva, entrega y conduce | Serres Drive",
+   "description": "Cuatro pasos: elige tu coche, reserva por WhatsApp, recíbelo en tu hotel, casa o aeropuerto (100 €) y conduce. Fianza desde 2.000 €. Condiciones claras.",
+   "h1": "Cómo funciona",
+   "schema": [
+    "HowTo",
+    "FAQPage",
+    "BreadcrumbList"
+   ],
+   "breadcrumb": [
+    [
+     "Inicio",
+     "/"
+    ]
+   ],
+   "links_to": [
+    "/flota",
+    "/tarifas",
+    "/condiciones-de-alquiler",
+    "/contacto"
+   ],
+   "sitemap": {
+    "priority": 0.6,
+    "changefreq": "monthly"
+   }
+  },
+  {
+   "url": "/condiciones-de-alquiler",
+   "canonical": "https://serresdrive.com/condiciones-de-alquiler",
+   "type": "condiciones",
+   "index": true,
+   "title": "Condiciones y requisitos de alquiler | Serres Drive",
+   "description": "Desde 18 años con carnet en vigor, sin antigüedad mínima. 150 km por día incluidos. Fianza desde 2.000 €. Entrega en hotel o aeropuerto por 100 €.",
+   "h1": "Condiciones de alquiler",
+   "schema": [
+    "FAQPage",
+    "BreadcrumbList"
+   ],
+   "breadcrumb": [
+    [
+     "Inicio",
+     "/"
+    ]
+   ],
+   "links_to": [
+    "/como-funciona",
+    "/tarifas",
+    "/contacto"
+   ],
+   "sitemap": {
+    "priority": 0.6,
+    "changefreq": "monthly"
+   },
+   "conditions": {
+    "_source": "owner, 03.09.2026 (chat): «минимум 18 лет, без стажа только права, 150 км»",
+    "min_age": 18,
+    "licence": "carnet de conducir en vigor; sin antigüedad mínima",
+    "km_included_per_day": 150,
+    "km_note": "ASSUMED per day — owner wrote '150 km' without unit; confirm. Extra-km price unknown.",
+    "pending": [
+     "seguro / franquicia",
+     "precio km extra",
+     "combustible",
+     "cancelación",
+     "documentos (DNI/pasaporte, tarjeta para la fianza)"
+    ]
+   },
+   "content_note": "Confirmado 03.09: 18 años, solo carnet en vigor, 150 km/día (unidad por confirmar). Pendiente: seguro/franquicia, precio km extra, combustible, cancelación, documentos."
+  },
+  {
+   "url": "/por-que-serres",
+   "canonical": "https://serresdrive.com/por-que-serres",
+   "type": "about",
+   "index": true,
+   "title": "Por qué Serres Drive | Alquiler de coches de lujo en Barcelona",
+   "description": "Solo publicamos los coches que puedes reservar hoy. Cada vehículo pasa por el detailing de Serres Wrap Center antes de la entrega. Reserva directa por WhatsApp.",
+   "h1": "Por qué Serres Drive",
+   "schema": [
+    "AboutPage",
+    "BreadcrumbList"
+   ],
+   "breadcrumb": [
+    [
+     "Inicio",
+     "/"
+    ]
+   ],
+   "links_to": [
+    "/flota",
+    "/como-funciona",
+    "/contacto"
+   ],
+   "sitemap": {
+    "priority": 0.4,
+    "changefreq": "monthly"
+   }
+  },
+  {
+   "url": "/contacto",
+   "canonical": "https://serresdrive.com/contacto",
+   "type": "contacto",
+   "index": true,
+   "title": "Contacto | Serres Drive, alquiler de coches de lujo en Barcelona",
+   "description": "Escríbenos por WhatsApp con el coche y las fechas y te confirmamos disponibilidad al momento. Sant Cugat del Vallès, entregas en toda el área de Barcelona.",
+   "h1": "Contacto",
+   "schema": [
+    "AutoRental",
+    "ContactPage",
+    "BreadcrumbList"
+   ],
+   "breadcrumb": [
+    [
+     "Inicio",
+     "/"
+    ]
+   ],
+   "links_to": [
+    "/flota",
+    "/como-funciona"
+   ],
+   "sitemap": {
+    "priority": 0.5,
+    "changefreq": "monthly"
+   }
+  },
+  {
+   "url": "/bodas",
+   "canonical": "https://serresdrive.com/bodas",
+   "type": "landing",
+   "index": true,
+   "title": "Coche de lujo para bodas en Barcelona, sin chófer | Serres Drive",
+   "description": "Porsche 911 Cabrio, Lamborghini Urus o Mercedes-AMG G63 para tu boda: tú conduces. Entrega y recogida en el lugar de la boda por 100 €. Precios por día.",
+   "h1": "Coche de lujo para tu boda en Barcelona",
+   "schema": [
+    "Service",
+    "FAQPage",
+    "BreadcrumbList"
+   ],
+   "breadcrumb": [
+    [
+     "Inicio",
+     "/"
+    ]
+   ],
+   "links_to": [
+    "/coches/porsche-911-cabrio",
+    "/coches/lamborghini-urus",
+    "/coches/mercedes-amg-g63",
+    "/flota",
+    "/tarifas"
+   ],
+   "sitemap": {
+    "priority": 0.7,
+    "changefreq": "monthly"
+   },
+   "phase": 2
+  },
+  {
+   "url": "/eventos-y-rodajes",
+   "canonical": "https://serresdrive.com/eventos-y-rodajes",
+   "type": "landing",
+   "index": true,
+   "title": "Coche de lujo para eventos y rodajes en Barcelona | Serres Drive",
+   "description": "Porsche, Lamborghini, Mercedes-AMG, Audi y Range Rover para sesiones de fotos, videoclips, rodajes y eventos. Entrega en el lugar del evento por 100 €.",
+   "h1": "Coches de lujo para eventos, rodajes y sesiones de fotos",
+   "schema": [
+    "Service",
+    "FAQPage",
+    "BreadcrumbList"
+   ],
+   "breadcrumb": [
+    [
+     "Inicio",
+     "/"
+    ]
+   ],
+   "links_to": [
+    "/flota",
+    "/coches/mercedes-amg-g63",
+    "/coches/lamborghini-urus",
+    "/coches/porsche-911-carrera-s",
+    "/tarifas"
+   ],
+   "sitemap": {
+    "priority": 0.6,
+    "changefreq": "monthly"
+   },
+   "phase": 2
+  },
+  {
+   "url": "/entrega-aeropuerto-barcelona",
+   "canonical": "https://serresdrive.com/entrega-aeropuerto-barcelona",
+   "type": "landing",
+   "index": true,
+   "title": "Coches de lujo en el aeropuerto de Barcelona | Serres Drive",
+   "description": "Recoge tu Porsche, Lamborghini, Mercedes-AMG o Range Rover al aterrizar en El Prat: entrega en la terminal por 100 €. Reserva por WhatsApp antes de volar.",
+   "h1": "Entrega en el aeropuerto de Barcelona-El Prat",
+   "schema": [
+    "Service",
+    "FAQPage",
+    "BreadcrumbList"
+   ],
+   "breadcrumb": [
+    [
+     "Inicio",
+     "/"
+    ]
+   ],
+   "links_to": [
+    "/flota",
+    "/como-funciona",
+    "/tarifas"
+   ],
+   "sitemap": {
+    "priority": 0.6,
+    "changefreq": "monthly"
+   },
+   "phase": 2
+  },
+  {
+   "url": "/politica-de-privacidad",
+   "canonical": "https://serresdrive.com/politica-de-privacidad",
+   "type": "legal",
+   "index": true,
+   "title": "Política de privacidad | Serres Drive",
+   "description": "Cómo tratamos tus datos personales al reservar por WhatsApp o formulario. Responsable, finalidad, derechos y plazos de conservación.",
+   "h1": "Política de privacidad",
+   "schema": [
+    "WebPage"
+   ],
+   "breadcrumb": [
+    [
+     "Inicio",
+     "/"
+    ]
+   ],
+   "links_to": [],
+   "sitemap": {
+    "priority": 0.2,
+    "changefreq": "yearly"
+   }
+  },
+  {
+   "url": "/politica-de-cookies",
+   "canonical": "https://serresdrive.com/politica-de-cookies",
+   "type": "legal",
+   "index": true,
+   "title": "Política de cookies | Serres Drive",
+   "description": "Qué cookies usa serresdrive.com (analítica y publicidad de Google), para qué sirven y cómo cambiar tu consentimiento en cualquier momento.",
+   "h1": "Política de cookies",
+   "schema": [
+    "WebPage"
+   ],
+   "breadcrumb": [
+    [
+     "Inicio",
+     "/"
+    ]
+   ],
+   "links_to": [],
+   "sitemap": {
+    "priority": 0.2,
+    "changefreq": "yearly"
+   }
+  },
+  {
+   "url": "/aviso-legal",
+   "canonical": "https://serresdrive.com/aviso-legal",
+   "type": "legal",
+   "index": true,
+   "title": "Aviso legal | Serres Drive",
+   "description": "Datos identificativos del titular de serresdrive.com, condiciones de uso del sitio, propiedad intelectual y legislación aplicable.",
+   "h1": "Aviso legal",
+   "schema": [
+    "WebPage"
+   ],
+   "breadcrumb": [
+    [
+     "Inicio",
+     "/"
+    ]
+   ],
+   "links_to": [],
+   "sitemap": {
+    "priority": 0.2,
+    "changefreq": "yearly"
+   }
+  }
+ ],
+ "redirects_301": {
+  "/alquiler-mercedes-amg-g63-barcelona.html": "/coches/mercedes-amg-g63",
+  "/alquiler-lamborghini-urus-barcelona.html": "/coches/lamborghini-urus",
+  "/alquiler-audi-rs6-avant-barcelona.html": "/coches/audi-rs6-avant",
+  "/alquiler-porsche-911-targa-gts-barcelona.html": "/coches/porsche-911-cabrio",
+  "/alquiler-porsche-911-carrera-992-barcelona.html": "/coches/porsche-911-carrera-s",
+  "/alquiler-porsche-cayenne-gts-coupe-barcelona.html": "/coches/porsche-cayenne-hybrid",
+  "/alquiler-mercedes-amg-a45-s-barcelona.html": "/coches/mercedes-amg-a45",
+  "/alquiler-audi-rs3-barcelona.html": "/coches/audi-rs3-sportback",
+  "/alquiler-audi-rsq3-sportback-barcelona.html": "/coches/audi-rsq3",
+  "/alquiler-volkswagen-golf-r-barcelona.html": "/coches/volkswagen-golf-r",
+  "/alquiler-porsche-barcelona.html": "/flota/porsche",
+  "/alquiler-mercedes-barcelona.html": "/flota/mercedes-amg",
+  "/alquiler-audi-barcelona.html": "/flota/audi",
+  "/alquiler-lamborghini-barcelona.html": "/flota/lamborghini",
+  "/alquiler-lamborghini-huracan-coupe-barcelona.html": "/flota/lamborghini",
+  "/alquiler-porsche-cayenne-turbo-gt-barcelona.html": "/coches/porsche-cayenne-hybrid",
+  "/alquiler-porsche-718-spyder-barcelona.html": "/flota/porsche",
+  "/alquiler-mercedes-amg-g63-plus-barcelona.html": "/coches/mercedes-amg-g63",
+  "/alquiler-mercedes-c220d-cabrio-barcelona.html": "/flota/mercedes-amg",
+  "/alquiler-audi-rs-q3-barcelona.html": "/coches/audi-rsq3",
+  "/alquiler-audi-rs4-avant-barcelona.html": "/flota/audi",
+  "/alquiler-audi-a5-avant-barcelona.html": "/flota/audi",
+  "/alquiler-ferrari-barcelona.html": "/flota",
+  "/alquiler-ferrari-458-spider-barcelona.html": "/flota",
+  "/alquiler-ferrari-f8-spider-barcelona.html": "/flota",
+  "/alquiler-ferrari-488-gtb-barcelona.html": "/flota",
+  "/alquiler-ferrari-portofino-m-barcelona.html": "/flota",
+  "/alquiler-mclaren-570s-gt-barcelona.html": "/flota",
+  "/alquiler-aston-martin-dbx-707-barcelona.html": "/flota",
+  "/alquiler-bmw-barcelona.html": "/flota",
+  "/alquiler-bmw-m8-competition-cabrio-barcelona.html": "/flota",
+  "/alquiler-bmw-x7-m60i-barcelona.html": "/flota",
+  "/alquiler-bmw-m4-competition-barcelona.html": "/flota",
+  "/alquiler-bmw-m135i-xdrive-barcelona.html": "/flota",
+  "/alquiler-alfa-romeo-stelvio-quadrifoglio-barcelona.html": "/flota",
+  "/alquiler-maserati-levante-gransport-barcelona.html": "/flota",
+  "/alquiler-abarth-595-competizione-barcelona.html": "/flota",
+  "/fleet.html": "/flota",
+  "/rates.html": "/tarifas",
+  "/how.html": "/como-funciona",
+  "/contact.html": "/contacto",
+  "/flota?marca=porsche": "/flota/porsche",
+  "/flota?marca=lamborghini": "/flota/lamborghini",
+  "/flota?marca=mercedes-amg": "/flota/mercedes-amg",
+  "/flota?marca=audi": "/flota/audi",
+  "/flota?marca=range-rover": "/flota/range-rover",
+  "/flota?marca=volkswagen": "/flota/volkswagen",
+  "/why.html": "/por-que-serres",
+  "/fleet.html?cat=Deportivo": "/flota",
+  "/fleet.html?cat=Descapotable": "/flota",
+  "/fleet.html?cat=Lujo": "/flota",
+  "/fleet.html?cat=SUV": "/flota"
+ }
+}

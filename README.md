@@ -62,8 +62,10 @@ node _build/verify.js            # 212 comprobaciones; debe salir FAIL 0
 | Cambiar diseño | `css/serres.css` (hoja única) |
 | Cambiar comportamiento | `js/site.js` (script único) |
 
-Después de cualquier cambio en `css/` o `js/`, sube el cache-buster `V` en
-`_build/build-site.js` y vuelve a generar.
+El cache-buster `V` es un **hash del contenido** de `css/serres.css` + `js/site.js`,
+así que se actualiza solo: cambia el CSS y cambia la URL. No hay que tocarlo a
+mano — y no se puede olvidar, que es justo lo que pasó dos veces y dejó a los
+navegadores con el CSS viejo cacheado (`immutable`, un año).
 
 ---
 

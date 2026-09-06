@@ -535,10 +535,19 @@ table{border-collapse:collapse;width:100%}
 .footer-social svg{width:17px;height:17px;flex:none}
 .footer-social a:hover svg{color:var(--gold-soft)}
 
-.ico-link{display:inline-flex;align-items:center;gap:8px;transition:color .2s var(--ease)}
+.ico-link{display:inline-flex;align-items:center;gap:9px;transition:color .2s var(--ease)}
 .ico-link svg{width:16px;height:16px;flex:none;color:var(--text-mute);transition:color .2s var(--ease)}
 .ico-link:hover{color:var(--white)}
 .ico-link:hover svg{color:var(--gold)}
+
+/* Marcas oficiales (Instagram, Gmail, WhatsApp): van en SUS colores, así que
+   no heredan currentColor ni el filtro blanco. Cualquier regla de tamaño de
+   arriba les vale; lo que no puede pasar es que se queden sin tamaño, que es
+   lo que las dejaba a tamaño intrínseco. */
+svg.ico-brand{width:18px;height:18px;flex:none;color:initial}
+.footer-social svg.ico-brand{width:19px;height:19px}
+.btn svg.ico-brand{width:19px;height:19px}
+.footer-social a:hover svg.ico-brand,.ico-link:hover svg.ico-brand{color:initial}
 
 .footer .bottom{margin-top:34px;padding-top:22px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between;font-size:13px;color:var(--text-mute)}
 .footer .bottom a{color:var(--text-dim)}
