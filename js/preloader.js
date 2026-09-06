@@ -122,7 +122,7 @@
   // far better than a per-letter drop: it reads as the word being laid
   // down at speed.
   function markHTML() {
-    return '<img class="pl-mark" src="assets/brand/serres-wordmark.svg" alt="" ' +
+    return '<img class="pl-mark" src="/assets/brand/serres-wordmark.svg" alt="" ' +
            'width="1000" height="89" decoding="async">';
   }
 

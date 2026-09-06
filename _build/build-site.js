@@ -62,6 +62,22 @@ const T = fleet.terms;
 const assetHash = (...files) => require('crypto').createHash('sha1')
   .update(files.map(f => fs.readFileSync(path.join(ROOT, f))).join('')).digest('hex').slice(0, 10);
 const V = 'v=' + assetHash('css/serres.css', 'js/site.js');
+
+/* Cache-buster POR IMAGEN. Las fotos se sirven con cache larga y su nombre
+   no cambia cuando cambia el contenido: al sustituir las fotos del Urus
+   amarillo por las del negro, todo navegador que ya hubiera entrado seguia
+   viendo el amarillo. Mismo fallo que tuve con el CSS, y aqui es peor
+   porque el nombre del archivo lo fija el slug del coche y no puede cambiar.
+   El hash se calcula una vez por archivo y se cachea en memoria. */
+const _assetV = new Map();
+const asset = (p) => {
+  if (!_assetV.has(p)) {
+    try { _assetV.set(p, assetHash(p)); }
+    catch (e) { _assetV.set(p, null); }      // el archivo no existe: sin sufijo
+  }
+  const v = _assetV.get(p);
+  return v ? `${p}?v=${v}` : p;
+};
 /* Mismo mecanismo para los assets que solo usa la portada restaurada. */
 const VH = 'v=' + assetHash('css/home.css', 'css/featured.css', 'css/preloader.css',
   'js/preloader.js', 'js/experience.js', 'js/featured.js', 'js/fleet.js');
@@ -144,7 +160,7 @@ function header(r, ra, current, canonicalUrl = '/') {
   return `<header class="nav">
   <div class="wrap">
     <a href="${r || './'}" class="brand" aria-label="${L.nav.home}">
-      <img src="${ra}assets/brand/serres-wordmark.svg" alt="Serres" width="1000" height="89" decoding="async">
+      <img src="${ra}${asset("assets/brand/serres-wordmark.svg")}" alt="Serres" width="1000" height="89" decoding="async">
       <span class="b-drive">Drive</span>
     </a>
     <nav class="nav-links" aria-label="${L.nav.primary}">
@@ -169,7 +185,7 @@ function footer(r, ra) {
   <div class="wrap">
     <div class="top">
       <a href="${r || './'}" class="brand" aria-label="${L.nav.home}">
-        <img src="${ra}assets/brand/serres-wordmark.svg" alt="Serres" width="1000" height="89" loading="lazy" decoding="async">
+        <img src="${ra}${asset("assets/brand/serres-wordmark.svg")}" alt="Serres" width="1000" height="89" loading="lazy" decoding="async">
         <span class="b-drive">Drive</span>
       </a>
       <nav class="footer-nav" aria-label="${L.footer.nav}">
@@ -231,9 +247,9 @@ ${alternates}
 <meta name="twitter:title" content="${esc(meta.title)}">
 <meta name="twitter:description" content="${esc(meta.description)}">
 <meta name="twitter:image" content="${meta.image}">
-<link rel="icon" href="${ra}assets/brand/favicon.svg" type="image/svg+xml">
-<link rel="icon" href="${ra}assets/brand/favicon-96.png" type="image/png" sizes="96x96">
-<link rel="apple-touch-icon" href="${ra}assets/brand/apple-touch-icon.png">
+<link rel="icon" href="${ra}${asset("assets/brand/favicon.svg")}" type="image/svg+xml">
+<link rel="icon" href="${ra}${asset("assets/brand/favicon-96.png")}" type="image/png" sizes="96x96">
+<link rel="apple-touch-icon" href="${ra}${asset("assets/brand/apple-touch-icon.png")}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
@@ -264,8 +280,8 @@ function carCard(c, r, ra, { lazy = true, level = 2 } = {}) {
   return `<article class="car-card">
   <a class="shot card-link" href="${r}coches/${c.slug}/" aria-label="${esc(c.name)} — ${L.common.seeCarAria}">
     <picture>
-      <source type="image/webp" srcset="${ra}${g.webp800} 800w, ${ra}${g.webp} ${g.width}w" sizes="(max-width:640px) 92vw, (max-width:1040px) 46vw, 30vw">
-      <img src="${ra}${g.jpg800}" width="800" height="533" alt="${esc(c.name)} ${L.common.rentalAlt}, ${L.common.threeQuarterAlt}"${lazy ? ' loading="lazy"' : ''} decoding="async">
+      <source type="image/webp" srcset="${ra}${asset(g.webp800)} 800w, ${ra}${asset(g.webp)} ${g.width}w" sizes="(max-width:640px) 92vw, (max-width:1040px) 46vw, 30vw">
+      <img src="${ra}${asset(g.jpg800)}" width="800" height="533" alt="${esc(c.name)} ${L.common.rentalAlt}, ${L.common.threeQuarterAlt}"${lazy ? ' loading="lazy"' : ''} decoding="async">
     </picture>
   </a>
   <div class="body">
@@ -485,13 +501,12 @@ for (const lang of LANGS) {
     <div class="fc-pin">
       <div class="fc-head">
         <p class="fc-eyebrow">${L.home.featured}</p>
-        <p class="fc-sub">${f(L.home.featuredSub, { n: featured.length, total: fleet.cars.length })}</p>
       </div>
       <div class="fc-stage">
         ${featured.map(c => `<a class="fc-slide" href="${r}coches/${c.slug}/">
           <picture>
-            <source type="image/webp" srcset="${ra}assets/img/cars/${c.slug}.webp">
-            <img src="${ra}assets/img/cars/${c.slug}.jpg" alt="${esc(c.name)} ${L.common.rentalAlt}" loading="lazy" decoding="async" width="1800" height="1013">
+            <source type="image/webp" srcset="${ra}${asset(`assets/img/cars/${c.slug}.webp`)}">
+            <img src="${ra}${asset(`assets/img/cars/${c.slug}.jpg`)}" alt="${esc(c.name)} ${L.common.rentalAlt}" loading="lazy" decoding="async" width="1800" height="1013">
           </picture>
           <h2 class="fc-title"><span class="fc-brand">${esc(brandOf(c).label)}</span>${esc(c.name.replace(brandOf(c).label, '').replace(/^[\\s-]+/, '') || c.name)}</h2>
         </a>`).join('\n        ')}
@@ -550,7 +565,7 @@ for (const lang of LANGS) {
         </div>
         <a class="swc-shot" href="${C.wrapCenter}" target="_blank" rel="noopener"
            aria-label="${L.home.swcShotAria}">
-          <img src="${ra}assets/img/wrapcenter/hero-poster.jpg" width="1600" height="900" loading="lazy" decoding="async"
+          <img src="${ra}${asset("assets/img/wrapcenter/hero-poster.jpg")}" width="1600" height="900" loading="lazy" decoding="async"
                alt="${L.home.swcShotAlt}">
           <span class="swc-shot-tag">${L.home.swcShotTag}</span>
         </a>
@@ -667,13 +682,13 @@ for (const c of fleet.cars) {
       <div class="gallery">
         <div class="main" id="gMain">
           <picture>
-            <source type="image/webp" srcset="${ra}${g0.webp}" id="gMainWebp">
-            <img src="${ra}${g0.jpg}" width="${g0.width}" height="${g0.height}" alt="${esc(c.name)} ${L.common.rentalAlt}" id="gMainImg" fetchpriority="high" decoding="async">
+            <source type="image/webp" srcset="${ra}${asset(g0.webp)}" id="gMainWebp">
+            <img src="${ra}${asset(g0.jpg)}" width="${g0.width}" height="${g0.height}" alt="${esc(c.name)} ${L.common.rentalAlt}" id="gMainImg" fetchpriority="high" decoding="async">
           </picture>
         </div>
         ${c.gallery.length > 1 ? `<div class="thumbs" style="--n:${c.gallery.length}" role="group" aria-label="${f(L.carPage.gallery, { car: esc(c.name) })}">
-          ${c.gallery.map((g, i) => `<button type="button" data-jpg="${ra}${g.jpg}" data-webp="${ra}${g.webp}"${i === 0 ? ' aria-current="true"' : ''} aria-label="${f(L.carPage.photoOf, { n: i + 1, total: c.gallery.length })}">
-            <img src="${ra}${g.jpg800}" alt="" width="800" height="533" loading="lazy" decoding="async">
+          ${c.gallery.map((g, i) => `<button type="button" data-jpg="${ra}${asset(g.jpg)}" data-webp="${ra}${asset(g.webp)}"${i === 0 ? ' aria-current="true"' : ''} aria-label="${f(L.carPage.photoOf, { n: i + 1, total: c.gallery.length })}">
+            <img src="${ra}${asset(g.jpg800)}" alt="" width="800" height="533" loading="lazy" decoding="async">
           </button>`).join('\n          ')}
         </div>` : ''}
       </div>
@@ -772,7 +787,7 @@ ${others.length ? `<section class="section--tight" style="padding-top:0">
         <tbody>
           ${cars.map(c => `<tr>
             <td><div class="car-cell">
-              <img src="${ra}${c.gallery[0].jpg800}" alt="" width="64" height="43" loading="lazy" decoding="async">
+              <img src="${ra}${asset(c.gallery[0].jpg800)}" alt="" width="64" height="43" loading="lazy" decoding="async">
               <a href="${r}coches/${c.slug}/"><b>${esc(c.name)}</b></a>
             </div></td>
             <td class="d1">${eur(c.prices.d1)}</td><td>${eur(c.prices.d2)}</td><td>${eur(c.prices.d3)}</td>
@@ -803,8 +818,8 @@ ${others.length ? `<section class="section--tight" style="padding-top:0">
     </div>
     <div class="plate" style="margin-bottom:36px"><div class="plate-core">
       <picture>
-        <source type="image/webp" srcset="${ra}${shot.webp}">
-        <img src="${ra}${shot.jpg}" width="${shot.width}" height="${shot.height}" alt="${L.how.shotAlt}" loading="lazy" decoding="async">
+        <source type="image/webp" srcset="${ra}${asset(shot.webp)}">
+        <img src="${ra}${asset(shot.jpg)}" width="${shot.width}" height="${shot.height}" alt="${L.how.shotAlt}" loading="lazy" decoding="async">
       </picture>
     </div></div>
     <div class="steps">
@@ -873,8 +888,8 @@ ${others.length ? `<section class="section--tight" style="padding-top:0">
     </div>
     <div class="plate" style="margin-bottom:36px"><div class="plate-core">
       <picture>
-        <source type="image/webp" srcset="${ra}${shot.webp}">
-        <img src="${ra}${shot.jpg}" width="${shot.width}" height="${shot.height}" alt="${L.why.shotAlt}" loading="lazy" decoding="async">
+        <source type="image/webp" srcset="${ra}${asset(shot.webp)}">
+        <img src="${ra}${asset(shot.jpg)}" width="${shot.width}" height="${shot.height}" alt="${L.why.shotAlt}" loading="lazy" decoding="async">
       </picture>
     </div></div>
     <div class="steps">

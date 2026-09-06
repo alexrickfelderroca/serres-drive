@@ -36,7 +36,7 @@
   display:inline-flex;align-items:center;gap:clamp(12px,1.6vw,20px);
   font-family:var(--font-head);font-size:clamp(1.6rem,4.2vw,3rem);font-weight:700;
   letter-spacing:.12em;text-transform:uppercase;line-height:1;
-  background:var(--gold-grad);
+  background:var(--oro-grad);
   -webkit-background-clip:text;background-clip:text;
   color:transparent;-webkit-text-fill-color:transparent;
   filter:drop-shadow(0 3px 14px rgba(0,0,0,.55));

@@ -173,8 +173,18 @@ ErrorDocument 404 /404.html
 # they can be immutable for a year. HTML/XML must revalidate so a deploy
 # is visible immediately.
 <IfModule mod_headers.c>
-  <FilesMatch "\\.(css|js|jpg|jpeg|png|webp|avif|svg|ico|woff|woff2)$">
+  # css y js SI pueden ser immutable: su URL lleva un hash del contenido, asi
+  # que al cambiar el archivo cambia la URL.
+  <FilesMatch "\\.(css|js|woff|woff2)$">
     Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  # Las imagenes NO. Su nombre lo fija el slug del coche y no puede cambiar
+  # cuando cambia la foto. Con "immutable" un ano, sustituir las fotos del
+  # Urus amarillo por las del negro no llegaba a quien ya hubiera entrado:
+  # seguia viendo el amarillo. Las URLs llevan ademas su propio ?v=<hash>,
+  # asi que esto es el cinturon y aquello los tirantes.
+  <FilesMatch "\\.(jpg|jpeg|png|webp|avif|svg|ico|glb|mp4)$">
+    Header set Cache-Control "public, max-age=604800, stale-while-revalidate=86400"
   </FilesMatch>
   <FilesMatch "\\.(html|xml|txt|json)$">
     Header set Cache-Control "no-cache"

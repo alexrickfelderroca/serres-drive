@@ -221,7 +221,7 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
         const tile = { mesh: mesh, slug: car.slug, name: car.name, price: car.price, lx: x, lz: z, baseRow: baseRow };
         tiles.push(tile); tileMeshes.push(mesh); meshToTile.set(mesh, tile);
 
-        texLoader.load("assets/img/cars/ring/" + car.slug + ".jpg", function (tex) {
+        texLoader.load("/assets/img/cars/ring/" + car.slug + ".jpg" + (window.SERRES_RING_V ? "?v=" + window.SERRES_RING_V : ""), function (tex) {
           if ("colorSpace" in tex) tex.colorSpace = THREE.SRGBColorSpace;
           tex.anisotropy = Math.min(4, renderer.capabilities.getMaxAnisotropy());
           const img = tex.image;
@@ -265,7 +265,7 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
   const draco = new DRACOLoader().setDecoderPath("https://www.gstatic.com/draco/versioned/decoders/1.5.6/");
   const loader = new GLTFLoader().setDRACOLoader(draco);
 
-  loader.load("assets/models/gt3.glb", function (gltf) {
+  loader.load("/assets/models/gt3.glb", function (gltf) {
     const inner = gltf.scene;
     inner.traverse(function (n) {
       if (n.isMesh && n.material) {

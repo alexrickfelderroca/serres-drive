@@ -41,6 +41,9 @@
      "DESTACADOS" se pinta con color:transparent sobre nada y queda
      INVISIBLE. (--pl-shift lo inyecta preloader.js en caliente.) */
   --gold-grad:linear-gradient(105deg,#8a8d97 0%,#c9ccd4 18%,#ffffff 38%,#d0d3da 52%,#8a8d97 70%,#eef0f4 88%,#a6a6b0 100%);
+  /* Oro de verdad, cálido, para los rótulos que tienen que destacar sobre
+     la foto. El --gold-grad de arriba es cromo plateado y no es lo mismo. */
+  --oro-grad:linear-gradient(102deg,#8a6a24 0%,#c9a24a 16%,#f3e0a3 34%,#e8cc7c 48%,#a9822f 64%,#f7ecc0 84%,#b8912f 100%);
   --shadow:0 24px 60px -24px rgba(0,0,0,.85);
 
   /* whatsapp */
@@ -625,13 +628,6 @@ svg.ico-brand{width:18px;height:18px;flex:none;color:initial}
 .sd-below{position:relative;z-index:2;background:var(--bg)}
 .home-exp .footer{position:relative;z-index:2}
 
-/* Subtítulo de «Destacados»: el rótulo solo no decía QUÉ son estos coches. */
-.fc-sub{
-  margin-top:10px;max-width:34ch;
-  font-size:clamp(13px,1.5vw,15px);color:var(--text-dim);
-  text-shadow:0 1px 10px rgba(6,6,8,.85);
-}
-.fc-on .fc-sub{color:#f2f2f5}
 
 /* El rótulo va en degradado cromo y el subtítulo en gris claro, y los coches
    están fotografiados sobre ciclorama BLANCO: encima del Urus o del Cayenne
@@ -640,7 +636,7 @@ svg.ico-brand{width:18px;height:18px;flex:none;color:initial}
 .fc-on .fc-head{position:relative;isolation:isolate}
 .fc-on .fc-head::before{
   content:"";position:absolute;z-index:-1;
-  inset:-28px -40px -34px -40px;
+  inset:-26px -40px -26px -40px;
   background:linear-gradient(180deg,
     rgba(6,6,9,.86) 0%,rgba(6,6,9,.72) 38%,
     rgba(6,6,9,.38) 70%,rgba(6,6,9,0) 100%);

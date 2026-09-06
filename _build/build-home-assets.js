@@ -96,6 +96,14 @@ const ACCENT = {
     return '  ' + JSON.stringify(o);
   }).join(',\n');
 
+  /* Las texturas del tubo las pide experience.js en caliente, asi que no
+     pasan por el generador de HTML y no llevan hash en la URL. Se publica
+     una version calculada sobre los propios archivos: al cambiar una foto
+     cambia la version y el navegador deja de servir la vieja de cache. */
+  const ringV = require('crypto').createHash('sha1')
+    .update(fleet.cars.map(c => fs.readFileSync(path.join(RING, c.slug + '.jpg'))).join(''))
+    .digest('hex').slice(0, 10);
+
   const js = `/* =====================================================================
    SERRES DRIVE — dataset para la portada (hero 3D + tubo)
    GENERADO por _build/build-home-assets.js desde data/fleet.json.
@@ -105,6 +113,7 @@ const ACCENT = {
    Son los 13 coches REALES. La version anterior de este archivo tenia 31
    e incluia Ferrari, BMW, McLaren y demas, que ya no estan en la flota.
    ===================================================================== */
+window.SERRES_RING_V = "${ringV}";
 window.SERRES_FLEET = [
 ${entries}
 ];
