@@ -116,18 +116,23 @@ RewriteRule ^index\\.html$ / [R=301,L]
 # in paid ads, so they must land on the static brand page WITHOUT losing
 # the click id. Most specific pattern first; %N is read from the LAST
 # RewriteCond, which is why each case is written out in full.
-${[['^(.+)&marca=([a-zA-Z0-9-]+)&(.+)$', '%1&%3'],
-   ['^(.+)&marca=([a-zA-Z0-9-]+)$', '%1'],
-   ['^marca=([a-zA-Z0-9-]+)&(.+)$', null],
-   ['^marca=([a-zA-Z0-9-]+)$', null]].map(([cond, keep]) => {
-  const slug = keep === null ? '%1' : '%2';
-  const rest = keep === null ? (cond.includes('&(.+)$') ? '%2' : '') : keep;
-  return Object.entries(MARCA).map(([from, to]) =>
-    `RewriteCond %{QUERY_STRING} ${cond.replace('([a-zA-Z0-9-]+)', from)} [NC]\nRewriteRule ^flota/?$ /flota/${to}/?${rest} [R=301,L,NE]`
+${[
+  /* The brand is written into the pattern as a literal, so it is NOT a
+     capture group — the remaining %N are only the surrounding params.
+     Getting this wrong silently ate the gclid on
+     /flota?marca=porsche&gclid=…, which is the exact failure the brief
+     calls out. Order matters: most specific pattern first. */
+  { cond: '^(.+)&marca=BRAND&(.+)$', rest: '%1&%2' },   // params either side
+  { cond: '^(.+)&marca=BRAND$',      rest: '%1'    },   // params before only
+  { cond: '^marca=BRAND&(.+)$',      rest: '%1'    },   // params after only
+  { cond: '^marca=BRAND$',           rest: ''      },   // marca alone
+].map(({ cond, rest }) =>
+  Object.entries(MARCA).map(([from, to]) =>
+    `RewriteCond %{QUERY_STRING} ${cond.replace('BRAND', from)} [NC]\nRewriteRule ^flota/?$ /flota/${to}/?${rest} [R=301,L,NE]`
   ).concat(MARCA_GONE.map(from =>
-    `RewriteCond %{QUERY_STRING} ${cond.replace('([a-zA-Z0-9-]+)', from)} [NC]\nRewriteRule ^flota/?$ /flota/?${rest} [R=301,L,NE]`
-  )).join('\n');
-}).join('\n')}
+    `RewriteCond %{QUERY_STRING} ${cond.replace('BRAND', from)} [NC]\nRewriteRule ^flota/?$ /flota/?${rest} [R=301,L,NE]`
+  )).join('\n')
+).join('\n')}
 
 # --- legacy car detail: car.html?slug=X -> /coches/X/ ------------------
 RewriteCond %{QUERY_STRING} ^slug=([a-zA-Z0-9-]+)$
