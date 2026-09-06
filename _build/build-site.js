@@ -259,7 +259,7 @@ ${extraScripts}
 }
 
 /* ---------- reusable blocks ------------------------------------------- */
-function carCard(c, r, ra, { lazy = true } = {}) {
+function carCard(c, r, ra, { lazy = true, level = 2 } = {}) {
   const g = c.gallery[0];
   return `<article class="car-card">
   <a class="shot card-link" href="${r}coches/${c.slug}/" aria-label="${esc(c.name)} — ${L.common.seeCarAria}">
@@ -269,7 +269,7 @@ function carCard(c, r, ra, { lazy = true } = {}) {
     </picture>
   </a>
   <div class="body">
-    <h3>${esc(c.name)}</h3>
+    <h${level}>${esc(c.name)}</h${level}>
     <ul class="specs">
       <li>${c.powerCv} CV</li><li>0-100 ${c.zeroToHundred}</li><li>${c.seats} plazas</li><li>${esc(c.bodyType)}</li>
     </ul>
@@ -732,7 +732,7 @@ ${others.length ? `<section class="section--tight" style="padding-top:0">
   <div class="wrap">
     <h2 class="h-sm" style="margin-bottom:20px">${f(L.carPage.moreOfBrand, { brand: b.label })}</h2>
     <div class="car-grid${others.length <= 2 ? ' car-grid--2' : ''}">
-      ${others.map(o => carCard(o, r, ra)).join('\n      ')}
+      ${others.map(o => carCard(o, r, ra, { level: 3 })).join('\n      ')}
     </div>
   </div>
 </section>` : ''}

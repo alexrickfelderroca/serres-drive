@@ -178,7 +178,17 @@ table{border-collapse:collapse;width:100%}
   background:rgba(10,10,11,.82);backdrop-filter:blur(18px) saturate(1.3);
   border-bottom:1px solid var(--line);
 }
-.nav .wrap{display:flex;align-items:center;gap:28px}
+/* La barra usa el ANCHO DE PANTALLA, no el de la columna de texto.
+   Estaba heredando --maxw (1240px) como el resto de .wrap, así que en un
+   monitor de 1680 se apretujaba en 1240 dejando 440px de margen vacío, y
+   «Cómo funciona» y «Por qué Serres» partían en dos líneas. El contenido
+   sigue a 1240; el chrome respira. */
+.nav .wrap{
+  display:flex;align-items:center;gap:clamp(20px,2.6vw,44px);
+  max-width:1680px;
+}
+/* Una etiqueta de dos palabras no se parte nunca. */
+.nav-links a{white-space:nowrap}
 .brand{display:flex;align-items:baseline;gap:9px;flex:none}
 .brand img{width:132px;height:auto}
 .brand .b-drive{
@@ -186,7 +196,7 @@ table{border-collapse:collapse;width:100%}
   letter-spacing:.34em;text-transform:uppercase;
   background:var(--chrome-grad);-webkit-background-clip:text;background-clip:text;color:transparent;
 }
-.nav-links{display:flex;gap:26px;margin-left:auto}
+.nav-links{display:flex;gap:clamp(18px,2vw,34px);margin-left:auto}
 .nav-links a{
   font-family:var(--font-head);font-size:16px;font-weight:500;
   letter-spacing:.11em;text-transform:uppercase;color:var(--text-dim);
@@ -241,7 +251,7 @@ table{border-collapse:collapse;width:100%}
 /* En el menú móvil se ven los cinco a la vez. */
 .mobile-menu .lang-picker{flex-wrap:wrap;gap:8px;margin-top:22px;padding-top:20px;border-top:1px solid var(--line)}
 .mobile-menu .lang-picker a{border-color:var(--line-2);font-size:15px;padding:9px 14px}
-@media (max-width:960px){ .nav-actions .lang-picker{display:none} }
+@media (max-width:1150px){ .nav-actions .lang-picker{display:none} }
 
 .menu-btn{
   display:none;width:44px;height:44px;border-radius:12px;
@@ -276,7 +286,10 @@ table{border-collapse:collapse;width:100%}
 .mobile-menu a:hover{color:var(--gold-soft);padding-left:8px}
 .mobile-menu .btn{margin-top:24px}
 
-@media (max-width:960px){
+/* Con las cinco banderas, el nav de escritorio necesita 1150px; por debajo
+   se pasa al menu, que ya lleva dentro los idiomas. Antes cortaba en 960 y
+   entre 961 y 1080 la barra desbordaba a lo ancho. */
+@media (max-width:1150px){
   .nav-links{display:none}
   .menu-btn{display:inline-flex}
   .brand img{width:112px}
@@ -563,6 +576,7 @@ table{border-collapse:collapse;width:100%}
 
 /* ---------- footer -------------------------------------------------- */
 .footer{border-top:1px solid var(--line);background:var(--bg-2);padding-block:52px 34px;margin-top:clamp(48px,7vw,96px)}
+.footer .wrap{max-width:1680px}
 .footer .top{display:flex;flex-wrap:wrap;gap:32px;justify-content:space-between;align-items:flex-start}
 .footer-nav{display:flex;flex-wrap:wrap;gap:10px 26px}
 .footer-nav a{font-family:var(--font-head);font-size:16px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);transition:color .2s var(--ease)}

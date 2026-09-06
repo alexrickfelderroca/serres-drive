@@ -34,7 +34,10 @@
     });
     // A resize past the breakpoint must not leave the overlay stuck open.
     window.addEventListener('resize', function () {
-      if (window.innerWidth > 960 && menuBtn.getAttribute('aria-expanded') === 'true') setMenu(false);
+      /* 1150 es el mismo punto en el que serres.css devuelve el nav de
+         escritorio. Si los dos números no coinciden, al ensanchar la ventana
+         el menú se queda abierto tapando la página. */
+      if (window.innerWidth > 1150 && menuBtn.getAttribute('aria-expanded') === 'true') setMenu(false);
     });
   }
 
