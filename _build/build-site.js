@@ -29,6 +29,9 @@ const T = fleet.terms;
 const assetHash = (...files) => require('crypto').createHash('sha1')
   .update(files.map(f => fs.readFileSync(path.join(ROOT, f))).join('')).digest('hex').slice(0, 10);
 const V = 'v=' + assetHash('css/serres.css', 'js/site.js');
+/* Mismo mecanismo para los assets que solo usa la portada restaurada. */
+const VH = 'v=' + assetHash('css/home.css', 'css/featured.css', 'css/preloader.css',
+  'js/preloader.js', 'js/experience.js', 'js/featured.js', 'js/fleet.js');
 
 /* ---------- helpers -------------------------------------------------- */
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
@@ -125,7 +128,7 @@ function footer(r) {
 }
 
 /* ---------- page shell ------------------------------------------------ */
-function page({ url, body, schema = [], bodyClass = '', current = '' }) {
+function page({ url, body, schema = [], bodyClass = '', current = '', extraHead = '', extraScripts = '', afterMain = '', beforeMain = '', mainClass = '' }) {
   const meta = seo[url];
   if (!meta) throw new Error(`no seo-meta entry for ${url}`);
   const r = rel(url);
@@ -159,16 +162,20 @@ function page({ url, body, schema = [], bodyClass = '', current = '' }) {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="${r}css/serres.css?${V}">
+${extraHead}
 ${ld}
 </head>
 <body${bodyClass ? ` class="${bodyClass}"` : ''}>
 ${SVG_SPRITE}
 <a class="skip" href="#main">Saltar al contenido</a>
 ${header(r, current)}
-<main id="main">
+${beforeMain}
+<main id="main"${mainClass ? ` class="${mainClass}"` : ''}>
 ${body}
 </main>
+${afterMain}
 ${footer(r)}
+${extraScripts}
 <script src="${r}js/site.js?${V}" defer></script>
 </body>
 </html>
@@ -304,88 +311,196 @@ const write = (url, html) => {
 };
 
 /* --- home ------------------------------------------------------------- */
+/* La portada vuelve a la experiencia anterior a peticion del propietario:
+   hero 3D con el Porsche y scroll suave, carrusel "Destacados", el tubo
+   "Toda la flota, en movimiento", la banda de Serres Wrap Center y el CTA
+   final. Se restauran home.css / featured.css / preloader.css y sus
+   scripts tal cual estaban (cero colisiones de selectores con serres.css,
+   comprobado).
+
+   Lo unico que NO vuelve son los coches que ya no existen: el carrusel
+   llevaba un Ferrari F8 y un Huracan, y el tubo los 31 antiguos. Ahora
+   ambos leen los 13 reales, porque la ETAPA 1 prohibe ensenar coches no
+   disponibles ni como decoracion. El modelo 3D del hero sigue siendo el
+   GT3 RS: es el unico .glb que existe, y esta anotado en OWNER-TODO.
+
+   El resto de paginas no cambia: siguen con serres.css y site.js.        */
 {
   const url = '/', r = rel(url), meta = seo[url];
-  const heroCar = car('porsche-911-cabrio');
-  const g = heroCar.gallery[0];
-  const cheapest = Math.min(...fleet.cars.map(c => c.prices.d1));
-  const body = `<section class="hero">
-  <div class="wrap">
-    <div class="hero-copy">
-      <p class="eyebrow">Sant Cugat del Vallès · Área metropolitana de Barcelona</p>
-      <h1>Alquiler de <span class="chrome">coches de lujo</span> en Barcelona</h1>
-      <p class="lede">${fleet.cars.length} coches disponibles, precio cerrado por día, por semana o por mes, y una sola conversación de WhatsApp para reservarlo.</p>
-      <div class="hero-cta">
-        <a class="btn btn--primary" href="${r}contacto/">Reserva tu vehículo ${btnArrow}</a>
-        <a class="btn btn--secondary" href="${r}flota/">Ver la flota ${btnArrow}</a>
-      </div>
-      <div class="hero-facts">
-        <div class="hero-fact"><b>${fleet.cars.length}</b><span>coches en flota</span></div>
-        <div class="hero-fact"><b>${eur(cheapest)}</b><span>desde, al día</span></div>
-        <div class="hero-fact"><b>${T.minAge} años</b><span>edad mínima</span></div>
-        <div class="hero-fact"><b>${eur(T.deliveryFee)}</b><span>entrega metropolitana</span></div>
-      </div>
-    </div>
-    <div class="hero-plate">
-      <div class="plate"><div class="plate-core">
-        <picture>
-          <source type="image/webp" srcset="${r}${g.webp}">
-          <img src="${r}${g.jpg}" width="${g.width}" height="${g.height}" alt="${esc(heroCar.name)} azul de alquiler en Barcelona" fetchpriority="high" decoding="async">
-        </picture>
-      </div></div>
-      <p class="tag"><b>${esc(heroCar.name)}</b><span>desde ${eur(heroCar.prices.d1)} al día</span></p>
-    </div>
-  </div>
-</section>
+  const featured = ['lamborghini-urus', 'mercedes-amg-g63', 'audi-rs6-avant',
+    'porsche-911-cabrio', 'porsche-cayenne-hybrid'].map(car);
 
-<section class="section grad-band">
-  <div class="wrap">
-    <div class="section-head">
-      <p class="eyebrow">Elige por marca</p>
-      <h2 class="h-lg">Seis marcas en la flota</h2>
-    </div>
-    <div class="brand-grid">
-      ${fleet.brands.map(b => {
-        const cars = carsOf(b.slug);
-        const bg = cars[0].gallery[0];
-        return `<a class="brand-card" href="${r}flota/${b.slug}/">
-        <picture>
-          <source type="image/webp" srcset="${r}${bg.webp800}">
-          <img src="${r}${bg.jpg800}" alt="" width="800" height="533" loading="lazy" decoding="async">
-        </picture>
-        <span class="go">${ICON.arrow}</span>
-        ${brandLogo(b, r)}
-        <b>${b.label}</b>
-        <span class="count">${cars.length} ${cars.length === 1 ? 'coche' : 'coches'} · desde ${eur(Math.min(...cars.map(c => c.prices.d1)))}</span>
-      </a>`;
-      }).join('\n      ')}
-    </div>
-  </div>
-</section>
+  const extraHead = `<link rel="stylesheet" href="${r}css/home.css?${VH}">
+<link rel="stylesheet" href="${r}css/featured.css?${VH}">
+<link rel="stylesheet" href="${r}css/preloader.css?${VH}">
+<script src="${r}js/preloader.js?${VH}"></script>`;
 
-<section class="section section--tight">
-  <div class="wrap split">
-    <div class="section-head">
-      <p class="eyebrow">Contacto</p>
-      <h2 class="h-md">¿Sabes ya qué coche quieres?</h2>
-      <p class="lede">Escríbenos por WhatsApp con las fechas y te confirmamos disponibilidad, fianza y entrega en el mismo mensaje.</p>
-      <div class="hero-cta">
-        <a class="btn btn--wa" href="${waGeneral}" target="_blank" rel="noopener">${ICON.wa}<span>Escríbenos por WhatsApp</span></a>
-        <a class="btn btn--ghost" href="${r}contacto/">Formulario ${btnArrow}</a>
-      </div>
-      <div class="footer-social" style="margin-top:18px">
-        <a href="${C.instagram}" target="_blank" rel="noopener">${ICON.ig}<span>${esc(C.instagramHandle)}</span></a>
-        <a href="mailto:${C.email}">${ICON.gmail}<span>${C.email}</span></a>
-      </div>
+  /* Orden y atributos calcados del index.html anterior: experience.js es un
+     modulo ES y necesita el importmap de three delante; sin `type="module"`
+     el navegador tira "Cannot use import statement outside a module" y el
+     hero 3D no arranca. Los CDN van sin defer porque el inline de
+     registerPlugin corre justo detras. */
+  const extraScripts = `<script src="https://unpkg.com/lenis@1.1.16/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>window.gsap&&window.ScrollTrigger&&gsap.registerPlugin(ScrollTrigger);</script>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+}}
+</script>
+<script src="${r}js/fleet.js?${VH}"></script>
+<script type="module" src="${r}js/experience.js?${VH}"></script>
+<script src="${r}js/featured.js?${VH}"></script>
+<!-- Rellena la rejilla de respaldo de .oa-choose desde la flota. Si no hay
+     WebGL ni JS, se queda el enlace estatico "Ver la flota completa". -->
+<script>
+(function () {
+  var grid = document.getElementById("chooseGrid");
+  var fleet = window.SERRES_FLEET;
+  if (!grid || !fleet || !fleet.length) return;
+  function eur(n){ return String(n).replace(/\\B(?=(\\d{3})+(?!\\d))/g, "."); }
+  var items = fleet.map(function (c) {
+    var px = c.prices && c.prices.d1 ? eur(c.prices.d1) + " €/d" : "";
+    return '<a href="${r}coches/' + encodeURIComponent(c.slug) + '/"><span>' + c.name + '</span><span class="px">' + px + '</span></a>';
+  });
+  items.push('<a href="${r}flota/"><span>Ver la flota completa</span><span class="px">&rarr;</span></a>');
+  grid.innerHTML = items.join("");
+})();
+</script>`;
+
+  const body = `  <section class="oa-intro">
+    <h1 class="oa-title">
+      <span class="oa-row">Alquiler</span>
+      <span class="oa-row">de coches</span>
+      <span class="oa-row">de lujo</span>
+      <span class="oa-row oa-row-geo">en Barcelona</span>
+    </h1>
+    <div class="oa-cta oa-intro-cta">
+      <a href="${waGeneral}" class="btn gold" target="_blank" rel="noopener">
+        Reserva tu vehículo
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a href="${r}flota/" class="btn ghost">
+        Ver la flota
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a href="${C.wrapCenter}" class="btn ghost" target="_blank" rel="noopener">
+        Serres Wrap Center
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+      </a>
     </div>
-    <div class="panel">
-      <h3 class="h-sm" style="margin-bottom:14px">Condiciones de alquiler</h3>
-      ${termsList()}
-      <p class="mute-sm" style="margin-top:16px"><a href="${r}condiciones-de-alquiler/">Ver todas las condiciones</a></p>
+  </section>
+
+  <!-- DESTACADOS — carrusel sticky de cinco coches de la flota. El markup es
+       el fallback sin JS: cinco fotos apiladas, legibles y enlazadas.
+       js/featured.js lo convierte en el barrido por scroll. -->
+  <section class="fc-sec" id="featured">
+    <div class="fc-pin">
+      <div class="fc-head">
+        <p class="fc-eyebrow">Destacados</p>
+      </div>
+      <div class="fc-stage">
+        ${featured.map(c => `<a class="fc-slide" href="${r}coches/${c.slug}/">
+          <img src="${r}assets/img/cars/${c.slug}.jpg" alt="${esc(c.name)} de alquiler en Barcelona" loading="lazy" decoding="async" width="1200" height="800">
+          <h2 class="fc-title"><span class="fc-brand">${esc(brandOf(c).label)}</span>${esc(c.name.replace(brandOf(c).label, '').replace(/^[\\s-]+/, '') || c.name)}</h2>
+        </a>`).join('\n        ')}
+      </div>
+      <div class="fc-progress" aria-hidden="true">${featured.map(() => '<i></i>').join('')}</div>
+      <p class="fc-hint">Sigue bajando</p>
     </div>
+  </section>
+
+  <!-- ELIGE TU COCHE — el anillo WebGL gira alrededor del Porsche. Esta
+       seccion aporta el recorrido de scroll y el fallback sin WebGL. -->
+  <section class="oa-choose" id="choose">
+    <div class="oa-choose-head">
+      <p>Elige tu coche</p>
+      <h2>Toda la flota, en movimiento</h2>
+    </div>
+    <div class="oa-choose-grid" id="chooseGrid" aria-label="Flota">
+      <a href="${r}flota/">Ver la flota completa</a>
+    </div>
+  </section>
+
+  <section class="oa-outro">
+    <div class="oa-footer">
+      <p>Serres Drive — alquiler de coches de lujo en Barcelona, del detailing al volante.</p>
+      <p>© ${new Date().getFullYear()} · BCN</p>
+    </div>
+  </section>
+`;
+
+  const afterMain = `<div class="sd-choose-ui" aria-hidden="true">
+  <div class="cu-title">
+    <span class="cu-kicker">Elige tu coche</span>
+    <span class="cu-h">Gira · elige · conduce</span>
   </div>
-</section>`;
-  write(url, page({ url, body, current: '', schema: [businessSchema] }));
+  <div class="cu-hint">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M8 12h8M8 12l3-3M8 12l3 3M16 12l-3-3M16 12l-3 3"/></svg>
+    Desliza para girar
+  </div>
+</div>
+<div class="sd-tooltip" role="status" aria-live="polite"></div>
+<div class="sd-cursor" aria-hidden="true"></div>
+
+<div class="sd-below">
+  <!-- NEGOCIO HERMANO — Serres Wrap Center. -->
+  <section class="section swc" id="wrap-center">
+    <div class="wrap">
+      <div class="swc-band">
+        <div class="swc-copy">
+          <span class="eyebrow">Serres Wrap Center</span>
+          <h2 class="h-md">Antes de conducirlo, <span class="gold-text">lo dejamos perfecto</span>.</h2>
+          <p class="lede">No solo alquilamos coches: los preparamos. Nuestro taller hermano en Sant Cugat del Vallès hace PPF, car wrap a medida, pulido multietapa, tratamientos cerámicos y detailing de nivel concours.</p>
+          <ul class="chips" style="margin:18px 0">
+            <li class="chip">PPF</li><li class="chip">Car Wrap</li><li class="chip">Pulido</li><li class="chip">Cerámico</li><li class="chip">Detailing</li>
+          </ul>
+          <a class="btn btn--secondary" href="${C.wrapCenter}" target="_blank" rel="noopener">Visitar Serres Wrap Center ${btnArrow}</a>
+        </div>
+        <a class="swc-shot" href="${C.wrapCenter}" target="_blank" rel="noopener"
+           aria-label="Serres Wrap Center — PPF, car wrap y detailing en Barcelona">
+          <img src="${r}assets/img/wrapcenter/hero-poster.jpg" width="1600" height="900" loading="lazy" decoding="async"
+               alt="Porsche 911 RWB en el taller de Serres Wrap Center, bajo iluminación hexagonal">
+          <span class="swc-shot-tag">Ver el taller</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="section" id="contact-cta">
+    <div class="wrap">
+      <div class="panel" style="text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px">
+        <h2 class="h-md">¿Listo para <span class="gold-text">conducir</span>?</h2>
+        <p class="lede" style="margin-inline:auto">Dinos qué coche y qué fechas. Te respondemos con disponibilidad y condiciones en minutos.</p>
+        <div class="hero-cta" style="justify-content:center">
+          <a href="${waGeneral}" class="btn btn--wa" target="_blank" rel="noopener">${ICON.wa}<span>Escríbenos por WhatsApp</span></a>
+          <a href="tel:+${C.whatsapp}" class="btn btn--secondary">${C.phoneDisplay}</a>
+        </div>
+        <div class="footer-social" style="justify-content:center">
+          <a href="${C.instagram}" target="_blank" rel="noopener">${ICON.ig}<span>${esc(C.instagramHandle)}</span></a>
+          <a href="mailto:${C.email}">${ICON.gmail}<span>${C.email}</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+`;
+
+  /* experience.js sale por la puerta de atras si no encuentra .sd-model y
+     .oa-exp (js/experience.js:34, "not the home page"), asi que el lienzo
+     WebGL y su fondo tienen que estar en el DOM antes de <main>, y <main>
+     tiene que llevar la clase .oa-exp. Sin esto no hay hero 3D y no avisa. */
+  const beforeMain = `<div class="oa-backdrop" aria-hidden="true"></div>
+<div class="sd-model" aria-hidden="true"><!-- lienzo WebGL: aqui gira el Porsche --></div>`;
+
+  write(url, page({
+    url, body, beforeMain, afterMain, mainClass: 'oa-exp',
+    current: '', bodyClass: 'home-exp', extraHead, extraScripts,
+    schema: [businessSchema],
+  }));
 }
 
 /* --- /flota ------------------------------------------------------------ */

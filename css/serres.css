@@ -553,6 +553,19 @@ svg.ico-brand{width:18px;height:18px;flex:none;color:initial}
 .footer .bottom a{color:var(--text-dim)}
 .footer .bottom a:hover{color:var(--white)}
 
+/* ---------- portada restaurada --------------------------------------- */
+/* home.css / featured.css / preloader.css vuelven tal cual y no colisionan
+   con nada de aqui (todos sus selectores van con prefijo .oa- .fc- .sd- y
+   estan scopeados a body.home-exp). Lo unico que vivia en la antigua
+   styles.css y sigue haciendo falta es este realce. */
+.gold-text{
+  background:var(--chrome-grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+/* El lienzo 3D es fijo y ocupa la pantalla; el pie y la banda del wrap
+   center van por encima. */
+.sd-below{position:relative;z-index:2;background:var(--bg)}
+.home-exp .footer{position:relative;z-index:2}
+
 /* ---------- 404 ------------------------------------------------------ */
 .center-pad{min-height:calc(100dvh - var(--nav-h) - 200px);display:grid;place-items:center;text-align:center}
 

@@ -59,7 +59,8 @@ node _build/verify.js            # 212 comprobaciones; debe salir FAIL 0
 | Corregir una ficha técnica o un texto | `_build/fleet-specs.json` → igual |
 | Cambiar un title o una description | `_build/build-seo-meta.js` → `build-seo-meta.js` → `build-site.js` |
 | Añadir o quitar un coche | `_build/fleet-base.json` + `_build/image-selection.json` → cadena completa |
-| Cambiar diseño | `css/serres.css` (hoja única) |
+| Cambiar diseño (todo menos portada) | `css/serres.css` |
+| Cambiar la portada | `css/home.css`, `css/featured.css`, `css/preloader.css` |
 | Cambiar comportamiento | `js/site.js` (script único) |
 
 El cache-buster `V` es un **hash del contenido** de `css/serres.css` + `js/site.js`,
@@ -72,7 +73,8 @@ navegadores con el CSS viejo cacheado (`immutable`, un año).
 ## 2. Estructura de URLs
 
 ```
-/                             portada: hero + rejilla de 6 marcas + contacto
+/                             portada: hero 3D con scroll + Destacados +
+                              tubo de la flota + Wrap Center + CTA
 /flota/                       catálogo con los 13 coches
 /flota/{marca}/               porsche · lamborghini · mercedes-amg · audi ·
                               range-rover · volkswagen
@@ -151,8 +153,11 @@ Un solo sistema de botones (primario / secundario / fantasma, más las dos
 variantes de WhatsApp). Sombras en capas y tintadas hacia el fondo, nunca negro
 puro. Espaciado en la escala de 4/8 px.
 
-**Motion:** solo hover y focus. No hay apariciones por scroll, ni carruseles,
-ni drag, ni parallax — las tarjetas simplemente están en la página. `prefers-reduced-motion` desactiva hasta esas micro-interacciones.
+**Motion:** en las 25 páginas interiores, solo hover y focus — sin apariciones
+por scroll ni carruseles; las tarjetas simplemente están ahí. La **portada es la
+excepción**, restaurada a petición del propietario: hero 3D (three.js) con scroll
+suave (Lenis + GSAP ScrollTrigger), carrusel «Destacados» y el tubo de la flota.
+`prefers-reduced-motion` desactiva el 3D y deja el hero estático.
 
 ---
 
