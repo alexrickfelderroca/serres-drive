@@ -130,11 +130,15 @@
     sec.classList.add("fc-on");
 
     /* Scroll runway scales with the slide count: one viewport on stage
-       plus ~110vh of travel per wipe. The 320vh in featured.css is only
-       the no-JS-never-happens fallback for this rule; with 5 slides the
-       section is 540vh. Inline style so adding a slide in the HTML is the
-       whole job — nothing else needs retuning. */
-    sec.style.height = (100 + (N - 1) * 110) + "vh";
+       plus TRAVEL_VH of travel per wipe. The 320vh in featured.css is only
+       the no-JS-never-happens fallback for this rule. Inline style so
+       adding a slide in the HTML is the whole job.
+
+       Era 110vh y con 5 coches daban 540vh: habia que scrollear cinco
+       pantallas y media para ver el carrusel entero, y se sentia lento y a
+       tirones. A 58vh y con 4 coches son 274vh — la mitad larga. */
+    var TRAVEL_VH = 58;
+    sec.style.height = (100 + (N - 1) * TRAVEL_VH) + "vh";
 
     var cur = 0;          /* active slide index */
     var tl = null;        /* running transition timeline */

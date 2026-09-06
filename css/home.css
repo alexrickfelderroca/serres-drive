@@ -44,6 +44,9 @@ html.lenis, .lenis.lenis-smooth { scroll-behavior: auto !important; }
 .home-exp .sd-model{position:fixed;inset:0;height:100svh;width:100%;z-index:1;
   pointer-events:none;opacity:0;transition:opacity .8s var(--ease)}
 .home-exp .sd-model.is-live{opacity:1}
+/* Mientras la opacidad la manda el scroll (experience.js), la transicion
+   sobra: si no, el fundido va un tercio de segundo por detras del scroll. */
+.home-exp .sd-model.is-scrub{transition:none}
 .home-exp .sd-model canvas{display:block;width:100%!important;height:100%!important}
 /* While the ring is interactive the canvas must come back above the (empty)
    .oa-choose section to receive the drag — pointerdown is bound to the mount,

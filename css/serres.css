@@ -36,6 +36,12 @@
   --gold-soft:#eef0f4;
   --gold-deep:#8a8d97;
   --chrome-grad:linear-gradient(176deg,#fdfdfe 0%,#cfcfd6 32%,#8d8d97 52%,#f0f0f4 72%,#a6a6b0 100%);
+  /* Las dos siguientes vivian en la antigua styles.css. home.css y
+     featured.css las siguen usando: sin --gold-grad, el rotulo
+     "DESTACADOS" se pinta con color:transparent sobre nada y queda
+     INVISIBLE. (--pl-shift lo inyecta preloader.js en caliente.) */
+  --gold-grad:linear-gradient(105deg,#8a8d97 0%,#c9ccd4 18%,#ffffff 38%,#d0d3da 52%,#8a8d97 70%,#eef0f4 88%,#a6a6b0 100%);
+  --shadow:0 24px 60px -24px rgba(0,0,0,.85);
 
   /* whatsapp */
   --wa:#25d366;
@@ -565,6 +571,18 @@ svg.ico-brand{width:18px;height:18px;flex:none;color:initial}
    center van por encima. */
 .sd-below{position:relative;z-index:2;background:var(--bg)}
 .home-exp .footer{position:relative;z-index:2}
+
+/* Subtítulo de «Destacados»: el rótulo solo no decía QUÉ son estos coches. */
+.fc-sub{
+  margin-top:10px;max-width:34ch;
+  font-size:clamp(13px,1.5vw,15px);color:var(--text-dim);
+  text-shadow:0 1px 10px rgba(6,6,8,.85);
+}
+.fc-on .fc-sub{color:#e9e9ee}
+
+/* El botón verde macizo del nav no se leía como WhatsApp; ahora lleva el
+   logo real, que trae su propio verde y no debe heredar currentColor. */
+.nav-actions .btn--wa-quiet svg.ico-brand{width:20px;height:20px}
 
 /* ---------- 404 ------------------------------------------------------ */
 .center-pad{min-height:calc(100dvh - var(--nav-h) - 200px);display:grid;place-items:center;text-align:center}

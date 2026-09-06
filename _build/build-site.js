@@ -90,14 +90,14 @@ function header(r, current) {
         ${links}
     </nav>
     <div class="nav-actions">
-      <a class="btn btn--wa-quiet btn--sm" href="${waGeneral}" target="_blank" rel="noopener" aria-label="Reservar por WhatsApp">${ICON.wa}<span>Reservar</span></a>
+      <a class="btn btn--wa-quiet btn--sm" href="${waGeneral}" target="_blank" rel="noopener" aria-label="Reservar por WhatsApp">${ICON.waColor}<span>Reservar</span></a>
       <button class="menu-btn" id="menuBtn" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu"><i></i></button>
     </div>
   </div>
 </header>
 <div class="mobile-menu" id="mobileMenu" hidden>
   ${NAV.map(n => `<a href="${r}${n.href}">${n.label}</a>`).join('\n  ')}
-  <a class="btn btn--wa btn--block" href="${waGeneral}" target="_blank" rel="noopener">${ICON.wa}<span>Reservar por WhatsApp</span></a>
+  <a class="btn btn--wa btn--block" href="${waGeneral}" target="_blank" rel="noopener">${ICON.waColor}<span>Reservar por WhatsApp</span></a>
 </div>`;
 }
 
@@ -327,8 +327,10 @@ const write = (url, html) => {
    El resto de paginas no cambia: siguen con serres.css y site.js.        */
 {
   const url = '/', r = rel(url), meta = seo[url];
+  /* Cuatro, no cinco: cada coche anade su tramo de scroll, y con cinco el
+     carrusel pedia 540vh. Son los cuatro tope de gama de la flota. */
   const featured = ['lamborghini-urus', 'mercedes-amg-g63', 'audi-rs6-avant',
-    'porsche-911-cabrio', 'porsche-cayenne-hybrid'].map(car);
+    'porsche-911-cabrio'].map(car);
 
   const extraHead = `<link rel="stylesheet" href="${r}css/home.css?${VH}">
 <link rel="stylesheet" href="${r}css/featured.css?${VH}">
@@ -400,10 +402,14 @@ const write = (url, html) => {
     <div class="fc-pin">
       <div class="fc-head">
         <p class="fc-eyebrow">Destacados</p>
+        <p class="fc-sub">${featured.length} de los ${fleet.cars.length} coches que puedes alquilar ahora mismo</p>
       </div>
       <div class="fc-stage">
         ${featured.map(c => `<a class="fc-slide" href="${r}coches/${c.slug}/">
-          <img src="${r}assets/img/cars/${c.slug}.jpg" alt="${esc(c.name)} de alquiler en Barcelona" loading="lazy" decoding="async" width="1200" height="800">
+          <picture>
+            <source type="image/webp" srcset="${r}assets/img/cars/${c.slug}.webp">
+            <img src="${r}assets/img/cars/${c.slug}.jpg" alt="${esc(c.name)} de alquiler en Barcelona" loading="lazy" decoding="async" width="1800" height="1013">
+          </picture>
           <h2 class="fc-title"><span class="fc-brand">${esc(brandOf(c).label)}</span>${esc(c.name.replace(brandOf(c).label, '').replace(/^[\\s-]+/, '') || c.name)}</h2>
         </a>`).join('\n        ')}
       </div>

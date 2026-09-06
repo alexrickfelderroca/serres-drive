@@ -345,13 +345,27 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
      `running` stays true, so unlike the outro parking above there is no
      early-return state to get wrong; the car keeps rendering behind the
      opaque slides and is simply invisible. */
+  /* Antes esto era un interruptor: al cruzar "top 55%" se quitaba .is-live y
+     el coche desaparecia de golpe con una transicion CSS de 0.8s que no
+     tenia nada que ver con donde estabas en la pagina. Se notaba como un
+     corte. Ahora la opacidad va atada al scroll (scrub), asi que el coche se
+     va y vuelve al ritmo de la rueda del raton. La opacidad inline gana a la
+     regla de .is-live, que se queda puesta; .is-scrub mata la transicion
+     para que el scrub no vaya con retardo. */
   if (document.querySelector(".fc-sec")) {
+    var setFade = function (v) {
+      mount.style.opacity = String(Math.max(0, Math.min(1, v)));
+    };
+    mount.classList.add("is-scrub");
     fcFade = ScrollTrigger.create({
-      trigger: ".fc-sec", start: "top 55%", end: "bottom 45%",
-      onEnter:     function () { mount.classList.remove("is-live"); },
-      onEnterBack: function () { mount.classList.remove("is-live"); },
-      onLeave:     function () { if (ready && running) mount.classList.add("is-live"); },
-      onLeaveBack: function () { if (ready && running) mount.classList.add("is-live"); }
+      trigger: ".fc-sec", start: "top 92%", end: "top 30%", scrub: true,
+      onUpdate: function (self) { if (ready && running) setFade(1 - self.progress); },
+      onLeaveBack: function () { if (ready && running) setFade(1); }
+    });
+    ScrollTrigger.create({
+      trigger: ".fc-sec", start: "bottom 70%", end: "bottom 20%", scrub: true,
+      onUpdate: function (self) { if (ready && running) setFade(self.progress); },
+      onLeave: function () { if (ready && running) setFade(1); }
     });
   }
 
