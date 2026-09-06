@@ -35,7 +35,9 @@
   "contact": {
     "whatsapp": "34621244469",
     "phoneDisplay": "+34 621 24 44 69",
-    "instagram": "https://www.instagram.com/serresdrive/",
+    "email": "serresdrive@gmail.com",
+    "instagram": "https://www.instagram.com/serres.drive/",
+    "instagramHandle": "@serres.drive",
     "wrapCenter": "https://serreswrapcenter.es",
     "address": { "street": "Av. Can Fatjó dels Aurons 15", "postalCode": "08174", "locality": "Sant Cugat del Vallès", "region": "Barcelona", "country": "ES" },
     "geo": { "lat": 41.4890, "lng": 2.0823 }

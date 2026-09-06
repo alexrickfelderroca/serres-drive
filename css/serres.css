@@ -328,6 +328,13 @@ table{border-collapse:collapse;width:100%}
 .brand-card:hover{transform:translateY(-3px);border-color:var(--line-strong);box-shadow:var(--shadow-2)}
 .brand-card:hover img{transform:scale(1.045);opacity:1}
 .brand-card b{text-shadow:0 1px 12px rgba(6,6,8,.8)}
+/* Logo de la marca. Sólo aparece si el SVG existe en assets/brand/marcas/.
+   La altura la fija el generador por marca (altura óptica, no matemática). */
+.brand-logo{
+  width:auto;margin-bottom:12px;
+  filter:brightness(0) invert(1) drop-shadow(0 1px 10px rgba(6,6,8,.9));
+  opacity:.96;
+}
 .brand-card b{
   font-family:var(--font-head);font-size:clamp(24px,2.6vw,33px);font-weight:700;
   letter-spacing:.01em;text-transform:uppercase;line-height:1;
@@ -515,6 +522,24 @@ table{border-collapse:collapse;width:100%}
 .footer-nav{display:flex;flex-wrap:wrap;gap:10px 26px}
 .footer-nav a{font-family:var(--font-head);font-size:16px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);transition:color .2s var(--ease)}
 .footer-nav a:hover{color:var(--white)}
+/* Instagram · WhatsApp · correo — con icono, en su propia fila para que se
+   vean, en lugar de perdidos entre los enlaces de página del pie. */
+.footer-social{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.footer-social a{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:9px 15px;border-radius:999px;border:1px solid var(--line-2);
+  background:rgba(255,255,255,.03);font-size:14px;color:var(--text-dim);
+  transition:color .2s var(--ease),border-color .2s var(--ease),background .2s var(--ease),transform .2s var(--ease);
+}
+.footer-social a:hover{color:var(--white);border-color:var(--gold);background:rgba(255,255,255,.07);transform:translateY(-1px)}
+.footer-social svg{width:17px;height:17px;flex:none}
+.footer-social a:hover svg{color:var(--gold-soft)}
+
+.ico-link{display:inline-flex;align-items:center;gap:8px;transition:color .2s var(--ease)}
+.ico-link svg{width:16px;height:16px;flex:none;color:var(--text-mute);transition:color .2s var(--ease)}
+.ico-link:hover{color:var(--white)}
+.ico-link:hover svg{color:var(--gold)}
+
 .footer .bottom{margin-top:34px;padding-top:22px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between;font-size:13px;color:var(--text-mute)}
 .footer .bottom a{color:var(--text-dim)}
 .footer .bottom a:hover{color:var(--white)}

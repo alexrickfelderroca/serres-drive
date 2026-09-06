@@ -38,6 +38,8 @@ const depositText = c => c.deposit === null ? T.depositUnknownText : `Fianza: ${
 const ICON = {
   arrow: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
   wa: '<svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16.04 3C9.4 3 4 8.4 4 15.04c0 2.12.56 4.18 1.62 6L4 29l8.16-1.58a12 12 0 0 0 3.88.64C22.7 28.06 28.1 22.66 28.1 16.02 28.1 8.4 22.68 3 16.04 3Zm5.39 14.57c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.66.15-.2.3-.76.96-.93 1.15-.17.2-.34.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.3-.02-.46.13-.61.13-.13.3-.34.45-.51.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.66-1.6-.9-2.18-.24-.58-.48-.5-.66-.5l-.56-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.22 3.08.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.08 1.75-.71 2-1.4.25-.69.25-1.28.17-1.4-.07-.13-.27-.2-.57-.35Z"/></svg>',
+  ig: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="2.6" y="2.6" width="18.8" height="18.8" rx="5.4"/><circle cx="12" cy="12" r="4.1"/><circle cx="17.4" cy="6.6" r="1.15" fill="currentColor" stroke="none"/></svg>',
+  mail: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2.6"/><path d="m3.4 6.4 7.5 5.6a2 2 0 0 0 2.2 0l7.5-5.6"/></svg>',
 };
 const btnArrow = `<span class="disc">${ICON.arrow}</span>`;
 
@@ -90,14 +92,17 @@ function footer(r) {
       </a>
       <nav class="footer-nav" aria-label="Pie de página">
         ${NAV.map(n => `<a href="${r}${n.href}">${n.label}</a>`).join('\n        ')}
-        <a href="${C.instagram}" target="_blank" rel="noopener">Instagram</a>
-        <a href="${waGeneral}" target="_blank" rel="noopener">WhatsApp</a>
         <a href="${C.wrapCenter}" target="_blank" rel="noopener">Serres Wrap Center</a>
       </nav>
     </div>
+    <div class="footer-social">
+      <a href="${C.instagram}" target="_blank" rel="noopener">${ICON.ig}<span>${esc(C.instagramHandle)}</span></a>
+      <a href="${waGeneral}" target="_blank" rel="noopener">${ICON.wa}<span>WhatsApp ${C.phoneDisplay}</span></a>
+      <a href="mailto:${C.email}">${ICON.mail}<span>${C.email}</span></a>
+    </div>
     <div class="bottom">
       <span>© ${new Date().getFullYear()} Serres Drive · ${C.address.locality}, ${C.address.region}</span>
-      <span><a href="tel:+${C.whatsapp}">${C.phoneDisplay}</a> · <a href="${r}condiciones-de-alquiler/">Condiciones de alquiler</a></span>
+      <span><a href="${r}condiciones-de-alquiler/">Condiciones de alquiler</a></span>
     </div>
   </div>
 </footer>`;
@@ -176,6 +181,22 @@ function carCard(c, r, { lazy = true } = {}) {
 </article>`;
 }
 
+/* Brand mark on the homepage cards. The SVGs are the manufacturers' own and
+   nobody has supplied them yet, so this renders the logo ONLY when the file
+   is actually there — drop <slug>.svg into assets/brand/marcas/ and rebuild.
+   Optical height is per brand (see LOGO_H): a single `height` makes the
+   Porsche crest tower over the Audi rings, because one is a tall shield and
+   the other a wide strip. */
+const LOGO_H = {
+  porsche: 54, lamborghini: 52, 'mercedes-amg': 44,
+  audi: 26, 'range-rover': 30, volkswagen: 44,
+};
+function brandLogo(b, r) {
+  const file = path.join(ROOT, 'assets/brand/marcas', `${b.slug}.svg`);
+  if (!fs.existsSync(file)) return '';
+  return `<img class="brand-logo" src="${r}assets/brand/marcas/${b.slug}.svg" alt="" aria-hidden="true" style="height:${LOGO_H[b.slug] || 40}px" loading="lazy" decoding="async">`;
+}
+
 function brandChips(r, current) {
   return `<nav class="chips" aria-label="Filtrar por marca">
   <a class="chip" href="${r}flota/"${!current ? ' aria-current="page"' : ''}>Todas</a>
@@ -207,6 +228,7 @@ const businessSchema = {
   name: 'Serres Drive',
   url: `${origin}/`,
   telephone: `+${C.whatsapp}`,
+  email: C.email,
   image: `${origin}/${car('mercedes-amg-g63').image}`,
   logo: `${origin}/assets/brand/serres-wordmark-flat.svg`,
   priceRange: '€€€',
@@ -315,6 +337,7 @@ const write = (url, html) => {
           <img src="${r}${bg.jpg800}" alt="" width="800" height="533" loading="lazy" decoding="async">
         </picture>
         <span class="go">${ICON.arrow}</span>
+        ${brandLogo(b, r)}
         <b>${b.label}</b>
         <span class="count">${cars.length} ${cars.length === 1 ? 'coche' : 'coches'} · desde ${eur(Math.min(...cars.map(c => c.prices.d1)))}</span>
       </a>`;
@@ -332,6 +355,10 @@ const write = (url, html) => {
       <div class="hero-cta">
         <a class="btn btn--wa" href="${waGeneral}" target="_blank" rel="noopener">${ICON.wa}<span>Escríbenos por WhatsApp</span></a>
         <a class="btn btn--ghost" href="${r}contacto/">Formulario ${btnArrow}</a>
+      </div>
+      <div class="footer-social" style="margin-top:18px">
+        <a href="${C.instagram}" target="_blank" rel="noopener">${ICON.ig}<span>${esc(C.instagramHandle)}</span></a>
+        <a href="mailto:${C.email}">${ICON.mail}<span>${C.email}</span></a>
       </div>
     </div>
     <div class="panel">
@@ -663,11 +690,14 @@ ${others.length ? `<section class="section--tight" style="padding-top:0">
       <p class="lede">${esc(meta.description)}</p>
       <div class="hero-cta">
         <a class="btn btn--wa" href="${waGeneral}" target="_blank" rel="noopener">${ICON.wa}<span>${C.phoneDisplay}</span></a>
+        <a class="btn btn--secondary" href="mailto:${C.email}">${ICON.mail}<span>Escríbenos un correo</span></a>
+        <a class="btn btn--secondary" href="${C.instagram}" target="_blank" rel="noopener" aria-label="Instagram ${esc(C.instagramHandle)}">${ICON.ig}<span>Instagram</span></a>
       </div>
       <ul class="terms-list" style="margin-top:24px">
         <li><span class="k">Dónde</span><span class="v">${esc(C.address.street)}, ${C.address.postalCode} ${esc(C.address.locality)} (${esc(C.address.region)})</span></li>
         <li><span class="k">Entrega</span><span class="v">Área metropolitana de Barcelona · ${eur(T.deliveryFee)}</span></li>
-        <li><span class="k">Instagram</span><span class="v"><a href="${C.instagram}" target="_blank" rel="noopener">@serresdrive</a></span></li>
+        <li><span class="k">Correo</span><span class="v"><a class="ico-link" href="mailto:${C.email}">${ICON.mail}<span>${C.email}</span></a></span></li>
+        <li><span class="k">Instagram</span><span class="v"><a class="ico-link" href="${C.instagram}" target="_blank" rel="noopener">${ICON.ig}<span>${esc(C.instagramHandle)}</span></a></span></li>
       </ul>
     </div>
 

@@ -1,5 +1,16 @@
 # Pendiente de confirmar con el propietario
 
+> **Actualizado 06-09-2026.** El propietario ha decidido:
+> - **Contacto (punto 1): RESUELTO.** Correo `serresdrive@gmail.com` e Instagram
+>   `@serres.drive` ya en la web. Se mantiene el telefono `+34 621 24 44 69`.
+> - **A200 4Matic (punto 3): se deja como esta**, a peticion del propietario.
+>   La ficha publica 163 CV y traccion AWD. Queda escrito abajo por si algun dia
+>   se quiere corregir.
+> - **Porsche rojo del hero (punto 5): se deja como esta.** El hero sigue con el
+>   911 Cabrio (992) azul, que es un coche real de la flota.
+> - **Logos (punto 7): el propietario los va a enviar.** Ver
+>   `assets/brand/marcas/LEEME.md` para nombres, formato y sitio exacto.
+
 Todo lo demás del encargo (`serresdrive-claude-code-task_2.md`) está
 implementado. Estos puntos **no se han inventado**: donde falta el dato, la web
 dice que se confirma por WhatsApp, o usa el dato que ya venía del propietario.
@@ -8,27 +19,15 @@ Ordenado por lo que más daño hace si está mal.
 
 ---
 
-## 1. El teléfono / WhatsApp — ¿es de Serres Drive o del wrap center?
+## 1. Contacto — RESUELTO
 
-**Estado en la web:** se usa `+34 621 24 44 69` en todos los CTA, el `tel:` del
-pie y el schema.
+- Correo: **serresdrive@gmail.com** (pie, pagina de contacto, portada y schema).
+- Instagram: **@serres.drive** — ojo, con punto; antes estaba mal como
+  `instagram.com/serresdrive/`, que no es la cuenta.
+- Telefono / WhatsApp: **+34 621 24 44 69**, confirmado por el propietario.
+- `info@serreswrapcenter.es` sigue sin aparecer en ninguna pagina.
 
-El encargo (BLOQUEADORES 1 y 2) pide un número propio de Serres Drive y prohíbe
-usar los contactos del wrap center. **No se ha entregado ningún número nuevo**,
-y este es el que ya estaba en la web y en el README anterior como canal de
-reservas.
-
-Se ha mantenido a propósito: poner un placeholder tipo `+34 600 000 000` en un
-sitio en producción significa perder todas las reservas hasta que llegue el
-número bueno. Eso es peor que el problema que el encargo quiere evitar.
-
-- ✅ `info@serreswrapcenter.es` **eliminado de toda la web**. No se ha inventado
-  ningún correo nuevo: hoy el único canal de contacto es WhatsApp.
-- ⚠️ **Confirmar si `+34 621 24 44 69` es la línea de Serres Drive.** Si es la
-  del wrap center, hay que sustituirlo en `_build/fleet-base.json` →
-  `contact.whatsapp` y `contact.phoneDisplay`, y regenerar.
-- ⚠️ Confirmar también la dirección postal (`Av. Can Fatjó dels Aurons 15, Sant
-  Cugat del Vallès`), que va en el schema `AutoRental`.
+Si cambia algo: `_build/fleet-base.json` -> bloque `contact`, y regenerar.
 
 ## 2. ¿Los 150 km son por día o por todo el alquiler?
 
@@ -114,15 +113,32 @@ publica 280 km/h, que solo son reales con el paquete dinámico (sin él, 250).
 El encargo (ETAPA 3) pide «logotipo (SVG) + nombre en texto» en las tarjetas de
 marca de la portada.
 
-**No se han puesto logos.** No hay SVG con licencia de Porsche, Lamborghini,
-Mercedes-AMG, Audi, Range Rover ni Volkswagen a los que se pueda recurrir, y
-dibujarlos a mano habría dado tres correctos (Audi, Mercedes, VW son geometría
-pura) y tres aproximaciones malas (el escudo de Porsche, el toro de
-Lamborghini). Un set inconsistente se ve peor que no tenerlo.
+**Los va a enviar el propietario.** No hay SVG con licencia de estas seis
+marcas a los que se pueda recurrir, y dibujarlos a mano habría dado tres
+correctos (Audi, Mercedes y VW son geometría pura) y tres aproximaciones malas
+(el escudo de Porsche, el toro de Lamborghini). Un set inconsistente se ve peor
+que no tenerlo, así que se esperan los originales.
 
-En su lugar, cada tarjeta lleva **la foto de un coche de esa marca + el nombre
-en grande**, y sigue leyéndose como botón (borde, hover, foco, cursor). Si el
-propietario consigue los SVG de los press kit, entran sin tocar la maqueta.
+**El hueco ya está montado.** Deja los seis SVG en `assets/brand/marcas/` con
+estos nombres exactos y vuelve a generar:
+
+```
+porsche.svg   lamborghini.svg   mercedes-amg.svg
+audi.svg      range-rover.svg   volkswagen.svg
+```
+
+`brandLogo()` en `_build/build-site.js` sólo pinta el logo **si el archivo
+existe**, así que se pueden ir poniendo de uno en uno sin romper nada: la marca
+que todavía no tenga SVG se sigue viendo como ahora. Formato, requisitos y
+alturas ópticas: `assets/brand/marcas/LEEME.md`.
+
+**Dónde salen:** en las seis tarjetas de marca de la portada (la rejilla 3×2
+«Seis marcas en la flota»), encima del nombre. Cada tarjeta mantiene la foto de
+fondo y el nombre en texto, como pedía la ETAPA 3.
+
+Las alturas de `LOGO_H` son un punto de partida: cuando estén los seis hay que
+mirarlos juntos y retocarlas hasta que **parezcan** iguales de grandes, que no
+es lo mismo que serlo.
 
 ## 8. Condiciones que la web no menciona (a propósito)
 
