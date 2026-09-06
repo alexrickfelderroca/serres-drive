@@ -42,6 +42,53 @@ Según vas bajando, la película va ocurriendo. No quiero cuatro cajas quietas.
   Mira cómo está hecha antes de inventar otra cosa: conviene que las dos
   páginas se muevan con el mismo vocabulario.
 
+## ⚠️ Las dos trampas que ya han mordido en este proyecto
+
+Las dos las he pisado yo montando la portada. Si haces animación con assets,
+las vas a pisar igual, así que léelas antes de escribir nada.
+
+### 1. Las rutas de los assets en el JS tienen que ser ABSOLUTAS
+
+El sitio está en cinco idiomas. La portada existe en `/`, `/en/`, `/ru/`,
+`/ca/` y `/fr/`. Una ruta relativa dentro de un `.js` se resuelve contra la
+página que lo carga, no contra la raíz:
+
+```js
+loader.load("assets/models/gt3.glb")    // desde /en/ pide /en/assets/... → 404
+loader.load("/assets/models/gt3.glb")   // correcto
+```
+
+Esto tuvo el 3D del Porsche y las texturas del tubo **sin cargar en los cuatro
+idiomas que no son español**, y no daba ningún error visible: el módulo
+simplemente se rendía. Si tu película carga imágenes, vídeos, sprites o un
+mapa desde JavaScript, **compruébalo en `/ru/` además de en `/`**, y no des por
+buena una página hasta haberla visto en los cinco.
+
+En el HTML generado hay dos profundidades distintas y confundirlas rompe medio
+sitio:
+
+- `r` → sube a la raíz del **idioma**. Para enlaces entre páginas.
+- `ra` → sube a la raíz del **sitio**. Para `css/`, `js/` y `assets/`.
+
+### 2. Las imágenes se cachean: si cambias una, cambia su URL
+
+`.htaccess` cachea los assets. El nombre de archivo de una foto lo fija el slug
+del coche y **no cambia cuando cambia la foto**, así que sustituir una imagen
+no llega a quien ya haya entrado. Pasó con el Urus: los archivos eran del coche
+negro y los visitantes seguían viendo el amarillo, miniaturas incluidas.
+
+Ya está resuelto y tienes que seguir el mismo patrón:
+
+- En el HTML, usa el helper **`asset(ruta)`** de `_build/build-site.js`: añade
+  `?v=<hash del contenido>` solo.
+- Si cargas una imagen **desde JavaScript**, no pasa por el generador: publica
+  una versión como se hace con `window.SERRES_RING_V` (la calcula
+  `_build/build-home-assets.js` sobre los propios archivos) y añádela a la URL.
+
+Y una consecuencia práctica al desarrollar: **si cambias una imagen y no la ves
+cambiar en el navegador, no estás loco — es la caché.** Recarga con
+Ctrl+Shift+R antes de perseguir un fantasma.
+
 ## Reglas del proyecto que no puedes saltarte
 
 - **Los textos de los cuatro pasos son del cliente y están fijados en el
@@ -82,6 +129,21 @@ npx serve -l 8123 .
 390×844 con Chrome DevTools MCP, consola limpia, sin scroll horizontal a
 360/390/768, y Lighthouse de accesibilidad. La página actual ya da 100/100/100
 — no la dejes peor.
+
+**Y una comprobación específica de este sitio, que no es opcional:** la página
+tiene que cargar **igual en los cinco idiomas**. Compruébalo midiendo, no a
+ojo — así se cazó que el 3D no arrancaba fuera del español:
+
+```js
+// en la consola, o con evaluate_script sobre iframes de cada idioma
+for (const p of ['/como-funciona/', '/en/como-funciona/', '/ru/como-funciona/',
+                 '/ca/como-funciona/', '/fr/como-funciona/']) {
+  // comparar: nº de imágenes rotas, elementos clave presentes,
+  // scripts que arrancaron, altura del documento
+}
+```
+
+Si una versión carga algo que otra no, es un bug, no una diferencia de idioma.
 
 ## Deploy
 
