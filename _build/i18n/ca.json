@@ -162,7 +162,34 @@
         "body": "Gaudeix del viatge i torna el vehicle en el termini acordat."
       }
     ],
-    "shotAlt": "Mercedes-AMG G 63 de la flota de Serres Drive"
+    "shotAlt": "Mercedes-AMG G 63 de la flota de Serres Drive",
+    "filmHint": "Baixa per veure la pel·lícula",
+    "filmAria": "Com funciona, en quatre escenes",
+    "stepOf": "Pas {n} de {total}",
+    "scene": "Escena",
+    "pick": {
+      "chosen": "Triat"
+    },
+    "chat": {
+      "aria": "Conversa d'exemple per WhatsApp amb Serres Drive",
+      "online": "en línia",
+      "typing": "escrivint…",
+      "today": "Avui",
+      "placeholder": "Missatge",
+      "m1": "Hola Serres, m'agradaria conduir aquest cotxe",
+      "m2": "Hola! I tant. Quines dates tens pensades?",
+      "m3": "De divendres a diumenge",
+      "m4": "Perfecte. Et confirmo dates i condicions ✅"
+    },
+    "map": {
+      "aria": "Mapa estilitzat de l'àrea metropolitana de Barcelona amb la ruta de lliurament des de Sant Cugat del Vallès",
+      "here": "Te'l portem aquí",
+      "area": "Àrea metropolitana",
+      "sea": "Mediterrani"
+    },
+    "drive": {
+      "kmh": "km/h"
+    }
   },
   "termsPage": {
     "h1": "Condicions de lloguer",

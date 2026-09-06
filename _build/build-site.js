@@ -81,6 +81,10 @@ const asset = (p) => {
 /* Mismo mecanismo para los assets que solo usa la portada restaurada. */
 const VH = 'v=' + assetHash('css/home.css', 'css/featured.css', 'css/preloader.css',
   'js/preloader.js', 'js/experience.js', 'js/featured.js', 'js/fleet.js');
+/* Y para la película de /como-funciona. Sin esto .htaccess los deja un año
+   en caché (immutable) y ningún cambio llega a quien ya haya entrado. */
+const VW = 'v=' + assetHash('css/how.css', 'js/how.js');
+const { howMap } = require('./how-map');
 
 /* ---------- helpers -------------------------------------------------- */
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
@@ -500,7 +504,11 @@ for (const lang of LANGS) {
   <section class="fc-sec" id="featured">
     <div class="fc-pin">
       <div class="fc-head">
-        <p class="fc-eyebrow">${L.home.featured}</p>
+        <!-- Dos gemelos en la misma celda: la sombra (con forma de letra, no
+             una caja) debajo y el degradado de oro encima. El oro va con
+             background-clip:text, que no admite text-shadow en el mismo
+             elemento; por eso el gemelo. Ver featured.css. -->
+        <p class="fc-eyebrow"><span class="fc-eyebrow-t"><span class="fc-eyebrow-sh" aria-hidden="true">${L.home.featured}</span><span class="fc-eyebrow-v">${L.home.featured}</span></span></p>
       </div>
       <div class="fc-stage">
         ${featured.map(c => `<a class="fc-slide" href="${r}coches/${c.slug}/">
@@ -777,22 +785,25 @@ ${others.length ? `<section class="section--tight" style="padding-top:0">
       <h1 class="h-lg">${esc(meta.h1)}</h1>
       <p class="lede">${esc(meta.description)}</p>
     </div>
+    <!-- En móvil serres.css convierte cada fila en una tarjeta (display:grid),
+         y eso le quita a <tr>/<td> su semántica de tabla: los role= la
+         devuelven, y data-label pone el nombre de la columna en cada celda. -->
     <div class="table-scroll">
-      <table class="rates">
+      <table class="rates" role="table">
         <caption class="sr">${L.rates.caption}</caption>
-        <thead><tr>
-          <th scope="col">${L.rates.colCar}</th><th scope="col">${L.carPage.d1}</th><th scope="col">${L.carPage.d2}</th>
-          <th scope="col">${L.carPage.d3}</th><th scope="col">${L.carPage.w1}</th><th scope="col">${L.carPage.m1}</th><th scope="col">${L.terms.deposit}</th>
+        <thead role="rowgroup"><tr role="row">
+          <th scope="col" role="columnheader">${L.rates.colCar}</th><th scope="col" role="columnheader">${L.carPage.d1}</th><th scope="col" role="columnheader">${L.carPage.d2}</th>
+          <th scope="col" role="columnheader">${L.carPage.d3}</th><th scope="col" role="columnheader">${L.carPage.w1}</th><th scope="col" role="columnheader">${L.carPage.m1}</th><th scope="col" role="columnheader">${L.terms.deposit}</th>
         </tr></thead>
-        <tbody>
-          ${cars.map(c => `<tr>
-            <td><div class="car-cell">
+        <tbody role="rowgroup">
+          ${cars.map(c => `<tr role="row">
+            <td role="cell" data-label="${esc(L.rates.colCar)}"><div class="car-cell">
               <img src="${ra}${asset(c.gallery[0].jpg800)}" alt="" width="64" height="43" loading="lazy" decoding="async">
               <a href="${r}coches/${c.slug}/"><b>${esc(c.name)}</b></a>
             </div></td>
-            <td class="d1">${eur(c.prices.d1)}</td><td>${eur(c.prices.d2)}</td><td>${eur(c.prices.d3)}</td>
-            <td>${eur(c.prices.w1)}</td><td>${eur(c.prices.m1)}</td>
-            <td>${c.deposit === null ? L.common.byWhatsapp : eur(c.deposit)}</td>
+            <td role="cell" class="d1" data-label="${esc(L.carPage.d1)}">${eur(c.prices.d1)}</td><td role="cell" data-label="${esc(L.carPage.d2)}">${eur(c.prices.d2)}</td><td role="cell" data-label="${esc(L.carPage.d3)}">${eur(c.prices.d3)}</td>
+            <td role="cell" data-label="${esc(L.carPage.w1)}">${eur(c.prices.w1)}</td><td role="cell" data-label="${esc(L.carPage.m1)}">${eur(c.prices.m1)}</td>
+            <td role="cell" data-label="${esc(L.terms.deposit)}">${c.deposit === null ? L.common.byWhatsapp : eur(c.deposit)}</td>
           </tr>`).join('\n          ')}
         </tbody>
       </table>
@@ -804,37 +815,190 @@ ${others.length ? `<section class="section--tight" style="padding-top:0">
 }
 
 /* --- /como-funciona ------------------------------------------------------ */
+/* Una película en cuatro escenas que avanza con el scroll (css/how.css +
+   js/how.js, GSAP + ScrollTrigger + Lenis como en la portada). El marcado
+   de cada escena es también su fotograma FINAL: sin JS o con
+   prefers-reduced-motion se ve completa y quieta. Los textos de los cuatro
+   pasos son del cliente y vienen del diccionario tal cual; la película los
+   envuelve, no los reescribe. Solo salen los 13 coches de data/fleet.json. */
 {
   const url = '/como-funciona/', r = rel(url), ra = rel(lp(url)), meta = seo[url];
-  const steps = L.how.steps.map(st => [st.n, st.title, f(st.body, { amount: eur(T.deliveryFee) })]);
-  const shot = car('mercedes-amg-g63').gallery[0];
+  const H = L.how;
+  const steps = H.steps.map(st => [st.n, st.title, f(st.body, { amount: eur(T.deliveryFee) })]);
+  /* El coche que protagoniza la película: se elige en la escena 1, va en la
+     tarjeta del chat de la 2 y arranca en la 4. */
+  const hero = car('mercedes-amg-g63');
+  const fromDay = c => `${L.common.from} ${eur(c.prices.d1)} ${L.common.aDay}`;
+  /* lazy solo donde no estorba: los tiles del desfile son el contenido del
+     escenario y GSAP los mueve cientos de píxeles, así que el cargador
+     perezoso los pedía cuando ya estaban entrando en plano, en blanco. */
+  const pic800 = (c, alt = '', { lazy = true } = {}) => {
+    const g = c.gallery[0];
+    return `<picture><source type="image/webp" srcset="${ra}${asset(g.webp800)}"><img src="${ra}${asset(g.jpg800)}" width="800" height="533" alt="${esc(alt)}"${lazy ? ' loading="lazy"' : ''} decoding="async"></picture>`;
+  };
+  const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>';
+
+  /* --- escena 01: el desfile. Dos carriles con los 13 coches; el
+     protagonista va cuarto en el delantero, que es donde queda centrado. */
+  const rowA = ['lamborghini-urus', 'audi-rs6-avant', 'porsche-911-cabrio', 'mercedes-amg-g63',
+    'porsche-cayenne-hybrid', 'porsche-911-carrera-s', 'mercedes-amg-a45'].map(car);
+  const rowB = fleet.cars.filter(c => !rowA.includes(c));
+  /* tabindex="-1": las fichas siguen siendo enlaces para el ratón y el
+     dedo, pero no son 13 paradas de tabulador que caen fuera del escenario
+     recortado (sin foco visible). El teclado tiene «Ver la flota completa». */
+  const tile = c => `<a class="pick-tile" href="${r}coches/${c.slug}/" tabindex="-1"${c === hero ? ' data-chosen' : ''}>
+            <span class="pick-shot">${pic800(c, `${c.name} ${L.common.rentalAlt}`, { lazy: false })}</span>
+            <span class="pick-meta"><b>${esc(c.name)}</b><span>${fromDay(c)}</span></span>${c === hero ? `
+            <span class="pick-badge" aria-hidden="true">${check}${esc(H.pick.chosen)}</span>` : ''}
+          </a>`;
+  const stagePick = `<div class="pick" aria-hidden="true">
+        <div class="pick-row pick-row--a">${rowA.map(tile).join('')}</div>
+        <div class="pick-row pick-row--b">${rowB.map(tile).join('')}</div>
+      </div>`;
+
+  /* --- escena 02: la conversación, recreada en HTML (globos, «escribiendo…»,
+     la barra donde se teclea). Sin número de teléfono a la vista: la
+     cabecera lleva el nombre y el estado. Las horas son decorado. */
+  const wa = H.chat;
+  const ticks = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12l4 4 8-9M9 16l3 3 9-10"/></svg>';
+  const typingDots = '<div class="wa-typing" aria-hidden="true"><i></i><i></i><i></i></div>';
+  const stageBook = `<div class="book">
+        <figure class="phone" role="img" aria-label="${esc(wa.aria)}">
+          <span class="phone-notch"></span>
+          <div class="wa">
+            <div class="wa-head">
+              <svg class="wa-back" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+              <span class="wa-avatar">S</span>
+              <span class="wa-who"><b>Serres Drive</b><i class="wa-status" data-online="${esc(wa.online)}" data-typing="${esc(wa.typing)}">${esc(wa.online)}</i></span>
+              <span class="wa-icons"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10l5-3v10l-5-3z"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></span>
+            </div>
+            <div class="wa-body">
+              <span class="wa-day">${esc(wa.today)}</span>
+              <div class="wa-msg wa-msg--out">
+                <span class="wa-card">${pic800(hero)}<span><b>${esc(hero.name.replace(/ (\S+)$/, '\u00a0$1'))}</b><span>serresdrive.com</span></span></span>
+                <p class="wa-text"><span class="wa-typed">${esc(wa.m1)}</span></p>
+                <span class="wa-meta">10:32 ${ticks}</span>
+              </div>
+              ${typingDots}
+              <div class="wa-msg wa-msg--in"><p class="wa-text">${esc(wa.m2)}</p><span class="wa-meta">10:33</span></div>
+              <div class="wa-msg wa-msg--out"><p class="wa-text"><span class="wa-typed">${esc(wa.m3)}</span></p><span class="wa-meta">10:33 ${ticks}</span></div>
+              ${typingDots}
+              <div class="wa-msg wa-msg--in"><p class="wa-text">${esc(wa.m4)}</p><span class="wa-meta">10:35</span></div>
+            </div>
+            <div class="wa-foot">
+              <span class="wa-input"><span class="wa-draft" data-placeholder="${esc(wa.placeholder)}"></span><span class="wa-caret"></span></span>
+              <span class="wa-send"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 11.5 21 3l-4 18-5.5-6.5L3 11.5z"/></svg></span>
+            </div>
+          </div>
+        </figure>
+      </div>`;
+
+  /* --- escena 03: el mapa (SVG generado en _build/how-map.js). */
+  const stageDeliver = `<div class="deliver">${howMap({
+    hq: C.geo,
+    labels: { here: H.map.here, hq: 'Serres Drive', area: H.map.area, sea: H.map.sea, aria: H.map.aria },
+    amount: eur(T.deliveryFee),
+  })}</div>`;
+
+  /* --- escena 04: arranca y sale de plano. Cuentarrevoluciones en SVG:
+     0 rpm a -118°, 8.000 a +118°, zona roja desde 6.500. */
+  const gauge = (() => {
+    const c = 60, R = 46;
+    const pt = (a, rr = R) => { const t = (a - 90) * Math.PI / 180; return [(c + rr * Math.cos(t)).toFixed(1), (c + rr * Math.sin(t)).toFixed(1)]; };
+    const arc = (a1, a2, large) => { const [x1, y1] = pt(a1), [x2, y2] = pt(a2); return `M${x1} ${y1}A${R} ${R} 0 ${large} 1 ${x2} ${y2}`; };
+    const ticks = Array.from({ length: 9 }, (_, k) => {
+      const a = -118 + k * 29.5, [x1, y1] = pt(a, R - 8), [x2, y2] = pt(a, R - 2);
+      return `<line class="tick" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}"/>`;
+    }).join('');
+    return `<svg class="gauge" viewBox="0 0 120 120" aria-hidden="true">
+            <path class="arc" d="${arc(-118, 118, 1)}"/><path class="arc-red" d="${arc(74, 118, 0)}"/>
+            ${ticks}
+            <line class="needle" x1="60" y1="60" x2="60" y2="21"/><circle class="hub" cx="60" cy="60" r="5"/>
+            <text x="60" y="90" text-anchor="middle">RPM ×1000</text>
+          </svg>`;
+  })();
+  const g0 = hero.gallery[0];
+  const heroPic = `<picture><source type="image/webp" srcset="${ra}${asset(g0.webp)}"><img src="${ra}${asset(g0.jpg)}" width="${g0.width}" height="${g0.height}" alt="" loading="lazy" decoding="async"></picture>`;
+  const stageDrive = `<div class="drive" aria-hidden="true">
+        <svg class="drive-road" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMax slice">
+          <defs><radialGradient id="drvGlow" cx=".5" cy="1" r=".7"><stop offset="0" stop-color="#c9cdd7" stop-opacity=".14"/><stop offset="1" stop-color="#c9cdd7" stop-opacity="0"/></radialGradient></defs>
+          <rect class="glow" width="1000" height="600"/>
+          <path class="horizon" d="M0 330H1000"/>
+          <path class="edge" d="M120 600L455 330M880 600L545 330"/>
+          <path class="dash" d="M500 600V330"/>
+        </svg>
+        <span class="drive-lines"><i></i><i></i><i></i><i></i></span>
+        <div class="drive-car">
+          <span class="drive-ghost">${heroPic}</span><span class="drive-ghost">${heroPic}</span><span class="drive-ghost">${heroPic}</span>
+          <span class="drive-shot">${heroPic}</span>
+        </div>
+        <div class="drive-dash">
+          ${gauge}
+          <span class="drive-start"><span>Engine</span><b>Start</b><span>Stop</span></span>
+        </div>
+        <p class="drive-speed"><b>0</b>${esc(H.drive.kmh)}</p>
+      </div>`;
+
+  /* --- una escena = texto del cliente a la izquierda, escenario a la derecha */
+  const scene = ({ n, kind, title, body, extra = '', stage }) => `<section class="scene scene--${kind}" id="paso-${n}" data-kind="${kind}" aria-label="${esc(f(H.stepOf, { n, total: steps.length }))}">
+  <div class="scene-pin">
+    <div class="scene-copy">
+      <p class="scene-n" aria-hidden="true"><span class="k">0${n}</span><span class="of">/ 0${steps.length}</span></p>
+      <h2 class="scene-title">${esc(title)}</h2>
+      <p class="scene-body">${esc(body)}</p>${extra ? `
+      <div class="scene-extra">${extra}</div>` : ''}
+    </div>
+    <div class="scene-stage"><div class="stage-shell"><div class="stage-core">
+      <div class="stage-slate" aria-hidden="true"><span>${esc(H.scene)} 0${n}</span><span><i></i>${esc(title)}</span></div>
+      ${stage}
+    </div></div></div>
+  </div>
+</section>`;
+
   const body = `${crumbs(r, [{ label: L.nav.how }])}
-<section class="section section--tight">
+<section class="section--tight how-intro">
   <div class="wrap">
     <div class="section-head">
-      <p class="eyebrow">${L.how.eyebrow}</p>
+      <p class="eyebrow">${H.eyebrow}</p>
       <h1 class="h-lg">${esc(meta.h1)}</h1>
       <p class="lede">${esc(meta.description)}</p>
+      <p class="how-hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg>${esc(H.filmHint)}</p>
     </div>
-    <div class="plate" style="margin-bottom:36px"><div class="plate-core">
-      <picture>
-        <source type="image/webp" srcset="${ra}${asset(shot.webp)}">
-        <img src="${ra}${asset(shot.jpg)}" width="${shot.width}" height="${shot.height}" alt="${L.how.shotAlt}" loading="lazy" decoding="async">
-      </picture>
-    </div></div>
-    <div class="steps">
-      ${steps.map(([n, t, d]) => `<article class="step"><span class="n">${n}</span><h3>${t}</h3><p class="muted">${esc(d)}</p></article>`).join('\n      ')}
-    </div>
-    <div class="hero-cta" style="margin-top:34px">
+  </div>
+</section>
+<div class="film" id="film" role="group" aria-label="${esc(H.filmAria)}">
+${scene({ n: 1, kind: 'pick', title: steps[0][1], body: steps[0][2], stage: stagePick,
+    extra: `<a class="btn btn--secondary btn--sm" href="${r}flota/">${L.common.seeFullFleet} ${btnArrow}</a>` })}
+${scene({ n: 2, kind: 'book', title: steps[1][1], body: steps[1][2], stage: stageBook,
+    extra: `<a class="btn btn--wa btn--sm" href="${waGeneral()}" target="_blank" rel="noopener">${ICON.wa}<span>${L.nav.bookWa}</span></a>` })}
+${scene({ n: 3, kind: 'deliver', title: steps[2][1], body: steps[2][2], stage: stageDeliver,
+    extra: `<a class="btn btn--secondary btn--sm" href="${r}condiciones-de-alquiler/">${L.footer.terms} ${btnArrow}</a>` })}
+${scene({ n: 4, kind: 'drive', title: steps[3][1], body: steps[3][2], stage: stageDrive })}
+</div>
+<ol class="film-rail" aria-hidden="true">${steps.map((_, i) => `<li>0${i + 1}</li>`).join('')}</ol>
+<section class="section--tight how-cta">
+  <div class="wrap">
+    <div class="hero-cta">
       <a class="btn btn--primary" href="${r}flota/">${L.common.seeFleet} ${btnArrow}</a>
       <a class="btn btn--wa" href="${waGeneral()}" target="_blank" rel="noopener">${ICON.wa}<span>${L.nav.bookWa}</span></a>
     </div>
   </div>
 </section>`;
+
+  /* Los CDN van sin defer, como en la portada, porque el registerPlugin
+     inline corre justo detrás; how.js va después y sin defer para que el
+     primer fotograma ya esté fijado antes de que la página se pinte. */
+  const extraHead = `<link rel="stylesheet" href="${ra}css/how.css?${VW}">`;
+  const extraScripts = `<script src="https://unpkg.com/lenis@1.1.16/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>window.gsap&&window.ScrollTrigger&&gsap.registerPlugin(ScrollTrigger);</script>
+<script src="${ra}js/how.js?${VW}"></script>`;
+
   write(url, page({
-    url, body, current: 'como-funciona/',
+    url, body, current: 'como-funciona/', extraHead, extraScripts,
     schema: [breadcrumb([{ name: L.common.start, url: '/' }, { name: L.nav.how, url }]), {
-      '@type': 'HowTo', name: L.how.h1,
+      '@type': 'HowTo', name: H.h1,
       step: steps.map(([n, t, d], i) => ({ '@type': 'HowToStep', position: i + 1, name: t, text: d })),
     }],
   }));

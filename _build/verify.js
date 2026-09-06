@@ -59,7 +59,9 @@ for (const [slug, [prices, deposit]] of Object.entries(BRIEF)) {
 {
   const html = read('tarifas/index.html');
   for (const [slug, [prices, deposit]] of Object.entries(BRIEF)) {
-    const row = html.split('<tr>').find(r => r.includes(`coches/${slug}/`));
+    /* <tr role="row">: la tabla lleva roles explícitos porque en móvil se
+       pinta como tarjetas (display:grid) y eso le quitaría la semántica. */
+    const row = html.split(/<tr[^>]*>/).find(r => r.includes(`coches/${slug}/`));
     check(!!row, `tarifas: row for ${slug}`);
     if (!row) continue;
     const missing = prices.filter(p => !row.includes(eur(p)));

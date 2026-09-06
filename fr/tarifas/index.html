@@ -30,7 +30,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../css/serres.css?v=40eeeaa645">
+<link rel="stylesheet" href="../../css/serres.css?v=d2586ca6f2">
 
 <script type="application/ld+json">{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://serresdrive.com/"},{"@type":"ListItem","position":2,"name":"Tarifs","item":"https://serresdrive.com/tarifas/"}]}</script>
 </head>
@@ -79,130 +79,133 @@
       <h1 class="h-lg">Tarifs</h1>
       <p class="lede">Les prix 1 jour, 2 jours, 3 jours, 1 semaine et 1 mois pour les 13 voitures de la flotte. Caution dès 2.000 €. Sans mauvaise surprise à la fin.</p>
     </div>
+    <!-- En móvil serres.css convierte cada fila en una tarjeta (display:grid),
+         y eso le quita a <tr>/<td> su semántica de tabla: los role= la
+         devuelven, y data-label pone el nombre de la columna en cada celda. -->
     <div class="table-scroll">
-      <table class="rates">
+      <table class="rates" role="table">
         <caption class="sr">Tarifs de location par voiture et par durée</caption>
-        <thead><tr>
-          <th scope="col">Voiture</th><th scope="col">1 jour</th><th scope="col">2 jours</th>
-          <th scope="col">3 jours</th><th scope="col">1 semaine</th><th scope="col">1 mois</th><th scope="col">Caution</th>
+        <thead role="rowgroup"><tr role="row">
+          <th scope="col" role="columnheader">Voiture</th><th scope="col" role="columnheader">1 jour</th><th scope="col" role="columnheader">2 jours</th>
+          <th scope="col" role="columnheader">3 jours</th><th scope="col" role="columnheader">1 semaine</th><th scope="col" role="columnheader">1 mois</th><th scope="col" role="columnheader">Caution</th>
         </tr></thead>
-        <tbody>
-          <tr>
-            <td><div class="car-cell">
+        <tbody role="rowgroup">
+          <tr role="row">
+            <td role="cell" data-label="Voiture"><div class="car-cell">
               <img src="../../assets/img/cars/lamborghini-urus/alquiler-lamborghini-urus-barcelona-1-800.jpg?v=2703e788de" alt="" width="64" height="43" loading="lazy" decoding="async">
               <a href="../coches/lamborghini-urus/"><b>Lamborghini Urus</b></a>
             </div></td>
-            <td class="d1">1.100 €</td><td>1.900 €</td><td>3.000 €</td>
-            <td>6.500 €</td><td>13.000 €</td>
-            <td>Par WhatsApp</td>
+            <td role="cell" class="d1" data-label="1 jour">1.100 €</td><td role="cell" data-label="2 jours">1.900 €</td><td role="cell" data-label="3 jours">3.000 €</td>
+            <td role="cell" data-label="1 semaine">6.500 €</td><td role="cell" data-label="1 mois">13.000 €</td>
+            <td role="cell" data-label="Caution">Par WhatsApp</td>
           </tr>
-          <tr>
-            <td><div class="car-cell">
+          <tr role="row">
+            <td role="cell" data-label="Voiture"><div class="car-cell">
               <img src="../../assets/img/cars/mercedes-amg-g63/alquiler-mercedes-amg-g63-barcelona-1-800.jpg?v=45aa21a88c" alt="" width="64" height="43" loading="lazy" decoding="async">
               <a href="../coches/mercedes-amg-g63/"><b>Mercedes-AMG G 63</b></a>
             </div></td>
-            <td class="d1">1.000 €</td><td>1.700 €</td><td>2.700 €</td>
-            <td>6.000 €</td><td>12.000 €</td>
-            <td>5.000 €</td>
+            <td role="cell" class="d1" data-label="1 jour">1.000 €</td><td role="cell" data-label="2 jours">1.700 €</td><td role="cell" data-label="3 jours">2.700 €</td>
+            <td role="cell" data-label="1 semaine">6.000 €</td><td role="cell" data-label="1 mois">12.000 €</td>
+            <td role="cell" data-label="Caution">5.000 €</td>
           </tr>
-          <tr>
-            <td><div class="car-cell">
+          <tr role="row">
+            <td role="cell" data-label="Voiture"><div class="car-cell">
               <img src="../../assets/img/cars/audi-rs6-avant/alquiler-audi-rs6-avant-barcelona-1-800.jpg?v=c98963afb3" alt="" width="64" height="43" loading="lazy" decoding="async">
               <a href="../coches/audi-rs6-avant/"><b>Audi RS 6 Avant</b></a>
             </div></td>
-            <td class="d1">900 €</td><td>1.600 €</td><td>2.500 €</td>
-            <td>5.500 €</td><td>11.000 €</td>
-            <td>Par WhatsApp</td>
+            <td role="cell" class="d1" data-label="1 jour">900 €</td><td role="cell" data-label="2 jours">1.600 €</td><td role="cell" data-label="3 jours">2.500 €</td>
+            <td role="cell" data-label="1 semaine">5.500 €</td><td role="cell" data-label="1 mois">11.000 €</td>
+            <td role="cell" data-label="Caution">Par WhatsApp</td>
           </tr>
-          <tr>
-            <td><div class="car-cell">
+          <tr role="row">
+            <td role="cell" data-label="Voiture"><div class="car-cell">
               <img src="../../assets/img/cars/porsche-911-cabrio/alquiler-porsche-911-cabrio-barcelona-1-800.jpg?v=f6d03b5815" alt="" width="64" height="43" loading="lazy" decoding="async">
               <a href="../coches/porsche-911-cabrio/"><b>Porsche 911 Cabrio (992)</b></a>
             </div></td>
-            <td class="d1">800 €</td><td>1.500 €</td><td>2.200 €</td>
-            <td>4.600 €</td><td>9.000 €</td>
-            <td>2.000 €</td>
+            <td role="cell" class="d1" data-label="1 jour">800 €</td><td role="cell" data-label="2 jours">1.500 €</td><td role="cell" data-label="3 jours">2.200 €</td>
+            <td role="cell" data-label="1 semaine">4.600 €</td><td role="cell" data-label="1 mois">9.000 €</td>
+            <td role="cell" data-label="Caution">2.000 €</td>
           </tr>
-          <tr>
-            <td><div class="car-cell">
+          <tr role="row">
+            <td role="cell" data-label="Voiture"><div class="car-cell">
               <img src="../../assets/img/cars/porsche-911-carrera-s/alquiler-porsche-911-carrera-s-barcelona-1-800.jpg?v=e5fa88fa7c" alt="" width="64" height="43" loading="lazy" decoding="async">
               <a href="../coches/porsche-911-carrera-s/"><b>Porsche 911 Carrera S (991)</b></a>
             </div></td>
-            <td class="d1">700 €</td><td>1.300 €</td><td>2.000 €</td>
-            <td>3.500 €</td><td>7.500 €</td>
-            <td>2.000 €</td>
+            <td role="cell" class="d1" data-label="1 jour">700 €</td><td role="cell" data-label="2 jours">1.300 €</td><td role="cell" data-label="3 jours">2.000 €</td>
+            <td role="cell" data-label="1 semaine">3.500 €</td><td role="cell" data-label="1 mois">7.500 €</td>
+            <td role="cell" data-label="Caution">2.000 €</td>
           </tr>
-          <tr>
-            <td><div class="car-cell">
+          <tr role="row">
+            <td role="cell" data-label="Voiture"><div class="car-cell">
               <img src="../../assets/img/cars/porsche-cayenne-hybrid/alquiler-porsche-cayenne-hybrid-barcelona-1-800.jpg?v=073f2b968a" alt="" width="64" height="43" loading="lazy" decoding="async">
               <a href="../coches/porsche-cayenne-hybrid/"><b>Porsche Cayenne Hybrid</b></a>
             </div></td>
-            <td class="d1">700 €</td><td>1.300 €</td><td>2.000 €</td>
-            <td>3.500 €</td><td>7.500 €</td>
-            <td>2.000 €</td>
+            <td role="cell" class="d1" data-label="1 jour">700 €</td><td role="cell" data-label="2 jours">1.300 €</td><td role="cell" data-label="3 jours">2.000 €</td>
+            <td role="cell" data-label="1 semaine">3.500 €</td><td role="cell" data-label="1 mois">7.500 €</td>
+            <td role="cell" data-label="Caution">2.000 €</td>
           </tr>
-          <tr>
-            <td><div class="car-cell">
+          <tr role="row">
+            <td role="cell" data-label="Voiture"><div class="car-cell">
               <img src="../../assets/img/cars/mercedes-amg-a45/alquiler-mercedes-amg-a45-barcelona-1-800.jpg?v=fb71e6d800" alt="" width="64" height="43" loading="lazy" decoding="async">
               <a href="../coches/mercedes-amg-a45/"><b>Mercedes-AMG A45 S</b></a>
             </div></td>
-            <td class="d1">450 €</td><td>800 €</td><td>1.100 €</td>
-            <td>2.000 €</td><td>5.000 €</td>
-            <td>2.000 €</td>
+            <td role="cell" class="d1" data-label="1 jour">450 €</td><td role="cell" data-label="2 jours">800 €</td><td role="cell" data-label="3 jours">1.100 €</td>
+            <td role="cell" data-label="1 semaine">2.000 €</td><td role="cell" data-label="1 mois">5.000 €</td>
+            <td role="cell" data-label="Caution">2.000 €</td>
           </tr>
-          <tr>
-            <td><div class="car-cell">
+          <tr role="row">
+            <td role="cell" data-label="Voiture"><div class="car-cell">
               <img src="../../assets/img/cars/audi-rs3-sportback/alquiler-audi-rs3-sportback-barcelona-1-800.jpg?v=54b4698d3b" alt="" width="64" height="43" loading="lazy" decoding="async">
               <a href="../coches/audi-rs3-sportback/"><b>Audi RS 3 Sportback</b></a>
             </div></td>
-            <td class="d1">450 €</td><td>800 €</td><td>1.100 €</td>
-            <td>2.000 €</td><td>5.000 €</td>
-            <td>2.000 €</td>
+            <td role="cell" class="d1" data-label="1 jour">450 €</td><td role="cell" data-label="2 jours">800 €</td><td role="cell" data-label="3 jours">1.100 €</td>
+            <td role="cell" data-label="1 semaine">2.000 €</td><td role="cell" data-label="1 mois">5.000 €</td>
+            <td role="cell" data-label="Caution">2.000 €</td>
           </tr>
-          <tr>
-            <td><div class="car-cell">
+          <tr role="row">
+            <td role="cell" data-label="Voiture"><div class="car-cell">
               <img src="../../assets/img/cars/audi-rsq3/alquiler-audi-rsq3-barcelona-1-800.jpg?v=8172f597cb" alt="" width="64" height="43" loading="lazy" decoding="async">
               <a href="../coches/audi-rsq3/"><b>Audi RS Q3</b></a>
             </div></td>
-            <td class="d1">450 €</td><td>800 €</td><td>1.100 €</td>
-            <td>2.000 €</td><td>5.000 €</td>
-            <td>2.000 €</td>
+            <td role="cell" class="d1" data-label="1 jour">450 €</td><td role="cell" data-label="2 jours">800 €</td><td role="cell" data-label="3 jours">1.100 €</td>
+            <td role="cell" data-label="1 semaine">2.000 €</td><td role="cell" data-label="1 mois">5.000 €</td>
+            <td role="cell" data-label="Caution">2.000 €</td>
           </tr>
-          <tr>
-            <td><div class="car-cell">
+          <tr role="row">
+            <td role="cell" data-label="Voiture"><div class="car-cell">
               <img src="../../assets/img/cars/volkswagen-golf-r/alquiler-volkswagen-golf-r-barcelona-1-800.jpg?v=a98611589a" alt="" width="64" height="43" loading="lazy" decoding="async">
               <a href="../coches/volkswagen-golf-r/"><b>Volkswagen Golf 8.5 R</b></a>
             </div></td>
-            <td class="d1">400 €</td><td>750 €</td><td>1.000 €</td>
-            <td>1.800 €</td><td>4.500 €</td>
-            <td>2.000 €</td>
+            <td role="cell" class="d1" data-label="1 jour">400 €</td><td role="cell" data-label="2 jours">750 €</td><td role="cell" data-label="3 jours">1.000 €</td>
+            <td role="cell" data-label="1 semaine">1.800 €</td><td role="cell" data-label="1 mois">4.500 €</td>
+            <td role="cell" data-label="Caution">2.000 €</td>
           </tr>
-          <tr>
-            <td><div class="car-cell">
+          <tr role="row">
+            <td role="cell" data-label="Voiture"><div class="car-cell">
               <img src="../../assets/img/cars/range-rover-velar/alquiler-range-rover-velar-barcelona-1-800.jpg?v=994aa3ebe2" alt="" width="64" height="43" loading="lazy" decoding="async">
               <a href="../coches/range-rover-velar/"><b>Range Rover Velar</b></a>
             </div></td>
-            <td class="d1">350 €</td><td>700 €</td><td>900 €</td>
-            <td>1.800 €</td><td>4.300 €</td>
-            <td>2.000 €</td>
+            <td role="cell" class="d1" data-label="1 jour">350 €</td><td role="cell" data-label="2 jours">700 €</td><td role="cell" data-label="3 jours">900 €</td>
+            <td role="cell" data-label="1 semaine">1.800 €</td><td role="cell" data-label="1 mois">4.300 €</td>
+            <td role="cell" data-label="Caution">2.000 €</td>
           </tr>
-          <tr>
-            <td><div class="car-cell">
+          <tr role="row">
+            <td role="cell" data-label="Voiture"><div class="car-cell">
               <img src="../../assets/img/cars/mercedes-glc/alquiler-mercedes-glc-barcelona-1-800.jpg?v=744d913d0d" alt="" width="64" height="43" loading="lazy" decoding="async">
               <a href="../coches/mercedes-glc/"><b>Mercedes GLC</b></a>
             </div></td>
-            <td class="d1">200 €</td><td>350 €</td><td>550 €</td>
-            <td>1.000 €</td><td>2.500 €</td>
-            <td>2.000 €</td>
+            <td role="cell" class="d1" data-label="1 jour">200 €</td><td role="cell" data-label="2 jours">350 €</td><td role="cell" data-label="3 jours">550 €</td>
+            <td role="cell" data-label="1 semaine">1.000 €</td><td role="cell" data-label="1 mois">2.500 €</td>
+            <td role="cell" data-label="Caution">2.000 €</td>
           </tr>
-          <tr>
-            <td><div class="car-cell">
+          <tr role="row">
+            <td role="cell" data-label="Voiture"><div class="car-cell">
               <img src="../../assets/img/cars/mercedes-a200-4matic/alquiler-mercedes-a200-4matic-barcelona-1-800.jpg?v=45e276b254" alt="" width="64" height="43" loading="lazy" decoding="async">
               <a href="../coches/mercedes-a200-4matic/"><b>Mercedes A200 4Matic</b></a>
             </div></td>
-            <td class="d1">150 €</td><td>250 €</td><td>400 €</td>
-            <td>900 €</td><td>1.800 €</td>
-            <td>2.000 €</td>
+            <td role="cell" class="d1" data-label="1 jour">150 €</td><td role="cell" data-label="2 jours">250 €</td><td role="cell" data-label="3 jours">400 €</td>
+            <td role="cell" data-label="1 semaine">900 €</td><td role="cell" data-label="1 mois">1.800 €</td>
+            <td role="cell" data-label="Caution">2.000 €</td>
           </tr>
         </tbody>
       </table>
@@ -240,6 +243,6 @@
   </div>
 </footer>
 
-<script src="../../js/site.js?v=40eeeaa645" defer></script>
+<script src="../../js/site.js?v=d2586ca6f2" defer></script>
 </body>
 </html>

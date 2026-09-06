@@ -36,14 +36,38 @@
   display:inline-flex;align-items:center;gap:clamp(12px,1.6vw,20px);
   font-family:var(--font-head);font-size:clamp(1.6rem,4.2vw,3rem);font-weight:700;
   letter-spacing:.12em;text-transform:uppercase;line-height:1;
+  color:var(--white);
+}
+/* Legibilidad sobre el ciclorama blanco de las fotos SIN caja detrás. El
+   oro va con background-clip:text, y un text-shadow en ese mismo elemento se
+   pintaría POR ENCIMA del relleno transparente; y un filter: drop-shadow se
+   convertía en iOS en un rectángulo oscuro (el "fondo negro"). Así que el
+   generador pinta el texto dos veces en la misma celda de una rejilla: el
+   gemelo de abajo es transparente y solo aporta su sombra, con forma de
+   letra y en capas (un borde prieto que dibuja el contorno sobre blanco puro
+   más dos halos anchos); el de arriba lleva el degradado. Medido sobre la
+   diapositiva más clara (el 911 Cabrio, 245/255 de luminancia). */
+.fc-eyebrow-t{display:inline-grid;isolation:isolate}
+.fc-eyebrow-t > span{grid-area:1/1}
+.fc-eyebrow-sh{
+  color:transparent;
+  user-select:none;-webkit-user-select:none;pointer-events:none;
+  text-shadow:
+    0 0 1px rgba(6,6,9,.95),
+    0 1px 2px rgba(6,6,9,.9),
+    0 2px 6px rgba(6,6,9,.72),
+    0 6px 18px rgba(6,6,9,.55),
+    0 14px 40px rgba(6,6,9,.4);
+}
+.fc-eyebrow-v{
   background:var(--oro-grad);
   -webkit-background-clip:text;background-clip:text;
   color:transparent;-webkit-text-fill-color:transparent;
-  filter:drop-shadow(0 3px 14px rgba(0,0,0,.55));
 }
 .fc-sec p.fc-eyebrow::before{
   content:"";width:clamp(30px,4.5vw,58px);height:2px;flex:none;
   background:var(--gold-grad);opacity:.9;
+  box-shadow:0 1px 2px rgba(6,6,9,.85),0 2px 8px rgba(6,6,9,.5);
 }
 
 .fc-slide{display:block;color:var(--white)}

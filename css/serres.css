@@ -526,6 +526,42 @@ table{border-collapse:collapse;width:100%}
 .rates .car-cell a::after{content:"";position:absolute;inset:0}
 .rates .d1{font-weight:600;color:var(--white)}
 
+/* Móvil y tablet vertical: la tabla mide 720 px y desplazarla en horizontal
+   dejaba los precios cortados por el borde y el coche fuera de pantalla en
+   cuanto mirabas la semana o la fianza. Por debajo de 860 px cada fila pasa
+   a ser una tarjeta: el coche arriba, los cinco precios en rejilla con su
+   etiqueta (data-label, puesta por el generador) y la fianza al pie. La
+   semántica de tabla la conservan los role= del HTML, porque display:grid
+   se la quita a <tr> y <td>. */
+@media (max-width:860px){
+  .table-scroll{overflow:visible;border:0;border-radius:0;background:none;box-shadow:none}
+  .rates{min-width:0;display:block}
+  .rates thead{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  .rates tbody{display:grid;gap:12px}
+  .rates tbody tr{
+    display:grid;grid-template-columns:repeat(6,1fr);gap:1px;
+    background:var(--line);border:1px solid var(--line-2);border-radius:var(--radius);
+    overflow:hidden;box-shadow:var(--shadow-1);
+  }
+  .rates tbody tr:hover{background:var(--line)}
+  .rates td{
+    display:flex;flex-direction:column;gap:3px;grid-column:span 2;
+    padding:12px 12px 13px;border:0;text-align:left;white-space:nowrap;background:var(--panel);
+  }
+  /* La segunda declaración (content … / "") es la forma con texto alternativo:
+     los navegadores que la entienden (Chrome 77+, Safari 17.4+, Firefox 128+)
+     ocultan la etiqueta generada al lector de pantalla, que ya la oye desde
+     el <thead>; los demás la ignoran y se quedan con la primera. */
+  .rates td::before{content:attr(data-label);content:attr(data-label) / "";font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-mute);font-variant-numeric:normal}
+  .rates td:nth-child(5),.rates td:nth-child(6){grid-column:span 3}
+  .rates td:first-child{grid-column:1/-1;padding:14px 14px;background:var(--panel-2);white-space:normal}
+  .rates td:first-child::before{display:none}
+  .rates td:last-child{grid-column:1/-1;flex-direction:row;justify-content:space-between;align-items:baseline;background:var(--panel-2)}
+  .rates .d1{font-size:17px}
+  .rates .car-cell img{width:76px;height:51px}
+  .rates .car-cell b{font-size:21px}
+}
+
 /* ---------- steps -------------------------------------------------- */
 .steps{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(14px,2vw,22px)}
 @media (max-width:760px){.steps{grid-template-columns:1fr}}
@@ -629,19 +665,11 @@ svg.ico-brand{width:18px;height:18px;flex:none;color:initial}
 .home-exp .footer{position:relative;z-index:2}
 
 
-/* El rótulo va en degradado cromo y el subtítulo en gris claro, y los coches
-   están fotografiados sobre ciclorama BLANCO: encima del Urus o del Cayenne
-   la cabecera entera se borraba. Se le pone su propio velo oscuro, que se
-   desvanece hacia abajo para no cortar la foto con una línea recta. */
-.fc-on .fc-head{position:relative;isolation:isolate}
-.fc-on .fc-head::before{
-  content:"";position:absolute;z-index:-1;
-  inset:-26px -40px -26px -40px;
-  background:linear-gradient(180deg,
-    rgba(6,6,9,.86) 0%,rgba(6,6,9,.72) 38%,
-    rgba(6,6,9,.38) 70%,rgba(6,6,9,0) 100%);
-  pointer-events:none;
-}
+/* El rótulo «Destacados» va en oro sobre fotos con ciclorama BLANCO. Antes
+   llevaba aquí un velo oscuro detrás (.fc-head::before), que en el móvil se
+   veía como una caja negra sobre la foto. Ahora la legibilidad la pone una
+   sombra CON FORMA DE LETRA (un gemelo del texto con text-shadow en capas),
+   que vive en featured.css junto al propio rótulo. */
 
 /* El botón verde macizo del nav no se leía como WhatsApp; ahora lleva el
    logo real, que trae su propio verde y no debe heredar currentColor. */

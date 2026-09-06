@@ -162,7 +162,34 @@
         "body": "Enjoy the drive and bring the car back on the agreed date."
       }
     ],
-    "shotAlt": "Mercedes-AMG G 63 from the Serres Drive fleet"
+    "shotAlt": "Mercedes-AMG G 63 from the Serres Drive fleet",
+    "filmHint": "Scroll to see how it works",
+    "filmAria": "How it works, in four scenes",
+    "stepOf": "Step {n} of {total}",
+    "scene": "Scene",
+    "pick": {
+      "chosen": "Chosen"
+    },
+    "chat": {
+      "aria": "Sample WhatsApp conversation with Serres Drive",
+      "online": "online",
+      "typing": "typing…",
+      "today": "Today",
+      "placeholder": "Message",
+      "m1": "Hi Serres, I'd like to drive this car",
+      "m2": "Hi! Of course. Which dates did you have in mind?",
+      "m3": "Friday to Sunday",
+      "m4": "Perfect. Dates and terms confirmed ✅"
+    },
+    "map": {
+      "aria": "Stylised map of the Barcelona metropolitan area with the delivery route from Sant Cugat del Vallès",
+      "here": "We'll bring it to you here",
+      "area": "Metropolitan area",
+      "sea": "Mediterranean"
+    },
+    "drive": {
+      "kmh": "km/h"
+    }
   },
   "termsPage": {
     "h1": "Hire terms",

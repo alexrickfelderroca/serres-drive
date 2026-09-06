@@ -145,7 +145,34 @@
       { "n": "03", "title": "Entrega", "body": "Recoge el vehículo o solicita la entrega. Entrega y recogida en el área metropolitana: {amount}." },
       { "n": "04", "title": "Conduce", "body": "Disfruta del viaje y devuelve el vehículo en el plazo acordado." }
     ],
-    "shotAlt": "Mercedes-AMG G 63 de la flota de Serres Drive"
+    "shotAlt": "Mercedes-AMG G 63 de la flota de Serres Drive",
+    "filmHint": "Baja para ver la película",
+    "filmAria": "Cómo funciona, en cuatro escenas",
+    "stepOf": "Paso {n} de {total}",
+    "scene": "Escena",
+    "pick": {
+      "chosen": "Elegido"
+    },
+    "chat": {
+      "aria": "Conversación de ejemplo por WhatsApp con Serres Drive",
+      "online": "en línea",
+      "typing": "escribiendo…",
+      "today": "Hoy",
+      "placeholder": "Mensaje",
+      "m1": "Hola Serres, me gustaría conducir este coche",
+      "m2": "¡Hola! Claro. ¿Qué fechas tienes en mente?",
+      "m3": "De viernes a domingo",
+      "m4": "Perfecto. Te confirmo fechas y condiciones ✅"
+    },
+    "map": {
+      "aria": "Mapa estilizado del área metropolitana de Barcelona con la ruta de entrega desde Sant Cugat del Vallès",
+      "here": "Te lo llevamos aquí",
+      "area": "Área metropolitana",
+      "sea": "Mediterráneo"
+    },
+    "drive": {
+      "kmh": "km/h"
+    }
   },
 
   "termsPage": {

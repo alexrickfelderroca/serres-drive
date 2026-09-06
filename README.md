@@ -36,7 +36,11 @@ _build/                ← generadores (no los sirve nadie, pero viven en el rep
   build-seo-meta.js      data/fleet.json → data/seo-meta.json
   build-site.js          → las 26 páginas + 404.html + sitemap.xml
   build-redirects.js     → .htaccess + seo/redirects/
+  how-map.js             mapa SVG del área metropolitana para /como-funciona
   verify.js              compara el HTML generado con los números del encargo
+  shot.js · lh.js        capturas con métricas y Lighthouse con el Chrome del
+                         sistema (puppeteer-core de la caché de npx), para
+                         cuando el navegador del MCP lo retiene otra sesión
 ```
 
 Un precio vive **en un solo sitio**. Cambiar `prices.d1` de un coche en
@@ -67,6 +71,7 @@ node _build/verify.js            # 212 comprobaciones; debe salir FAIL 0
 | Cambiar diseño (todo menos portada) | `css/serres.css` |
 | Cambiar la portada | `css/home.css`, `css/featured.css`, `css/preloader.css` |
 | Cambiar comportamiento | `js/site.js` (script único) |
+| Cambiar la película de Cómo funciona | `css/how.css`, `js/how.js`, `_build/how-map.js` y el bloque `/como-funciona` de `build-site.js` |
 | Cambiar un texto | `_build/i18n/es.json` **y su equivalente en los otros 4** |
 | Añadir un idioma | un `<código>.json` en `_build/i18n/` + su código en `LANGS` |
 
@@ -95,7 +100,9 @@ equivalencias que mantener.
                               range-rover · volkswagen
 /coches/{slug}/               13 fichas
 /tarifas/                     una tabla con las 5 duraciones
-/como-funciona/               4 pasos estáticos
+/como-funciona/               los 4 pasos como película que avanza con el
+                              scroll: desfile de la flota · chat de WhatsApp
+                              · mapa con la ruta de entrega · el coche arranca
 /condiciones-de-alquiler/
 /por-que-serres/
 /contacto/                    formulario → WhatsApp
@@ -168,21 +175,37 @@ Un solo sistema de botones (primario / secundario / fantasma, más las dos
 variantes de WhatsApp). Sombras en capas y tintadas hacia el fondo, nunca negro
 puro. Espaciado en la escala de 4/8 px.
 
-**Motion:** en las 25 páginas interiores, solo hover y focus — sin apariciones
-por scroll ni carruseles; las tarjetas simplemente están ahí. La **portada es la
-excepción**, restaurada a petición del propietario: hero 3D (three.js) con scroll
-suave (Lenis + GSAP ScrollTrigger), carrusel «Destacados» y el tubo de la flota.
-`prefers-reduced-motion` desactiva el 3D y deja el hero estático.
+**Motion:** en las páginas interiores, solo hover y focus — sin apariciones
+por scroll ni carruseles; las tarjetas simplemente están ahí. Dos excepciones:
+la **portada**, restaurada a petición del propietario (hero 3D con three.js,
+scroll suave con Lenis + GSAP ScrollTrigger, carrusel «Destacados» y el tubo de
+la flota), y **/como-funciona/**, que a petición del propietario es una
+película en cuatro escenas que avanza con el scroll (mismo GSAP + ScrollTrigger
++ Lenis, escenarios pegados con `position:sticky`). En las dos, el marcado es
+también el fotograma final: sin JS, sin GSAP o con `prefers-reduced-motion` se
+ven quietas y completas (la clase `.fc-on` / `.film-on` que activa la
+animación solo la añade el script).
+
+**Tarifas en móvil:** por debajo de 860 px la tabla se pinta como tarjetas
+(`role=` y `data-label` en el generador, CSS en `serres.css`), porque la tabla
+de 720 px desplazada en horizontal dejaba los precios cortados.
 
 ---
 
 ## 7. Estado de las comprobaciones
 
-Última verificación (06-09-2026, Chrome DevTools sobre el sitio generado):
+Última verificación (07-09-2026, `_build/shot.js` + `_build/lh.js` sobre el
+sitio generado, servido en local):
 
 - Lighthouse móvil — Accesibilidad **100**, Buenas prácticas **100**, SEO **100**
-  en portada, ficha de coche, contacto y ficha en ruso.
-- Sin scroll horizontal a 360 / 390 / 768 px.
+  en portada, tarifas, cómo funciona (español y ruso).
+- Sin scroll horizontal a 360 / 390 / 768 / 1280 / 1440 px en las páginas
+  tocadas. **Excepción conocida:** en ruso el nav de escritorio desborda entre
+  1151 y ~1560 px (las etiquetas rusas son más largas y el corte a menú móvil
+  está en 1150); anotado, pendiente.
+- /como-funciona/ carga igual en los cinco idiomas, medido (13 fichas, ruta del
+  mapa, 4 globos, medidor, GSAP y Lenis en todos), con y sin
+  `prefers-reduced-motion`.
 - Consola sin errores ni avisos.
 - `node _build/verify.js` → **656 comprobaciones, 0 fallos** (precios, fianzas,
   coches retirados, idioma declarado y `hreflang` de las 130 páginas).

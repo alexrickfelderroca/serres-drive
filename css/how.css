@@ -1,0 +1,484 @@
+/* =====================================================================
+   SERRES DRIVE — how.css
+   /como-funciona como una película en cuatro escenas que avanza con el
+   scroll. Cada escena es una sección con un escenario pineado (sticky,
+   100dvh) y una pista de scroll detrás; js/how.js lee el progreso con
+   ScrollTrigger y lo convierte en la animación de esa escena.
+
+   Contrato con js/how.js (mismo patrón que featured.css / featured.js):
+
+   · SIN la clase .film-on (sin JS, sin GSAP, o prefers-reduced-motion) el
+     marcado se pinta como cuatro bloques normales, quietos y COMPLETOS:
+     los coches en fila con el elegido marcado, la conversación entera, la
+     ruta trazada con el pin puesto, el coche en su plano. Nada queda
+     oculto ni a medias: el estado por defecto es el fotograma final.
+   · CON .film-on (solo la añade how.js) cada escena crece con su pista de
+     scroll, el escenario se pega a la pantalla y los estados iniciales
+     (globos ocultos, ruta sin trazar…) los fija GSAP, no este CSS.
+
+   Todo va con prefijo .film / .scene / .pick / .wa / .hm / .drive y no
+   toca nada de serres.css. Tokens: los de :root de serres.css; los colores
+   propios del móvil de WhatsApp van como variables locales en .film,
+   porque son los de la app real y es lo que hace la escena reconocible.
+   ===================================================================== */
+
+/* ---------- Lenis: mismo cableado que en la portada ------------------ */
+/* Sin esto, `html{scroll-behavior:smooth}` de serres.css pelea con Lenis
+   y la rueda del ratón deja de mover la página. */
+html.lenis,html.lenis body{height:auto}
+html.lenis,.lenis.lenis-smooth{scroll-behavior:auto!important}
+.lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain}
+.lenis.lenis-stopped{overflow:clip}
+.lenis.lenis-smooth iframe{pointer-events:none}
+
+/* ---------- tokens locales -------------------------------------------- */
+.film{
+  --scene-runway:150vh;            /* pista de scroll extra por escena */
+  --stage-pad:8px;
+  --stage-radius:28px;
+  --wa-bg:#0b141a;--wa-panel:#202c33;--wa-out:#005c4b;--wa-in:#202c33;
+  --wa-text:#e9edef;--wa-meta:#8696a0;--wa-green:#00a884;--wa-tick:#53bdeb;
+  --wa-input:#2a3942;
+}
+
+/* ---------- intro: pista de que hay que bajar ------------------------- */
+.how-intro{padding-bottom:clamp(20px,3vw,40px)}
+.how-intro .section-head{margin-bottom:0}
+.how-hint{
+  display:none;align-items:center;gap:10px;margin-top:22px;
+  font-family:var(--font-head);font-size:13px;font-weight:600;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--text-mute);
+}
+.how-hint svg{width:18px;height:18px;color:var(--gold);animation:how-bob 1.8s var(--ease) infinite}
+body.how-film .how-hint{display:inline-flex}
+@keyframes how-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+
+/* ---------- escena: la unidad ---------------------------------------- */
+.film{position:relative}
+.scene{position:relative}
+.scene-pin{
+  display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);
+  gap:clamp(28px,4vw,64px);align-items:center;
+  width:100%;max-width:var(--maxw);margin-inline:auto;
+  padding:clamp(40px,6vw,72px) var(--gutter);
+}
+.scene-copy{display:flex;flex-direction:column;gap:14px;max-width:44ch}
+/* Número de escena: grande, en cromo, con el "de cuatro" en gris. */
+.scene-n{
+  display:flex;align-items:baseline;gap:10px;
+  font-family:var(--font-head);font-weight:700;line-height:1;
+}
+.scene-n .k{
+  font-size:clamp(40px,4.6vw,64px);letter-spacing:-.02em;
+  background:var(--chrome-grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.scene-n .of{font-size:15px;letter-spacing:.2em;color:var(--text-mute)}
+.scene-title{font-size:clamp(34px,4.6vw,62px);text-transform:uppercase;letter-spacing:-.015em;line-height:.95}
+/* El texto del cliente: en el color de lectura, no en gris, y ancho de párrafo. */
+.scene-body{font-size:clamp(16px,1.5vw,19px);line-height:1.6;color:var(--text);max-width:38ch;text-wrap:pretty}
+.scene-extra{margin-top:8px;display:flex;flex-wrap:wrap;gap:10px}
+
+/* Escenario: doble bisel, como .plate del resto del sitio. */
+.scene-stage{position:relative;height:clamp(360px,62vh,640px)}
+.stage-shell{
+  height:100%;padding:var(--stage-pad);border-radius:var(--stage-radius);
+  background:linear-gradient(150deg,rgba(255,255,255,.10),rgba(255,255,255,.02) 45%,rgba(255,255,255,.05));
+  border:1px solid var(--line-2);box-shadow:var(--shadow-3);
+}
+/* overflow:clip, no hidden: hidden crea un contenedor de scroll, y al
+   tabular por las fichas del desfile el navegador lo desplazaría para
+   enfocarlas, descolocando la fila. clip recorta sin poder desplazarse. */
+.stage-core{
+  position:relative;height:100%;overflow:hidden;overflow:clip;
+  border-radius:calc(var(--stage-radius) - var(--stage-pad));
+  background:
+    radial-gradient(110% 80% at 20% 0%,rgba(200,206,216,.09),transparent 55%),
+    linear-gradient(180deg,var(--panel-2),var(--panel));
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.14);
+  isolation:isolate;
+}
+/* La franja de "claqueta" arriba del escenario: escena + título en pequeño. */
+.stage-slate{
+  position:absolute;z-index:4;top:14px;left:16px;right:16px;
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+  font-family:var(--font-head);font-size:11px;font-weight:600;
+  letter-spacing:.24em;text-transform:uppercase;color:var(--text-dim);
+  pointer-events:none;
+}
+.stage-slate i{display:block;width:6px;height:6px;border-radius:999px;background:var(--gold);box-shadow:0 0 0 3px rgba(201,205,215,.18)}
+.stage-slate span:last-child{display:flex;align-items:center;gap:8px}
+
+/* ---------- MODO PELÍCULA (.film-on) --------------------------------- */
+/* lvh para la sección y svh para el pin, no dvh: con dvh cada escena crecía
+   ~56-100px al plegarse la barra del móvil y los triggers de ScrollTrigger
+   (calculados al cargar) se quedaban desplazados una barra por escena. Con
+   lvh nada se mueve; con svh el pin nunca queda tapado por la barra. */
+.film-on .scene{height:calc(100vh + var(--scene-runway));height:calc(100lvh + var(--scene-runway))}
+.film-on .scene-pin{
+  position:sticky;top:0;
+  height:100vh;height:100svh;
+  padding-top:calc(var(--nav-h) + 24px);padding-bottom:28px;
+}
+.film-on .scene-stage{height:min(calc(100dvh - var(--nav-h) - 84px),720px)}
+.film-on .scene--book{--scene-runway:200vh}
+.film-on .scene--deliver{--scene-runway:170vh}
+
+/* Raíl de progreso: 01–04 a la izquierda en escritorio, barras abajo en móvil. */
+.film-rail{
+  position:fixed;z-index:30;left:clamp(10px,1.6vw,26px);top:50%;transform:translateY(-50%);
+  display:flex;flex-direction:column;gap:18px;list-style:none;margin:0;padding:0;
+  opacity:0;pointer-events:none;transition:opacity .4s var(--ease);
+}
+.film-rail.is-on{opacity:1}
+.film-rail li{
+  display:flex;align-items:center;gap:10px;
+  font-family:var(--font-head);font-size:12px;font-weight:600;letter-spacing:.18em;
+  color:var(--text-mute);transition:color .35s var(--ease);
+}
+.film-rail li::before{content:"";width:18px;height:1px;background:var(--line-strong);transition:width .35s var(--ease),background .35s var(--ease)}
+.film-rail li.is-on{color:var(--white)}
+.film-rail li.is-on::before{width:34px;background:var(--gold)}
+/* Sin película no hay raíl que enseñar. */
+.film:not(.film-on) ~ .film-rail,.film-rail:not(.is-on){opacity:0}
+/* El raíl vertical necesita ~90px libres a la izquierda del texto; por
+   debajo de 1320px el margen de .wrap no los tiene y se pisaría con el
+   número de escena. Ahí pasa a barras abajo, como en el móvil. */
+@media (max-width:1319px){
+  .film-rail{left:50%;top:auto;bottom:11px;transform:translateX(-50%);flex-direction:row;gap:8px}
+  .film-rail li{font-size:0;gap:0}
+  .film-rail li::before{width:22px;height:2px}
+  .film-rail li.is-on::before{width:38px}
+}
+
+/* =====================================================================
+   ESCENA 01 — ELIGE TU COCHE · el desfile
+   Dos filas de fichas 3:2 que cruzan el escenario en sentidos opuestos,
+   como dos carriles. Al final de la escena una se queda en el centro y
+   se marca como elegida; las demás bajan de intensidad.
+   ===================================================================== */
+.pick{
+  --tile-w:clamp(184px,21vw,264px);
+  --tile-gap:clamp(12px,1.4vw,18px);
+  position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;
+  gap:clamp(14px,2vh,22px);padding:44px 0 24px;
+}
+.pick-row{display:flex;gap:var(--tile-gap);width:max-content;will-change:transform}
+.pick-tile{
+  --pick:0;
+  position:relative;display:flex;flex-direction:column;width:var(--tile-w);flex:none;
+  border-radius:16px;border:1px solid var(--line);background:var(--bg-3);
+  box-shadow:var(--shadow-1),0 0 0 2px rgba(238,240,244,var(--pick));
+  overflow:hidden;color:var(--text);
+  transition:border-color .25s var(--ease);
+}
+.pick-tile:hover{border-color:var(--line-strong)}
+.pick-shot{display:block;aspect-ratio:3/2;overflow:hidden;background:var(--panel)}
+.pick-shot img{width:100%;height:100%;object-fit:cover}
+.pick-meta{display:flex;flex-direction:column;gap:2px;padding:10px 12px 12px}
+.pick-meta b{font-family:var(--font-head);font-size:16px;font-weight:600;letter-spacing:.01em;text-transform:uppercase;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pick-meta span{font-size:12px;color:var(--text-mute)}
+/* "Elegido": aparece con --pick, que anima how.js. */
+.pick-badge{
+  position:absolute;top:10px;left:10px;z-index:2;
+  display:inline-flex;align-items:center;gap:6px;
+  padding:6px 10px 6px 8px;border-radius:999px;
+  background:var(--gold-soft);color:#0a0a0b;
+  font-family:var(--font-head);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  box-shadow:var(--shadow-1);
+  opacity:var(--pick);transform:translateY(calc((1 - var(--pick)) * 6px));
+}
+.pick-badge svg{width:12px;height:12px}
+/* Fotograma final sin película: la fila delantera centrada en el elegido,
+   la trasera desplazada, el elegido marcado. */
+/* margin-left:50% se mide contra el escenario (el porcentaje de un margen
+   es del contenedor); el translate, contra la propia fila. Así el cuarto
+   tile (el elegido) queda en el centro sin saber el ancho del escenario. */
+.film:not(.film-on) .pick-row--a{margin-left:50%;transform:translateX(calc(var(--tile-w) * -3.5 - var(--tile-gap) * 3))}
+.film:not(.film-on) .pick-row--b{transform:translateX(-22%)}
+.film:not(.film-on) .pick-tile[data-chosen]{--pick:1}
+.film:not(.film-on) .pick-tile:not([data-chosen]) .pick-shot{opacity:.55}
+/* En móvil el escenario es más estrecho: fichas más pequeñas. */
+@media (max-width:760px){.pick{--tile-w:clamp(150px,44vw,190px);padding-top:40px}}
+
+/* =====================================================================
+   ESCENA 02 — RESERVA · la conversación
+   Un móvil con la conversación recreada en HTML: cabecera, globos, el
+   «escribiendo…», la barra de redacción donde se teclea el mensaje.
+   ===================================================================== */
+.book{position:absolute;inset:0;display:grid;place-items:center;padding:44px 16px 20px}
+.phone{
+  position:relative;margin:0;
+  height:min(100%,600px);aspect-ratio:9/19.2;max-width:100%;
+  border-radius:38px;padding:9px;
+  background:linear-gradient(160deg,#2a2b31,#121317 40%,#1b1c22);
+  box-shadow:var(--shadow-3),inset 0 0 0 1px rgba(255,255,255,.12);
+  overflow:hidden;
+}
+.phone-notch{position:absolute;z-index:3;top:16px;left:50%;transform:translateX(-50%);width:34%;height:22px;border-radius:999px;background:#050506}
+.wa{
+  height:100%;border-radius:30px;overflow:hidden;
+  display:flex;flex-direction:column;background:var(--wa-bg);color:var(--wa-text);
+  font-family:var(--font-body);font-size:13.5px;line-height:1.35;
+}
+.wa-head{
+  display:flex;align-items:center;gap:9px;padding:42px 12px 10px;
+  background:var(--wa-panel);border-bottom:1px solid rgba(255,255,255,.06);
+}
+.wa-back{width:14px;height:14px;flex:none;color:var(--wa-meta)}
+.wa-avatar{
+  width:34px;height:34px;flex:none;border-radius:999px;display:grid;place-items:center;
+  background:var(--chrome-grad);color:#0a0a0b;
+  font-family:var(--font-head);font-weight:700;font-size:16px;
+}
+.wa-who{display:flex;flex-direction:column;min-width:0;flex:1}
+.wa-who b{font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wa-status{font-style:normal;font-size:11.5px;color:var(--wa-meta)}
+.wa-status.is-typing{color:var(--wa-green)}
+.wa-icons{display:flex;gap:14px;color:var(--wa-meta)}
+.wa-icons svg{width:17px;height:17px}
+/* El fondo de chat de WhatsApp lleva doodles; aquí, una trama de puntos suave. */
+.wa-body{
+  flex:1;min-height:0;display:flex;flex-direction:column;justify-content:flex-end;gap:7px;
+  padding:12px 10px 10px;overflow:hidden;
+  background:
+    radial-gradient(rgba(255,255,255,.045) .8px,transparent 1px) 0 0/14px 14px,
+    var(--wa-bg);
+}
+.wa-day{align-self:center;margin-bottom:6px;padding:4px 10px;border-radius:8px;background:rgba(32,44,51,.9);font-size:11px;color:var(--wa-meta);box-shadow:0 1px 1px rgba(0,0,0,.3)}
+.wa-msg{
+  position:relative;display:flex;flex-direction:column;gap:4px;max-width:84%;
+  padding:6px 8px 6px;border-radius:9px;box-shadow:0 1px 1px rgba(0,0,0,.28);
+  transform-origin:bottom left;
+}
+.wa-msg--in{align-self:flex-start;background:var(--wa-in);border-top-left-radius:2px}
+.wa-msg--out{align-self:flex-end;background:var(--wa-out);border-top-right-radius:2px;transform-origin:bottom right}
+.wa-text{margin:0;padding-right:4px;overflow-wrap:anywhere}
+.wa-meta{align-self:flex-end;display:inline-flex;align-items:center;gap:3px;margin-top:-2px;font-size:10.5px;color:var(--wa-meta)}
+/* Sobre el verde del globo saliente el gris de WhatsApp se queda en 2,6:1;
+   un gris más claro (5:1) sigue leyéndose como hora de WhatsApp. */
+.wa-msg--out .wa-meta,.wa-msg--out .wa-card span{color:#c6d6d0}
+.wa-meta svg{width:14px;height:14px;color:var(--wa-tick)}
+/* Tarjeta de previsualización del enlace al coche, dentro del globo. */
+.wa-card{
+  display:grid;grid-template-columns:46px 1fr;gap:8px;align-items:center;
+  padding:6px;margin:-1px -2px 2px;border-radius:7px;background:rgba(0,0,0,.22);color:inherit;
+}
+.wa-card img{width:46px;height:34px;object-fit:cover;border-radius:5px}
+/* El globo que lleva la tarjeta del coche se ensancha: «Mercedes-AMG G 63» no
+   cabía en el 84% y salía con puntos suspensivos, justo el coche de la película. */
+.wa-msg--out:has(.wa-card){max-width:96%}
+/* Dos líneas como máximo, nunca puntos suspensivos: en un móvil real el
+   teléfono mide ~236px y «Mercedes-AMG G 63» no cabe en una línea. El
+   generador une el último espacio del nombre con un NBSP para que parta
+   por «Mercedes-AMG / G 63» y no por «…G / 63». */
+.wa-card b{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;font-size:12.5px;font-weight:600;line-height:1.2;overflow:hidden}
+.wa-card > span{min-width:0}
+.wa-card span{display:block;font-size:10.5px;color:var(--wa-meta);margin-top:2px}
+/* «escribiendo…»: tres puntos que respiran (animación de tiempo, no de scroll). */
+.wa-typing{align-self:flex-start;display:flex;gap:4px;padding:10px 12px;border-radius:9px;border-top-left-radius:2px;background:var(--wa-in);box-shadow:0 1px 1px rgba(0,0,0,.28)}
+.wa-typing i{width:6px;height:6px;border-radius:999px;background:var(--wa-meta);animation:wa-dot 1.2s var(--ease) infinite}
+.wa-typing i:nth-child(2){animation-delay:.15s}
+.wa-typing i:nth-child(3){animation-delay:.3s}
+@keyframes wa-dot{0%,60%,100%{transform:translateY(0);opacity:.55}30%{transform:translateY(-3px);opacity:1}}
+.wa-foot{display:flex;align-items:center;gap:8px;padding:8px 10px 14px;background:var(--wa-panel)}
+.wa-input{
+  flex:1;min-width:0;display:flex;align-items:center;gap:1px;min-height:34px;
+  padding:7px 12px;border-radius:999px;background:var(--wa-input);font-size:13px;
+}
+.wa-draft{white-space:nowrap;overflow:hidden;text-overflow:clip;min-height:1em}
+.wa-draft:empty::before{content:attr(data-placeholder);color:var(--wa-meta)}
+.wa-caret{width:1.5px;height:15px;background:var(--wa-text);animation:wa-caret 1s steps(2) infinite}
+@keyframes wa-caret{to{opacity:0}}
+.wa-send{width:34px;height:34px;flex:none;border-radius:999px;display:grid;place-items:center;background:var(--wa-green);color:#0b141a}
+.wa-send svg{width:16px;height:16px}
+/* Fotograma final sin película: la conversación entera, sin «escribiendo». */
+.film:not(.film-on) .scene--book .scene-stage{height:clamp(560px,74vh,700px)}
+.film:not(.film-on) .wa-typing{display:none}
+.film:not(.film-on) .wa-caret{display:none}
+/* Con película, los globos empiezan ocultos y los va enseñando how.js. */
+.film-on .wa-msg,.film-on .wa-typing{display:none}
+
+/* =====================================================================
+   ESCENA 03 — ENTREGA · el mapa
+   SVG generado en _build/how-map.js. Aquí solo se pinta.
+   ===================================================================== */
+.deliver{position:absolute;inset:0}
+.hm{display:block;width:100%;height:100%;font-family:var(--font-body)}
+.hm-land{fill:#111217}
+.hm-dots{opacity:.9}
+.hm-ridge{fill:none;stroke:#1a1c24;stroke-width:46;stroke-linecap:round}
+.hm-sea{fill:url(#hmSea)}
+.hm-coast{fill:none;stroke:rgba(160,176,204,.42);stroke-width:1.6}
+.hm-river{fill:none;stroke:rgba(120,150,200,.28);stroke-width:1.6}
+.hm-roads path{fill:none;stroke:rgba(255,255,255,.10);stroke-width:1.4}
+.hm-area{fill:rgba(201,205,215,.025);stroke:rgba(201,205,215,.35);stroke-width:1.2;stroke-dasharray:6 8}
+.hm-area-label,.hm-sea-label{fill:var(--text-mute);font-family:var(--font-head);font-size:13px;font-weight:600;letter-spacing:.22em;text-transform:uppercase}
+.hm-sea-label{fill:rgba(140,160,200,.6)}
+.hm-airport path{fill:rgba(255,255,255,.35)}
+.hm-town circle{fill:var(--text-dim)}
+.hm-town text{fill:var(--text-dim);font-size:12px;font-weight:500;letter-spacing:.02em}
+.hm-town--2 text{font-size:14px;fill:var(--text)}
+.hm-town--3 circle{fill:var(--white)}
+.hm-town--3 text{font-family:var(--font-head);font-size:20px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;fill:var(--white)}
+.hm-hq-dot{fill:var(--gold-soft);stroke:#0a0a0b;stroke-width:2}
+/* Sin latido: una animación CSS sobre un hijo del SVG no se compone en la
+   GPU y obligaba a recalcular y repintar el mapa en cada fotograma, incluso
+   con otra escena en pantalla. */
+.hm-hq-halo{opacity:.85}
+.hm-hq text{fill:var(--white);font-family:var(--font-head);font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+.hm-route{fill:none;stroke:var(--gold-soft);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:0}
+.hm-route-ghost{fill:none;stroke:var(--gold-soft);stroke-opacity:.12;stroke-width:9;stroke-linecap:round;stroke-linejoin:round}
+.hm-car-ring{fill:rgba(10,10,11,.6);stroke:var(--gold-soft);stroke-width:1.5}
+.hm-car-dot{fill:var(--gold-soft)}
+.hm-ripple{fill:none;stroke:var(--wa);stroke-width:2;opacity:0}
+.hm-pin-shadow{fill:rgba(0,0,0,.55)}
+.hm-pin path{fill:var(--wa);stroke:#0a0a0b;stroke-width:1.5}
+.hm-pin circle{fill:#0a0a0b}
+.hm-here rect{fill:var(--white)}
+.hm-here text{fill:#0a0a0b;font-size:14px;font-weight:600}
+.hm-price rect{fill:var(--wa)}
+.hm-price text{fill:#04210f;font-family:var(--font-head);font-size:15px;font-weight:700;letter-spacing:.04em}
+/* Fotograma final sin película: el coche ya ha llegado, el marcador no se
+   queda aparcado sobre la sede. Con película, la ruta, el coche, el pin y
+   el rótulo los fija GSAP. */
+.film:not(.film-on) .hm-car{opacity:0}
+
+/* =====================================================================
+   ESCENA 04 — CONDUCE · arranca y sale de plano
+   ===================================================================== */
+.drive{position:absolute;inset:0;overflow:hidden}
+.drive-road{position:absolute;inset:0;width:100%;height:100%}
+.drive-road .edge{fill:none;stroke:rgba(255,255,255,.12);stroke-width:1.5}
+.drive-road .dash{fill:none;stroke:rgba(238,240,244,.55);stroke-width:2.2;stroke-dasharray:38 30;stroke-linecap:round}
+.drive-road .horizon{fill:none;stroke:rgba(255,255,255,.08);stroke-width:1}
+.drive-road .glow{fill:url(#drvGlow)}
+.drive-car{
+  position:absolute;left:50%;top:46%;width:min(74%,640px);transform:translate(-50%,-50%);
+  will-change:transform;
+}
+.film-on .drive-car{transform:none}
+.drive-car .drive-shot{
+  position:relative;display:block;border-radius:18px;overflow:hidden;
+  border:1px solid var(--line-2);background:var(--panel);box-shadow:var(--shadow-3);
+}
+.drive-car img{width:100%;height:auto;aspect-ratio:3/2;object-fit:cover}
+/* Estelas: copias de la foto que quedan atrás cuando el coche sale. */
+.drive-ghost{
+  position:absolute;inset:0;border-radius:18px;overflow:hidden;opacity:0;pointer-events:none;
+}
+.drive-ghost img{width:100%;height:100%;object-fit:cover;filter:blur(2px) brightness(1.1)}
+/* Líneas de velocidad, a la izquierda del coche. */
+.drive-lines{position:absolute;inset:0;pointer-events:none;opacity:0}
+.drive-lines i{position:absolute;height:2px;border-radius:2px;background:linear-gradient(90deg,transparent,rgba(238,240,244,.85))}
+.drive-lines i:nth-child(1){top:36%;left:-10%;width:34%}
+.drive-lines i:nth-child(2){top:44%;left:-18%;width:28%}
+.drive-lines i:nth-child(3){top:52%;left:-8%;width:40%}
+.drive-lines i:nth-child(4){top:60%;left:-16%;width:24%}
+/* El cuadro: cuentarrevoluciones + botón de arranque, como un HUD. */
+.drive-dash{
+  position:absolute;left:18px;bottom:16px;z-index:3;display:flex;align-items:flex-end;gap:14px;
+}
+.gauge{width:clamp(96px,14vw,136px);height:auto;display:block;overflow:visible}
+.gauge .arc{fill:none;stroke:rgba(255,255,255,.14);stroke-width:6;stroke-linecap:round}
+.gauge .arc-red{fill:none;stroke:rgba(255,90,90,.75);stroke-width:6;stroke-linecap:round}
+.gauge .tick{stroke:rgba(255,255,255,.4);stroke-width:1.5}
+.gauge .needle{stroke:var(--gold-soft);stroke-width:2.5;stroke-linecap:round;transform-origin:60px 60px;transform:rotate(-118deg)}
+.gauge .hub{fill:#0a0a0b;stroke:var(--gold-soft);stroke-width:2}
+.gauge text{fill:var(--text-dim);font-family:var(--font-head);font-size:9px;font-weight:600;letter-spacing:.16em}
+.drive-start{
+  --lit:0;
+  width:64px;height:64px;border-radius:999px;display:grid;place-content:center;text-align:center;
+  background:radial-gradient(circle at 50% 35%,#2a2b31,#101116 70%);
+  border:1px solid rgba(255,255,255,.16);
+  box-shadow:0 2px 6px rgba(0,0,0,.6),inset 0 1px 1px rgba(255,255,255,.14),0 0 0 3px rgba(37,211,102,calc(var(--lit) * .35)),0 0 22px rgba(37,211,102,calc(var(--lit) * .55));
+  font-family:var(--font-head);font-weight:700;color:var(--text-dim);line-height:1;
+}
+.drive-start span{display:block;font-size:7.5px;letter-spacing:.18em}
+.drive-start b{display:block;font-size:11px;letter-spacing:.14em;margin:3px 0;color:var(--white)}
+.drive-speed{
+  position:absolute;right:18px;bottom:18px;z-index:3;display:flex;align-items:baseline;gap:6px;
+  font-family:var(--font-head);color:var(--text-mute);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+}
+.drive-speed b{font-size:clamp(28px,3.4vw,40px);font-weight:700;color:var(--white);letter-spacing:.01em;font-variant-numeric:tabular-nums;min-width:2ch;text-align:right}
+/* Fotograma final sin película: coche en plano, contacto puesto, aguja al ralentí. */
+.film:not(.film-on) .drive-start{--lit:1}
+.film:not(.film-on) .gauge .needle{transform:rotate(-96deg)}
+.film:not(.film-on) .drive-speed{display:none}
+
+/* ---------- CTA final -------------------------------------------------- */
+.how-cta .hero-cta{margin-top:0}
+
+/* =====================================================================
+   RESPONSIVE
+   ===================================================================== */
+@media (max-width:900px){
+  /* align-items:stretch, no start: el escenario es un item de rejilla y su
+     .stage-shell mide height:100%; sin estirar, esa altura se resuelve a 0
+     y la película se ve vacía en el móvil. El texto se ancla arriba aparte. */
+  .scene-pin{grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr);gap:14px;align-items:stretch;padding-block:28px}
+  .scene-copy{gap:8px;max-width:none;align-self:start}
+  .scene-n .k{font-size:34px}
+  .scene-n .of{font-size:12px}
+  .scene-title{font-size:clamp(28px,8.2vw,40px)}
+  .scene-body{font-size:15px;line-height:1.5}
+  .scene-extra{margin-top:4px}
+  .scene-stage{height:clamp(340px,112vw,560px)}
+  .film-on .scene-pin{padding-top:calc(var(--nav-h) + 12px);padding-bottom:34px}
+  .film-on .scene-stage{height:auto;min-height:0}
+  .film{--scene-runway:130vh}
+  .film-on .scene--book{--scene-runway:170vh}
+  .film-on .scene--deliver{--scene-runway:150vh}
+  .stage-slate{top:10px;left:12px;right:12px;font-size:10px;letter-spacing:.18em}
+  .stage-slate span:last-child{display:none}
+}
+/* Móviles bajos (560-720px de alto, la barra del navegador a la vista):
+   modo compacto para que el escenario conserve altura. Por debajo de 560
+   la película ni arranca (how.js) y se ven los fotogramas quietos. */
+@media (max-width:900px) and (max-height:780px){
+  .film-on .scene-pin{padding-top:calc(var(--nav-h) + 6px);padding-bottom:26px;gap:8px}
+  .film-on .scene-copy{gap:4px}
+  .film-on .scene-n .k{font-size:26px}
+  .film-on .scene-title{font-size:clamp(22px,6.4vw,30px)}
+  .film-on .scene-body{font-size:14px;line-height:1.4}
+  .film-on .scene-extra{display:none}
+  .film-on .stage-slate{display:none}
+  .film-on .book{padding-top:16px}
+  .film-on .pick{padding-top:14px}
+}
+@media (max-width:760px){
+  .drive-dash{left:12px;bottom:12px;gap:10px}
+  .drive-start{width:54px;height:54px}
+  .drive-car{width:min(86%,520px);top:44%}
+  .drive-speed{right:12px;bottom:14px}
+  /* El fotograma final del chat tiene que caber ENTERO, con la tarjeta
+     del coche: se gana altura quitando la claqueta y el chip del día y
+     apretando cabecera y globos. */
+  .film-on .scene--book .stage-slate{display:none}
+  .book{padding:14px 10px 12px}
+  .wa-day{display:none}
+  .wa-head{padding-top:30px}
+  .wa-msg{padding:5px 7px}
+  .wa-body{gap:6px}
+  .wa-foot{padding:6px 8px 10px}
+  .phone{padding:6px}
+  /* Un poco más ancho que un móvil real: en un escenario de ~500px de
+     alto, 9/19 dejaba el teléfono en 215px y la cabecera recortaba el nombre. */
+  .phone{height:min(100%,560px);aspect-ratio:9/17.6;border-radius:32px;padding:7px}
+  .wa{border-radius:26px;font-size:12.5px}
+  .wa-icons{display:none}
+}
+/* Pantallas bajas (móvil apaisado, portátiles pequeños): que el escenario no se coma el texto. */
+@media (max-height:640px) and (min-width:901px){
+  .film-on .scene-stage{height:min(calc(100dvh - var(--nav-h) - 60px),720px)}
+  .scene-n .k{font-size:36px}
+  .scene-title{font-size:clamp(28px,3.6vw,44px)}
+}
+
+/* =====================================================================
+   REDUCED MOTION — la película no arranca (how.js no añade .film-on) y
+   además se apagan las animaciones de tiempo que quedan en CSS.
+   ===================================================================== */
+@media (prefers-reduced-motion:reduce){
+  .how-hint svg,.wa-typing i,.wa-caret{animation:none}
+  .film-rail,.film-rail li,.film-rail li::before,.pick-tile{transition:none}
+}
