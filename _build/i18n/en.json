@@ -1,0 +1,377 @@
+{
+  "_meta": {
+    "lang": "en",
+    "label": "English",
+    "flag": "🇬🇧",
+    "locale": "en_GB",
+    "note": "Translated from the Spanish source dictionary. Exactly the same keys. Nothing on the site is written outside this file except prices, car names and slugs, which come from data/fleet.json and are never translated."
+  },
+  "nav": {
+    "fleet": "Fleet",
+    "rates": "Rates",
+    "how": "How it works",
+    "why": "Why Serres",
+    "contact": "Contact",
+    "book": "Book",
+    "bookWa": "Book on WhatsApp",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "skip": "Skip to content",
+    "home": "Serres Drive — home",
+    "primary": "Main",
+    "language": "Language"
+  },
+  "footer": {
+    "nav": "Footer",
+    "terms": "Hire terms",
+    "wrapCenter": "Serres Wrap Center"
+  },
+  "common": {
+    "breadcrumb": "Breadcrumb",
+    "start": "Home",
+    "perDay": "per day",
+    "aDay": "a day",
+    "allCars": "All",
+    "filterByBrand": "Filter by brand",
+    "seeFleet": "See the fleet",
+    "seeFullFleet": "See the full fleet",
+    "seeAllTerms": "See all the terms",
+    "car": "car",
+    "cars": "cars",
+    "from": "from",
+    "modelAvailable": "model available",
+    "modelsAvailable": "models available",
+    "carsAvailable": "cars available",
+    "byWhatsapp": "On WhatsApp",
+    "writeWa": "Message us on WhatsApp",
+    "askWa": "Ask on WhatsApp",
+    "form": "Form",
+    "threeQuarterAlt": "front three-quarter view",
+    "rentalAlt": "for hire in Barcelona",
+    "seeCarAria": "see details and prices"
+  },
+  "terms": {
+    "title": "Hire terms",
+    "age": "Age",
+    "ageValue": "From {age} years old",
+    "licence": "Licence",
+    "licenceValue": "Just a valid driving licence. No minimum years on your licence.",
+    "km": "Kilometres",
+    "kmValue": "{km} km included",
+    "deposit": "Deposit",
+    "depositFrom": "From {amount}",
+    "delivery": "Delivery",
+    "deliveryValue": "Delivery and collection in the metropolitan area: {amount}",
+    "depositLabel": "Deposit: {amount}",
+    "depositUnknown": "Deposit: we’ll confirm it on WhatsApp",
+    "deliveryShort": "Metropolitan delivery {amount}"
+  },
+  "home": {
+    "eyebrow": "Sant Cugat del Vallès · Barcelona metropolitan area",
+    "titleRow1": "Luxury",
+    "titleRow2": "car",
+    "titleRow3": "hire",
+    "titleRow4": "in Barcelona",
+    "ctaBook": "Book your car",
+    "featured": "Featured",
+    "featuredSub": "{n} of the {total} cars you can hire right now",
+    "keepScrolling": "Keep scrolling",
+    "chooseKicker": "Choose your car",
+    "chooseTitle": "The whole fleet, in motion",
+    "chooseUiTitle": "Spin · choose · drive",
+    "chooseUiHint": "Swipe to spin",
+    "fleetAria": "Fleet",
+    "outro": "Serres Drive — luxury car hire in Barcelona, from the detailing bay to the driver’s seat.",
+    "swcEyebrow": "Serres Wrap Center",
+    "swcTitleA": "Before you drive it,",
+    "swcTitleB": "we make it perfect",
+    "swcBody": "We don’t just hire cars out: we prepare them. Our sister workshop in Sant Cugat del Vallès does PPF, bespoke car wrap, multi-stage paint correction, ceramic coatings and concours-level detailing.",
+    "swcTags": [
+      "PPF",
+      "Car Wrap",
+      "Polishing",
+      "Ceramic",
+      "Detailing"
+    ],
+    "swcCta": "Visit Serres Wrap Center",
+    "swcShotAlt": "Porsche 911 RWB in the Serres Wrap Center workshop, under hexagonal lighting",
+    "swcShotAria": "Serres Wrap Center — PPF, car wrap and detailing in Barcelona",
+    "swcShotTag": "See the workshop",
+    "ctaTitleA": "Ready to",
+    "ctaTitleB": "drive",
+    "ctaBody": "Tell us the car and the dates. We'll come back to you with availability and terms in minutes."
+  },
+  "fleet": {
+    "h1": "Our fleet",
+    "book": "Book",
+    "bookAria": "Book the {car} on WhatsApp",
+    "seats": "seats"
+  },
+  "carPage": {
+    "specs": "Specifications",
+    "power": "Power",
+    "zeroHundred": "0-100 km/h",
+    "topSpeed": "Top speed",
+    "seats": "Seats",
+    "transmission": "Gearbox",
+    "drivetrain": "Drivetrain",
+    "fuel": "Fuel",
+    "bodyType": "Body",
+    "gallery": "{car} gallery",
+    "photoOf": "Photo {n} of {total}",
+    "bookEyebrow": "Booking",
+    "bookTitle": "Check dates for the {car}",
+    "bookBody": "Tell us the days you need it and we confirm availability, deposit and pick-up point on WhatsApp.",
+    "moreOfBrand": "More {brand} in the fleet",
+    "d1": "1 day",
+    "d2": "2 days",
+    "d3": "3 days",
+    "w1": "1 week",
+    "m1": "1 month"
+  },
+  "rates": {
+    "h1": "Rates",
+    "eyebrow": "Prices in euros, VAT included",
+    "caption": "Hire rates by car and duration",
+    "colCar": "Car",
+    "colDeposit": "Deposit",
+    "note": "Delivery and collection in the Barcelona metropolitan area: {delivery}. {km} km included. Deposit from {deposit}."
+  },
+  "how": {
+    "h1": "How it works",
+    "eyebrow": "Four steps",
+    "steps": [
+      {
+        "n": "01",
+        "title": "Choose your car",
+        "body": "Pick your car from the fleet we have available."
+      },
+      {
+        "n": "02",
+        "title": "Book",
+        "body": "Message us on WhatsApp, confirm dates and terms."
+      },
+      {
+        "n": "03",
+        "title": "Delivery",
+        "body": "Collect the car or ask us to bring it to you. Delivery and collection in the metropolitan area: {amount}."
+      },
+      {
+        "n": "04",
+        "title": "Drive",
+        "body": "Enjoy the drive and bring the car back on the agreed date."
+      }
+    ],
+    "shotAlt": "Mercedes-AMG G 63 from the Serres Drive fleet"
+  },
+  "termsPage": {
+    "h1": "Hire terms",
+    "eyebrow": "What you need to know before booking",
+    "requirements": "Requirements and terms",
+    "depositPerCar": "Deposit by car",
+    "footnote": "For anything that isn’t on this page, message us on WhatsApp before booking and we’ll confirm it in writing."
+  },
+  "why": {
+    "h1": "Why Serres Drive",
+    "eyebrow": "Sant Cugat del Vallès",
+    "shotAlt": "Range Rover Velar from the Serres Drive fleet",
+    "reasons": [
+      {
+        "title": "A real fleet, not a catalogue",
+        "body": "The {total} cars on this site are the cars we have. If it is in the fleet, you can hire it."
+      },
+      {
+        "title": "Fixed price",
+        "body": "You see the price for 1 day, 2, 3, a week and a month before you message us. No fees that show up at the end."
+      },
+      {
+        "title": "Delivered wherever you are",
+        "body": "Delivery and collection in the Barcelona metropolitan area for {amount}."
+      },
+      {
+        "title": "A conversation, not a counter",
+        "body": "You book on WhatsApp with someone who knows the cars. No queues, no endless forms."
+      },
+      {
+        "title": "From 18 years old",
+        "body": "No minimum years on your licence. Just a valid one."
+      },
+      {
+        "title": "Straight from the Serres workshop",
+        "body": "Serres Drive comes out of Serres Wrap Center: the cars are prepared and looked after in house."
+      }
+    ]
+  },
+  "contact": {
+    "h1": "Contact",
+    "eyebrow": "Bookings on WhatsApp",
+    "where": "Where",
+    "delivery": "Delivery",
+    "email": "Email",
+    "instagram": "Instagram",
+    "writeEmail": "Send us an email",
+    "formTitle": "Message us",
+    "name": "Name",
+    "phone": "Phone or WhatsApp",
+    "car": "Car",
+    "chooseCar": "Choose a car",
+    "dates": "Dates",
+    "datesPlaceholder": "12 to 15 October",
+    "message": "Message",
+    "messagePlaceholder": "Do you need it delivered to a particular address?",
+    "submit": "Send on WhatsApp",
+    "note": "Sending opens WhatsApp with the message already written. No data is stored on this site.",
+    "errName": "Tell us your name.",
+    "errPhone": "We need a phone number with at least 9 digits.",
+    "errCar": "Choose the car you are interested in.",
+    "errDates": "Give us the dates, even if they are rough.",
+    "waIntro": "Hi Serres Drive, I’d like to book.",
+    "waName": "Name",
+    "waPhone": "Phone",
+    "waCar": "Car",
+    "waDates": "Dates",
+    "waMessage": "Message"
+  },
+  "wa": {
+    "general": "Hi Serres Drive, I’d like to book a car.",
+    "car": "Hi Serres Drive, I’m interested in hiring the {car}. Is it available?"
+  },
+  "e404": {
+    "title": "Page not found · Serres Drive",
+    "eyebrow": "Error 404",
+    "h1": "This page no longer exists",
+    "body": "The car you were looking for may not be in the fleet any more. These are the {total} you can hire right now.",
+    "goHome": "Go to the homepage"
+  },
+  "seo": {
+    "homeTitle": "Luxury car hire in Barcelona · Serres Drive",
+    "homeDesc": "Luxury car hire in Barcelona and Sant Cugat: Porsche, Lamborghini, Mercedes-AMG, Audi, Range Rover and Volkswagen from {from} a day. Book on WhatsApp.",
+    "homeH1": "Luxury car hire in Barcelona",
+    "fleetTitle": "Our fleet · Serres Drive Barcelona",
+    "fleetDesc": "The {total} cars available right now at Serres Drive, with the price by day, by week and by month. Delivery across the Barcelona metropolitan area.",
+    "ratesTitle": "Hire rates · Serres Drive Barcelona",
+    "ratesDesc": "Prices for 1 day, 2 days, 3 days, 1 week and 1 month on all {total} cars in the fleet. Deposit from {deposit}, VAT included. No surprises at the end.",
+    "howTitle": "How the hire works · Serres Drive",
+    "howDesc": "Choose the car, book on WhatsApp, collect it or ask us to bring it to you, and drive. Four steps and one person on the other end of the phone.",
+    "termsTitle": "Hire terms and conditions · Serres Drive",
+    "termsDesc": "From {age} years old, no minimum years on your licence, {km} km included, deposit from {deposit} and delivery across the metropolitan area for {delivery}.",
+    "whyTitle": "Why Serres Drive · Car hire in Sant Cugat",
+    "whyDesc": "Our own fleet, checked before every hire, delivery wherever you are in the Barcelona metropolitan area and a direct chat on WhatsApp. No counters, no queues.",
+    "contactTitle": "Contact and bookings · Serres Drive Barcelona",
+    "contactDesc": "Book your car on WhatsApp or write to us from the form and we reply in minutes. Serres Drive, Sant Cugat del Vallès, Barcelona metropolitan area.",
+    "brandTitle": "{brand} hire in Barcelona · Serres Drive",
+    "brandDescOne": "Available at Serres Drive: {list}. From {from} a day, with delivery across the Barcelona metropolitan area.",
+    "brandDescMany": "Available at Serres Drive: {list}. From {from} a day, with delivery across the Barcelona metropolitan area.",
+    "brandH1": "{brand} hire in Barcelona",
+    "carTitle": "{car} hire in Barcelona · Serres Drive",
+    "carDesc": "Hire a {car} in Barcelona from {from} a day. {cv} hp, 0-100 km/h in {zero}. Book on WhatsApp and we deliver it across the metropolitan area.",
+    "carH1": "{car} hire in Barcelona",
+    "listJoin": " and "
+  },
+  "cars": {
+    "mercedes-amg-g63": {
+      "tagline": "Three differential locks and a 585 hp biturbo V8 under a silhouette that hasn't changed since 1979.",
+      "highlights": [
+        "585 hp biturbo V8",
+        "0-100 in 4.5 s",
+        "Three differential locks"
+      ]
+    },
+    "lamborghini-urus": {
+      "tagline": "Finished in Giallo, seating five: 650 hp from the biturbo V8 and 0-100 km/h in 3.6 seconds.",
+      "highlights": [
+        "650 hp biturbo V8",
+        "0-100 in 3.6 s",
+        "305 km/h, all-wheel drive"
+      ]
+    },
+    "audi-rs6-avant": {
+      "tagline": "Five seats, a full estate boot and a 600 hp biturbo V8 that settles 0-100 in 3.6 seconds.",
+      "highlights": [
+        "600 hp biturbo V8",
+        "0-100 in 3.6 s",
+        "Five-seat quattro estate"
+      ]
+    },
+    "porsche-911-cabrio": {
+      "tagline": "A 450 hp biturbo flat-six behind your shoulders and a roof that drops in twelve seconds on the move.",
+      "highlights": [
+        "450 hp biturbo flat-six",
+        "Roof down in 12 s",
+        "306 km/h, rear-wheel drive"
+      ]
+    },
+    "porsche-911-carrera-s": {
+      "tagline": "The last naturally aspirated Carrera S: a 3.8 flat-six that pulls to 7,400 rpm, seven-speed PDK and a sunroof.",
+      "highlights": [
+        "400 hp, 7,400 rpm",
+        "0-100 km/h in 4.3 s",
+        "7-speed PDK, rear-wheel drive"
+      ]
+    },
+    "porsche-cayenne-hybrid": {
+      "tagline": "Chalk grey outside, red leather inside: 470 hp that leaves the car park in electric silence and posts 4.9 seconds.",
+      "highlights": [
+        "470 hp plug-in hybrid",
+        "0-100 in 4.9 s",
+        "Full electric mode in town"
+      ]
+    },
+    "mercedes-amg-a45": {
+      "tagline": "A five-seat hatchback with its four-cylinder hand-built in Affalterbach: 421 hp and 3.9 seconds to 100 km/h.",
+      "highlights": [
+        "421 hp and 500 Nm",
+        "0-100 in 3.9 s",
+        "AMG 4MATIC+ all-wheel drive"
+      ]
+    },
+    "audi-rs3-sportback": {
+      "tagline": "No other hatchback sounds like this inline five: 400 hp, a rear torque splitter and 3.8 seconds to 100.",
+      "highlights": [
+        "400 hp five-cylinder TFSI",
+        "0-100 in 3.8 s",
+        "quattro with torque splitter"
+      ]
+    },
+    "audi-rsq3": {
+      "tagline": "Firing order 1-2-4-5-3: the 2.5 TFSI five-cylinder feeds 400 hp to the quattro system and posts 0-100 in 4.5 seconds.",
+      "highlights": [
+        "400 hp 2.5 TFSI",
+        "0-100 in 4.5 s",
+        "Permanent quattro all-wheel drive"
+      ]
+    },
+    "volkswagen-golf-r": {
+      "tagline": "A five-seat hatchback hiding 420 Nm, high-performance brakes and a Race mode under plain black bodywork.",
+      "highlights": [
+        "333 hp and 420 Nm",
+        "0-100 in 4.6 s",
+        "4MOTION with torque vectoring"
+      ]
+    },
+    "range-rover-velar": {
+      "tagline": "Flush handles, deep blue and caramel leather: the Velar D200 carries its 430 Nm across Barcelona without raising its voice.",
+      "highlights": [
+        "204 hp mild-hybrid diesel",
+        "430 Nm, all-wheel drive",
+        "568-litre boot"
+      ]
+    },
+    "mercedes-glc": {
+      "tagline": "AMG Line black over pale leather: 258 hp with 48-volt electric assistance and permanent 4MATIC drive.",
+      "highlights": [
+        "258 hp, 48V hybrid assist",
+        "0-100 km/h in 6.2 s",
+        "AMG Line, pale leather"
+      ]
+    },
+    "mercedes-a200-4matic": {
+      "tagline": "The Mercedes hatchback with 163 mild-hybrid hp, a 7G-DCT dual-clutch gearbox and AMG Line trim in white.",
+      "highlights": [
+        "163 hp mild-hybrid",
+        "0-100 in 8.2 s",
+        "AMG Line pack, five seats"
+      ]
+    }
+  }
+}

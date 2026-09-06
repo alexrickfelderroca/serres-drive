@@ -8,9 +8,11 @@ Hostinger desde la raíz.
 - **13 coches**, seis marcas. La flota real; no hay ningún coche en la web que
   no se pueda alquilar.
 - **Reservas por WhatsApp**, con el mensaje prerrellenado por coche.
-- **Un solo idioma en el DOM: español.** No hay conmutador ES/EN.
-- **26 páginas** con `<title>`, `description`, `H1`, `canonical` y schema
-  propios.
+- **Cinco idiomas, cada uno con sus propias URLs:** español (raíz), inglés
+  (`/en/`), ruso (`/ru/`), catalán (`/ca/`) y francés (`/fr/`), con `hreflang`
+  entre las cinco y selector con banderas en el menú.
+- **130 páginas** (26 × 5 idiomas) con `<title>`, `description`, `H1`,
+  `canonical`, `hreflang` y schema propios.
 
 ---
 
@@ -22,7 +24,10 @@ Las páginas HTML **se generan**. No se editan a mano: si tocas
 ```
 data/fleet.json        ← ÚNICA fuente de verdad: precios, slugs, fianzas,
                          fichas técnicas, textos y rutas de fotos
-data/seo-meta.json     ← title / description / H1 / canonical de las 26 páginas
+data/seo-meta.json     ← title / description / H1 / canonical, por idioma
+_build/i18n/es.json    ← DICCIONARIO FUENTE. Todo el texto de la web sale de
+                         aquí; en.json / ru.json / ca.json / fr.json son su
+                         traducción, con exactamente las mismas claves
 
 _build/                ← generadores (no los sirve nadie, pero viven en el repo
                          para que el sitio se pueda reconstruir)
@@ -62,6 +67,8 @@ node _build/verify.js            # 212 comprobaciones; debe salir FAIL 0
 | Cambiar diseño (todo menos portada) | `css/serres.css` |
 | Cambiar la portada | `css/home.css`, `css/featured.css`, `css/preloader.css` |
 | Cambiar comportamiento | `js/site.js` (script único) |
+| Cambiar un texto | `_build/i18n/es.json` **y su equivalente en los otros 4** |
+| Añadir un idioma | un `<código>.json` en `_build/i18n/` + su código en `LANGS` |
 
 El cache-buster `V` es un **hash del contenido** de `css/serres.css` + `js/site.js`,
 así que se actualiza solo: cambia el CSS y cambia la URL. No hay que tocarlo a
@@ -72,7 +79,15 @@ navegadores con el CSS viejo cacheado (`immutable`, un año).
 
 ## 2. Estructura de URLs
 
+Cada idioma cuelga de su prefijo; el español vive en la raíz. **Los segmentos
+de ruta NO se traducen** (`/en/flota/`, no `/en/fleet/`): el slug de cada
+coche tiene que ser idéntico en los cinco porque es el que llevan los
+anuncios, y así el `hreflang` empareja las versiones sin una tabla de
+equivalencias que mantener.
+
 ```
+/  ·  /en/  ·  /ru/  ·  /ca/  ·  /fr/     mismas rutas bajo cada prefijo
+
 /                             portada: hero 3D con scroll + Destacados +
                               tubo de la flota + Wrap Center + CTA
 /flota/                       catálogo con los 13 coches
@@ -166,10 +181,11 @@ suave (Lenis + GSAP ScrollTrigger), carrusel «Destacados» y el tubo de la flot
 Última verificación (06-09-2026, Chrome DevTools sobre el sitio generado):
 
 - Lighthouse móvil — Accesibilidad **100**, Buenas prácticas **100**, SEO **100**
-  en portada, ficha de coche y contacto.
+  en portada, ficha de coche, contacto y ficha en ruso.
 - Sin scroll horizontal a 360 / 390 / 768 px.
 - Consola sin errores ni avisos.
-- `node _build/verify.js` → **212 comprobaciones, 0 fallos**.
+- `node _build/verify.js` → **656 comprobaciones, 0 fallos** (precios, fianzas,
+  coches retirados, idioma declarado y `hreflang` de las 130 páginas).
 
 ## 8. Pendiente de confirmar con el propietario
 

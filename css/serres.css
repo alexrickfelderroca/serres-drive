@@ -204,6 +204,50 @@ table{border-collapse:collapse;width:100%}
 .nav-actions{display:flex;align-items:center;gap:12px;margin-left:auto}
 .nav-links+.nav-actions{margin-left:0}
 
+/* ---------- selector de idioma --------------------------------------- */
+/* Cinco idiomas no caben como cinco botones en el nav, así que en escritorio
+   se muestra solo el activo y los demás se despliegan al pasar por encima o
+   al enfocar con el teclado. En móvil van todos en fila dentro del menú.
+   Sin JS: es hover + focus-within, así que funciona con teclado. */
+.lang-picker{position:relative;display:flex;align-items:center}
+.lang-picker a{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:7px 10px;border-radius:999px;border:1px solid transparent;
+  font-family:var(--font-head);font-size:14px;font-weight:600;
+  letter-spacing:.1em;color:var(--text-dim);
+  transition:background .2s var(--ease),color .2s var(--ease),border-color .2s var(--ease);
+}
+/* Bandera SVG con marco: sobre fondo casi negro, la francesa y la rusa
+   tienen bandas blancas que si no se funden con el borde de la pastilla. */
+.lang-picker .flag{display:block;width:20px;height:14px;border-radius:2px;overflow:hidden;box-shadow:0 0 0 1px rgba(255,255,255,.22)}
+.lang-picker .flag svg{display:block;width:100%;height:100%}
+.lang-picker a:hover{color:var(--white);background:rgba(255,255,255,.07)}
+.lang-picker a[aria-current="true"]{color:var(--white);border-color:var(--line-2)}
+
+@media (min-width:961px){
+  /* colapsado: solo el idioma activo */
+  .nav-actions .lang-picker a:not([aria-current="true"]){
+    position:absolute;top:calc(100% + 8px);left:0;
+    opacity:0;pointer-events:none;transform:translateY(-6px);
+    background:rgba(12,12,15,.97);backdrop-filter:blur(16px);
+    border-color:var(--line);width:max-content;min-width:100%;
+    transition:opacity .18s var(--ease),transform .18s var(--ease);
+  }
+  .nav-actions .lang-picker a:nth-of-type(1):not([aria-current="true"]){top:calc(100% + 8px)}
+  .nav-actions .lang-picker a:nth-of-type(2):not([aria-current="true"]){top:calc(100% + 48px)}
+  .nav-actions .lang-picker a:nth-of-type(3):not([aria-current="true"]){top:calc(100% + 88px)}
+  .nav-actions .lang-picker a:nth-of-type(4):not([aria-current="true"]){top:calc(100% + 128px)}
+  .nav-actions .lang-picker a:nth-of-type(5):not([aria-current="true"]){top:calc(100% + 168px)}
+  .nav-actions .lang-picker:hover a:not([aria-current="true"]),
+  .nav-actions .lang-picker:focus-within a:not([aria-current="true"]){
+    opacity:1;pointer-events:auto;transform:translateY(0);
+  }
+}
+/* En el menú móvil se ven los cinco a la vez. */
+.mobile-menu .lang-picker{flex-wrap:wrap;gap:8px;margin-top:22px;padding-top:20px;border-top:1px solid var(--line)}
+.mobile-menu .lang-picker a{border-color:var(--line-2);font-size:15px;padding:9px 14px}
+@media (max-width:960px){ .nav-actions .lang-picker{display:none} }
+
 .menu-btn{
   display:none;width:44px;height:44px;border-radius:12px;
   border:1px solid var(--line-2);background:transparent;cursor:pointer;

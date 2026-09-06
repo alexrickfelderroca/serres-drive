@@ -1,0 +1,377 @@
+{
+  "_meta": {
+    "lang": "ca",
+    "label": "Català",
+    "flag": "🇦🇩",
+    "locale": "ca_ES",
+    "note": "Traduït des de es.json. Mateixes claus, exactament. Res de la web s'escriu fora d'aquest fitxer llevat dels preus, els noms de cotxe i els slugs, que vénen de data/fleet.json i no es tradueixen."
+  },
+  "nav": {
+    "fleet": "Flota",
+    "rates": "Tarifes",
+    "how": "Com funciona",
+    "why": "Per què Serres",
+    "contact": "Contacte",
+    "book": "Reservar",
+    "bookWa": "Reservar per WhatsApp",
+    "openMenu": "Obrir menú",
+    "closeMenu": "Tancar menú",
+    "skip": "Salta al contingut",
+    "home": "Serres Drive — inici",
+    "primary": "Principal",
+    "language": "Idioma"
+  },
+  "footer": {
+    "nav": "Peu de pàgina",
+    "terms": "Condicions de lloguer",
+    "wrapCenter": "Serres Wrap Center"
+  },
+  "common": {
+    "breadcrumb": "Ruta de navegació",
+    "start": "Inici",
+    "perDay": "per dia",
+    "aDay": "al dia",
+    "allCars": "Totes",
+    "filterByBrand": "Filtrar per marca",
+    "seeFleet": "Veure la flota",
+    "seeFullFleet": "Veure la flota completa",
+    "seeAllTerms": "Veure totes les condicions",
+    "car": "cotxe",
+    "cars": "cotxes",
+    "from": "des de",
+    "modelAvailable": "model disponible",
+    "modelsAvailable": "models disponibles",
+    "carsAvailable": "cotxes disponibles",
+    "byWhatsapp": "Per WhatsApp",
+    "writeWa": "Escriu-nos per WhatsApp",
+    "askWa": "Preguntar per WhatsApp",
+    "form": "Formulari",
+    "threeQuarterAlt": "vista tres quarts davantera",
+    "rentalAlt": "de lloguer a Barcelona",
+    "seeCarAria": "veure fitxa i preus"
+  },
+  "terms": {
+    "title": "Condicions de lloguer",
+    "age": "Edat",
+    "ageValue": "Des dels {age} anys",
+    "licence": "Carnet",
+    "licenceValue": "Només permís de conduir en vigor. Sense antiguitat mínima.",
+    "km": "Quilòmetres",
+    "kmValue": "{km} km inclosos",
+    "deposit": "Fiança",
+    "depositFrom": "Des de {amount}",
+    "delivery": "Lliurament",
+    "deliveryValue": "Lliurament i recollida a l'àrea metropolitana: {amount}",
+    "depositLabel": "Fiança: {amount}",
+    "depositUnknown": "Fiança: te la confirmem per WhatsApp",
+    "deliveryShort": "Lliurament metropolità {amount}"
+  },
+  "home": {
+    "eyebrow": "Sant Cugat del Vallès · Àrea metropolitana de Barcelona",
+    "titleRow1": "Lloguer",
+    "titleRow2": "de cotxes",
+    "titleRow3": "de luxe",
+    "titleRow4": "a Barcelona",
+    "ctaBook": "Reserva el teu vehicle",
+    "featured": "Destacats",
+    "featuredSub": "{n} dels {total} cotxes que pots llogar ara mateix",
+    "keepScrolling": "Continua baixant",
+    "chooseKicker": "Tria el teu cotxe",
+    "chooseTitle": "Tota la flota, en moviment",
+    "chooseUiTitle": "Gira · tria · condueix",
+    "chooseUiHint": "Llisca per girar",
+    "fleetAria": "Flota",
+    "outro": "Serres Drive — lloguer de cotxes de luxe a Barcelona, del detailing al volant.",
+    "swcEyebrow": "Serres Wrap Center",
+    "swcTitleA": "Abans de conduir-lo,",
+    "swcTitleB": "el deixem perfecte",
+    "swcBody": "No només lloguem cotxes: els preparem. El nostre taller germà a Sant Cugat del Vallès fa PPF, car wrap a mida, poliment multietapa, tractaments ceràmics i detailing de nivell concours.",
+    "swcTags": [
+      "PPF",
+      "Car Wrap",
+      "Poliment",
+      "Ceràmic",
+      "Detailing"
+    ],
+    "swcCta": "Visitar Serres Wrap Center",
+    "swcShotAlt": "Porsche 911 RWB al taller de Serres Wrap Center, sota il·luminació hexagonal",
+    "swcShotAria": "Serres Wrap Center — PPF, car wrap i detailing a Barcelona",
+    "swcShotTag": "Veure el taller",
+    "ctaTitleA": "A punt per",
+    "ctaTitleB": "conduir",
+    "ctaBody": "Digues-nos quin cotxe i quines dates. Et responem amb disponibilitat i condicions en minuts."
+  },
+  "fleet": {
+    "h1": "La nostra flota",
+    "book": "Reservar",
+    "bookAria": "Reservar {car} per WhatsApp",
+    "seats": "places"
+  },
+  "carPage": {
+    "specs": "Fitxa tècnica",
+    "power": "Potència",
+    "zeroHundred": "0-100 km/h",
+    "topSpeed": "Velocitat màx.",
+    "seats": "Places",
+    "transmission": "Canvi",
+    "drivetrain": "Tracció",
+    "fuel": "Combustible",
+    "bodyType": "Carrosseria",
+    "gallery": "Galeria: {car}",
+    "photoOf": "Foto {n} de {total}",
+    "bookEyebrow": "Reserva",
+    "bookTitle": "Consulta dates per al teu {car}",
+    "bookBody": "Digues-nos els dies que el necessites i et confirmem disponibilitat, fiança i punt de lliurament per WhatsApp.",
+    "moreOfBrand": "Més {brand} a la flota",
+    "d1": "1 dia",
+    "d2": "2 dies",
+    "d3": "3 dies",
+    "w1": "1 setmana",
+    "m1": "1 mes"
+  },
+  "rates": {
+    "h1": "Tarifes",
+    "eyebrow": "Preus en euros, IVA inclòs",
+    "caption": "Tarifes de lloguer per cotxe i durada",
+    "colCar": "Cotxe",
+    "colDeposit": "Fiança",
+    "note": "Lliurament i recollida a l'àrea metropolitana de Barcelona: {delivery}. {km} km inclosos. Fiança des de {deposit}."
+  },
+  "how": {
+    "h1": "Com funciona",
+    "eyebrow": "Quatre passos",
+    "steps": [
+      {
+        "n": "01",
+        "title": "Tria el teu cotxe",
+        "body": "Tria el teu vehicle de la nostra flota disponible."
+      },
+      {
+        "n": "02",
+        "title": "Reserva",
+        "body": "Contacta per WhatsApp, confirma dates i condicions."
+      },
+      {
+        "n": "03",
+        "title": "Lliurament",
+        "body": "Recull el vehicle o demana el lliurament. Lliurament i recollida a l'àrea metropolitana: {amount}."
+      },
+      {
+        "n": "04",
+        "title": "Condueix",
+        "body": "Gaudeix del viatge i torna el vehicle en el termini acordat."
+      }
+    ],
+    "shotAlt": "Mercedes-AMG G 63 de la flota de Serres Drive"
+  },
+  "termsPage": {
+    "h1": "Condicions de lloguer",
+    "eyebrow": "El que has de saber abans de reservar",
+    "requirements": "Requisits i condicions",
+    "depositPerCar": "Fiança per cotxe",
+    "footnote": "Per a qualsevol condició que no aparegui en aquesta pàgina, escriu-nos per WhatsApp abans de reservar i te la confirmem per escrit."
+  },
+  "why": {
+    "h1": "Per què Serres Drive",
+    "eyebrow": "Sant Cugat del Vallès",
+    "shotAlt": "Range Rover Velar de la flota de Serres Drive",
+    "reasons": [
+      {
+        "title": "Flota real, no un catàleg",
+        "body": "Els {total} cotxes d'aquesta web són els que hi ha. Si surt a la flota, es pot llogar."
+      },
+      {
+        "title": "Preu tancat",
+        "body": "Veuràs el preu d'1 dia, 2, 3, una setmana i un mes abans d'escriure'ns. Sense tarifes que apareixen al final."
+      },
+      {
+        "title": "Lliurament on siguis",
+        "body": "Lliurament i recollida a l'àrea metropolitana de Barcelona per {amount}."
+      },
+      {
+        "title": "Una conversa, no un taulell",
+        "body": "Reserves per WhatsApp amb una persona que coneix els cotxes. Sense cues ni formularis interminables."
+      },
+      {
+        "title": "Des dels 18 anys",
+        "body": "Sense antiguitat mínima de carnet. Només permís en vigor."
+      },
+      {
+        "title": "Del taller de Serres",
+        "body": "Serres Drive neix de Serres Wrap Center: els cotxes es preparen i es cuiden a casa."
+      }
+    ]
+  },
+  "contact": {
+    "h1": "Contacte",
+    "eyebrow": "Reserves per WhatsApp",
+    "where": "On",
+    "delivery": "Lliurament",
+    "email": "Correu",
+    "instagram": "Instagram",
+    "writeEmail": "Escriu-nos un correu",
+    "formTitle": "Escriu-nos",
+    "name": "Nom",
+    "phone": "Telèfon o WhatsApp",
+    "car": "Cotxe",
+    "chooseCar": "Tria un cotxe",
+    "dates": "Dates",
+    "datesPlaceholder": "Del 12 al 15 d'octubre",
+    "message": "Missatge",
+    "messagePlaceholder": "Necessites el lliurament en alguna adreça concreta?",
+    "submit": "Enviar per WhatsApp",
+    "note": "En enviar s'obre WhatsApp amb el missatge ja escrit. No es desa cap dada en aquesta web.",
+    "errName": "Digues-nos com et dius.",
+    "errPhone": "Ens cal un telèfon amb almenys 9 dígits.",
+    "errCar": "Tria el cotxe que t'interessa.",
+    "errDates": "Indica'ns les dates, encara que siguin aproximades.",
+    "waIntro": "Hola Serres Drive, vull reservar.",
+    "waName": "Nom",
+    "waPhone": "Telèfon",
+    "waCar": "Cotxe",
+    "waDates": "Dates",
+    "waMessage": "Missatge"
+  },
+  "wa": {
+    "general": "Hola Serres Drive, vull reservar un cotxe.",
+    "car": "Hola Serres Drive, vull llogar un {car}. El teniu disponible?"
+  },
+  "e404": {
+    "title": "Pàgina no trobada · Serres Drive",
+    "eyebrow": "Error 404",
+    "h1": "Aquesta pàgina ja no existeix",
+    "body": "Potser el cotxe que buscaves ja no és a la flota. Aquests són els {total} que sí que pots llogar ara mateix.",
+    "goHome": "Torna a l'inici"
+  },
+  "seo": {
+    "homeTitle": "Lloguer de cotxes de luxe a Barcelona · Serres Drive",
+    "homeDesc": "Lloguer de cotxes de luxe a Barcelona i Sant Cugat: Porsche, Lamborghini, Mercedes-AMG, Audi, Range Rover i Volkswagen des de {from}/dia. Reserva per WhatsApp.",
+    "homeH1": "Lloguer de cotxes de luxe a Barcelona",
+    "fleetTitle": "La nostra flota · Serres Drive Barcelona",
+    "fleetDesc": "Els {total} cotxes disponibles ara mateix a Serres Drive, amb preu per dia, per setmana i per mes. Lliurament a l'àrea metropolitana de Barcelona.",
+    "ratesTitle": "Tarifes de lloguer · Serres Drive Barcelona",
+    "ratesDesc": "Preus d'1 dia, 2 dies, 3 dies, 1 setmana i 1 mes per als {total} cotxes de la flota. Fiança des de {deposit}. Preu tancat, sense lletra petita ni sorpreses.",
+    "howTitle": "Com funciona el lloguer · Serres Drive",
+    "howDesc": "Tria el cotxe, reserva per WhatsApp, recull-lo o demana el lliurament i condueix. Quatre passos i una sola persona a l'altra banda del telèfon.",
+    "termsTitle": "Condicions de lloguer · Serres Drive",
+    "termsDesc": "Des dels {age} anys, sense antiguitat mínima de carnet, {km} km inclosos, fiança des de {deposit} i lliurament a tota l'àrea metropolitana per {delivery}.",
+    "whyTitle": "Per què Serres Drive · Lloguer a Sant Cugat",
+    "whyDesc": "Flota pròpia i revisada, lliurament on siguis dins de l'àrea metropolitana de Barcelona i tracte directe per WhatsApp, sense taulells ni cues.",
+    "contactTitle": "Contacte i reserves · Serres Drive Barcelona",
+    "contactDesc": "Reserva el teu cotxe per WhatsApp o escriu-nos des del formulari. Serres Drive, a Sant Cugat del Vallès i a tota l'àrea metropolitana de Barcelona.",
+    "brandTitle": "Lloguer de cotxes {brand} a Barcelona · Serres Drive",
+    "brandDescOne": "Disponible a Serres Drive: {list}. Des de {from} al dia, amb lliurament a l'àrea metropolitana de Barcelona. Reserva'l per WhatsApp.",
+    "brandDescMany": "Disponibles a Serres Drive: {list}. Des de {from} al dia, amb lliurament a l'àrea metropolitana de Barcelona.",
+    "brandH1": "Lloguer de cotxes {brand} a Barcelona",
+    "carTitle": "Lloguer {car} a Barcelona · Serres Drive",
+    "carDesc": "Lloga un {car} a Barcelona des de {from} al dia. {cv} CV, 0-100 en {zero}. Reserva per WhatsApp amb lliurament a l'àrea metropolitana.",
+    "carH1": "Lloguer {car} a Barcelona",
+    "listJoin": " i "
+  },
+  "cars": {
+    "mercedes-amg-g63": {
+      "tagline": "Tres bloquejos de diferencial i un V8 biturbo de 585 CV sota la silueta que no canvia des del 1979.",
+      "highlights": [
+        "585 CV V8 biturbo",
+        "0-100 en 4,5 s",
+        "Tres bloquejos de diferencial"
+      ]
+    },
+    "lamborghini-urus": {
+      "tagline": "En Giallo i amb cinc places: els 650 CV del seu V8 biturbo signen el 0-100 km/h en 3,6 segons.",
+      "highlights": [
+        "650 CV V8 biturbo",
+        "0-100 en 3,6 s",
+        "305 km/h, tracció integral"
+      ]
+    },
+    "audi-rs6-avant": {
+      "tagline": "Cinc places, maleter de familiar i un V8 biturbo de 600 CV que resol el 0-100 en 3,6 segons.",
+      "highlights": [
+        "600 CV V8 biturbo",
+        "0-100 en 3,6 s",
+        "Familiar quattro de 5 places"
+      ]
+    },
+    "porsche-911-cabrio": {
+      "tagline": "Un bòxer biturbo de 450 CV darrere del clatell i una capota que s'obre en dotze segons en marxa.",
+      "highlights": [
+        "450 CV bòxer biturbo",
+        "Capota oberta en 12 s",
+        "306 km/h, tracció posterior"
+      ]
+    },
+    "porsche-911-carrera-s": {
+      "tagline": "L'últim Carrera S atmosfèric: un bòxer 3.8 que estira fins a les 7.400 rpm, PDK de set marxes i sostre solar.",
+      "highlights": [
+        "400 CV atmosfèrics, 7.400 rpm",
+        "0-100 km/h en 4,3 s",
+        "PDK 7 vel., propulsió posterior"
+      ]
+    },
+    "porsche-cayenne-hybrid": {
+      "tagline": "Gris guix per fora, pell vermella per dins: 470 CV que surten del pàrquing en silenci elèctric i signen 4,9 segons.",
+      "highlights": [
+        "470 CV híbrid endollable",
+        "0-100 en 4,9 s",
+        "Mode elèctric pur a ciutat"
+      ]
+    },
+    "mercedes-amg-a45": {
+      "tagline": "Un compacte de cinc places amb el quatre cilindres muntat a mà a Affalterbach: 421 CV i 3,9 segons.",
+      "highlights": [
+        "421 CV i 500 Nm",
+        "0-100 en 3,9 s",
+        "Tracció total AMG 4MATIC+"
+      ]
+    },
+    "audi-rs3-sportback": {
+      "tagline": "El cinc cilindres en línia sona com cap altre compacte: 400 CV, torque splitter posterior i 3,8 segons fins als 100.",
+      "highlights": [
+        "400 CV 5 cilindres TFSI",
+        "0-100 en 3,8 s",
+        "quattro amb torque splitter"
+      ]
+    },
+    "audi-rsq3": {
+      "tagline": "Ordre d'encesa 1-2-4-5-3: el cinc cilindres 2.5 TFSI porta 400 CV al quattro i signa el 0-100 en 4,5 segons.",
+      "highlights": [
+        "400 CV 2.5 TFSI",
+        "0-100 en 4,5 s",
+        "Tracció quattro permanent"
+      ]
+    },
+    "volkswagen-golf-r": {
+      "tagline": "Un compacte de cinc places amb 420 Nm, frens d'altes prestacions i mode Race amagats sota una carrosseria negra.",
+      "highlights": [
+        "333 CV i 420 Nm",
+        "0-100 en 4,6 s",
+        "4MOTION amb vectorització de parell"
+      ]
+    },
+    "range-rover-velar": {
+      "tagline": "Manetes enrasades, blau profund i pell caramel: el Velar D200 mou els seus 430 Nm per Barcelona sense alçar la veu.",
+      "highlights": [
+        "204 CV dièsel microhíbrid",
+        "430 Nm i tracció total",
+        "Maleter de 568 litres"
+      ]
+    },
+    "mercedes-glc": {
+      "tagline": "Negre AMG Line sobre pell clara: 258 CV amb suport elèctric de 48 volts i tracció 4MATIC permanent.",
+      "highlights": [
+        "258 CV amb hibridació 48V",
+        "0-100 km/h en 6,2 s",
+        "AMG Line, pell clara"
+      ]
+    },
+    "mercedes-a200-4matic": {
+      "tagline": "El compacte de Mercedes amb 163 CV microhibridats, canvi 7G-DCT de doble embragatge i acabat AMG Line en blanc.",
+      "highlights": [
+        "163 CV amb microhibridació",
+        "0-100 en 8,2 s",
+        "Pack AMG Line, 5 places"
+      ]
+    }
+  }
+}

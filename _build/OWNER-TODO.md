@@ -10,6 +10,8 @@
 >   911 Cabrio (992) azul, que es un coche real de la flota.
 > - **Logos (punto 7): el propietario los va a enviar.** Ver
 >   `assets/brand/marcas/LEEME.md` para nombres, formato y sitio exacto.
+> - **Fotos del Urus negro (punto 9): las va a enviar.** Las actuales son del
+>   amarillo. Ver el punto 9.
 
 Todo lo demás del encargo (`serresdrive-claude-code-task_2.md`) está
 implementado. Estos puntos **no se han inventado**: donde falta el dato, la web
@@ -176,3 +178,66 @@ se han construido desde cero:
   aparece el `redirects/` original, conviene compararlos.
 
 Si estos cuatro archivos aparecen, tienen prioridad sobre lo generado.
+
+
+## 9. Fotos del Lamborghini Urus — son de otro coche
+
+La unidad real es **negra**; las siete fotos de `Sicur Cars/URUS` son del
+**amarillo** (Giallo). Están hoy en la tarjeta del catálogo, en la ficha, en el
+carrusel de la portada y en la textura del tubo 3D.
+
+Hace falta que el propietario deje en `Sicur Cars/URUS` las del coche negro.
+Idealmente:
+
+- **tres cuartos delantera** (es la foto 1 de todas las tarjetas)
+- frontal
+- tres cuartos trasera
+- interior: salpicadero, asientos delanteros, plazas traseras
+
+Los interiores actuales tampoco valen: el amarillo lleva costuras y respaldos
+en amarillo, que un coche negro no tendrá.
+
+Con las fotos dentro, se regenera todo de una tirada:
+
+```bash
+node _build/build-images.js      # tarjetas y galería
+node _build/build-home-assets.js # carrusel + textura del tubo
+node _build/build-data.js && node _build/build-seo-meta.js && node _build/build-site.js
+```
+
+También hay que corregir la frase comercial, que menciona el color: en
+`_build/fleet-specs.json`, `lamborghini-urus.taglineEs` empieza por «En Giallo
+y con cinco plazas…», y lo mismo en los cuatro diccionarios de idioma
+(`_build/i18n/<idioma>.json` → `cars.lamborghini-urus`).
+
+## 10. Resolución de las fotos: el techo son 1.290 px
+
+Las fotos de la flota son **capturas de móvil de un anuncio**: entre 1.092 y
+1.448 px de ancho. En el carrusel de la portada el slide ocupa la pantalla
+entera —unos 2.000 px en un portátil— así que hay que ampliarlas.
+
+Ya se hace lo posible (Lanczos + máscara de enfoque, y se parte siempre del
+original, no de una copia reducida), y el estiramiento ha bajado de ×1,66 a
+×1,11. Pero **por encima de eso no hay detalle que recuperar**.
+
+Si el propietario tiene los originales de la sesión de fotos —o puede pedirlos
+a Sicurcars— con 2.500-3.000 px de ancho, el carrusel pasaría a verse nítido
+sin tocar una línea de código: basta sustituir los archivos y regenerar.
+
+## 11. Idiomas: qué falta por revisar
+
+La web está en **español, inglés, ruso, catalán y francés**, cada uno con sus
+propias URLs. Las traducciones pasaron por un revisor nativo por idioma, que
+encontró cosas de fondo — ya corregidas — como que en francés «CV» significa
+caballos *fiscales* y la potencia se escribe «ch».
+
+Lo que conviene que revise una persona antes de anunciar en esos mercados:
+
+- **Ruso:** la concordancia de numerales («3 модели» / «5 моделей») se ha
+  resuelto con la forma que cubre 2-4, porque las páginas de marca tienen 3 y 4
+  coches. Si algún día una marca tiene 5 o más, esa cadena habrá que revisarla.
+- **Los mensajes de WhatsApp** (`wa.general`, `wa.car`) son los que le llegan
+  al cliente escritos en su idioma. Merece la pena leerlos en voz alta.
+- **Los títulos y descripciones de Google** están medidos y dentro de rango,
+  pero son lo primero que ve un cliente ruso o francés: si el propietario tiene
+  a alguien nativo cerca, que les eche un ojo.

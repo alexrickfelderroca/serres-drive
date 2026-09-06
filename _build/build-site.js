@@ -15,7 +15,40 @@ const fs = require('fs'), path = require('path');
 const ROOT = path.join(__dirname, '..');
 
 const fleet = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/fleet.json'), 'utf8'));
-const seo = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/seo-meta.json'), 'utf8')).pages;
+const seoAll = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/seo-meta.json'), 'utf8'));
+
+/* ---------- idiomas --------------------------------------------------- *
+   Cinco idiomas, cada uno con sus PROPIAS URLs — que es lo unico que Google
+   indexa de verdad y lo unico que permite anunciar por idioma. El espanol
+   vive en la raiz; los demas cuelgan de su prefijo.
+
+   Los segmentos de ruta NO se traducen (/en/flota/, no /en/fleet/): el slug
+   de cada coche tiene que ser identico en los cinco idiomas porque es el que
+   llevan los anuncios, y asi el hreflang empareja las cinco versiones sin
+   una tabla de equivalencias que mantener.                                */
+const LANGS = ['es', 'en', 'ru', 'ca', 'fr'].map(code => {
+  const d = JSON.parse(fs.readFileSync(path.join(__dirname, 'i18n', `${code}.json`), 'utf8'));
+  return { code, dict: d, ...d._meta, prefix: code === 'es' ? '' : code + '/' };
+});
+let LG = LANGS[0];      // idioma que se esta generando
+let L = LG.dict;        // su diccionario
+let seo = seoAll[LG.code].pages;
+
+/* Rellena {marcadores} de una cadena del diccionario. */
+const f = (tpl, vars) => String(tpl).replace(/\{(\w+)\}/g, (m, k) =>
+  (vars && vars[k] !== undefined) ? vars[k] : m);
+
+/* Antepone el prefijo de idioma a una ruta canonica ("/flota/"). */
+const lp = u => u === '/' ? '/' + LG.prefix : '/' + LG.prefix + u.slice(1);
+
+/* Copia por idioma de la ficha de un coche (tagline + highlights). */
+const carCopy = (c) => {
+  if (LG.code === 'es') return { tagline: c.taglineEs, highlights: c.highlightsEs };
+  const t = L.cars && L.cars[c.slug];
+  /* Si un idioma no tiene la ficha traducida, cae al espanol en vez de dejar
+     la tarjeta vacia: mejor un texto en otro idioma que un hueco. */
+  return t || { tagline: c.taglineEs, highlights: c.highlightsEs };
+};
 const { origin } = fleet.site;
 const C = fleet.contact;
 const T = fleet.terms;
@@ -42,10 +75,12 @@ const carsOf = brand => fleet.brands.find(b => b.slug === brand).cars.map(car);
 const brandOf = c => fleet.brands.find(b => b.slug === c.brand);
 
 const wa = (text) => `https://wa.me/${C.whatsapp}?text=${encodeURIComponent(text)}`;
-const waCar = c => wa(`Hola Serres Drive, me interesa alquilar el ${c.name}. ¿Está disponible?`);
-const waGeneral = wa('Hola Serres Drive, quiero reservar un coche.');
+const waCar = c => wa(f(L.wa.car, { car: c.name }));
+const waGeneral = () => wa(L.wa.general);
 
-const depositText = c => c.deposit === null ? T.depositUnknownText : `Fianza: ${eur(c.deposit)}`;
+const depositText = c => c.deposit === null
+  ? L.terms.depositUnknown
+  : f(L.terms.depositLabel, { amount: eur(c.deposit) });
 
 const ICON = {
   arrow: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
@@ -69,59 +104,87 @@ const rel = (url) => {
 };
 
 /* ---------- shared chrome -------------------------------------------- */
-const NAV = [
-  { href: 'flota/', label: 'Flota' },
-  { href: 'tarifas/', label: 'Tarifas' },
-  { href: 'como-funciona/', label: 'Cómo funciona' },
-  { href: 'por-que-serres/', label: 'Por qué Serres' },
-  { href: 'contacto/', label: 'Contacto' },
+/* Funcion, no constante: las etiquetas cambian con el idioma y una const se
+   habria quedado congelada con el primero de la lista. Las RUTAS no se
+   traducen — ver la nota de LANGS. */
+const navItems = () => [
+  { href: 'flota/', label: L.nav.fleet },
+  { href: 'tarifas/', label: L.nav.rates },
+  { href: 'como-funciona/', label: L.nav.how },
+  { href: 'por-que-serres/', label: L.nav.why },
+  { href: 'contacto/', label: L.nav.contact },
 ];
 
-function header(r, current) {
-  const links = NAV.map(n =>
+/* Banderas en SVG, no emoji: Windows NO dibuja los emoji de bandera — en
+   lugar de 🇪🇸 pinta las letras "ES", que es exactamente lo que no queremos.
+   Dibujadas a 3:2. La catalana ademas no existe como emoji de pais.        */
+const FLAG = {
+  es: '<svg viewBox="0 0 60 40" aria-hidden="true"><rect width="60" height="40" fill="#c60b1e"/><rect y="10" width="60" height="20" fill="#ffc400"/></svg>',
+  en: '<svg viewBox="0 0 60 40" aria-hidden="true"><rect width="60" height="40" fill="#012169"/><path d="M0 0l60 40M60 0L0 40" stroke="#fff" stroke-width="9"/><path d="M0 0l60 40M60 0L0 40" stroke="#c8102e" stroke-width="5"/><path d="M30 0v40M0 20h60" stroke="#fff" stroke-width="14"/><path d="M30 0v40M0 20h60" stroke="#c8102e" stroke-width="8"/></svg>',
+  ru: '<svg viewBox="0 0 60 40" aria-hidden="true"><rect width="60" height="40" fill="#fff"/><rect y="13.33" width="60" height="13.34" fill="#0039a6"/><rect y="26.67" width="60" height="13.33" fill="#d52b1e"/></svg>',
+  ca: '<svg viewBox="0 0 60 40" aria-hidden="true"><rect width="60" height="40" fill="#fcdd09"/><g fill="#da121a"><rect y="4.44" width="60" height="4.45"/><rect y="13.33" width="60" height="4.45"/><rect y="22.22" width="60" height="4.45"/><rect y="31.11" width="60" height="4.45"/></g></svg>',
+  fr: '<svg viewBox="0 0 60 40" aria-hidden="true"><rect width="20" height="40" fill="#002395"/><rect x="20" width="20" height="40" fill="#fff"/><rect x="40" width="20" height="40" fill="#ed2939"/></svg>',
+};
+
+/* Selector de idioma. Cada opcion apunta a la MISMA pagina en el otro
+   idioma (misma ruta canonica, distinto prefijo), no a la portada: si estas
+   viendo el Urus en espanol y cambias a frances, sigues en el Urus. */
+function langPicker(canonicalUrl) {
+  const opts = LANGS.map(l => {
+    const href = (l.code === 'es' ? '' : '/' + l.code) + canonicalUrl;
+    const on = l.code === LG.code;
+    return `<a href="${href}" lang="${l.code}" hreflang="${l.code}"${on ? ' aria-current="true"' : ''} title="${esc(l.label)}"><span class="flag">${FLAG[l.code]}</span><span class="code">${l.code.toUpperCase()}</span><span class="sr">${esc(l.label)}</span></a>`;
+  }).join('');
+  return `<div class="lang-picker" role="group" aria-label="${esc(L.nav.language)}">${opts}</div>`;
+}
+
+function header(r, ra, current, canonicalUrl = '/') {
+  const links = navItems().map(n =>
     `<a href="${r}${n.href}"${current === n.href ? ' aria-current="page"' : ''}>${n.label}</a>`).join('\n        ');
   return `<header class="nav">
   <div class="wrap">
-    <a href="${r || '/'}" class="brand" aria-label="Serres Drive — inicio">
-      <img src="${r}assets/brand/serres-wordmark.svg" alt="Serres" width="1000" height="89" decoding="async">
+    <a href="${r || './'}" class="brand" aria-label="${L.nav.home}">
+      <img src="${ra}assets/brand/serres-wordmark.svg" alt="Serres" width="1000" height="89" decoding="async">
       <span class="b-drive">Drive</span>
     </a>
-    <nav class="nav-links" aria-label="Principal">
+    <nav class="nav-links" aria-label="${L.nav.primary}">
         ${links}
     </nav>
     <div class="nav-actions">
-      <a class="btn btn--wa-quiet btn--sm" href="${waGeneral}" target="_blank" rel="noopener" aria-label="Reservar por WhatsApp">${ICON.waColor}<span>Reservar</span></a>
-      <button class="menu-btn" id="menuBtn" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu"><i></i></button>
+      ${langPicker(canonicalUrl)}
+      <a class="btn btn--wa-quiet btn--sm" href="${waGeneral()}" target="_blank" rel="noopener" aria-label="${L.nav.bookWa}">${ICON.waColor}<span>${L.nav.book}</span></a>
+      <button class="menu-btn" id="menuBtn" type="button" aria-label="${L.nav.openMenu}" data-open="${esc(L.nav.openMenu)}" data-close="${esc(L.nav.closeMenu)}" aria-expanded="false" aria-controls="mobileMenu"><i></i></button>
     </div>
   </div>
 </header>
 <div class="mobile-menu" id="mobileMenu" hidden>
-  ${NAV.map(n => `<a href="${r}${n.href}">${n.label}</a>`).join('\n  ')}
-  <a class="btn btn--wa btn--block" href="${waGeneral}" target="_blank" rel="noopener">${ICON.waColor}<span>Reservar por WhatsApp</span></a>
+  ${navItems().map(n => `<a href="${r}${n.href}">${n.label}</a>`).join('\n  ')}
+  <a class="btn btn--wa btn--block" href="${waGeneral()}" target="_blank" rel="noopener">${ICON.waColor}<span>${L.nav.bookWa}</span></a>
+  ${langPicker(canonicalUrl)}
 </div>`;
 }
 
-function footer(r) {
+function footer(r, ra) {
   return `<footer class="footer">
   <div class="wrap">
     <div class="top">
-      <a href="${r || '/'}" class="brand" aria-label="Serres Drive — inicio">
-        <img src="${r}assets/brand/serres-wordmark.svg" alt="Serres" width="1000" height="89" loading="lazy" decoding="async">
+      <a href="${r || './'}" class="brand" aria-label="${L.nav.home}">
+        <img src="${ra}assets/brand/serres-wordmark.svg" alt="Serres" width="1000" height="89" loading="lazy" decoding="async">
         <span class="b-drive">Drive</span>
       </a>
-      <nav class="footer-nav" aria-label="Pie de página">
-        ${NAV.map(n => `<a href="${r}${n.href}">${n.label}</a>`).join('\n        ')}
-        <a href="${C.wrapCenter}" target="_blank" rel="noopener">Serres Wrap Center</a>
+      <nav class="footer-nav" aria-label="${L.footer.nav}">
+        ${navItems().map(n => `<a href="${r}${n.href}">${n.label}</a>`).join('\n        ')}
+        <a href="${C.wrapCenter}" target="_blank" rel="noopener">${L.footer.wrapCenter}</a>
       </nav>
     </div>
     <div class="footer-social">
       <a href="${C.instagram}" target="_blank" rel="noopener">${ICON.ig}<span>${esc(C.instagramHandle)}</span></a>
-      <a href="${waGeneral}" target="_blank" rel="noopener">${ICON.waColor}<span>WhatsApp ${C.phoneDisplay}</span></a>
+      <a href="${waGeneral()}" target="_blank" rel="noopener">${ICON.waColor}<span>WhatsApp ${C.phoneDisplay}</span></a>
       <a href="mailto:${C.email}">${ICON.gmail}<span>${C.email}</span></a>
     </div>
     <div class="bottom">
       <span>© ${new Date().getFullYear()} Serres Drive · ${C.address.locality}, ${C.address.region}</span>
-      <span><a href="${r}condiciones-de-alquiler/">Condiciones de alquiler</a></span>
+      <span><a href="${r}condiciones-de-alquiler/">${L.footer.terms}</a></span>
     </div>
   </div>
 </footer>`;
@@ -130,23 +193,36 @@ function footer(r) {
 /* ---------- page shell ------------------------------------------------ */
 function page({ url, body, schema = [], bodyClass = '', current = '', extraHead = '', extraScripts = '', afterMain = '', beforeMain = '', mainClass = '' }) {
   const meta = seo[url];
-  if (!meta) throw new Error(`no seo-meta entry for ${url}`);
+  if (!meta) throw new Error(`no seo-meta entry for ${url} (${LG.code})`);
+  /* DOS profundidades distintas, y confundirlas rompe medio sitio:
+       r  -> sube a la raiz del IDIOMA. Para enlaces entre paginas: desde
+             /en/coches/x/ subir ../../ cae en /en/, que es lo que quieres.
+       ra -> sube a la raiz del SITIO. Para css, js y assets, que NO estan
+             duplicados por idioma y viven en /css, /js, /assets.            */
   const r = rel(url);
+  const ra = rel(lp(url));
+  const home = r || './';
+  /* hreflang: las cinco versiones se apuntan entre si, y el espanol hace de
+     x-default. Sin esto Google trata cada idioma como contenido duplicado. */
+  const alternates = LANGS.map(l =>
+    `<link rel="alternate" hreflang="${l.code}" href="${origin}${l.code === 'es' ? '' : '/' + l.code}${url}">`
+  ).concat(`<link rel="alternate" hreflang="x-default" href="${origin}${url}">`).join('\n');
   const ld = schema.length
     ? `<script type="application/ld+json">${JSON.stringify(schema.length === 1 ? schema[0] : { '@context': 'https://schema.org', '@graph': schema })}</script>`
     : '';
   return `<!DOCTYPE html>
-<html lang="es">
+<html lang="${LG.code}">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(meta.title)}</title>
 <meta name="description" content="${esc(meta.description)}">
 <link rel="canonical" href="${meta.canonical}">
+${alternates}
 <meta name="theme-color" content="#0a0a0b">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Serres Drive">
-<meta property="og:locale" content="es_ES">
+<meta property="og:locale" content="${LG.locale}">
 <meta property="og:title" content="${esc(meta.title)}">
 <meta property="og:description" content="${esc(meta.description)}">
 <meta property="og:url" content="${meta.canonical}">
@@ -155,41 +231,41 @@ function page({ url, body, schema = [], bodyClass = '', current = '', extraHead 
 <meta name="twitter:title" content="${esc(meta.title)}">
 <meta name="twitter:description" content="${esc(meta.description)}">
 <meta name="twitter:image" content="${meta.image}">
-<link rel="icon" href="${r}assets/brand/favicon.svg" type="image/svg+xml">
-<link rel="icon" href="${r}assets/brand/favicon-96.png" type="image/png" sizes="96x96">
-<link rel="apple-touch-icon" href="${r}assets/brand/apple-touch-icon.png">
+<link rel="icon" href="${ra}assets/brand/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="${ra}assets/brand/favicon-96.png" type="image/png" sizes="96x96">
+<link rel="apple-touch-icon" href="${ra}assets/brand/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="${r}css/serres.css?${V}">
+<link rel="stylesheet" href="${ra}css/serres.css?${V}">
 ${extraHead}
 ${ld}
 </head>
 <body${bodyClass ? ` class="${bodyClass}"` : ''}>
 ${SVG_SPRITE}
-<a class="skip" href="#main">Saltar al contenido</a>
-${header(r, current)}
+<a class="skip" href="#main">${L.nav.skip}</a>
+${header(r, ra, current, url)}
 ${beforeMain}
 <main id="main"${mainClass ? ` class="${mainClass}"` : ''}>
 ${body}
 </main>
 ${afterMain}
-${footer(r)}
+${footer(r, ra)}
 ${extraScripts}
-<script src="${r}js/site.js?${V}" defer></script>
+<script src="${ra}js/site.js?${V}" defer></script>
 </body>
 </html>
 `;
 }
 
 /* ---------- reusable blocks ------------------------------------------- */
-function carCard(c, r, { lazy = true } = {}) {
+function carCard(c, r, ra, { lazy = true } = {}) {
   const g = c.gallery[0];
   return `<article class="car-card">
-  <a class="shot card-link" href="${r}coches/${c.slug}/" aria-label="${esc(c.name)} — ver ficha y precios">
+  <a class="shot card-link" href="${r}coches/${c.slug}/" aria-label="${esc(c.name)} — ${L.common.seeCarAria}">
     <picture>
-      <source type="image/webp" srcset="${r}${g.webp800} 800w, ${r}${g.webp} ${g.width}w" sizes="(max-width:640px) 92vw, (max-width:1040px) 46vw, 30vw">
-      <img src="${r}${g.jpg800}" width="800" height="533" alt="${esc(c.name)} de alquiler en Barcelona, vista tres cuartos delantera"${lazy ? ' loading="lazy"' : ''} decoding="async">
+      <source type="image/webp" srcset="${ra}${g.webp800} 800w, ${ra}${g.webp} ${g.width}w" sizes="(max-width:640px) 92vw, (max-width:1040px) 46vw, 30vw">
+      <img src="${ra}${g.jpg800}" width="800" height="533" alt="${esc(c.name)} ${L.common.rentalAlt}, ${L.common.threeQuarterAlt}"${lazy ? ' loading="lazy"' : ''} decoding="async">
     </picture>
   </a>
   <div class="body">
@@ -198,8 +274,8 @@ function carCard(c, r, { lazy = true } = {}) {
       <li>${c.powerCv} CV</li><li>0-100 ${c.zeroToHundred}</li><li>${c.seats} plazas</li><li>${esc(c.bodyType)}</li>
     </ul>
     <div class="foot">
-      <p class="price"><b>${eur(c.prices.d1)}</b><span>por día</span></p>
-      <a class="btn btn--wa-quiet btn--sm wa-mini" href="${waCar(c)}" target="_blank" rel="noopener" aria-label="Reservar ${esc(c.name)} por WhatsApp">${ICON.wa}<span>Reservar</span></a>
+      <p class="price"><b>${eur(c.prices.d1)}</b><span>${L.common.perDay}</span></p>
+      <a class="btn btn--wa-quiet btn--sm wa-mini" href="${waCar(c)}" target="_blank" rel="noopener" aria-label="Reservar ${esc(c.name)} por WhatsApp">${ICON.wa}<span>${L.nav.book}</span></a>
     </div>
   </div>
 </article>`;
@@ -218,30 +294,30 @@ const LOGO_H = {
 function brandLogo(b, r) {
   const file = path.join(ROOT, 'assets/brand/marcas', `${b.slug}.svg`);
   if (!fs.existsSync(file)) return '';
-  return `<img class="brand-logo" src="${r}assets/brand/marcas/${b.slug}.svg" alt="" aria-hidden="true" style="height:${LOGO_H[b.slug] || 40}px" loading="lazy" decoding="async">`;
+  return `<img class="brand-logo" src="${ra}assets/brand/marcas/${b.slug}.svg" alt="" aria-hidden="true" style="height:${LOGO_H[b.slug] || 40}px" loading="lazy" decoding="async">`;
 }
 
 function brandChips(r, current) {
-  return `<nav class="chips" aria-label="Filtrar por marca">
-  <a class="chip" href="${r}flota/"${!current ? ' aria-current="page"' : ''}>Todas</a>
+  return `<nav class="chips" aria-label="${L.common.filterByBrand}">
+  <a class="chip" href="${r}flota/"${!current ? ' aria-current="page"' : ''}>${L.common.allCars}</a>
   ${fleet.brands.map(b => `<a class="chip" href="${r}flota/${b.slug}/"${current === b.slug ? ' aria-current="page"' : ''}>${b.label}</a>`).join('\n  ')}
 </nav>`;
 }
 
 function crumbs(r, trail) {
-  return `<nav class="wrap crumbs" aria-label="Migas de pan">
-  <a href="${r || '/'}">Inicio</a>
+  return `<nav class="wrap crumbs" aria-label="${L.common.breadcrumb}">
+  <a href="${r || '/'}">${L.common.start}</a>
   ${trail.map(t => `<span aria-hidden="true">/</span>${t.href ? `<a href="${t.href}">${esc(t.label)}</a>` : `<span>${esc(t.label)}</span>`}`).join('\n  ')}
 </nav>`;
 }
 
 function termsList() {
   return `<ul class="terms-list">
-  <li><span class="k">Edad</span><span class="v">Desde ${T.minAge} años</span></li>
-  <li><span class="k">Carnet</span><span class="v">${esc(T.licenceNote)}</span></li>
-  <li><span class="k">Kilómetros</span><span class="v">${T.kmIncluded} km incluidos</span></li>
-  <li><span class="k">Fianza</span><span class="v">Desde ${eur(T.depositFrom)}</span></li>
-  <li><span class="k">Entrega</span><span class="v">Entrega y recogida en el área metropolitana: ${eur(T.deliveryFee)}</span></li>
+  <li><span class="k">${L.terms.age}</span><span class="v">${f(L.terms.ageValue, { age: T.minAge })}</span></li>
+  <li><span class="k">${L.terms.licence}</span><span class="v">${esc(L.terms.licenceValue)}</span></li>
+  <li><span class="k">${L.terms.km}</span><span class="v">${f(L.terms.kmValue, { km: T.kmIncluded })}</span></li>
+  <li><span class="k">${L.terms.deposit}</span><span class="v">${f(L.terms.depositFrom, { amount: eur(T.depositFrom) })}</span></li>
+  <li><span class="k">${L.terms.delivery}</span><span class="v">${f(L.terms.deliveryValue, { amount: eur(T.deliveryFee) })}</span></li>
 </ul>`;
 }
 
@@ -278,7 +354,7 @@ const carSchema = c => ({
   name: c.name,
   brand: { '@type': 'Brand', name: brandOf(c).label },
   image: `${origin}/${c.image}`,
-  description: c.taglineEs,
+  description: carCopy(c).tagline,
   offers: {
     '@type': 'Offer',
     price: c.prices.d1,
@@ -302,13 +378,20 @@ const breadcrumb = items => ({
 });
 
 /* ---------- pages ----------------------------------------------------- */
-const out = [];
+const out = [];                 // [{ canonical, url, lang }] para sitemap y hreflang
 const write = (url, html) => {
-  const dir = path.join(ROOT, url === '/' ? '.' : url);
+  const full = lp(url);         // "/flota/" -> "/en/flota/"
+  const dir = path.join(ROOT, full === '/' ? '.' : full);
   fs.mkdirSync(dir, { recursive: true });
   fs.writeFileSync(path.join(dir, 'index.html'), html);
-  out.push(url);
+  out.push({ canonical: url, url: full, lang: LG.code });
 };
+
+/* Se genera el sitio entero una vez por idioma. Cada pasada fija L (el
+   diccionario), LG (el idioma) y seo (sus metadatos), y todo lo de abajo
+   los lee sin saber en que idioma esta. */
+for (const lang of LANGS) {
+  LG = lang; L = lang.dict; seo = seoAll[lang.code].pages;
 
 /* --- home ------------------------------------------------------------- */
 /* La portada vuelve a la experiencia anterior a peticion del propietario:
@@ -326,16 +409,16 @@ const write = (url, html) => {
 
    El resto de paginas no cambia: siguen con serres.css y site.js.        */
 {
-  const url = '/', r = rel(url), meta = seo[url];
+  const url = '/', r = rel(url), ra = rel(lp(url)), meta = seo[url];
   /* Cuatro, no cinco: cada coche anade su tramo de scroll, y con cinco el
      carrusel pedia 540vh. Son los cuatro tope de gama de la flota. */
   const featured = ['lamborghini-urus', 'mercedes-amg-g63', 'audi-rs6-avant',
     'porsche-911-cabrio'].map(car);
 
-  const extraHead = `<link rel="stylesheet" href="${r}css/home.css?${VH}">
-<link rel="stylesheet" href="${r}css/featured.css?${VH}">
-<link rel="stylesheet" href="${r}css/preloader.css?${VH}">
-<script src="${r}js/preloader.js?${VH}"></script>`;
+  const extraHead = `<link rel="stylesheet" href="${ra}css/home.css?${VH}">
+<link rel="stylesheet" href="${ra}css/featured.css?${VH}">
+<link rel="stylesheet" href="${ra}css/preloader.css?${VH}">
+<script src="${ra}js/preloader.js?${VH}"></script>`;
 
   /* Orden y atributos calcados del index.html anterior: experience.js es un
      modulo ES y necesita el importmap de three delante; sin `type="module"`
@@ -352,9 +435,9 @@ const write = (url, html) => {
   "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
 }}
 </script>
-<script src="${r}js/fleet.js?${VH}"></script>
-<script type="module" src="${r}js/experience.js?${VH}"></script>
-<script src="${r}js/featured.js?${VH}"></script>
+<script src="${ra}js/fleet.js?${VH}"></script>
+<script type="module" src="${ra}js/experience.js?${VH}"></script>
+<script src="${ra}js/featured.js?${VH}"></script>
 <!-- Rellena la rejilla de respaldo de .oa-choose desde la flota. Si no hay
      WebGL ni JS, se queda el enlace estatico "Ver la flota completa". -->
 <script>
@@ -367,25 +450,25 @@ const write = (url, html) => {
     var px = c.prices && c.prices.d1 ? eur(c.prices.d1) + " €/d" : "";
     return '<a href="${r}coches/' + encodeURIComponent(c.slug) + '/"><span>' + c.name + '</span><span class="px">' + px + '</span></a>';
   });
-  items.push('<a href="${r}flota/"><span>Ver la flota completa</span><span class="px">&rarr;</span></a>');
+  items.push('<a href="${r}flota/"><span>${L.common.seeFullFleet}</span><span class="px">&rarr;</span></a>');
   grid.innerHTML = items.join("");
 })();
 </script>`;
 
   const body = `  <section class="oa-intro">
     <h1 class="oa-title">
-      <span class="oa-row">Alquiler</span>
-      <span class="oa-row">de coches</span>
-      <span class="oa-row">de lujo</span>
-      <span class="oa-row oa-row-geo">en Barcelona</span>
+      <span class="oa-row">${L.home.titleRow1}</span>
+      <span class="oa-row">${L.home.titleRow2}</span>
+      <span class="oa-row">${L.home.titleRow3}</span>
+      <span class="oa-row oa-row-geo">${L.home.titleRow4}</span>
     </h1>
     <div class="oa-cta oa-intro-cta">
-      <a href="${waGeneral}" class="btn gold" target="_blank" rel="noopener">
-        Reserva tu vehículo
+      <a href="${waGeneral()}" class="btn gold" target="_blank" rel="noopener">
+        ${L.home.ctaBook}
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
       <a href="${r}flota/" class="btn ghost">
-        Ver la flota
+        ${L.common.seeFleet}
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
       <a href="${C.wrapCenter}" class="btn ghost" target="_blank" rel="noopener">
@@ -401,20 +484,20 @@ const write = (url, html) => {
   <section class="fc-sec" id="featured">
     <div class="fc-pin">
       <div class="fc-head">
-        <p class="fc-eyebrow">Destacados</p>
-        <p class="fc-sub">${featured.length} de los ${fleet.cars.length} coches que puedes alquilar ahora mismo</p>
+        <p class="fc-eyebrow">${L.home.featured}</p>
+        <p class="fc-sub">${f(L.home.featuredSub, { n: featured.length, total: fleet.cars.length })}</p>
       </div>
       <div class="fc-stage">
         ${featured.map(c => `<a class="fc-slide" href="${r}coches/${c.slug}/">
           <picture>
-            <source type="image/webp" srcset="${r}assets/img/cars/${c.slug}.webp">
-            <img src="${r}assets/img/cars/${c.slug}.jpg" alt="${esc(c.name)} de alquiler en Barcelona" loading="lazy" decoding="async" width="1800" height="1013">
+            <source type="image/webp" srcset="${ra}assets/img/cars/${c.slug}.webp">
+            <img src="${ra}assets/img/cars/${c.slug}.jpg" alt="${esc(c.name)} ${L.common.rentalAlt}" loading="lazy" decoding="async" width="1800" height="1013">
           </picture>
           <h2 class="fc-title"><span class="fc-brand">${esc(brandOf(c).label)}</span>${esc(c.name.replace(brandOf(c).label, '').replace(/^[\\s-]+/, '') || c.name)}</h2>
         </a>`).join('\n        ')}
       </div>
       <div class="fc-progress" aria-hidden="true">${featured.map(() => '<i></i>').join('')}</div>
-      <p class="fc-hint">Sigue bajando</p>
+      <p class="fc-hint">${L.home.keepScrolling}</p>
     </div>
   </section>
 
@@ -422,17 +505,17 @@ const write = (url, html) => {
        seccion aporta el recorrido de scroll y el fallback sin WebGL. -->
   <section class="oa-choose" id="choose">
     <div class="oa-choose-head">
-      <p>Elige tu coche</p>
-      <h2>Toda la flota, en movimiento</h2>
+      <p>${L.home.chooseKicker}</p>
+      <h2>${L.home.chooseTitle}</h2>
     </div>
-    <div class="oa-choose-grid" id="chooseGrid" aria-label="Flota">
-      <a href="${r}flota/">Ver la flota completa</a>
+    <div class="oa-choose-grid" id="chooseGrid" aria-label="${L.nav.fleet}">
+      <a href="${r}flota/">${L.common.seeFullFleet}</a>
     </div>
   </section>
 
   <section class="oa-outro">
     <div class="oa-footer">
-      <p>Serres Drive — alquiler de coches de lujo en Barcelona, del detailing al volante.</p>
+      <p>${L.home.outro}</p>
       <p>© ${new Date().getFullYear()} · BCN</p>
     </div>
   </section>
@@ -440,8 +523,8 @@ const write = (url, html) => {
 
   const afterMain = `<div class="sd-choose-ui" aria-hidden="true">
   <div class="cu-title">
-    <span class="cu-kicker">Elige tu coche</span>
-    <span class="cu-h">Gira · elige · conduce</span>
+    <span class="cu-kicker">${L.home.chooseKicker}</span>
+    <span class="cu-h">${L.home.chooseUiTitle}</span>
   </div>
   <div class="cu-hint">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M8 12h8M8 12l3-3M8 12l3 3M16 12l-3-3M16 12l-3 3"/></svg>
@@ -457,19 +540,19 @@ const write = (url, html) => {
     <div class="wrap">
       <div class="swc-band">
         <div class="swc-copy">
-          <span class="eyebrow">Serres Wrap Center</span>
-          <h2 class="h-md">Antes de conducirlo, <span class="gold-text">lo dejamos perfecto</span>.</h2>
-          <p class="lede">No solo alquilamos coches: los preparamos. Nuestro taller hermano en Sant Cugat del Vallès hace PPF, car wrap a medida, pulido multietapa, tratamientos cerámicos y detailing de nivel concours.</p>
+          <span class="eyebrow">${L.footer.wrapCenter}</span>
+          <h2 class="h-md">Antes de conducirlo, <span class="gold-text">${L.home.swcTitleB}</span>.</h2>
+          <p class="lede">${L.home.swcBody}</p>
           <ul class="chips" style="margin:18px 0">
-            <li class="chip">PPF</li><li class="chip">Car Wrap</li><li class="chip">Pulido</li><li class="chip">Cerámico</li><li class="chip">Detailing</li>
+            <li class="chip">${L.home.swcTags[0]}</li><li class="chip">${L.home.swcTags[1]}</li><li class="chip">${L.home.swcTags[2]}</li><li class="chip">${L.home.swcTags[3]}</li><li class="chip">${L.home.swcTags[4]}</li>
           </ul>
           <a class="btn btn--secondary" href="${C.wrapCenter}" target="_blank" rel="noopener">Visitar Serres Wrap Center ${btnArrow}</a>
         </div>
         <a class="swc-shot" href="${C.wrapCenter}" target="_blank" rel="noopener"
-           aria-label="Serres Wrap Center — PPF, car wrap y detailing en Barcelona">
-          <img src="${r}assets/img/wrapcenter/hero-poster.jpg" width="1600" height="900" loading="lazy" decoding="async"
-               alt="Porsche 911 RWB en el taller de Serres Wrap Center, bajo iluminación hexagonal">
-          <span class="swc-shot-tag">Ver el taller</span>
+           aria-label="${L.home.swcShotAria}">
+          <img src="${ra}assets/img/wrapcenter/hero-poster.jpg" width="1600" height="900" loading="lazy" decoding="async"
+               alt="${L.home.swcShotAlt}">
+          <span class="swc-shot-tag">${L.home.swcShotTag}</span>
         </a>
       </div>
     </div>
@@ -479,10 +562,10 @@ const write = (url, html) => {
   <section class="section" id="contact-cta">
     <div class="wrap">
       <div class="panel" style="text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px">
-        <h2 class="h-md">¿Listo para <span class="gold-text">conducir</span>?</h2>
-        <p class="lede" style="margin-inline:auto">Dinos qué coche y qué fechas. Te respondemos con disponibilidad y condiciones en minutos.</p>
+        <h2 class="h-md">${L.home.ctaTitleA} <span class="gold-text">${L.home.ctaTitleB}</span>?</h2>
+        <p class="lede" style="margin-inline:auto">${L.home.ctaBody}</p>
         <div class="hero-cta" style="justify-content:center">
-          <a href="${waGeneral}" class="btn btn--wa" target="_blank" rel="noopener">${ICON.wa}<span>Escríbenos por WhatsApp</span></a>
+          <a href="${waGeneral()}" class="btn btn--wa" target="_blank" rel="noopener">${ICON.wa}<span>${L.common.writeWa}</span></a>
           <a href="tel:+${C.whatsapp}" class="btn btn--secondary">${C.phoneDisplay}</a>
         </div>
         <div class="footer-social" style="justify-content:center">
@@ -511,25 +594,25 @@ const write = (url, html) => {
 
 /* --- /flota ------------------------------------------------------------ */
 {
-  const url = '/flota/', r = rel(url), meta = seo[url];
+  const url = '/flota/', r = rel(url), ra = rel(lp(url)), meta = seo[url];
   const cars = [...fleet.cars].sort((a, b) => b.prices.d1 - a.prices.d1);
-  const body = `${crumbs(r, [{ label: 'Flota' }])}
+  const body = `${crumbs(r, [{ label: L.nav.fleet }])}
 <section class="section section--tight">
   <div class="wrap">
     <div class="section-head">
-      <p class="eyebrow">${fleet.cars.length} coches disponibles</p>
+      <p class="eyebrow">${fleet.cars.length} ${L.common.carsAvailable}</p>
       <h1 class="h-lg">${esc(meta.h1)}</h1>
       <p class="lede">${esc(meta.description)}</p>
     </div>
     ${brandChips(r, '')}
     <div class="car-grid" style="margin-top:28px">
-      ${cars.map((c, i) => carCard(c, r, { lazy: i > 2 })).join('\n      ')}
+      ${cars.map((c, i) => carCard(c, r, ra, { lazy: i > 2 })).join('\n      ')}
     </div>
   </div>
 </section>`;
   write(url, page({
     url, body, current: 'flota/',
-    schema: [breadcrumb([{ name: 'Inicio', url: '/' }, { name: 'Flota', url: '/flota/' }]), {
+    schema: [breadcrumb([{ name: L.common.start, url: '/' }, { name: L.nav.fleet, url: '/flota/' }]), {
       '@type': 'ItemList', name: 'Flota Serres Drive',
       itemListElement: cars.map((c, i) => ({ '@type': 'ListItem', position: i + 1, url: `${origin}/coches/${c.slug}/`, name: c.name })),
     }],
@@ -538,59 +621,59 @@ const write = (url, html) => {
 
 /* --- brand pages -------------------------------------------------------- */
 for (const b of fleet.brands) {
-  const url = `/flota/${b.slug}/`, r = rel(url), meta = seo[url];
+  const url = `/flota/${b.slug}/`, r = rel(url), ra = rel(lp(url)), meta = seo[url];
   const cars = carsOf(b.slug).sort((a, x) => x.prices.d1 - a.prices.d1);
-  const body = `${crumbs(r, [{ label: 'Flota', href: `${r}flota/` }, { label: b.label }])}
+  const body = `${crumbs(r, [{ label: L.nav.fleet, href: `${r}flota/` }, { label: b.label }])}
 <section class="section section--tight">
   <div class="wrap">
     <div class="section-head">
-      <p class="eyebrow">${cars.length} ${cars.length === 1 ? 'modelo disponible' : 'modelos disponibles'}</p>
+      <p class="eyebrow">${cars.length} ${cars.length === 1 ? L.common.modelAvailable : L.common.modelsAvailable}</p>
       <h1 class="h-lg">${esc(meta.h1)}</h1>
       <p class="lede">${esc(meta.description)}</p>
     </div>
     ${brandChips(r, b.slug)}
     <div class="car-grid${cars.length <= 2 ? ' car-grid--2' : ''}" style="margin-top:28px">
-      ${cars.map((c, i) => carCard(c, r, { lazy: i > 1 })).join('\n      ')}
+      ${cars.map((c, i) => carCard(c, r, ra, { lazy: i > 1 })).join('\n      ')}
     </div>
   </div>
 </section>`;
   write(url, page({
     url, body, current: 'flota/',
-    schema: [breadcrumb([{ name: 'Inicio', url: '/' }, { name: 'Flota', url: '/flota/' }, { name: b.label, url }])],
+    schema: [breadcrumb([{ name: L.common.start, url: '/' }, { name: L.nav.fleet, url: '/flota/' }, { name: b.label, url }])],
   }));
 }
 
 /* --- car pages ----------------------------------------------------------- */
 for (const c of fleet.cars) {
-  const url = `/coches/${c.slug}/`, r = rel(url), meta = seo[url];
+  const url = `/coches/${c.slug}/`, r = rel(url), ra = rel(lp(url)), meta = seo[url];
   const b = brandOf(c);
   const g0 = c.gallery[0];
   const priceRows = [
-    ['1 día', c.prices.d1], ['2 días', c.prices.d2], ['3 días', c.prices.d3],
-    ['1 semana', c.prices.w1], ['1 mes', c.prices.m1],
+    [L.carPage.d1, c.prices.d1], [L.carPage.d2, c.prices.d2], [L.carPage.d3, c.prices.d3],
+    [L.carPage.w1, c.prices.w1], [L.carPage.m1, c.prices.m1],
   ];
   const specs = [
-    ['Potencia', `${c.powerCv} CV`], ['0-100 km/h', c.zeroToHundred],
-    ['Velocidad máx.', c.topSpeed], ['Plazas', c.seats],
-    ['Cambio', c.transmission], ['Tracción', c.drivetrain],
-    ['Combustible', c.fuel], ['Carrocería', c.bodyType],
+    [L.carPage.power, `${c.powerCv} CV`], [L.carPage.zeroHundred, c.zeroToHundred],
+    [L.carPage.topSpeed, c.topSpeed], [L.carPage.seats, c.seats],
+    [L.carPage.transmission, c.transmission], [L.carPage.drivetrain, c.drivetrain],
+    [L.carPage.fuel, c.fuel], [L.carPage.bodyType, c.bodyType],
   ];
   const others = fleet.cars.filter(x => x.brand === c.brand && x.slug !== c.slug).slice(0, 3);
 
-  const body = `${crumbs(r, [{ label: 'Flota', href: `${r}flota/` }, { label: b.label, href: `${r}flota/${b.slug}/` }, { label: c.name }])}
+  const body = `${crumbs(r, [{ label: L.nav.fleet, href: `${r}flota/` }, { label: b.label, href: `${r}flota/${b.slug}/` }, { label: c.name }])}
 <section class="section section--tight">
   <div class="wrap">
     <div class="car-head">
       <div class="gallery">
         <div class="main" id="gMain">
           <picture>
-            <source type="image/webp" srcset="${r}${g0.webp}" id="gMainWebp">
-            <img src="${r}${g0.jpg}" width="${g0.width}" height="${g0.height}" alt="${esc(c.name)} de alquiler en Barcelona" id="gMainImg" fetchpriority="high" decoding="async">
+            <source type="image/webp" srcset="${ra}${g0.webp}" id="gMainWebp">
+            <img src="${ra}${g0.jpg}" width="${g0.width}" height="${g0.height}" alt="${esc(c.name)} ${L.common.rentalAlt}" id="gMainImg" fetchpriority="high" decoding="async">
           </picture>
         </div>
-        ${c.gallery.length > 1 ? `<div class="thumbs" style="--n:${c.gallery.length}" role="group" aria-label="Galería de ${esc(c.name)}">
-          ${c.gallery.map((g, i) => `<button type="button" data-jpg="${r}${g.jpg}" data-webp="${r}${g.webp}"${i === 0 ? ' aria-current="true"' : ''} aria-label="Foto ${i + 1} de ${c.gallery.length}">
-            <img src="${r}${g.jpg800}" alt="" width="800" height="533" loading="lazy" decoding="async">
+        ${c.gallery.length > 1 ? `<div class="thumbs" style="--n:${c.gallery.length}" role="group" aria-label="${f(L.carPage.gallery, { car: esc(c.name) })}">
+          ${c.gallery.map((g, i) => `<button type="button" data-jpg="${ra}${g.jpg}" data-webp="${ra}${g.webp}"${i === 0 ? ' aria-current="true"' : ''} aria-label="${f(L.carPage.photoOf, { n: i + 1, total: c.gallery.length })}">
+            <img src="${ra}${g.jpg800}" alt="" width="800" height="533" loading="lazy" decoding="async">
           </button>`).join('\n          ')}
         </div>` : ''}
       </div>
@@ -599,19 +682,19 @@ for (const c of fleet.cars) {
         <div>
           <p class="eyebrow">${b.label}</p>
           <h1 class="h-md" style="margin-top:8px">${esc(c.name)}</h1>
-          <p class="lede" style="margin-top:12px">${esc(c.taglineEs)}</p>
+          <p class="lede" style="margin-top:12px">${esc(carCopy(c).tagline)}</p>
         </div>
 
         <div class="price-box">
-          <p class="from"><b>${eur(c.prices.d1)}</b><span>al día</span></p>
+          <p class="from"><b>${eur(c.prices.d1)}</b><span>${L.common.aDay}</span></p>
           <ul class="price-list">
             ${priceRows.map(([k, v]) => `<li><span>${k}</span><b>${eur(v)}</b></li>`).join('\n            ')}
           </ul>
-          <p class="mute-sm" style="margin-top:14px">${esc(depositText(c))} · Entrega metropolitana ${eur(T.deliveryFee)}</p>
-          <a class="btn btn--wa btn--block" style="margin-top:16px" href="${waCar(c)}" target="_blank" rel="noopener">${ICON.wa}<span>Reservar por WhatsApp</span></a>
+          <p class="mute-sm" style="margin-top:14px">${esc(depositText(c))} · ${f(L.terms.deliveryShort, { amount: eur(T.deliveryFee) })}</p>
+          <a class="btn btn--wa btn--block" style="margin-top:16px" href="${waCar(c)}" target="_blank" rel="noopener">${ICON.wa}<span>${L.nav.bookWa}</span></a>
         </div>
 
-        <ul class="highlights">${c.highlightsEs.map(h => `<li>${esc(h)}</li>`).join('')}</ul>
+        <ul class="highlights">${carCopy(c).highlights.map(h => `<li>${esc(h)}</li>`).join('')}</ul>
       </div>
     </div>
   </div>
@@ -619,7 +702,7 @@ for (const c of fleet.cars) {
 
 <section class="section--tight" style="padding-bottom:0">
   <div class="wrap">
-    <h2 class="h-sm" style="margin-bottom:16px">Ficha técnica</h2>
+    <h2 class="h-sm" style="margin-bottom:16px">${L.carPage.specs}</h2>
     <div class="spec-grid">
       ${specs.map(([k, v]) => `<div class="spec"><span class="spec-k">${k}</span><span class="spec-v">${esc(v)}</span></div>`).join('\n      ')}
     </div>
@@ -629,16 +712,16 @@ for (const c of fleet.cars) {
 <section class="section">
   <div class="wrap split">
     <div class="panel">
-      <h2 class="h-sm" style="margin-bottom:14px">Condiciones de alquiler</h2>
+      <h2 class="h-sm" style="margin-bottom:14px">${L.footer.terms}</h2>
       ${termsList()}
-      <p class="mute-sm" style="margin-top:16px"><strong>${esc(depositText(c))}</strong> · <a href="${r}condiciones-de-alquiler/">Ver todas las condiciones</a></p>
+      <p class="mute-sm" style="margin-top:16px"><strong>${esc(depositText(c))}</strong> · <a href="${r}condiciones-de-alquiler/">${L.common.seeAllTerms}</a></p>
     </div>
     <div class="section-head">
-      <p class="eyebrow">Reserva</p>
-      <h2 class="h-md">Consulta fechas del ${esc(c.name)}</h2>
-      <p class="lede">Dinos los días que lo necesitas y te confirmamos disponibilidad, fianza y punto de entrega por WhatsApp.</p>
+      <p class="eyebrow">${L.carPage.bookEyebrow}</p>
+      <h2 class="h-md">${f(L.carPage.bookTitle, { car: esc(c.name) })}</h2>
+      <p class="lede">${L.carPage.bookBody}</p>
       <div class="hero-cta">
-        <a class="btn btn--wa" href="${waCar(c)}" target="_blank" rel="noopener">${ICON.wa}<span>Reservar por WhatsApp</span></a>
+        <a class="btn btn--wa" href="${waCar(c)}" target="_blank" rel="noopener">${ICON.wa}<span>${L.nav.bookWa}</span></a>
         <a class="btn btn--ghost" href="${r}contacto/?coche=${c.slug}">Formulario ${btnArrow}</a>
       </div>
     </div>
@@ -647,9 +730,9 @@ for (const c of fleet.cars) {
 
 ${others.length ? `<section class="section--tight" style="padding-top:0">
   <div class="wrap">
-    <h2 class="h-sm" style="margin-bottom:20px">Más ${b.label} en la flota</h2>
+    <h2 class="h-sm" style="margin-bottom:20px">${f(L.carPage.moreOfBrand, { brand: b.label })}</h2>
     <div class="car-grid${others.length <= 2 ? ' car-grid--2' : ''}">
-      ${others.map(o => carCard(o, r)).join('\n      ')}
+      ${others.map(o => carCard(o, r, ra)).join('\n      ')}
     </div>
   </div>
 </section>` : ''}
@@ -661,7 +744,7 @@ ${others.length ? `<section class="section--tight" style="padding-top:0">
   write(url, page({
     url, body, current: 'flota/', bodyClass: 'has-sticky',
     schema: [carSchema(c), breadcrumb([
-      { name: 'Inicio', url: '/' }, { name: 'Flota', url: '/flota/' },
+      { name: L.common.start, url: '/' }, { name: L.nav.fleet, url: '/flota/' },
       { name: b.label, url: `/flota/${b.slug}/` }, { name: c.name, url },
     ])],
   }));
@@ -669,79 +752,74 @@ ${others.length ? `<section class="section--tight" style="padding-top:0">
 
 /* --- /tarifas ------------------------------------------------------------ */
 {
-  const url = '/tarifas/', r = rel(url), meta = seo[url];
+  const url = '/tarifas/', r = rel(url), ra = rel(lp(url)), meta = seo[url];
   const cars = [...fleet.cars].sort((a, b) => b.prices.d1 - a.prices.d1);
-  const body = `${crumbs(r, [{ label: 'Tarifas' }])}
+  const body = `${crumbs(r, [{ label: L.nav.rates }])}
 <section class="section section--tight">
   <div class="wrap">
     <div class="section-head">
-      <p class="eyebrow">Precios en euros, IVA incluido</p>
+      <p class="eyebrow">${L.rates.eyebrow}</p>
       <h1 class="h-lg">${esc(meta.h1)}</h1>
       <p class="lede">${esc(meta.description)}</p>
     </div>
     <div class="table-scroll">
       <table class="rates">
-        <caption class="sr">Tarifas de alquiler por coche y duración</caption>
+        <caption class="sr">${L.rates.caption}</caption>
         <thead><tr>
-          <th scope="col">Coche</th><th scope="col">1 día</th><th scope="col">2 días</th>
-          <th scope="col">3 días</th><th scope="col">1 semana</th><th scope="col">1 mes</th><th scope="col">Fianza</th>
+          <th scope="col">${L.rates.colCar}</th><th scope="col">${L.carPage.d1}</th><th scope="col">${L.carPage.d2}</th>
+          <th scope="col">${L.carPage.d3}</th><th scope="col">${L.carPage.w1}</th><th scope="col">${L.carPage.m1}</th><th scope="col">${L.terms.deposit}</th>
         </tr></thead>
         <tbody>
           ${cars.map(c => `<tr>
             <td><div class="car-cell">
-              <img src="${r}${c.gallery[0].jpg800}" alt="" width="64" height="43" loading="lazy" decoding="async">
+              <img src="${ra}${c.gallery[0].jpg800}" alt="" width="64" height="43" loading="lazy" decoding="async">
               <a href="${r}coches/${c.slug}/"><b>${esc(c.name)}</b></a>
             </div></td>
             <td class="d1">${eur(c.prices.d1)}</td><td>${eur(c.prices.d2)}</td><td>${eur(c.prices.d3)}</td>
             <td>${eur(c.prices.w1)}</td><td>${eur(c.prices.m1)}</td>
-            <td>${c.deposit === null ? 'Por WhatsApp' : eur(c.deposit)}</td>
+            <td>${c.deposit === null ? L.common.byWhatsapp : eur(c.deposit)}</td>
           </tr>`).join('\n          ')}
         </tbody>
       </table>
     </div>
-    <p class="mute-sm" style="margin-top:14px">Entrega y recogida en el área metropolitana de Barcelona: ${eur(T.deliveryFee)}. ${T.kmIncluded} km incluidos. Fianza desde ${eur(T.depositFrom)}.</p>
+    <p class="mute-sm" style="margin-top:14px">${f(L.rates.note, { delivery: eur(T.deliveryFee), km: T.kmIncluded, deposit: eur(T.depositFrom) })}</p>
   </div>
 </section>`;
-  write(url, page({ url, body, current: 'tarifas/', schema: [breadcrumb([{ name: 'Inicio', url: '/' }, { name: 'Tarifas', url }])] }));
+  write(url, page({ url, body, current: 'tarifas/', schema: [breadcrumb([{ name: L.common.start, url: '/' }, { name: L.nav.rates, url }])] }));
 }
 
 /* --- /como-funciona ------------------------------------------------------ */
 {
-  const url = '/como-funciona/', r = rel(url), meta = seo[url];
-  const steps = [
-    ['01', 'Elige tu coche', 'Elige tu vehículo de nuestra flota disponible.'],
-    ['02', 'Reserva', 'Contacta por WhatsApp, confirma fechas y condiciones.'],
-    ['03', 'Entrega', `Recoge el vehículo o solicita la entrega. Entrega y recogida en el área metropolitana: ${eur(T.deliveryFee)}.`],
-    ['04', 'Conduce', 'Disfruta del viaje y devuelve el vehículo en el plazo acordado.'],
-  ];
+  const url = '/como-funciona/', r = rel(url), ra = rel(lp(url)), meta = seo[url];
+  const steps = L.how.steps.map(st => [st.n, st.title, f(st.body, { amount: eur(T.deliveryFee) })]);
   const shot = car('mercedes-amg-g63').gallery[0];
-  const body = `${crumbs(r, [{ label: 'Cómo funciona' }])}
+  const body = `${crumbs(r, [{ label: L.nav.how }])}
 <section class="section section--tight">
   <div class="wrap">
     <div class="section-head">
-      <p class="eyebrow">Cuatro pasos</p>
+      <p class="eyebrow">${L.how.eyebrow}</p>
       <h1 class="h-lg">${esc(meta.h1)}</h1>
       <p class="lede">${esc(meta.description)}</p>
     </div>
     <div class="plate" style="margin-bottom:36px"><div class="plate-core">
       <picture>
-        <source type="image/webp" srcset="${r}${shot.webp}">
-        <img src="${r}${shot.jpg}" width="${shot.width}" height="${shot.height}" alt="Mercedes-AMG G 63 de la flota de Serres Drive" loading="lazy" decoding="async">
+        <source type="image/webp" srcset="${ra}${shot.webp}">
+        <img src="${ra}${shot.jpg}" width="${shot.width}" height="${shot.height}" alt="${L.how.shotAlt}" loading="lazy" decoding="async">
       </picture>
     </div></div>
     <div class="steps">
       ${steps.map(([n, t, d]) => `<article class="step"><span class="n">${n}</span><h3>${t}</h3><p class="muted">${esc(d)}</p></article>`).join('\n      ')}
     </div>
     <div class="hero-cta" style="margin-top:34px">
-      <a class="btn btn--primary" href="${r}flota/">Ver la flota ${btnArrow}</a>
-      <a class="btn btn--wa" href="${waGeneral}" target="_blank" rel="noopener">${ICON.wa}<span>Reservar por WhatsApp</span></a>
+      <a class="btn btn--primary" href="${r}flota/">${L.common.seeFleet} ${btnArrow}</a>
+      <a class="btn btn--wa" href="${waGeneral()}" target="_blank" rel="noopener">${ICON.wa}<span>${L.nav.bookWa}</span></a>
     </div>
   </div>
 </section>`;
   write(url, page({
     url, body, current: 'como-funciona/',
-    schema: [breadcrumb([{ name: 'Inicio', url: '/' }, { name: 'Cómo funciona', url }]), {
-      '@type': 'HowTo', name: 'Cómo alquilar un coche en Serres Drive',
+    schema: [breadcrumb([{ name: L.common.start, url: '/' }, { name: L.nav.how, url }]), {
+      '@type': 'HowTo', name: L.how.h1,
       step: steps.map(([n, t, d], i) => ({ '@type': 'HowToStep', position: i + 1, name: t, text: d })),
     }],
   }));
@@ -749,136 +827,143 @@ ${others.length ? `<section class="section--tight" style="padding-top:0">
 
 /* --- /condiciones-de-alquiler --------------------------------------------- */
 {
-  const url = '/condiciones-de-alquiler/', r = rel(url), meta = seo[url];
-  const body = `${crumbs(r, [{ label: 'Condiciones de alquiler' }])}
+  const url = '/condiciones-de-alquiler/', r = rel(url), ra = rel(lp(url)), meta = seo[url];
+  const body = `${crumbs(r, [{ label: L.footer.terms }])}
 <section class="section section--tight">
   <div class="wrap">
     <div class="section-head">
-      <p class="eyebrow">Lo que necesitas saber antes de reservar</p>
+      <p class="eyebrow">${L.termsPage.eyebrow}</p>
       <h1 class="h-lg">${esc(meta.h1)}</h1>
     </div>
     <div class="split">
       <div class="panel">
-        <h2 class="h-sm" style="margin-bottom:14px">Requisitos y condiciones</h2>
+        <h2 class="h-sm" style="margin-bottom:14px">${L.termsPage.requirements}</h2>
         ${termsList()}
       </div>
       <div class="panel">
-        <h2 class="h-sm" style="margin-bottom:14px">Fianza por coche</h2>
+        <h2 class="h-sm" style="margin-bottom:14px">${L.termsPage.depositPerCar}</h2>
         <ul class="price-list">
           ${[...fleet.cars].sort((a, b) => b.prices.d1 - a.prices.d1).map(c =>
-            `<li><span><a href="${r}coches/${c.slug}/">${esc(c.name)}</a></span><b>${c.deposit === null ? 'Por WhatsApp' : eur(c.deposit)}</b></li>`).join('\n          ')}
+            `<li><span><a href="${r}coches/${c.slug}/">${esc(c.name)}</a></span><b>${c.deposit === null ? L.common.byWhatsapp : eur(c.deposit)}</b></li>`).join('\n          ')}
         </ul>
       </div>
     </div>
-    <p class="mute-sm" style="margin-top:24px;max-width:70ch">Para cualquier condición que no aparezca en esta página, escríbenos por WhatsApp antes de reservar y te la confirmamos por escrito.</p>
+    <p class="mute-sm" style="margin-top:24px;max-width:70ch">${L.termsPage.footnote}</p>
     <div class="hero-cta" style="margin-top:20px">
-      <a class="btn btn--wa" href="${waGeneral}" target="_blank" rel="noopener">${ICON.wa}<span>Preguntar por WhatsApp</span></a>
+      <a class="btn btn--wa" href="${waGeneral()}" target="_blank" rel="noopener">${ICON.wa}<span>${L.common.askWa}</span></a>
     </div>
   </div>
 </section>`;
-  write(url, page({ url, body, schema: [breadcrumb([{ name: 'Inicio', url: '/' }, { name: 'Condiciones de alquiler', url }])] }));
+  write(url, page({ url, body, schema: [breadcrumb([{ name: L.common.start, url: '/' }, { name: L.footer.terms, url }])] }));
 }
 
 /* --- /por-que-serres ------------------------------------------------------- */
 {
-  const url = '/por-que-serres/', r = rel(url), meta = seo[url];
-  const reasons = [
-    ['Flota real, no un catálogo', `Los ${fleet.cars.length} coches de esta web son los que hay. Si aparece en la flota, se puede alquilar.`],
-    ['Precio cerrado', 'Verás el precio de 1 día, 2, 3, una semana y un mes antes de escribirnos. Sin tarifas que aparecen al final.'],
-    ['Entrega donde estés', `Entrega y recogida en el área metropolitana de Barcelona por ${eur(T.deliveryFee)}.`],
-    ['Una conversación, no un mostrador', 'Reservas por WhatsApp con una persona que conoce los coches. Sin colas ni formularios interminables.'],
-    ['Desde los 18 años', 'Sin antigüedad mínima de carnet. Solo permiso en vigor.'],
-    ['Del taller de Serres', 'Serres Drive nace de Serres Wrap Center: los coches se preparan y se cuidan en casa.'],
-  ];
+  const url = '/por-que-serres/', r = rel(url), ra = rel(lp(url)), meta = seo[url];
+  const reasons = L.why.reasons.map(rs => [rs.title,
+    f(rs.body, { total: fleet.cars.length, amount: eur(T.deliveryFee) })]);
   const shot = car('range-rover-velar').gallery[0];
-  const body = `${crumbs(r, [{ label: 'Por qué Serres' }])}
+  const body = `${crumbs(r, [{ label: L.nav.why }])}
 <section class="section section--tight">
   <div class="wrap">
     <div class="section-head">
-      <p class="eyebrow">Sant Cugat del Vallès</p>
+      <p class="eyebrow">${L.why.eyebrow}</p>
       <h1 class="h-lg">${esc(meta.h1)}</h1>
       <p class="lede">${esc(meta.description)}</p>
     </div>
     <div class="plate" style="margin-bottom:36px"><div class="plate-core">
       <picture>
-        <source type="image/webp" srcset="${r}${shot.webp}">
-        <img src="${r}${shot.jpg}" width="${shot.width}" height="${shot.height}" alt="Range Rover Velar de la flota de Serres Drive" loading="lazy" decoding="async">
+        <source type="image/webp" srcset="${ra}${shot.webp}">
+        <img src="${ra}${shot.jpg}" width="${shot.width}" height="${shot.height}" alt="${L.why.shotAlt}" loading="lazy" decoding="async">
       </picture>
     </div></div>
     <div class="steps">
       ${reasons.map(([t, d]) => `<article class="step"><h3>${esc(t)}</h3><p class="muted">${esc(d)}</p></article>`).join('\n      ')}
     </div>
     <div class="hero-cta" style="margin-top:34px">
-      <a class="btn btn--primary" href="${r}flota/">Ver la flota ${btnArrow}</a>
+      <a class="btn btn--primary" href="${r}flota/">${L.common.seeFleet} ${btnArrow}</a>
     </div>
   </div>
 </section>`;
-  write(url, page({ url, body, current: 'por-que-serres/', schema: [breadcrumb([{ name: 'Inicio', url: '/' }, { name: 'Por qué Serres', url }])] }));
+  write(url, page({ url, body, current: 'por-que-serres/', schema: [breadcrumb([{ name: L.common.start, url: '/' }, { name: L.nav.why, url }])] }));
 }
 
 /* --- /contacto -------------------------------------------------------------- */
 {
-  const url = '/contacto/', r = rel(url), meta = seo[url];
-  const body = `${crumbs(r, [{ label: 'Contacto' }])}
+  const url = '/contacto/', r = rel(url), ra = rel(lp(url)), meta = seo[url];
+  const body = `${crumbs(r, [{ label: L.nav.contact }])}
 <section class="section section--tight">
   <div class="wrap split">
     <div class="section-head">
-      <p class="eyebrow">Reservas por WhatsApp</p>
+      <p class="eyebrow">${L.contact.eyebrow}</p>
       <h1 class="h-lg">${esc(meta.h1)}</h1>
       <p class="lede">${esc(meta.description)}</p>
       <div class="hero-cta">
-        <a class="btn btn--wa" href="${waGeneral}" target="_blank" rel="noopener">${ICON.wa}<span>${C.phoneDisplay}</span></a>
-        <a class="btn btn--secondary" href="mailto:${C.email}">${ICON.gmail}<span>Escríbenos un correo</span></a>
-        <a class="btn btn--secondary" href="${C.instagram}" target="_blank" rel="noopener" aria-label="Instagram ${esc(C.instagramHandle)}">${ICON.ig}<span>Instagram</span></a>
+        <a class="btn btn--wa" href="${waGeneral()}" target="_blank" rel="noopener">${ICON.wa}<span>${C.phoneDisplay}</span></a>
+        <a class="btn btn--secondary" href="mailto:${C.email}">${ICON.gmail}<span>${L.contact.writeEmail}</span></a>
+        <a class="btn btn--secondary" href="${C.instagram}" target="_blank" rel="noopener" aria-label="Instagram ${esc(C.instagramHandle)}">${ICON.ig}<span>${L.contact.instagram}</span></a>
       </div>
       <ul class="terms-list" style="margin-top:24px">
-        <li><span class="k">Dónde</span><span class="v">${esc(C.address.street)}, ${C.address.postalCode} ${esc(C.address.locality)} (${esc(C.address.region)})</span></li>
-        <li><span class="k">Entrega</span><span class="v">Área metropolitana de Barcelona · ${eur(T.deliveryFee)}</span></li>
-        <li><span class="k">Correo</span><span class="v"><a class="ico-link" href="mailto:${C.email}">${ICON.gmail}<span>${C.email}</span></a></span></li>
-        <li><span class="k">Instagram</span><span class="v"><a class="ico-link" href="${C.instagram}" target="_blank" rel="noopener">${ICON.ig}<span>${esc(C.instagramHandle)}</span></a></span></li>
+        <li><span class="k">${L.contact.where}</span><span class="v">${esc(C.address.street)}, ${C.address.postalCode} ${esc(C.address.locality)} (${esc(C.address.region)})</span></li>
+        <li><span class="k">${L.terms.delivery}</span><span class="v">Área metropolitana de Barcelona · ${eur(T.deliveryFee)}</span></li>
+        <li><span class="k">${L.contact.email}</span><span class="v"><a class="ico-link" href="mailto:${C.email}">${ICON.gmail}<span>${C.email}</span></a></span></li>
+        <li><span class="k">${L.contact.instagram}</span><span class="v"><a class="ico-link" href="${C.instagram}" target="_blank" rel="noopener">${ICON.ig}<span>${esc(C.instagramHandle)}</span></a></span></li>
       </ul>
     </div>
 
     <div class="panel">
-      <h2 class="h-sm" style="margin-bottom:16px">Escríbenos</h2>
+      <h2 class="h-sm" style="margin-bottom:16px">${L.contact.formTitle}</h2>
+      <script type="application/json" id="formI18n">${JSON.stringify({
+        errName: L.contact.errName, errPhone: L.contact.errPhone,
+        errCar: L.contact.errCar, errDates: L.contact.errDates,
+        waIntro: L.contact.waIntro, waName: L.contact.waName,
+        waPhone: L.contact.waPhone, waCar: L.contact.waCar,
+        waDates: L.contact.waDates, waMessage: L.contact.waMessage,
+      })}</script>
       <form class="form" id="bookForm" data-wa="${C.whatsapp}" novalidate>
         <div class="field">
-          <label for="f-name">Nombre</label>
+          <label for="f-name">${L.contact.name}</label>
           <input id="f-name" name="name" type="text" autocomplete="name" required>
           <p class="err" id="e-name" role="alert"></p>
         </div>
         <div class="field">
-          <label for="f-phone">Teléfono o WhatsApp</label>
+          <label for="f-phone">${L.contact.phone}</label>
           <input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required>
           <p class="err" id="e-phone" role="alert"></p>
         </div>
         <div class="field field--full">
-          <label for="f-car">Coche</label>
+          <label for="f-car">${L.rates.colCar}</label>
           <select id="f-car" name="car" required>
-            <option value="">Elige un coche</option>
+            <option value="">${L.contact.chooseCar}</option>
             ${fleet.cars.map(c => `<option value="${esc(c.name)}" data-slug="${c.slug}">${esc(c.name)} — desde ${eur(c.prices.d1)}/día</option>`).join('\n            ')}
           </select>
           <p class="err" id="e-car" role="alert"></p>
         </div>
         <div class="field field--full">
-          <label for="f-dates">Fechas</label>
-          <input id="f-dates" name="dates" type="text" placeholder="Del 12 al 15 de octubre" required>
+          <label for="f-dates">${L.contact.dates}</label>
+          <input id="f-dates" name="dates" type="text" placeholder="${L.contact.datesPlaceholder}" required>
           <p class="err" id="e-dates" role="alert"></p>
         </div>
         <div class="field field--full">
-          <label for="f-msg">Mensaje</label>
-          <textarea id="f-msg" name="message" rows="4" placeholder="¿Necesitas entrega en alguna dirección concreta?"></textarea>
+          <label for="f-msg">${L.contact.message}</label>
+          <textarea id="f-msg" name="message" rows="4" placeholder="${L.contact.messagePlaceholder}"></textarea>
         </div>
         <div class="field--full">
-          <button class="btn btn--wa btn--block" type="submit">${ICON.wa}<span>Enviar por WhatsApp</span></button>
+          <button class="btn btn--wa btn--block" type="submit">${ICON.wa}<span>${L.contact.submit}</span></button>
         </div>
-        <p class="form-note">Al enviar se abre WhatsApp con el mensaje ya escrito. No se guarda ningún dato en esta web.</p>
+        <p class="form-note">${L.contact.note}</p>
       </form>
     </div>
   </div>
 </section>`;
-  write(url, page({ url, body, current: 'contacto/', schema: [businessSchema, breadcrumb([{ name: 'Inicio', url: '/' }, { name: 'Contacto', url }])] }));
+  write(url, page({ url, body, current: 'contacto/', schema: [businessSchema, breadcrumb([{ name: L.common.start, url: '/' }, { name: L.nav.contact, url }])] }));
 }
+
+}   /* fin del bucle de idiomas */
+
+/* La 404 la sirve Apache para cualquier ruta: se genera una sola, en
+   espanol, y su selector de idioma lleva a la portada de cada uno. */
+LG = LANGS[0]; L = LG.dict; seo = seoAll.es.pages;
 
 /* --- 404 (not in the sitemap, noindex) ------------------------------------- */
 {
@@ -888,7 +973,7 @@ ${others.length ? `<section class="section--tight" style="padding-top:0">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Página no encontrada · Serres Drive</title>
+<title>${L.e404.title}</title>
 <meta name="robots" content="noindex,follow">
 <meta name="theme-color" content="#0a0a0b">
 <link rel="icon" href="/assets/brand/favicon.svg" type="image/svg+xml">
@@ -899,24 +984,24 @@ ${others.length ? `<section class="section--tight" style="padding-top:0">
 </head>
 <body>
 ${SVG_SPRITE}
-<a class="skip" href="#main">Saltar al contenido</a>
-${header('/', '').replace(/href="\/\//g, 'href="/')}
+<a class="skip" href="#main">${L.nav.skip}</a>
+${header('/', '/', '').replace(/href="\/\//g, 'href="/')}
 <main id="main">
   <section class="section">
     <div class="wrap center-pad">
       <div class="section-head" style="align-items:center;text-align:center">
-        <p class="eyebrow">Error 404</p>
-        <h1 class="h-lg">Esta página ya no existe</h1>
+        <p class="eyebrow">${L.e404.eyebrow}</p>
+        <h1 class="h-lg">${L.e404.h1}</h1>
         <p class="lede" style="margin-inline:auto">Puede que el coche que buscabas ya no esté en la flota. Estos son los ${fleet.cars.length} que sí puedes alquilar ahora mismo.</p>
         <div class="hero-cta" style="justify-content:center">
-          <a class="btn btn--primary" href="/flota/">Ver la flota ${btnArrow}</a>
+          <a class="btn btn--primary" href="/flota/">${L.common.seeFleet} ${btnArrow}</a>
           <a class="btn btn--secondary" href="/">Ir al inicio ${btnArrow}</a>
         </div>
       </div>
     </div>
   </section>
 </main>
-${footer('/').replace(/href="\/\//g, 'href="/')}
+${footer('/', '/').replace(/href="\/\//g, 'href="/')}
 <script src="/js/site.js?${V}" defer></script>
 </body>
 </html>
@@ -928,18 +1013,29 @@ ${footer('/').replace(/href="\/\//g, 'href="/')}
 {
   const today = new Date().toISOString().slice(0, 10);
   const prio = u => u === '/' ? '1.0' : u.startsWith('/coches/') ? '0.9' : u.startsWith('/flota') ? '0.8' : '0.6';
+  /* Cada <url> declara sus cinco alternativas con xhtml:link. Es la forma que
+     Google pide para sitios multiidioma: sin esto trata las cinco versiones
+     como contenido duplicado y elige una por su cuenta. */
+  const alt = canonical => LANGS.map(l =>
+    `    <xhtml:link rel="alternate" hreflang="${l.code}" href="${origin}${l.code === 'es' ? '' : '/' + l.code}${canonical}"/>`
+  ).concat(`    <xhtml:link rel="alternate" hreflang="x-default" href="${origin}${canonical}"/>`).join('\n');
+
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${out.map(u => `  <url>
-    <loc>${origin}${u}</loc>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+${out.map(p => `  <url>
+    <loc>${origin}${p.url}</loc>
+${alt(p.canonical)}
     <lastmod>${today}</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>${prio(u)}</priority>
+    <priority>${prio(p.canonical)}</priority>
   </url>`).join('\n')}
 </urlset>
 `;
   fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), xml);
 }
 
+const byLang = {};
+
 console.log(`Generated ${out.length} pages + 404.html + sitemap.xml`);
-out.forEach(u => console.log('  ' + u));
+console.log('  ' + Object.entries(byLang).map(([k, v]) => `${k}:${v}`).join('  '));
+

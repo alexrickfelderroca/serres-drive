@@ -1,0 +1,238 @@
+{
+  "_meta": {
+    "lang": "es",
+    "label": "Español",
+    "flag": "🇪🇸",
+    "locale": "es_ES",
+    "note": "Diccionario fuente. Los demás idiomas se traducen DESDE aquí y tienen exactamente las mismas claves. Nada de la web se escribe fuera de este archivo salvo precios, nombres de coche y slugs, que vienen de data/fleet.json y no se traducen."
+  },
+
+  "nav": {
+    "fleet": "Flota",
+    "rates": "Tarifas",
+    "how": "Cómo funciona",
+    "why": "Por qué Serres",
+    "contact": "Contacto",
+    "book": "Reservar",
+    "bookWa": "Reservar por WhatsApp",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú",
+    "skip": "Saltar al contenido",
+    "home": "Serres Drive — inicio",
+    "primary": "Principal",
+    "language": "Idioma"
+  },
+
+  "footer": {
+    "nav": "Pie de página",
+    "terms": "Condiciones de alquiler",
+    "wrapCenter": "Serres Wrap Center"
+  },
+
+  "common": {
+    "breadcrumb": "Migas de pan",
+    "start": "Inicio",
+    "perDay": "por día",
+    "aDay": "al día",
+    "allCars": "Todas",
+    "filterByBrand": "Filtrar por marca",
+    "seeFleet": "Ver la flota",
+    "seeFullFleet": "Ver la flota completa",
+    "seeAllTerms": "Ver todas las condiciones",
+    "car": "coche",
+    "cars": "coches",
+    "from": "desde",
+    "modelAvailable": "modelo disponible",
+    "modelsAvailable": "modelos disponibles",
+    "carsAvailable": "coches disponibles",
+    "byWhatsapp": "Por WhatsApp",
+    "writeWa": "Escríbenos por WhatsApp",
+    "askWa": "Preguntar por WhatsApp",
+    "form": "Formulario",
+    "threeQuarterAlt": "vista tres cuartos delantera",
+    "rentalAlt": "de alquiler en Barcelona",
+    "seeCarAria": "ver ficha y precios"
+  },
+
+  "terms": {
+    "title": "Condiciones de alquiler",
+    "age": "Edad",
+    "ageValue": "Desde {age} años",
+    "licence": "Carnet",
+    "licenceValue": "Solo permiso de conducir en vigor. Sin antigüedad mínima.",
+    "km": "Kilómetros",
+    "kmValue": "{km} km incluidos",
+    "deposit": "Fianza",
+    "depositFrom": "Desde {amount}",
+    "delivery": "Entrega",
+    "deliveryValue": "Entrega y recogida en el área metropolitana: {amount}",
+    "depositLabel": "Fianza: {amount}",
+    "depositUnknown": "Fianza: te la confirmamos por WhatsApp",
+    "deliveryShort": "Entrega metropolitana {amount}"
+  },
+
+  "home": {
+    "eyebrow": "Sant Cugat del Vallès · Área metropolitana de Barcelona",
+    "titleRow1": "Alquiler",
+    "titleRow2": "de coches",
+    "titleRow3": "de lujo",
+    "titleRow4": "en Barcelona",
+    "ctaBook": "Reserva tu vehículo",
+    "featured": "Destacados",
+    "featuredSub": "{n} de los {total} coches que puedes alquilar ahora mismo",
+    "keepScrolling": "Sigue bajando",
+    "chooseKicker": "Elige tu coche",
+    "chooseTitle": "Toda la flota, en movimiento",
+    "chooseUiTitle": "Gira · elige · conduce",
+    "chooseUiHint": "Desliza para girar",
+    "fleetAria": "Flota",
+    "outro": "Serres Drive — alquiler de coches de lujo en Barcelona, del detailing al volante.",
+    "swcEyebrow": "Serres Wrap Center",
+    "swcTitleA": "Antes de conducirlo,",
+    "swcTitleB": "lo dejamos perfecto",
+    "swcBody": "No solo alquilamos coches: los preparamos. Nuestro taller hermano en Sant Cugat del Vallès hace PPF, car wrap a medida, pulido multietapa, tratamientos cerámicos y detailing de nivel concours.",
+    "swcTags": ["PPF", "Car Wrap", "Pulido", "Cerámico", "Detailing"],
+    "swcCta": "Visitar Serres Wrap Center",
+    "swcShotAlt": "Porsche 911 RWB en el taller de Serres Wrap Center, bajo iluminación hexagonal",
+    "swcShotAria": "Serres Wrap Center — PPF, car wrap y detailing en Barcelona",
+    "swcShotTag": "Ver el taller",
+    "ctaTitleA": "¿Listo para",
+    "ctaTitleB": "conducir",
+    "ctaBody": "Dinos qué coche y qué fechas. Te respondemos con disponibilidad y condiciones en minutos."
+  },
+
+  "fleet": {
+    "h1": "Nuestra flota",
+    "book": "Reservar",
+    "bookAria": "Reservar {car} por WhatsApp",
+    "seats": "plazas"
+  },
+
+  "carPage": {
+    "specs": "Ficha técnica",
+    "power": "Potencia",
+    "zeroHundred": "0-100 km/h",
+    "topSpeed": "Velocidad máx.",
+    "seats": "Plazas",
+    "transmission": "Cambio",
+    "drivetrain": "Tracción",
+    "fuel": "Combustible",
+    "bodyType": "Carrocería",
+    "gallery": "Galería de {car}",
+    "photoOf": "Foto {n} de {total}",
+    "bookEyebrow": "Reserva",
+    "bookTitle": "Consulta fechas del {car}",
+    "bookBody": "Dinos los días que lo necesitas y te confirmamos disponibilidad, fianza y punto de entrega por WhatsApp.",
+    "moreOfBrand": "Más {brand} en la flota",
+    "d1": "1 día", "d2": "2 días", "d3": "3 días", "w1": "1 semana", "m1": "1 mes"
+  },
+
+  "rates": {
+    "h1": "Tarifas",
+    "eyebrow": "Precios en euros, IVA incluido",
+    "caption": "Tarifas de alquiler por coche y duración",
+    "colCar": "Coche",
+    "colDeposit": "Fianza",
+    "note": "Entrega y recogida en el área metropolitana de Barcelona: {delivery}. {km} km incluidos. Fianza desde {deposit}."
+  },
+
+  "how": {
+    "h1": "Cómo funciona",
+    "eyebrow": "Cuatro pasos",
+    "steps": [
+      { "n": "01", "title": "Elige tu coche", "body": "Elige tu vehículo de nuestra flota disponible." },
+      { "n": "02", "title": "Reserva", "body": "Contacta por WhatsApp, confirma fechas y condiciones." },
+      { "n": "03", "title": "Entrega", "body": "Recoge el vehículo o solicita la entrega. Entrega y recogida en el área metropolitana: {amount}." },
+      { "n": "04", "title": "Conduce", "body": "Disfruta del viaje y devuelve el vehículo en el plazo acordado." }
+    ],
+    "shotAlt": "Mercedes-AMG G 63 de la flota de Serres Drive"
+  },
+
+  "termsPage": {
+    "h1": "Condiciones de alquiler",
+    "eyebrow": "Lo que necesitas saber antes de reservar",
+    "requirements": "Requisitos y condiciones",
+    "depositPerCar": "Fianza por coche",
+    "footnote": "Para cualquier condición que no aparezca en esta página, escríbenos por WhatsApp antes de reservar y te la confirmamos por escrito."
+  },
+
+  "why": {
+    "h1": "Por qué Serres Drive",
+    "eyebrow": "Sant Cugat del Vallès",
+    "shotAlt": "Range Rover Velar de la flota de Serres Drive",
+    "reasons": [
+      { "title": "Flota real, no un catálogo", "body": "Los {total} coches de esta web son los que hay. Si aparece en la flota, se puede alquilar." },
+      { "title": "Precio cerrado", "body": "Verás el precio de 1 día, 2, 3, una semana y un mes antes de escribirnos. Sin tarifas que aparecen al final." },
+      { "title": "Entrega donde estés", "body": "Entrega y recogida en el área metropolitana de Barcelona por {amount}." },
+      { "title": "Una conversación, no un mostrador", "body": "Reservas por WhatsApp con una persona que conoce los coches. Sin colas ni formularios interminables." },
+      { "title": "Desde los 18 años", "body": "Sin antigüedad mínima de carnet. Solo permiso en vigor." },
+      { "title": "Del taller de Serres", "body": "Serres Drive nace de Serres Wrap Center: los coches se preparan y se cuidan en casa." }
+    ]
+  },
+
+  "contact": {
+    "h1": "Contacto",
+    "eyebrow": "Reservas por WhatsApp",
+    "where": "Dónde",
+    "delivery": "Entrega",
+    "email": "Correo",
+    "instagram": "Instagram",
+    "writeEmail": "Escríbenos un correo",
+    "formTitle": "Escríbenos",
+    "name": "Nombre",
+    "phone": "Teléfono o WhatsApp",
+    "car": "Coche",
+    "chooseCar": "Elige un coche",
+    "dates": "Fechas",
+    "datesPlaceholder": "Del 12 al 15 de octubre",
+    "message": "Mensaje",
+    "messagePlaceholder": "¿Necesitas entrega en alguna dirección concreta?",
+    "submit": "Enviar por WhatsApp",
+    "note": "Al enviar se abre WhatsApp con el mensaje ya escrito. No se guarda ningún dato en esta web.",
+    "errName": "Dinos cómo te llamas.",
+    "errPhone": "Necesitamos un teléfono con al menos 9 dígitos.",
+    "errCar": "Elige el coche que te interesa.",
+    "errDates": "Indícanos las fechas, aunque sean aproximadas.",
+    "waIntro": "Hola Serres Drive, quiero reservar.",
+    "waName": "Nombre", "waPhone": "Teléfono", "waCar": "Coche", "waDates": "Fechas", "waMessage": "Mensaje"
+  },
+
+  "wa": {
+    "general": "Hola Serres Drive, quiero reservar un coche.",
+    "car": "Hola Serres Drive, me interesa alquilar el {car}. ¿Está disponible?"
+  },
+
+  "e404": {
+    "title": "Página no encontrada · Serres Drive",
+    "eyebrow": "Error 404",
+    "h1": "Esta página ya no existe",
+    "body": "Puede que el coche que buscabas ya no esté en la flota. Estos son los {total} que sí puedes alquilar ahora mismo.",
+    "goHome": "Ir al inicio"
+  },
+
+  "seo": {
+    "homeTitle": "Alquiler de coches de lujo en Barcelona · Serres Drive",
+    "homeDesc": "Alquiler de coches de lujo en Barcelona y Sant Cugat: Porsche, Lamborghini, Mercedes-AMG, Audi, Range Rover y Volkswagen desde {from} al día. Reserva por WhatsApp.",
+    "homeH1": "Alquiler de coches de lujo en Barcelona",
+    "fleetTitle": "Nuestra flota · Serres Drive Barcelona",
+    "fleetDesc": "Los {total} coches disponibles ahora mismo en Serres Drive, con precio por día, por semana y por mes. Entrega en el área metropolitana de Barcelona.",
+    "ratesTitle": "Tarifas de alquiler · Serres Drive Barcelona",
+    "ratesDesc": "Precios de 1 día, 2 días, 3 días, 1 semana y 1 mes para los {total} coches de la flota. Fianza desde {deposit}. Sin sorpresas.",
+    "howTitle": "Cómo funciona el alquiler · Serres Drive",
+    "howDesc": "Elige el coche, reserva por WhatsApp, recoge o pide la entrega y conduce. Cuatro pasos y una sola persona al otro lado del teléfono.",
+    "termsTitle": "Condiciones de alquiler · Serres Drive",
+    "termsDesc": "Desde {age} años, sin antigüedad mínima de carnet, {km} km incluidos, fianza desde {deposit} y entrega en el área metropolitana por {delivery}.",
+    "whyTitle": "Por qué Serres Drive · Alquiler en Sant Cugat",
+    "whyDesc": "Flota propia y revisada, entrega donde estés dentro del área metropolitana de Barcelona y trato directo por WhatsApp, sin mostradores ni colas.",
+    "contactTitle": "Contacto y reservas · Serres Drive Barcelona",
+    "contactDesc": "Reserva tu coche por WhatsApp o escríbenos desde el formulario. Serres Drive, Sant Cugat del Vallès, área metropolitana de Barcelona.",
+    "brandTitle": "Alquiler de {brand} en Barcelona · Serres Drive",
+    "brandDescOne": "Disponible en Serres Drive: {list}. Desde {from} al día, con entrega en el área metropolitana de Barcelona.",
+    "brandDescMany": "Disponibles en Serres Drive: {list}. Desde {from} al día, con entrega en el área metropolitana de Barcelona.",
+    "brandH1": "Alquiler de {brand} en Barcelona",
+    "carTitle": "Alquiler {car} en Barcelona · Serres Drive",
+    "carDesc": "Alquila un {car} en Barcelona desde {from} al día. {cv} CV, 0-100 en {zero}. Reserva por WhatsApp con entrega en el área metropolitana.",
+    "carH1": "Alquiler {car} en Barcelona",
+    "listJoin": " y "
+  }
+}

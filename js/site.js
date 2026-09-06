@@ -20,7 +20,8 @@
   if (menuBtn && menu) {
     var setMenu = function (open) {
       menuBtn.setAttribute('aria-expanded', String(open));
-      menuBtn.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+      /* Las dos etiquetas vienen en data-* porque cambian con el idioma. */
+      menuBtn.setAttribute('aria-label', open ? (menuBtn.dataset.close || 'Close') : (menuBtn.dataset.open || 'Menu'));
       menu.hidden = !open;
       document.body.style.overflow = open ? 'hidden' : '';
     };
@@ -57,6 +58,12 @@
   /* ---- 3. contact form ------------------------------------------------ */
   var form = document.getElementById('bookForm');
   if (form) {
+    /* Los textos del formulario los inyecta el generador en el idioma de la
+       página: con cinco idiomas no pueden vivir aquí en español. Si por lo
+       que sea faltara el bloque, se cae a un objeto vacío y los mensajes
+       salen genéricos en vez de romper el envío. */
+    var S = {};
+    try { S = JSON.parse(document.getElementById('formI18n').textContent); } catch (e) {}
     // /coches/<slug>/ links here with ?coche=<slug>; preselect that car.
     var wanted = new URLSearchParams(location.search).get('coche');
     var select = form.querySelector('#f-car');
@@ -83,10 +90,10 @@
       var ok = true;
       ['name', 'phone', 'car', 'dates'].forEach(function (id) { clear(id); });
 
-      if (v('name').length < 2) { fail('name', 'Dinos cómo te llamas.'); ok = false; }
-      if (v('phone').replace(/[^0-9]/g, '').length < 9) { fail('phone', 'Necesitamos un teléfono con al menos 9 dígitos.'); ok = false; }
-      if (!v('car')) { fail('car', 'Elige el coche que te interesa.'); ok = false; }
-      if (v('dates').length < 3) { fail('dates', 'Indícanos las fechas, aunque sean aproximadas.'); ok = false; }
+      if (v('name').length < 2) { fail('name', S.errName || 'Required'); ok = false; }
+      if (v('phone').replace(/[^0-9]/g, '').length < 9) { fail('phone', S.errPhone || 'Required'); ok = false; }
+      if (!v('car')) { fail('car', S.errCar || 'Required'); ok = false; }
+      if (v('dates').length < 3) { fail('dates', S.errDates || 'Required'); ok = false; }
 
       if (!ok) {
         var first = form.querySelector('[data-invalid="true"] input, [data-invalid="true"] select');
@@ -95,14 +102,14 @@
       }
 
       var lines = [
-        'Hola Serres Drive, quiero reservar.',
+        S.waIntro || 'Serres Drive',
         '',
-        'Nombre: ' + v('name'),
-        'Teléfono: ' + v('phone'),
-        'Coche: ' + v('car'),
-        'Fechas: ' + v('dates'),
+        (S.waName || 'Name') + ': ' + v('name'),
+        (S.waPhone || 'Phone') + ': ' + v('phone'),
+        (S.waCar || 'Car') + ': ' + v('car'),
+        (S.waDates || 'Dates') + ': ' + v('dates'),
       ];
-      if (v('msg')) lines.push('Mensaje: ' + v('msg'));
+      if (v('msg')) lines.push((S.waMessage || 'Message') + ': ' + v('msg'));
       window.open('https://wa.me/' + form.dataset.wa + '?text=' + encodeURIComponent(lines.join('\n')), '_blank', 'noopener');
     });
   }

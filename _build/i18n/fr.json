@@ -1,0 +1,377 @@
+{
+  "_meta": {
+    "lang": "fr",
+    "label": "Français",
+    "flag": "🇫🇷",
+    "locale": "fr_FR",
+    "note": "Traduit depuis le dictionnaire source espagnol, avec exactement les mêmes clés. Rien du site n'est écrit en dehors de ce fichier, sauf les prix, les noms de voitures et les slugs, qui viennent de data/fleet.json et ne se traduisent pas."
+  },
+  "nav": {
+    "fleet": "Flotte",
+    "rates": "Tarifs",
+    "how": "Comment ça marche",
+    "why": "Pourquoi Serres",
+    "contact": "Contact",
+    "book": "Réserver",
+    "bookWa": "Réserver par WhatsApp",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu",
+    "skip": "Aller au contenu",
+    "home": "Serres Drive — accueil",
+    "primary": "Principale",
+    "language": "Langue"
+  },
+  "footer": {
+    "nav": "Pied de page",
+    "terms": "Conditions de location",
+    "wrapCenter": "Serres Wrap Center"
+  },
+  "common": {
+    "breadcrumb": "Fil d'Ariane",
+    "start": "Accueil",
+    "perDay": "par jour",
+    "aDay": "par jour",
+    "allCars": "Toutes",
+    "filterByBrand": "Filtrer par marque",
+    "seeFleet": "Voir la flotte",
+    "seeFullFleet": "Voir toute la flotte",
+    "seeAllTerms": "Voir toutes les conditions",
+    "car": "voiture",
+    "cars": "voitures",
+    "from": "dès",
+    "modelAvailable": "modèle disponible",
+    "modelsAvailable": "modèles disponibles",
+    "carsAvailable": "voitures disponibles",
+    "byWhatsapp": "Par WhatsApp",
+    "writeWa": "Écrivez-nous sur WhatsApp",
+    "askWa": "Demander sur WhatsApp",
+    "form": "Formulaire",
+    "threeQuarterAlt": "vue trois quarts avant",
+    "rentalAlt": "en location à Barcelone",
+    "seeCarAria": "voir la fiche et les tarifs"
+  },
+  "terms": {
+    "title": "Conditions de location",
+    "age": "Âge",
+    "ageValue": "Dès {age} ans",
+    "licence": "Permis",
+    "licenceValue": "Un permis de conduire en cours de validité, rien de plus. Sans ancienneté minimale.",
+    "km": "Kilomètres",
+    "kmValue": "{km} km inclus",
+    "deposit": "Caution",
+    "depositFrom": "Dès {amount}",
+    "delivery": "Livraison",
+    "deliveryValue": "Livraison et récupération dans l'aire métropolitaine : {amount}",
+    "depositLabel": "Caution : {amount}",
+    "depositUnknown": "Caution : nous vous la confirmons sur WhatsApp",
+    "deliveryShort": "Livraison métropolitaine {amount}"
+  },
+  "home": {
+    "eyebrow": "Sant Cugat del Vallès · Aire métropolitaine de Barcelone",
+    "titleRow1": "Location",
+    "titleRow2": "de voitures",
+    "titleRow3": "de luxe",
+    "titleRow4": "à Barcelone",
+    "ctaBook": "Réservez votre véhicule",
+    "featured": "À la une",
+    "featuredSub": "{n} des {total} voitures que vous pouvez louer dès maintenant",
+    "keepScrolling": "Faites défiler",
+    "chooseKicker": "Choisissez votre voiture",
+    "chooseTitle": "Toute la flotte, en mouvement",
+    "chooseUiTitle": "Tournez · choisissez · conduisez",
+    "chooseUiHint": "Faites glisser pour tourner",
+    "fleetAria": "Flotte",
+    "outro": "Serres Drive — location de voitures de luxe à Barcelone, du detailing au volant.",
+    "swcEyebrow": "Serres Wrap Center",
+    "swcTitleA": "Avant de la conduire,",
+    "swcTitleB": "on la rend parfaite",
+    "swcBody": "On ne se contente pas de louer des voitures : on les prépare. Notre atelier frère à Sant Cugat del Vallès fait du PPF, du car wrap sur mesure, du polissage multi-étapes, des traitements céramiques et du detailing niveau concours.",
+    "swcTags": [
+      "PPF",
+      "Car Wrap",
+      "Polissage",
+      "Céramique",
+      "Detailing"
+    ],
+    "swcCta": "Visiter Serres Wrap Center",
+    "swcShotAlt": "Porsche 911 RWB dans l'atelier Serres Wrap Center, sous un éclairage hexagonal",
+    "swcShotAria": "Serres Wrap Center — PPF, car wrap et detailing à Barcelone",
+    "swcShotTag": "Voir l'atelier",
+    "ctaTitleA": "Prêt à",
+    "ctaTitleB": "conduire",
+    "ctaBody": "Dites-nous quelle voiture et quelles dates. Nous vous répondons avec la disponibilité et les conditions en quelques minutes."
+  },
+  "fleet": {
+    "h1": "Notre flotte",
+    "book": "Réserver",
+    "bookAria": "Réserver {car} sur WhatsApp",
+    "seats": "places"
+  },
+  "carPage": {
+    "specs": "Fiche technique",
+    "power": "Puissance",
+    "zeroHundred": "0-100 km/h",
+    "topSpeed": "Vitesse max.",
+    "seats": "Places",
+    "transmission": "Boîte",
+    "drivetrain": "Transmission",
+    "fuel": "Carburant",
+    "bodyType": "Carrosserie",
+    "gallery": "Galerie {car}",
+    "photoOf": "Photo {n} sur {total}",
+    "bookEyebrow": "Réservation",
+    "bookTitle": "Demandez les dates pour {car}",
+    "bookBody": "Dites-nous les jours dont vous avez besoin et nous vous confirmons la disponibilité, la caution et le point de livraison sur WhatsApp.",
+    "moreOfBrand": "Plus de {brand} dans la flotte",
+    "d1": "1 jour",
+    "d2": "2 jours",
+    "d3": "3 jours",
+    "w1": "1 semaine",
+    "m1": "1 mois"
+  },
+  "rates": {
+    "h1": "Tarifs",
+    "eyebrow": "Prix en euros, TVA incluse",
+    "caption": "Tarifs de location par voiture et par durée",
+    "colCar": "Voiture",
+    "colDeposit": "Caution",
+    "note": "Livraison et récupération dans l'aire métropolitaine de Barcelone : {delivery}. {km} km inclus. Caution dès {deposit}."
+  },
+  "how": {
+    "h1": "Comment ça marche",
+    "eyebrow": "Quatre étapes",
+    "steps": [
+      {
+        "n": "01",
+        "title": "Choisissez votre voiture",
+        "body": "Choisissez votre véhicule parmi notre flotte disponible."
+      },
+      {
+        "n": "02",
+        "title": "Réservez",
+        "body": "Contactez-nous sur WhatsApp, confirmez les dates et les conditions."
+      },
+      {
+        "n": "03",
+        "title": "Livraison",
+        "body": "Récupérez le véhicule ou demandez la livraison. Livraison et récupération dans l'aire métropolitaine : {amount}."
+      },
+      {
+        "n": "04",
+        "title": "Conduisez",
+        "body": "Profitez de la route et rendez le véhicule dans le délai convenu."
+      }
+    ],
+    "shotAlt": "Mercedes-AMG G 63 de la flotte Serres Drive"
+  },
+  "termsPage": {
+    "h1": "Conditions de location",
+    "eyebrow": "Ce qu'il faut savoir avant de réserver",
+    "requirements": "Prérequis et conditions",
+    "depositPerCar": "Caution par voiture",
+    "footnote": "Pour toute condition qui n'apparaît pas sur cette page, écrivez-nous sur WhatsApp avant de réserver : nous vous la confirmons par écrit."
+  },
+  "why": {
+    "h1": "Pourquoi Serres Drive",
+    "eyebrow": "Sant Cugat del Vallès",
+    "shotAlt": "Range Rover Velar de la flotte Serres Drive",
+    "reasons": [
+      {
+        "title": "Une flotte réelle, pas un catalogue",
+        "body": "Les {total} voitures de ce site sont celles que nous avons. Si elle apparaît dans la flotte, elle se loue."
+      },
+      {
+        "title": "Prix ferme",
+        "body": "Vous voyez le prix pour 1 jour, 2, 3, une semaine et un mois avant même de nous écrire. Sans mauvaise surprise à la fin."
+      },
+      {
+        "title": "Livraison là où vous êtes",
+        "body": "Livraison et récupération dans l'aire métropolitaine de Barcelone pour {amount}."
+      },
+      {
+        "title": "Une conversation, pas un comptoir",
+        "body": "Vous réservez sur WhatsApp avec quelqu'un qui connaît les voitures. Sans file d'attente ni formulaires interminables."
+      },
+      {
+        "title": "Dès 18 ans",
+        "body": "Sans ancienneté minimale de permis. Juste un permis en cours de validité."
+      },
+      {
+        "title": "De l'atelier Serres",
+        "body": "Serres Drive est né de Serres Wrap Center : les voitures sont préparées et entretenues en interne."
+      }
+    ]
+  },
+  "contact": {
+    "h1": "Contact",
+    "eyebrow": "Réservations sur WhatsApp",
+    "where": "Où",
+    "delivery": "Livraison",
+    "email": "E-mail",
+    "instagram": "Instagram",
+    "writeEmail": "Écrivez-nous un e-mail",
+    "formTitle": "Écrivez-nous",
+    "name": "Nom",
+    "phone": "Téléphone ou WhatsApp",
+    "car": "Voiture",
+    "chooseCar": "Choisissez une voiture",
+    "dates": "Dates",
+    "datesPlaceholder": "Du 12 au 15 octobre",
+    "message": "Message",
+    "messagePlaceholder": "Vous avez besoin d'une livraison à une adresse précise ?",
+    "submit": "Envoyer sur WhatsApp",
+    "note": "À l'envoi, WhatsApp s'ouvre avec le message déjà écrit. Aucune donnée n'est enregistrée sur ce site.",
+    "errName": "Dites-nous comment vous vous appelez.",
+    "errPhone": "Il nous faut un numéro d'au moins 9 chiffres.",
+    "errCar": "Choisissez la voiture qui vous intéresse.",
+    "errDates": "Indiquez-nous les dates, même approximatives.",
+    "waIntro": "Bonjour Serres Drive, je voudrais réserver.",
+    "waName": "Nom",
+    "waPhone": "Téléphone",
+    "waCar": "Voiture",
+    "waDates": "Dates",
+    "waMessage": "Message"
+  },
+  "wa": {
+    "general": "Bonjour Serres Drive, je voudrais louer une voiture.",
+    "car": "Bonjour Serres Drive, je voudrais louer une {car}. Elle est disponible ?"
+  },
+  "e404": {
+    "title": "Page introuvable · Serres Drive",
+    "eyebrow": "Erreur 404",
+    "h1": "Cette page n'existe plus",
+    "body": "La voiture que vous cherchiez n'est peut-être plus dans la flotte. Voici les {total} que vous pouvez louer dès maintenant.",
+    "goHome": "Aller à l'accueil"
+  },
+  "seo": {
+    "homeTitle": "Location de voitures de luxe à Barcelone · Serres Drive",
+    "homeDesc": "Location de voitures de luxe à Barcelone et Sant Cugat : Porsche, Lamborghini, Mercedes-AMG, Audi, Range Rover, Volkswagen. Dès {from} par jour.",
+    "homeH1": "Location de voitures de luxe à Barcelone",
+    "fleetTitle": "Notre flotte · Serres Drive Barcelone",
+    "fleetDesc": "Les {total} voitures disponibles chez Serres Drive, avec le prix par jour, par semaine et par mois. Livraison dans l'aire métropolitaine de Barcelone.",
+    "ratesTitle": "Tarifs de location · Serres Drive Barcelone",
+    "ratesDesc": "Les prix 1 jour, 2 jours, 3 jours, 1 semaine et 1 mois pour les {total} voitures de la flotte. Caution dès {deposit}. Sans mauvaise surprise à la fin.",
+    "howTitle": "Comment marche la location · Serres Drive",
+    "howDesc": "Choisissez la voiture, réservez sur WhatsApp, récupérez-la ou demandez la livraison, et conduisez. Quatre étapes et une seule personne au bout du fil.",
+    "termsTitle": "Conditions de location · Serres Drive",
+    "termsDesc": "Dès {age} ans, sans ancienneté minimale de permis, {km} km inclus, caution dès {deposit} et livraison dans l'aire métropolitaine de Barcelone pour {delivery}.",
+    "whyTitle": "Pourquoi Serres Drive · Location à Sant Cugat",
+    "whyDesc": "Flotte en propre et révisée, livraison là où vous êtes dans l'aire métropolitaine de Barcelone et contact direct sur WhatsApp, sans comptoir ni file d'attente.",
+    "contactTitle": "Contact et réservations · Serres Drive Barcelone",
+    "contactDesc": "Réservez votre voiture sur WhatsApp ou écrivez-nous depuis le formulaire. Serres Drive, à Sant Cugat del Vallès, dans l'aire métropolitaine de Barcelone.",
+    "brandTitle": "Location de {brand} à Barcelone · Serres Drive",
+    "brandDescOne": "Disponible chez Serres Drive : {list}. Dès {from} par jour, avec livraison dans l'aire métropolitaine de Barcelone.",
+    "brandDescMany": "Disponibles chez Serres Drive : {list}. Dès {from} par jour, avec livraison dans l'aire métropolitaine de Barcelone.",
+    "brandH1": "Location de {brand} à Barcelone",
+    "carTitle": "Location {car} à Barcelone · Serres Drive",
+    "carDesc": "{car} en location à Barcelone dès {from} par jour. {cv} ch, 0-100 en {zero}. Réservation sur WhatsApp et livraison dans l'aire métropolitaine.",
+    "carH1": "Location {car} à Barcelone",
+    "listJoin": " et "
+  },
+  "cars": {
+    "mercedes-amg-g63": {
+      "tagline": "Trois blocages de différentiel et un V8 biturbo de 585 ch sous une silhouette inchangée depuis 1979.",
+      "highlights": [
+        "585 ch, V8 biturbo",
+        "0-100 en 4,5 s",
+        "Trois blocages de différentiel"
+      ]
+    },
+    "lamborghini-urus": {
+      "tagline": "En Giallo et cinq places : les 650 ch de son V8 biturbo expédient le 0-100 km/h en 3,6 secondes.",
+      "highlights": [
+        "650 ch, V8 biturbo",
+        "0-100 en 3,6 s",
+        "305 km/h, transmission intégrale"
+      ]
+    },
+    "audi-rs6-avant": {
+      "tagline": "Cinq places, un coffre de break et un V8 biturbo de 600 ch qui règle le 0-100 en 3,6 secondes.",
+      "highlights": [
+        "600 ch, V8 biturbo",
+        "0-100 en 3,6 s",
+        "Break quattro 5 places"
+      ]
+    },
+    "porsche-911-cabrio": {
+      "tagline": "Un flat-six biturbo de 450 ch dans la nuque et une capote qui s'ouvre en douze secondes en roulant.",
+      "highlights": [
+        "450 ch, flat-six biturbo",
+        "Capote ouverte en 12 s",
+        "306 km/h, propulsion"
+      ]
+    },
+    "porsche-911-carrera-s": {
+      "tagline": "Le dernier Carrera S atmosphérique : un flat-six 3.8 qui monte à 7 400 tr/min, PDK sept rapports et toit ouvrant.",
+      "highlights": [
+        "400 ch atmosphériques, 7 400 tr/min",
+        "0-100 km/h en 4,3 s",
+        "PDK 7 rapports, propulsion"
+      ]
+    },
+    "porsche-cayenne-hybrid": {
+      "tagline": "Gris craie dehors, cuir rouge dedans : 470 ch qui quittent le parking en silence électrique et signent 4,9 secondes.",
+      "highlights": [
+        "470 ch hybride rechargeable",
+        "0-100 en 4,9 s",
+        "Mode tout électrique en ville"
+      ]
+    },
+    "mercedes-amg-a45": {
+      "tagline": "Une compacte cinq places avec son quatre-cylindres assemblé à la main à Affalterbach : 421 ch et 3,9 secondes.",
+      "highlights": [
+        "421 ch et 500 Nm",
+        "0-100 en 3,9 s",
+        "Transmission intégrale AMG 4MATIC+"
+      ]
+    },
+    "audi-rs3-sportback": {
+      "tagline": "Aucune autre compacte ne sonne comme son cinq-cylindres en ligne : 400 ch, torque splitter arrière et 3,8 secondes.",
+      "highlights": [
+        "400 ch, 5-cylindres TFSI",
+        "0-100 en 3,8 s",
+        "quattro avec torque splitter"
+      ]
+    },
+    "audi-rsq3": {
+      "tagline": "Ordre d'allumage 1-2-4-5-3 : le cinq-cylindres 2.5 TFSI envoie 400 ch au quattro et boucle le 0-100 en 4,5 secondes.",
+      "highlights": [
+        "400 ch, 2.5 TFSI",
+        "0-100 en 4,5 s",
+        "Transmission quattro permanente"
+      ]
+    },
+    "volkswagen-golf-r": {
+      "tagline": "Une compacte cinq places avec 420 Nm, des freins hautes performances et un mode Race sous une carrosserie noire.",
+      "highlights": [
+        "333 ch et 420 Nm",
+        "0-100 en 4,6 s",
+        "4MOTION à vectorisation de couple"
+      ]
+    },
+    "range-rover-velar": {
+      "tagline": "Poignées escamotables, bleu profond et cuir caramel : le Velar D200 promène ses 430 Nm dans Barcelone sans hausser le ton.",
+      "highlights": [
+        "204 ch diesel micro-hybride",
+        "430 Nm, transmission intégrale",
+        "Coffre de 568 litres"
+      ]
+    },
+    "mercedes-glc": {
+      "tagline": "Noir AMG Line sur cuir clair : 258 ch avec renfort électrique 48 volts et transmission 4MATIC permanente.",
+      "highlights": [
+        "258 ch, hybridation 48V",
+        "0-100 km/h en 6,2 s",
+        "AMG Line, cuir clair"
+      ]
+    },
+    "mercedes-a200-4matic": {
+      "tagline": "La compacte de Mercedes : 163 ch micro-hybridés, boîte 7G-DCT à double embrayage et finition AMG Line en blanc.",
+      "highlights": [
+        "163 ch micro-hybridés",
+        "0-100 en 8,2 s",
+        "Pack AMG Line, 5 places"
+      ]
+    }
+  }
+}

@@ -103,9 +103,17 @@ for (const f of shipped) {
   const html = fs.readFileSync(f, 'utf8');
   const rp = path.relative(ROOT, f);
   if (/\.html$/.test(rp)) {
-    check(/<html lang="es">/.test(html), `${rp}: lang="es"`);
-    check(!/data-lang|data-en\b|data-es\b/.test(html), `${rp}: no data-lang machinery`);
+    /* El sitio es multiidioma: cada página declara el idioma de SU carpeta.
+       Un /ru/ que dijera lang="es" haría que Google lo tratara como español
+       duplicado y que los lectores de pantalla lo leyeran con voz castellana. */
+    const m = rp.replace(/\\/g, '/').match(/^(en|ru|ca|fr)\//);
+    const expect = m ? m[1] : 'es';
+    check(new RegExp(`<html lang="${expect}">`).test(html), `${rp}: lang="${expect}"`);
+    check(!/data-lang=|data-en\b|data-es\b/.test(html), `${rp}: no data-lang machinery`);
     check(!/info@serreswrapcenter/.test(html), `${rp}: no wrap-centre email`);
+    /* hreflang completo: las 5 versiones + x-default en cada página. */
+    const alts = (html.match(/rel="alternate" hreflang=/g) || []).length;
+    if (!/404\.html$/.test(rp)) check(alts === 6, `${rp}: 6 hreflang (tiene ${alts})`);
   }
 }
 
@@ -113,8 +121,15 @@ for (const f of shipped) {
 {
   const xml = read('sitemap.xml');
   const locs = [...xml.matchAll(/<loc>https:\/\/serresdrive\.com(.*?)<\/loc>/g)].map(m => m[1]);
-  check(locs.length === 26, `sitemap has 26 URLs (found ${locs.length})`);
-  const missing = locs.filter(u => !fs.existsSync(path.join(ROOT, u === '/' ? 'index.html' : u + 'index.html')));
+  /* 26 páginas x 5 idiomas. */
+  check(locs.length === 130, `sitemap tiene 130 URLs (26 x 5 idiomas) — encontradas ${locs.length}`);
+  const perLang = { es: 0, en: 0, ru: 0, ca: 0, fr: 0 };
+  locs.forEach(u => { const m = u.match(/^\/(en|ru|ca|fr)\//); perLang[m ? m[1] : 'es']++; });
+  check(Object.values(perLang).every(n => n === 26),
+    `26 URLs por idioma — ${JSON.stringify(perLang)}`);
+  const alts = (xml.match(/xhtml:link rel="alternate"/g) || []).length;
+  check(alts === 130 * 6, `cada URL declara sus 6 alternativas (${alts}/${130 * 6})`);
+  const missing = locs.filter(u => !fs.existsSync(path.join(ROOT, u === '/' ? 'index.html' : u.slice(1) + 'index.html')));
   check(!missing.length, `every sitemap URL exists${missing.length ? ` — missing ${missing}` : ''}`);
   check(!/alquiler-|fleet\.html|rates\.html|motos/.test(xml), 'sitemap has no legacy URLs');
 }
