@@ -244,6 +244,14 @@ RewriteRule ^alquiler-[a-z0-9-]+-barcelona\.html$ /flota/ [R=301,L]
 RewriteRule "^seo y google ads(/|$)" - [R=404,L]
 RewriteRule "^_build(/|$)" - [R=404,L]
 
+# --- fotos sueltas volcadas del movil ----------------------------------
+# Las fotos nuevas llegan a la raiz del proyecto (IMG_2151.PNG y compania) y
+# un "git add -A" las publico. Ya salieron del repo, pero el deploy de
+# Hostinger tampoco las borro del disco — igual que con la carpeta de arriba.
+# Su sitio es "Sicur Cars/<coche>/"; en la web no pinta nada un original de
+# 1,4 MB con nombre de camara.
+RewriteRule "^IMG_[0-9]+.(png|jpe?g)$" - [R=404,L,NC]
+
 # --- branded 404 -------------------------------------------------------
 ErrorDocument 404 /404.html
 
