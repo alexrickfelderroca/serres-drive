@@ -1,0 +1,16 @@
+{
+  "_comment": "Curated per car, chosen by eye from the contact sheets in _build/contact-sheet.js. Index 0 is the hero: a 3/4 front exterior for every car, so the 13 cards share one angle even though the shoots differ. Values are matched as substrings against the source filename.",
+  "mercedes-amg-g63":      { "folder": "G-wagon",         "shots": ["IMG_1947", "IMG_1948", "IMG_1949", "EE1926FE", "18.31.18", "18.31.26", "18.31.42"] },
+  "lamborghini-urus":      { "folder": "URUS",            "shots": ["IMG_2057", "IMG_2058", "IMG_2059", "IMG_2064", "IMG_2060", "IMG_2061", "IMG_2063"] },
+  "audi-rs6-avant":        { "folder": "RS6",             "shots": ["IMG_1998", "IMG_1999", "IMG_2001", "IMG_2005", "IMG_2002", "IMG_2003", "IMG_2004"] },
+  "porsche-911-cabrio":    { "folder": "Porsche 911",     "shots": ["IMG_1963", "IMG_1964", "IMG_1965", "IMG_1966", "52092C42"] },
+  "porsche-911-carrera-s": { "folder": "911 991",         "shots": ["IMG_2049", "IMG_2050", "IMG_2051", "IMG_2055", "IMG_2056", "IMG_2053", "IMG_2054"] },
+  "porsche-cayenne-hybrid":{ "folder": "Porsche Cayenne", "shots": ["IMG_1990", "IMG_1989", "IMG_1991", "828A7BE7", "IMG_1980", "IMG_1982", "IMG_1988"] },
+  "mercedes-amg-a45":      { "folder": "A45",             "shots": ["IMG_1920", "IMG_1921", "IMG_1919", "IMG_1923", "IMG_1925", "IMG_1926", "IMG_1924"] },
+  "audi-rs3-sportback":    { "folder": "RS3",             "shots": ["IMG_2018", "IMG_2013", "IMG_2014", "IMG_2015", "IMG_2017", "IMG_2016", "IMG_2019"] },
+  "audi-rsq3":             { "folder": "RSQ3",            "shots": ["IMG_2041", "IMG_2044", "IMG_2043", "IMG_2048", "IMG_2042", "IMG_2045", "IMG_2046"] },
+  "volkswagen-golf-r":     { "folder": "GOLF R",          "shots": ["IMG_2024", "IMG_2025", "IMG_2026", "IMG_2030", "IMG_2032", "IMG_2028", "IMG_2031"] },
+  "range-rover-velar":     { "folder": "RR velar",        "shots": ["IMG_1974", "IMG_1973", "IMG_1975", "IMG_1970", "IMG_1971", "IMG_1972", "IMG_1976"] },
+  "mercedes-glc":          { "folder": "GLC",             "shots": ["IMG_2006", "IMG_2007", "IMG_2008", "IMG_2011", "IMG_2009", "IMG_2010", "IMG_2012"] },
+  "mercedes-a200-4matic":  { "folder": "A200",            "shots": ["IMG_2033", "IMG_2034", "IMG_2038", "IMG_2036", "IMG_2035", "IMG_2037", "IMG_2040"] }
+}

@@ -1,0 +1,94 @@
+{
+  "audi-rs6-avant": {
+    "slug": "audi-rs6-avant",
+    "anyWrong": false,
+    "corrections": [],
+    "copyVerdict": "OK. \"Cinco plazas, maletero de familiar y un V8 biturbo de 600 CV que resuelve el 0-100 en 3,6 segundos.\" is grammatically correct Spanish, free of AI cliches (no \"desata\", \"experiencia inolvidable\", \"no es solo X, es Y\", no em-dash padding), and every number in it matches the verified spec. \"Resuelve el 0-100\" is a nice concrete verb instead of the generic \"acelera de 0 a 100\". Two optional, non-blocking notes: (1) \"maletero de familiar\" duplicates information the highlight \"Familiar quattro de 5 plazas\" already carries, and \"cinco plazas\" is likewise repeated between tagline and highlight, so the three lines together say \"familiar de 5 plazas\" twice; swapping \"maletero de familiar\" for a concrete figure (\"565 litros de maletero\") would remove the redundancy and add substance. (2) The fuel field is written \"Hibrido ligero\" without the accent; the repo entry in js/fleet.js correctly has \"Híbrido ligero\" — keep the accented form in anything user-facing. Neither is a spec error."
+  },
+  "audi-rs-3-sportback": {
+    "slug": "audi-rs-3-sportback",
+    "anyWrong": false,
+    "corrections": [],
+    "copyVerdict": "OK. Grammatically correct and free of AI cliches (no \"descubre/experimenta/redefine/eleva\", no empty superlatives). \"El cinco cilindros en linea\" is valid Spanish usage, and \"suena como ningun otro compacto\" is idiomatic with correct negative polarity after \"como\". It is genuinely specific to this car rather than generic sports-car filler: the inline-five soundtrack is a real RS 3 differentiator (every rival hot hatch - A45, M135, Golf R - is an inline-four), and \"torque splitter trasero\" is factually precise (Audi's RS torque splitter acts on the rear axle, distributing up to 100% of rear torque to the outside wheel). \"Torque splitter\" left untranslated is correct, not an anglicism slip: it is Audi's own product name, used untranslated in Audi Espana's materials. Only optional nitpick, not an error: \"3,8 segundos hasta los 100\" could read \"de 0 a 100 km/h en 3,8 segundos\" for a touch more formality, but the current phrasing is standard Spanish motoring copy. No change required."
+  },
+  "audi-rs-q3": {
+    "slug": "audi-rs-q3",
+    "anyWrong": false,
+    "corrections": [],
+    "copyVerdict": "OK. El dato tecnico del titular es correcto y verificable: Audi documenta el orden de encendido 1-2-4-5-3 del 2.5 TFSI en su propia nota de prensa, y 400 CV / 4,5 s coinciden con la ficha oficial. No hay cliches de IA (nada de \"descubre\", \"eleva tu experiencia\", \"el poder de\"), no hay emojis y el gancho es especifico de ESTE coche y no reutilizable en otro modelo, que es justo lo que se pide. Gramatica y puntuacion correctas en espanol: \"cinco cilindros\" sin guion como sustantivo compuesto es uso normal de la prensa del motor (Audi Espana escribe \"el cinco cilindros\"), decimal con coma en \"4,5\" es correcto, y los dos puntos tras el orden de encendido funcionan bien como estructura dato-explicacion. Unica sugerencia opcional, puramente estilistica y NO un error: \"lleva 400 CV al quattro\" es una metonimia algo suelta (quattro es la traccion, no un destinatario); \"manda 400 CV a las cuatro ruedas\" o \"descarga 400 CV sobre el quattro\" sonaria mas natural. Tambien podria valorarse acortarlo, ya que 132 caracteres es largo para un tagline de tarjeta de alquiler, pero el contenido no necesita cambios."
+  },
+  "mercedes-amg-a45-s": {
+    "slug": "mercedes-amg-a45-s",
+    "anyWrong": false,
+    "corrections": [],
+    "copyVerdict": "OK. Gramaticalmente correcta y sin cliches de IA (nada de \"Descubre\", \"Experimenta\", \"No es solo... es\", \"eleva\", \"redefine\"). \"El cuatro cilindros\" es uso periodistico correcto en espanol de motor, y el dato es verificable: el M139 se ensambla a mano en Affalterbach bajo \"One Man, One Engine\" (nota de prensa oficial Mercedes-AMG). Es especifica de este coche, no intercambiable con otro modelo. Unica pega estilistica opcional (NO error de dato): repite literalmente los dos numeros que ya estan en highlightsEs (\"421 CV\" y \"3,9 s\"), asi que la ficha dice tres veces lo mismo; se podria cerrar con algo como \"...montado a mano en Affalterbach: mas potencia por litro que muchos V8\" y dejar las cifras solo en los highlights. NOTA APARTE, fuera de las CLAIMED SPECS: el archivo vivo C:\\Users\\Rickfelder\\Desktop\\serres-drive-main\\js\\fleet.js linea 188 todavia lleva powerCv:425 y highlightsEs \"425 CV turbo\". 425 CV es incorrecto para cualquier A 45 S (oficial: 310 kW / 421 CV, pre y post-facelift); el 421 de esta ficha es la correccion, no una regresion."
+  },
+  "lamborghini-urus": {
+    "slug": "lamborghini-urus",
+    "anyWrong": false,
+    "corrections": [],
+    "copyVerdict": "Casi OK, pero hay un fallo gramatical real, no estilistico: el participio inicial \"Pintado en Giallo\" queda mal anclado. El sujeto de la frase es \"su V8 biturbo\", asi que literalmente dice que el motor esta pintado en Giallo; ademas \"su\" no tiene antecedente porque el coche no se nombra antes. Segundo problema: \"con cinco plazas a bordo\" va soldado a una clausula de prestaciones sin funcion narrativa, y \"a bordo\" sobra (las plazas ya estan a bordo). Tercero: \"el 0 a 100\" pide unidad -> \"0 a 100 km/h\" o \"0-100 km/h\". Lo bueno: cero cliches de IA (nada de \"eleva\", \"descubre\", \"no es solo un SUV\"), sin emoji, y es especifica del coche (Giallo, V8 biturbo, 650 CV). Aun asi es un volcado de fichas: los tres numeros se repiten literalmente en los highlights, asi que la frase no aporta nada nuevo. Propuesta que arregla el anclaje y da sentido a las cinco plazas: \"En Giallo y con cinco plazas: los 650 CV de su V8 biturbo firman el 0-100 km/h en 3,6 segundos sin renunciar a las maletas.\" NOTA APARTE (fuera de los campos que pediste verificar): en js/fleet.js linea 92 el registro lleva year:2024, incompatible con 650 CV — el Urus de 650 CV se fabrico hasta 2022; un 2024 seria Urus S (666 CV) o Performante. O el ano baja a 2022 o toda la ficha debe pasar a cifras de Urus S. No lo he metido en corrections para no disparar un cambio de potencia/aceleracion, que son correctas."
+  },
+  "range-rover-velar": {
+    "slug": "range-rover-velar",
+    "anyWrong": false,
+    "corrections": [],
+    "copyVerdict": "OK. Spanish is grammatically correct and idiomatic (\"mueve sus 430 Nm... sin levantar la voz\" reads naturally, no anglicismos), free of AI cliches (no \"descubre\", \"eleva tu experiencia\", \"redefine el lujo\"), and every detail is model-specific and verifiable: manillas enrasadas = the Velar's signature flush deployable door handles; \"azul profundo\" matches Varesine Blue metalizado, new for MY2024; \"cuero caramelo\" is a fair Spanish rendering of Caraway, one of the four leather colourways introduced with the 2023 facelift; 430 Nm is the exact D200 torque figure. Highlights also check out: 204 CV, 430 Nm + AWD, and 568 L is precisely Land Rover Espana's VDA (solido) figure behind the second row. Two optional nitpicks, not errors: (1) Windsor leather in Caraway is an upgrade on Dynamic SE rather than standard upholstery, so if the fleet car is a base Dynamic SE, confirm the actual interior before publishing; (2) since the boot number is the VDA solido figure, consider \"568 L de maletero (VDA)\" in the spec table to preempt guests comparing it with the 748 L \"liquido\" figure some sites quote."
+  },
+  "porsche-911-carrera-s-991": {
+    "slug": "porsche-911-carrera-s-991",
+    "anyWrong": false,
+    "corrections": [],
+    "copyVerdict": "Mostly OK — free of AI cliches, grammatically correct Spanish, and genuinely specific to this car. Two fixes, one factual.\n\nFACTUAL (fix this): \"estira hasta las 7.400 rpm\" is wrong. 7.400 rpm is where the engine makes its 400 CV peak, not where it stops — the 991.1 redline is 7.800 rpm (Porsche's own 2012 press kit: \"Engine redline 7800 rpm\"). As written it understates the car by 400 rpm and contradicts the point the sentence is trying to make. Change to \"que estira hasta las 7.800 rpm\" (if you want the redline drama) or \"que entrega sus 400 CV a 7.400 rpm\" (if you want the peak). Note the highlight \"400 CV atmosfericos a 7.400 rpm\" is correct as-is and should NOT be changed — 7.400 is right there.\n\nNEEDS OWNER CONFIRMATION: \"techo solar\" was a cost option on the 991, not standard equipment. It is a claim about this specific unit in the fleet, not about the model, so confirm the actual car has it before shipping — otherwise drop it.\n\nSTYLE (optional): the tagline ends on a descent in register — \"el ultimo Carrera S atmosferico\" and \"PDK de siete marchas\" are strong, then it closes on a sunroof. Consider ending on the drivetrain or the atmospheric point instead.\n\nGOOD, keep: \"El ultimo Carrera S atmosferico\" is accurate and is the single best selling line here — the 991.2 replaced the 3.8 atmosferico with the 3.0 biturbo, so the claim is true and specific. Decimal comma / thousands point usage (4,3 s and 7.400 rpm) is correct Spanish convention. \"boxer\" correctly accented per RAE."
+  },
+  "mercedes-amg-g63": {
+    "slug": "mercedes-amg-g63",
+    "anyWrong": false,
+    "corrections": [],
+    "copyVerdict": "OK — ship it. Grammar is correct, no AI cliches (no \"descubre\", no \"no es solo X, es Y\", no vacuous \"experiencia unica\"), and both hooks are G-Class-specific rather than generic-SUV filler. Two notes, neither a spec error: (1) \"bloqueos de diferencial\" is the technically right term here — the G 63's three locks are 100% dog-clutch locks, so do NOT let anyone \"improve\" it to \"autoblocantes\", which would be factually wrong; (2) \"la silueta que no cambia desde 1979\" is defensible and is Mercedes' own marketing framing (W460 production began Feb 1979), even though the W463A body is all-new underneath — the claim is scoped to the silhouette, which is the accurate scope. Only real nit is length: at ~100 characters it will wrap to 2-3 lines on a 390px card, so check it against the mobile tagline slot. Verified: 585 CV (430 kW) / 850 Nm, 0-100 in 4,5 s, 220 km/h limited (240 with AMG Driver's Package — 220 is the correct base figure), AMG SPEEDSHIFT TCT 9G, AMG Performance 4MATIC 40:60 permanent AWD, 5 plazas/5 puertas, gasolina sin hibridacion (48 V only arrives with the W465 in 2024), M177 3.982 cc V8 biturbo. All three highlights are accurate."
+  },
+  "porsche-911-cabrio-992": {
+    "slug": "porsche-911-cabrio-992",
+    "anyWrong": true,
+    "corrections": [
+      {
+        "field": "seats",
+        "was": "2",
+        "shouldBe": "4 (2+2)",
+        "why": "El 911 Carrera S Cabriolet 992.1 es un 2+2, no un biplaza. Los asientos traseros son equipamiento de serie en Europa; el 'rear seat delete' era solo una opcion sin coste en algunos mercados. StuttCars y encyCARpedia listan la configuracion 992.1 Cabrio como 2+2 / 4 plazas, y en el 992.2 los traseros pasaron a ser obligatorios sin opcion de supresion. Publicar 'seats: 2' infravalora el coche y es incorrecto salvo que la unidad concreta de la flota se pidiera con supresion de plazas traseras: eso es un TODO de confirmar con el propietario, no un dato que se pueda dar por bueno."
+      }
+    ],
+    "copyVerdict": "OK, no cambiar. Sin cliches de IA (nada de \"eleva\", \"desata\", \"no es solo... es\", ni estructura de trio publicitario), gramaticalmente correcta, y especifica de ESTE coche y no de un deportivo generico: el motor boxer detras, la biturbo, y la capota que se abre en marcha son los tres rasgos que solo tiene un 911 Cabrio. Los tres numeros que cita son correctos (450 CV, 12 s de capota, hasta 50 km/h rodando). Dos matices opcionales, no errores: (1) \"detras de la nuca\" es licencia poetica, el boxer va detras del eje trasero, no justo detras del reposacabezas; es figura habitual en la prensa del motor y funciona; (2) \"doce segundos rodando\" es cierto pero solo hasta 50 km/h, asi que si se quiere blindar la letra pequena, \"rodando hasta 50 km/h\" lo deja exacto sin perder ritmo. Los highlights tambien pasan: los tres son verificables tal cual estan."
+  },
+  "volkswagen-golf-8-5-r": {
+    "slug": "volkswagen-golf-8-5-r",
+    "anyWrong": false,
+    "corrections": [],
+    "copyVerdict": "OK - ship it, with two micro-notes (neither is a spec error). The tagline is free of AI cliches (no \"descubre\", \"experiencia unica\", \"eleva tu conduccion\"), grammatically correct (masculine plural \"escondidos\" is right for the mixed list 420 Nm / frenos / modo Race), and every claim it makes is verified for this exact variant: 420 Nm is the official VW figure, \"frenos de altas prestaciones\" matches VW's own standard-equipment wording (high-performance brakes are serie on the R), and \"modo Race\" is a standard driving profile - correctly avoiding Drift and Special/Nurburgring, which would have been wrong since those are R-Performance-package-only. The highlight \"4MOTION con vectorizacion de par\" is also safe: VW Espana states Torque Vectoring is part of the standard 4MOTION system, not the optional pack. Micro-notes: (1) accents are missing throughout (\"carroceria\" should be \"carrocería\") - fix at render time if that is not just an ASCII transport artifact; (2) \"escondidos bajo una carroceria negra\" is slightly loose for brakes, which sit behind the wheels rather than under the bodywork, and it hard-codes the black paint - only keep it if the actual fleet unit is Negro Intenso."
+  },
+  "porsche-cayenne-hybrid": {
+    "slug": "porsche-cayenne-hybrid",
+    "anyWrong": true,
+    "corrections": [
+      {
+        "field": "seats",
+        "was": "5",
+        "shouldBe": "4 (verificar el coche real; 5 solo si lleva la banqueta trasera opcional)",
+        "why": "El Cayenne Coupé sale de fábrica como 4 plazas: los asientos traseros son dos butacas individuales de serie. La banqueta de tres plazas que lo convierte en 5 plazas es una opcion SIN COSTE, pero hay que pedirla expresamente al configurar el coche; no viene por defecto. Esto lo confirman la propia Porsche (paginas de modelo Cayenne Coupé), KBB y la prensa espanola (diariomotor titula literalmente 'cuatro plazas'). En el Cayenne SUV normal si son 5 de serie, de ahi la confusion. Para una web de alquiler es un dato contractual, no un detalle: si el cliente reserva para 5 personas y el coche es de 4 butacas, el alquiler se cae en la entrega. Hay que mirar la ficha tecnica del vehiculo concreto antes de publicar 5."
+      }
+    ],
+    "copyVerdict": "Casi OK — buen copy, pero corregir las tildes. Sin cliches de IA (nada de \"eleva tu experiencia\", \"descubre\", \"no es solo un SUV\"), y es genuinamente especifico de ESTE coche: \"Gris tiza\" es un color real de Porsche (Chalk/Kreide), el contraste con el cuero rojo es una combinacion concreta, y 470 CV + 4,9 s son las cifras oficiales verificadas. La estructura color-fuera/color-dentro seguida de la cifra funciona y el contraste \"silencio electrico\" vs \"4,9 segundos\" es la tension correcta para un PHEV. FALLOS ORTOGRAFICOS (no son preferencias, son errores): \"electrico\" -> \"electrico\" con tilde (\"eléctrico\") en el tagline; en highlights, \"hibrido\" -> \"híbrido\" y \"electrico\" -> \"eléctrico\". GRAMATICA: correcta — \"470 CV que salen\" concuerda bien en plural, y \"firman 4,9 segundos\" es uso normal en prensa del motor espanola (\"firma un 0-100 en...\"), aunque queda algo eliptico; si se quiere mas natural: \"y firman el 0-100 en 4,9 segundos\". \"Parking\" es anglicismo aceptado en Espana (RAE admite \"parking\"/\"párking\"), no hace falta cambiarlo. El highlight \"Modo electrico puro en ciudad\" es tecnicamente cierto (modo E-Power, ~74-76 km WLTP, arranque electrico por defecto con bateria cargada), asi que no hay exageracion publicitaria que corregir."
+  },
+  "mercedes-glc-300-4matic-amg-line": {
+    "slug": "mercedes-glc-300-4matic-amg-line",
+    "anyWrong": false,
+    "corrections": [],
+    "copyVerdict": "OK con dos matices no-numericos. Sin cliches de IA: es concreta, sectorial y no usa relleno tipo \"descubre la experiencia\" / \"eleva tu viaje\"; los datos que cita (258 CV, 48V, 4MATIC permanente) son correctos, y \"traccion 4MATIC permanente\" es tecnicamente exacto en el X254 (reparto fijo 45:55, sin desconexion). Cambios recomendados: (1) faltan tildes — debe publicarse como \"apoyo electrico\" -> \"apoyo eléctrico\" y \"traccion\" -> \"tracción\"; restaurar los diacriticos en el HTML final. (2) Redundancia con HIGHLIGHTS: \"258 CV\" y \"48 voltios/48V\" aparecen tanto en el tagline como en el highlight 1, asi que el primer highlight no aporta nada nuevo — o se quita del tagline la cifra y se deja el caracter (\"Negro AMG Line sobre cuero claro: microhibridacion de 48 voltios y tracción 4MATIC permanente\"), o se reescribe el highlight 1 con otro dato duro (p. ej. \"400 Nm de par\" o \"240 km/h\"). Aparte: \"cuero claro\" es una afirmacion sobre la tapiceria concreta de ESTA unidad, no una especificacion homologada — confirmar con fotos reales del coche antes de publicarlo (es lo unico del texto que no se puede verificar contra fuente de fabricante)."
+  },
+  "mercedes-a200-4matic": {
+    "slug": "mercedes-a200-4matic",
+    "anyWrong": false,
+    "corrections": [],
+    "copyVerdict": "Mostly OK — no AI cliches (\"descubre\", \"experiencia unica\", \"eleva tu viaje\" all absent), no emoji, no generic filler; it is concrete and sector-appropriate. Three things to change, none of them spec errors: (1) \"acabado AMG Line en blanco\" reads as if the AMG Line trim is white — move the colour so it modifies the car: \"...y acabado AMG Line, en color blanco\" or better \"...en carroceria blanca con acabado AMG Line\". (2) \"163 CV microhibridados\" is loose Spanish: the CV are not microhibridados, the engine is. Prefer \"163 CV con microhibridacion de 48 V\" or \"163 CV de un 1.3 turbo microhibridado\". (3) \"cambio 7G-DCT de doble embrague\" is redundant with highlight 1 and 3 — tagline and highlights repeat 163 CV and AMG Line twice, so the block reads like a spec dump rather than copy. Also unify vocabulary: the tagline says \"acabado AMG Line\", the highlights say \"Pack AMG Line\" (Mercedes ES calls it \"linea de equipamiento AMG Line\"; pick one). Separate accuracy flag for the parent, not a copy fault: the listing title says \"4Matic\" but the assumed variant and the drivetrain field are FWD — a customer reading \"A200 4Matic\" next to a FWD datasheet is being told two different things, so either the title drops \"4Matic\" or the variant assumption needs re-checking with the owner."
+  }
+}

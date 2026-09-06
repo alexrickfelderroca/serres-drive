@@ -1,0 +1,534 @@
+/* =====================================================================
+   SERRES DRIVE — stylesheet
+   One file for the whole site. It replaces styles.css + the seven
+   stylesheets that belonged to the deleted experiences (3D tube,
+   preloader, page transitions, featured marquee, wave process, ink menu,
+   old car page), so there is no dead CSS left behind.
+
+   Design tokens are carried over UNCHANGED from the previous styles.css
+   so the brand does not shift: near-black canvas, brushed-chrome accent,
+   Barlow Condensed over DM Sans, inherited from serreswrapcenter.es.
+
+   Motion policy: hover and focus micro-interactions only. No scroll
+   reveals, no autoplay, no parallax, no drag — the brief asks for cards
+   that are simply on the page (ETAPA 4), so nothing here animates in.
+   ===================================================================== */
+
+:root{
+  /* canvas */
+  --bg:#0a0a0b;
+  --bg-2:#0d0d10;
+  --bg-3:#101116;
+  --panel:#121319;
+  --panel-2:#16171e;
+  --line:rgba(255,255,255,.08);
+  --line-2:rgba(255,255,255,.14);
+  --line-strong:rgba(255,255,255,.22);
+
+  /* text */
+  --white:#fdfdfe;
+  --text:#e7e7ec;
+  --text-dim:#a6a6b0;
+  --text-mute:#82828c;
+
+  /* classic silver / chrome accent */
+  --gold:#c9cdd7;
+  --gold-soft:#eef0f4;
+  --gold-deep:#8a8d97;
+  --chrome-grad:linear-gradient(176deg,#fdfdfe 0%,#cfcfd6 32%,#8d8d97 52%,#f0f0f4 72%,#a6a6b0 100%);
+
+  /* whatsapp */
+  --wa:#25d366;
+  --wa-dark:#1ebe57;
+
+  /* geometry — 4/8 scale */
+  --maxw:1240px;
+  --gutter:clamp(18px,5vw,64px);
+  --radius:16px;
+  --radius-sm:11px;
+  --radius-lg:28px;
+  --nav-h:74px;
+
+  /* layered shadows, tinted to the canvas rather than pure black */
+  --shadow-1:0 1px 2px rgba(4,4,6,.6), 0 4px 12px -4px rgba(4,4,6,.5);
+  --shadow-2:0 2px 6px rgba(4,4,6,.55), 0 18px 42px -18px rgba(4,4,6,.75);
+  --shadow-3:0 3px 10px rgba(4,4,6,.5), 0 32px 72px -28px rgba(4,4,6,.85);
+
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --ease-out:cubic-bezier(.16,.84,.44,1);
+  --font-head:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
+  --font-body:"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+
+  color-scheme:dark;
+}
+
+/* ---------- reset ------------------------------------------------- */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:var(--font-body);font-size:16px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+img,svg,video{display:block;max-width:100%}
+img{height:auto}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit}
+h1,h2,h3,h4{margin:0;font-family:var(--font-head);font-weight:700;line-height:1.02;letter-spacing:-.015em;text-wrap:balance}
+p{margin:0;text-wrap:pretty}
+ul{margin:0;padding:0;list-style:none}
+table{border-collapse:collapse;width:100%}
+
+/* Numbers are compared constantly on this site (prices, 0-100, km/h),
+   so every figure is tabular. */
+.num,td,th,.price,.spec-v{font-variant-numeric:tabular-nums}
+
+::selection{background:var(--gold);color:#0a0a0b}
+
+:where(a,button,input,select,textarea,[tabindex]):focus-visible{
+  outline:2px solid var(--gold-soft);outline-offset:3px;border-radius:4px;
+}
+
+.skip{
+  position:absolute;left:-9999px;top:0;z-index:100;
+  background:var(--gold-soft);color:#0a0a0b;padding:12px 20px;font-weight:600;
+}
+.skip:focus{left:16px;top:16px}
+
+.wrap{width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gutter)}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* ---------- type scale (1.25) ------------------------------------- */
+.eyebrow{
+  font-family:var(--font-body);font-size:11px;font-weight:600;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--text-mute);
+}
+.h-xl{font-size:clamp(46px,9vw,104px)}
+.h-lg{font-size:clamp(34px,5.4vw,68px)}
+.h-md{font-size:clamp(27px,3.4vw,42px)}
+.h-sm{font-size:clamp(21px,2.2vw,27px)}
+.lede{font-size:clamp(16px,1.6vw,19px);color:var(--text-dim);max-width:62ch}
+.muted{color:var(--text-dim)}
+.mute-sm{font-size:13px;color:var(--text-mute)}
+
+/* ---------- section rhythm ---------------------------------------- */
+.section{padding-block:clamp(72px,10vw,136px)}
+.section--tight{padding-block:clamp(56px,7vw,96px)}
+.section-head{margin-bottom:clamp(32px,4vw,56px);display:flex;flex-direction:column;gap:12px}
+
+/* Section transitions are gradient overlaps, never a hard colour cut. */
+.grad-band{
+  background:linear-gradient(180deg,var(--bg) 0%,#0b0b0e 18%,var(--bg-2) 42%,#0c0c10 68%,var(--bg) 100%);
+}
+
+/* ---------- buttons: one 3-variant system ------------------------- */
+.btn{
+  --btn-bg:transparent;--btn-fg:var(--text);--btn-line:var(--line-2);
+  display:inline-flex;align-items:center;gap:12px;
+  padding:14px 22px;border-radius:999px;border:1px solid var(--btn-line);
+  background:var(--btn-bg);color:var(--btn-fg);
+  font-family:var(--font-head);font-size:17px;font-weight:600;
+  letter-spacing:.06em;text-transform:uppercase;cursor:pointer;
+  transition:background .2s var(--ease),border-color .2s var(--ease),
+             color .2s var(--ease),transform .2s var(--ease),box-shadow .2s var(--ease);
+}
+.btn:hover{transform:translateY(-1px)}
+.btn:active{transform:translateY(0) scale(.985)}
+
+.btn--primary{--btn-bg:var(--gold-soft);--btn-fg:#0a0a0b;--btn-line:var(--gold-soft);box-shadow:var(--shadow-1)}
+.btn--primary:hover{--btn-bg:#fff;--btn-line:#fff;box-shadow:var(--shadow-2)}
+.btn--secondary{--btn-line:var(--line-strong)}
+.btn--secondary:hover{--btn-bg:rgba(255,255,255,.06);--btn-line:var(--gold)}
+.btn--ghost{--btn-line:transparent;padding-inline:10px}
+.btn--ghost:hover{--btn-bg:rgba(255,255,255,.05)}
+.btn--wa{--btn-bg:var(--wa);--btn-fg:#04210f;--btn-line:var(--wa);box-shadow:var(--shadow-1)}
+.btn--wa:hover{--btn-bg:var(--wa-dark);--btn-line:var(--wa-dark);box-shadow:var(--shadow-2)}
+/* Quiet WhatsApp: same affordance without thirteen solid green pills
+   competing with the cars on the catalogue. Fills in on hover/focus. */
+.btn--wa-quiet{--btn-bg:transparent;--btn-fg:var(--text);--btn-line:var(--line-strong)}
+.btn--wa-quiet svg{color:var(--wa)}
+.btn--wa-quiet:hover,.btn--wa-quiet:focus-visible{--btn-bg:var(--wa);--btn-fg:#04210f;--btn-line:var(--wa)}
+.btn--wa-quiet:hover svg,.btn--wa-quiet:focus-visible svg{color:#04210f}
+.btn--sm{padding:10px 16px;font-size:15px}
+.btn--block{width:100%;justify-content:center}
+.btn svg{width:19px;height:19px;flex:none}
+
+/* Trailing arrow lives in its own disc, flush to the inner padding. */
+.btn .disc{
+  width:26px;height:26px;margin-right:-8px;border-radius:999px;
+  display:grid;place-items:center;background:rgba(0,0,0,.10);
+  transition:transform .2s var(--ease),background .2s var(--ease);
+}
+.btn--secondary .disc,.btn--ghost .disc{background:rgba(255,255,255,.09)}
+.btn:hover .disc{transform:translate(2px,-1px);background:rgba(0,0,0,.18)}
+.btn--secondary:hover .disc,.btn--ghost:hover .disc{background:rgba(255,255,255,.15)}
+.btn .disc svg{width:13px;height:13px}
+
+/* ---------- header ------------------------------------------------ */
+.nav{
+  position:sticky;top:0;z-index:40;height:var(--nav-h);
+  display:flex;align-items:center;
+  background:rgba(10,10,11,.82);backdrop-filter:blur(18px) saturate(1.3);
+  border-bottom:1px solid var(--line);
+}
+.nav .wrap{display:flex;align-items:center;gap:28px}
+.brand{display:flex;align-items:baseline;gap:9px;flex:none}
+.brand img{width:132px;height:auto}
+.brand .b-drive{
+  font-family:var(--font-head);font-size:15px;font-weight:600;
+  letter-spacing:.34em;text-transform:uppercase;
+  background:var(--chrome-grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.nav-links{display:flex;gap:26px;margin-left:auto}
+.nav-links a{
+  font-family:var(--font-head);font-size:16px;font-weight:500;
+  letter-spacing:.11em;text-transform:uppercase;color:var(--text-dim);
+  padding-block:6px;position:relative;transition:color .2s var(--ease);
+}
+.nav-links a::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:1px;
+  background:var(--gold);transform:scaleX(0);transform-origin:left;
+  transition:transform .22s var(--ease);
+}
+.nav-links a:hover{color:var(--white)}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav-links a[aria-current="page"]{color:var(--white)}
+.nav-links a[aria-current="page"]::after{transform:scaleX(1);background:var(--gold-deep)}
+.nav-actions{display:flex;align-items:center;gap:12px;margin-left:auto}
+.nav-links+.nav-actions{margin-left:0}
+
+.menu-btn{
+  display:none;width:44px;height:44px;border-radius:12px;
+  border:1px solid var(--line-2);background:transparent;cursor:pointer;
+  align-items:center;justify-content:center;
+}
+.menu-btn i{display:block;width:18px;height:1.5px;background:var(--text);position:relative;transition:transform .25s var(--ease),opacity .2s var(--ease)}
+.menu-btn i::before,.menu-btn i::after{
+  content:"";position:absolute;left:0;width:18px;height:1.5px;background:var(--text);
+  transition:transform .25s var(--ease);
+}
+.menu-btn i::before{top:-6px}
+.menu-btn i::after{top:6px}
+.menu-btn[aria-expanded="true"] i{background:transparent}
+.menu-btn[aria-expanded="true"] i::before{transform:translateY(6px) rotate(45deg)}
+.menu-btn[aria-expanded="true"] i::after{transform:translateY(-6px) rotate(-45deg)}
+
+.mobile-menu{
+  position:fixed;inset:var(--nav-h) 0 0;z-index:39;
+  background:rgba(8,8,10,.97);backdrop-filter:blur(24px);
+  padding:32px var(--gutter) 48px;
+  display:flex;flex-direction:column;gap:6px;
+  overflow-y:auto;
+}
+.mobile-menu[hidden]{display:none}
+.mobile-menu a{
+  font-family:var(--font-head);font-size:30px;font-weight:600;
+  letter-spacing:.02em;text-transform:uppercase;
+  padding-block:14px;border-bottom:1px solid var(--line);
+  transition:color .2s var(--ease),padding-left .2s var(--ease);
+}
+.mobile-menu a:hover{color:var(--gold-soft);padding-left:8px}
+.mobile-menu .btn{margin-top:24px}
+
+@media (max-width:960px){
+  .nav-links{display:none}
+  .menu-btn{display:inline-flex}
+  .brand img{width:112px}
+  .nav .wrap{gap:14px}
+}
+/* Below 430px the header is wordmark + icon-only CTA + burger; keeping the
+   "Reservar" label pushed .nav-actions a couple of pixels past the viewport. */
+@media (max-width:430px){
+  .nav-actions .btn--wa span,.nav-actions .btn--wa-quiet span{display:none}
+  .nav-actions .btn--wa,.nav-actions .btn--wa-quiet{padding-inline:13px}
+}
+
+/* ---------- hero -------------------------------------------------- */
+.hero{
+  min-height:calc(100dvh - var(--nav-h));
+  display:grid;align-items:center;
+  padding-block:clamp(40px,6vw,80px);
+  background:
+    radial-gradient(1200px 620px at 78% 30%,rgba(150,158,178,.14),transparent 62%),
+    radial-gradient(760px 460px at 8% 82%,rgba(120,126,142,.09),transparent 66%),
+    linear-gradient(180deg,var(--bg) 0%,#0b0b0f 55%,var(--bg-2) 100%);
+}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.92fr);gap:clamp(32px,5vw,72px);align-items:center}
+.hero-copy{display:flex;flex-direction:column;gap:22px;max-width:640px}
+.hero h1{font-size:clamp(46px,8.2vw,96px);text-transform:uppercase;letter-spacing:-.02em}
+.hero h1 .chrome{
+  background:var(--chrome-grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
+/* Four facts on one row on desktop, 2x2 on narrow — never 3 + 1 orphan. */
+.hero-facts{display:grid;grid-template-columns:repeat(4,auto);justify-content:start;gap:14px 34px;margin-top:10px;padding-top:22px;border-top:1px solid var(--line)}
+@media (max-width:1180px){.hero-facts{grid-template-columns:repeat(2,auto)}}
+.hero-fact{display:flex;flex-direction:column;gap:2px}
+.hero-fact b{font-family:var(--font-head);font-size:26px;font-weight:700;letter-spacing:.01em}
+.hero-fact span{font-size:12px;letter-spacing:.11em;text-transform:uppercase;color:var(--text-mute)}
+
+/* Double-bezel plate: dark tray, bright core. The fleet photography is
+   shot on a light cyclorama, so the car sits in its own lit panel rather
+   than being cut out badly against the dark page. */
+.plate{
+  padding:10px;border-radius:var(--radius-lg);
+  background:linear-gradient(150deg,rgba(255,255,255,.10),rgba(255,255,255,.02) 45%,rgba(255,255,255,.05));
+  border:1px solid var(--line-2);box-shadow:var(--shadow-3);
+}
+.plate-core{
+  border-radius:calc(var(--radius-lg) - 10px);overflow:hidden;
+  background:var(--panel);box-shadow:inset 0 1px 1px rgba(255,255,255,.14);
+}
+.plate-core img{width:100%;height:auto;display:block}
+
+/* The caption sits in its own bar under the photo rather than floating on
+   top of it — the studio shots are tight and an overlay covered a wheel. */
+.hero-plate{position:relative}
+.hero-plate .tag{
+  display:flex;align-items:baseline;justify-content:space-between;gap:14px;flex-wrap:wrap;
+  margin-top:10px;padding:12px 16px;border-radius:14px;
+  background:rgba(255,255,255,.045);border:1px solid var(--line);
+}
+.hero-plate .tag b{font-family:var(--font-head);font-size:19px;letter-spacing:.05em;text-transform:uppercase}
+.hero-plate .tag span{font-size:13px;color:var(--text-dim)}
+
+@media (max-width:900px){
+  .hero{min-height:0}
+  .hero .wrap{grid-template-columns:1fr;gap:36px}
+  .hero-copy{max-width:none}
+  .hero-plate{order:-1}
+}
+
+/* ---------- brand grid -------------------------------------------- */
+.brand-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,1.6vw,20px)}
+.brand-card{
+  position:relative;display:flex;flex-direction:column;justify-content:flex-end;
+  min-height:clamp(180px,20vw,244px);padding:22px;
+  border-radius:var(--radius);border:1px solid var(--line-2);
+  background:var(--panel);overflow:hidden;isolation:isolate;
+  box-shadow:var(--shadow-1);
+  transition:transform .24s var(--ease),border-color .24s var(--ease),box-shadow .24s var(--ease);
+}
+.brand-card img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  z-index:-2;opacity:.92;
+  transition:transform .5s var(--ease-out),opacity .3s var(--ease);
+}
+/* Scrim only where the type sits, so the dark cars stay readable. The
+   bottom stops are near-opaque because the label sits over whichever
+   photo the brand happens to have — a yellow Urus and a black RS 6 both
+   have to clear 4.5:1 without per-card tuning. */
+.brand-card::after{
+  content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(180deg,
+    rgba(8,8,10,0) 0%,rgba(8,8,10,.05) 30%,rgba(8,8,10,.34) 52%,
+    rgba(8,8,10,.74) 72%,rgba(8,8,10,.93) 88%,rgba(8,8,10,.96) 100%);
+}
+.brand-card:hover{transform:translateY(-3px);border-color:var(--line-strong);box-shadow:var(--shadow-2)}
+.brand-card:hover img{transform:scale(1.045);opacity:1}
+.brand-card b{text-shadow:0 1px 12px rgba(6,6,8,.8)}
+.brand-card b{
+  font-family:var(--font-head);font-size:clamp(24px,2.6vw,33px);font-weight:700;
+  letter-spacing:.01em;text-transform:uppercase;line-height:1;
+}
+.brand-card .count{margin-top:6px;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:#d2d2d9}
+.brand-card .go{
+  position:absolute;top:18px;right:18px;width:34px;height:34px;border-radius:999px;
+  display:grid;place-items:center;border:1px solid var(--line-2);
+  background:rgba(10,10,12,.5);backdrop-filter:blur(8px);
+  transition:transform .24s var(--ease),background .24s var(--ease),border-color .24s var(--ease);
+}
+.brand-card .go svg{width:14px;height:14px}
+.brand-card:hover .go{transform:translate(2px,-2px);background:var(--gold-soft);border-color:var(--gold-soft);color:#0a0a0b}
+
+@media (max-width:900px){.brand-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:480px){.brand-card{min-height:150px;padding:16px}}
+
+/* ---------- car grid ---------------------------------------------- */
+.car-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,1.8vw,24px)}
+.car-grid--2{grid-template-columns:repeat(2,1fr)}
+@media (max-width:1040px){.car-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.car-grid,.car-grid--2{grid-template-columns:1fr}}
+
+.car-card{
+  position:relative;display:flex;flex-direction:column;
+  border-radius:var(--radius);border:1px solid var(--line);
+  background:var(--panel);overflow:hidden;box-shadow:var(--shadow-1);
+  transition:transform .24s var(--ease),border-color .24s var(--ease),box-shadow .24s var(--ease);
+}
+.car-card:hover{transform:translateY(-3px);border-color:var(--line-strong);box-shadow:var(--shadow-2)}
+.car-card .shot{position:relative;aspect-ratio:3/2;overflow:hidden;background:var(--bg-3)}
+.car-card .shot img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease-out)}
+.car-card:hover .shot img{transform:scale(1.035)}
+.car-card .body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.car-card h3{font-size:clamp(20px,2vw,25px);text-transform:uppercase;letter-spacing:.005em}
+.car-card .specs{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--text-dim)}
+.car-card .specs li{display:flex;align-items:center;gap:6px}
+.car-card .specs li+li::before{content:"";width:3px;height:3px;border-radius:999px;background:var(--text-mute);margin-right:8px;margin-left:-8px}
+.car-card .foot{
+  margin-top:auto;padding-top:14px;border-top:1px solid var(--line);
+  display:flex;align-items:flex-end;justify-content:space-between;gap:12px;
+}
+.car-card .price b{font-family:var(--font-head);font-size:28px;font-weight:700;letter-spacing:.01em;display:block;line-height:1}
+.car-card .price span{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--text-mute)}
+/* Whole card is the link; the WhatsApp button sits above it. */
+.card-link::after{content:"";position:absolute;inset:0;z-index:1}
+.car-card .wa-mini{position:relative;z-index:2}
+
+/* ---------- car detail -------------------------------------------- */
+.car-head{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:clamp(28px,4vw,56px);align-items:start}
+@media (max-width:960px){.car-head{grid-template-columns:1fr}}
+
+.gallery{display:flex;flex-direction:column;gap:12px}
+.gallery .main{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line-2);background:var(--panel);box-shadow:var(--shadow-2)}
+.gallery .main img{width:100%;aspect-ratio:3/2;object-fit:cover}
+/* One row, however many frames the car has — --n is set per page, so a
+   7-shot gallery does not leave a single orphan thumbnail on a second row. */
+.thumbs{display:grid;grid-template-columns:repeat(var(--n,6),1fr);gap:8px}
+@media (max-width:640px){.thumbs{grid-template-columns:repeat(4,1fr)}}
+.thumbs button{
+  padding:0;border-radius:9px;overflow:hidden;cursor:pointer;
+  border:1px solid var(--line);background:var(--panel);
+  transition:border-color .2s var(--ease),opacity .2s var(--ease),transform .2s var(--ease);
+  opacity:.62;
+}
+.thumbs button:hover{opacity:1;transform:translateY(-2px)}
+.thumbs button[aria-current="true"]{opacity:1;border-color:var(--gold)}
+.thumbs img{width:100%;aspect-ratio:3/2;object-fit:cover}
+
+.car-aside{display:flex;flex-direction:column;gap:22px}
+/* The three headline facts, as pills rather than a bare stacked list. */
+.highlights{display:flex;flex-wrap:wrap;gap:8px}
+.highlights li{
+  padding:8px 14px;border-radius:999px;border:1px solid var(--line-2);
+  background:rgba(255,255,255,.035);font-size:13px;color:var(--text);
+}
+.price-box{
+  padding:22px;border-radius:var(--radius);border:1px solid var(--line-2);
+  background:linear-gradient(170deg,var(--panel-2),var(--panel));box-shadow:var(--shadow-2);
+}
+.price-box .from{display:flex;align-items:baseline;gap:10px;margin-bottom:16px}
+.price-box .from b{font-family:var(--font-head);font-size:46px;font-weight:700;line-height:1}
+.price-box .from span{font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--text-mute)}
+.price-list{display:flex;flex-direction:column;gap:0}
+.price-list li{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-top:1px solid var(--line);font-size:15px}
+.price-list li span{color:var(--text-dim)}
+.price-list li b{font-weight:600}
+
+.spec-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+@media (max-width:900px){.spec-grid{grid-template-columns:repeat(2,1fr)}}
+.spec{background:var(--panel);padding:18px 16px;display:flex;flex-direction:column;gap:5px}
+.spec-k{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-mute)}
+.spec-v{font-family:var(--font-head);font-size:23px;font-weight:600;letter-spacing:.01em;line-height:1.1}
+
+.terms-list{display:flex;flex-direction:column;gap:0}
+.terms-list li{display:flex;gap:14px;padding:14px 0;border-top:1px solid var(--line);align-items:flex-start}
+.terms-list li:first-child{border-top:0}
+.terms-list .k{flex:none;width:132px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-mute);padding-top:3px}
+.terms-list .v{color:var(--text)}
+@media (max-width:560px){.terms-list li{flex-direction:column;gap:4px}.terms-list .k{width:auto}}
+
+/* Mobile booking bar — the brief asks for a sticky WhatsApp CTA. */
+.sticky-wa{
+  position:fixed;left:0;right:0;bottom:0;z-index:35;display:none;
+  padding:10px var(--gutter) calc(10px + env(safe-area-inset-bottom));
+  background:rgba(9,9,11,.94);backdrop-filter:blur(16px);
+  border-top:1px solid var(--line-2);
+}
+@media (max-width:760px){.sticky-wa{display:block}body.has-sticky{padding-bottom:76px}}
+
+/* ---------- rates table ------------------------------------------- */
+.table-scroll{overflow-x:auto;border:1px solid var(--line-2);border-radius:var(--radius);background:var(--panel);box-shadow:var(--shadow-1)}
+.rates{min-width:720px;font-size:15px}
+.rates thead th{
+  position:sticky;top:0;background:var(--panel-2);
+  font-family:var(--font-head);font-size:13px;font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim);
+  text-align:right;padding:14px 16px;border-bottom:1px solid var(--line-2);white-space:nowrap;
+}
+.rates thead th:first-child{text-align:left}
+.rates td{padding:13px 16px;border-top:1px solid var(--line);text-align:right;white-space:nowrap}
+.rates td:first-child{text-align:left;white-space:normal}
+.rates tbody tr{transition:background .18s var(--ease)}
+.rates tbody tr:hover{background:rgba(255,255,255,.045)}
+.rates .car-cell{display:flex;align-items:center;gap:12px;position:relative}
+.rates .car-cell img{width:64px;height:43px;object-fit:cover;border-radius:7px;flex:none;border:1px solid var(--line)}
+.rates .car-cell b{font-family:var(--font-head);font-size:19px;font-weight:600;letter-spacing:.01em;text-transform:uppercase}
+.rates .car-cell a::after{content:"";position:absolute;inset:0}
+.rates .d1{font-weight:600;color:var(--white)}
+
+/* ---------- steps -------------------------------------------------- */
+.steps{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(14px,2vw,22px)}
+@media (max-width:760px){.steps{grid-template-columns:1fr}}
+.step{
+  padding:26px;border-radius:var(--radius);border:1px solid var(--line);
+  background:var(--panel);display:flex;flex-direction:column;gap:10px;
+  box-shadow:var(--shadow-1);
+}
+.step .n{
+  font-family:var(--font-head);font-size:15px;font-weight:700;letter-spacing:.2em;
+  color:var(--gold-deep);
+}
+.step h3{font-size:clamp(21px,2.2vw,27px);text-transform:uppercase}
+
+/* ---------- form --------------------------------------------------- */
+.form{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+@media (max-width:640px){.form{grid-template-columns:1fr}}
+.field{display:flex;flex-direction:column;gap:7px}
+.field--full{grid-column:1/-1}
+.field label{font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--text-dim)}
+.field input,.field select,.field textarea{
+  width:100%;padding:13px 15px;border-radius:var(--radius-sm);
+  border:1px solid var(--line-2);background:var(--bg-3);color:var(--text);
+  transition:border-color .2s var(--ease),background .2s var(--ease);
+}
+.field input:hover,.field select:hover,.field textarea:hover{border-color:var(--line-strong)}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--gold);background:var(--panel)}
+.field textarea{resize:vertical;min-height:120px}
+.field .err{font-size:13px;color:#ff8f8f;min-height:0}
+.field[data-invalid="true"] input,.field[data-invalid="true"] select,.field[data-invalid="true"] textarea{border-color:#ff8f8f}
+.form-note{grid-column:1/-1;font-size:13px;color:var(--text-mute)}
+
+/* ---------- misc panels -------------------------------------------- */
+.panel{padding:clamp(22px,3vw,34px);border-radius:var(--radius);border:1px solid var(--line);background:var(--panel);box-shadow:var(--shadow-1)}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:start}
+@media (max-width:860px){.split{grid-template-columns:1fr}}
+.crumbs{display:flex;flex-wrap:wrap;gap:8px;font-size:13px;color:var(--text-mute);padding-block:20px 0}
+.crumbs a{color:var(--text-dim);transition:color .2s var(--ease)}
+.crumbs a:hover{color:var(--white)}
+.crumbs span[aria-hidden]{opacity:.5}
+
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{
+  padding:9px 15px;border-radius:999px;border:1px solid var(--line-2);
+  font-family:var(--font-head);font-size:14px;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);
+  transition:border-color .2s var(--ease),color .2s var(--ease),background .2s var(--ease);
+}
+.chip:hover{color:var(--white);border-color:var(--gold);background:rgba(255,255,255,.05)}
+.chip[aria-current="page"]{background:var(--gold-soft);border-color:var(--gold-soft);color:#0a0a0b}
+
+/* ---------- footer -------------------------------------------------- */
+.footer{border-top:1px solid var(--line);background:var(--bg-2);padding-block:52px 34px;margin-top:clamp(48px,7vw,96px)}
+.footer .top{display:flex;flex-wrap:wrap;gap:32px;justify-content:space-between;align-items:flex-start}
+.footer-nav{display:flex;flex-wrap:wrap;gap:10px 26px}
+.footer-nav a{font-family:var(--font-head);font-size:16px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);transition:color .2s var(--ease)}
+.footer-nav a:hover{color:var(--white)}
+.footer .bottom{margin-top:34px;padding-top:22px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between;font-size:13px;color:var(--text-mute)}
+.footer .bottom a{color:var(--text-dim)}
+.footer .bottom a:hover{color:var(--white)}
+
+/* ---------- 404 ------------------------------------------------------ */
+.center-pad{min-height:calc(100dvh - var(--nav-h) - 200px);display:grid;place-items:center;text-align:center}
+
+/* ---------- reduced motion ------------------------------------------- */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{
+    animation-duration:.001ms!important;animation-iteration-count:1!important;
+    transition-duration:.001ms!important;
+  }
+  .btn:hover,.car-card:hover,.brand-card:hover{transform:none}
+  .car-card:hover .shot img,.brand-card:hover img{transform:none}
+}

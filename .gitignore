@@ -87,3 +87,19 @@ assets/img/cars/scrape/*
 node_modules/
 dist/
 *.log
+
+# --- Verification screenshots (local evidence, not served) ------------
+.screenshots/
+
+# --- Owner's original fleet photography ------------------------------
+# "Sicur Cars/" is the 62 MB of unedited originals the web images were
+# built from (_build/build-images.js). Hostinger serves the repo root, so
+# committing it would publish full-resolution originals at
+# serresdrive.com/Sicur%20Cars/. The web-ready derivatives live in
+# assets/img/cars/<slug>/ and those ARE committed.
+Sicur Cars/
+
+# --- The brief itself -------------------------------------------------
+# Internal task spec (Russian). Committing it would serve it at
+# serresdrive.com/serresdrive-claude-code-task_2.md.
+serresdrive-claude-code-task_2.md

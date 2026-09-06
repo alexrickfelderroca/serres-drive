@@ -1,0 +1,44 @@
+{
+  "_source": "Prices, slugs, deposits and brand pages are transcribed verbatim from serresdrive-claude-code-task_2.md, ETAPA 0 (revision 04.09.2026). The owner's fleet.json referenced by that document does not exist on this machine (~/Desktop/GOOGLE ADS/serresdrive/ is empty), so this file IS the single source of truth. Specs and copy are merged in from _build/fleet-specs.json.",
+  "cars": [
+    { "slug": "mercedes-amg-g63",       "name": "Mercedes-AMG G 63",           "brand": "mercedes-amg", "brandLabel": "Mercedes-AMG", "prices": { "d1": 1000, "d2": 1700, "d3": 2700, "w1": 6000, "m1": 12000 }, "deposit": 5000 },
+    { "slug": "lamborghini-urus",       "name": "Lamborghini Urus",            "brand": "lamborghini",  "brandLabel": "Lamborghini",  "prices": { "d1": 1100, "d2": 1900, "d3": 3000, "w1": 6500, "m1": 13000 }, "deposit": null },
+    { "slug": "audi-rs6-avant",         "name": "Audi RS 6 Avant",             "brand": "audi",         "brandLabel": "Audi",         "prices": { "d1": 900,  "d2": 1600, "d3": 2500, "w1": 5500, "m1": 11000 }, "deposit": null },
+    { "slug": "porsche-911-cabrio",     "name": "Porsche 911 Cabrio (992)",    "brand": "porsche",      "brandLabel": "Porsche",      "prices": { "d1": 800,  "d2": 1500, "d3": 2200, "w1": 4600, "m1": 9000 },  "deposit": 2000 },
+    { "slug": "porsche-911-carrera-s",  "name": "Porsche 911 Carrera S (991)", "brand": "porsche",      "brandLabel": "Porsche",      "prices": { "d1": 700,  "d2": 1300, "d3": 2000, "w1": 3500, "m1": 7500 },  "deposit": 2000 },
+    { "slug": "porsche-cayenne-hybrid", "name": "Porsche Cayenne Hybrid",      "brand": "porsche",      "brandLabel": "Porsche",      "prices": { "d1": 700,  "d2": 1300, "d3": 2000, "w1": 3500, "m1": 7500 },  "deposit": 2000 },
+    { "slug": "mercedes-amg-a45",       "name": "Mercedes-AMG A45 S",          "brand": "mercedes-amg", "brandLabel": "Mercedes-AMG", "prices": { "d1": 450,  "d2": 800,  "d3": 1100, "w1": 2000, "m1": 5000 },  "deposit": 2000 },
+    { "slug": "audi-rs3-sportback",     "name": "Audi RS 3 Sportback",         "brand": "audi",         "brandLabel": "Audi",         "prices": { "d1": 450,  "d2": 800,  "d3": 1100, "w1": 2000, "m1": 5000 },  "deposit": 2000 },
+    { "slug": "audi-rsq3",              "name": "Audi RS Q3",                  "brand": "audi",         "brandLabel": "Audi",         "prices": { "d1": 450,  "d2": 800,  "d3": 1100, "w1": 2000, "m1": 5000 },  "deposit": 2000 },
+    { "slug": "volkswagen-golf-r",      "name": "Volkswagen Golf 8.5 R",       "brand": "volkswagen",   "brandLabel": "Volkswagen",   "prices": { "d1": 400,  "d2": 750,  "d3": 1000, "w1": 1800, "m1": 4500 },  "deposit": 2000 },
+    { "slug": "range-rover-velar",      "name": "Range Rover Velar",           "brand": "range-rover",  "brandLabel": "Range Rover",  "prices": { "d1": 350,  "d2": 700,  "d3": 900,  "w1": 1800, "m1": 4300 },  "deposit": 2000 },
+    { "slug": "mercedes-glc",           "name": "Mercedes GLC",                "brand": "mercedes-amg", "brandLabel": "Mercedes-Benz","prices": { "d1": 200,  "d2": 350,  "d3": 550,  "w1": 1000, "m1": 2500 },  "deposit": 2000 },
+    { "slug": "mercedes-a200-4matic",   "name": "Mercedes A200 4Matic",        "brand": "mercedes-amg", "brandLabel": "Mercedes-Benz","prices": { "d1": 150,  "d2": 250,  "d3": 400,  "w1": 900,  "m1": 1800 },  "deposit": 2000 }
+  ],
+  "brands": [
+    { "slug": "porsche",      "label": "Porsche" },
+    { "slug": "lamborghini",  "label": "Lamborghini" },
+    { "slug": "mercedes-amg", "label": "Mercedes-AMG" },
+    { "slug": "audi",         "label": "Audi" },
+    { "slug": "range-rover",  "label": "Range Rover" },
+    { "slug": "volkswagen",   "label": "Volkswagen" }
+  ],
+  "terms": {
+    "minAge": 18,
+    "licenceNote": "Solo permiso de conducir en vigor. Sin antigüedad mínima.",
+    "kmIncluded": 150,
+    "kmUnitConfirmed": false,
+    "depositFrom": 2000,
+    "deliveryFee": 100,
+    "depositUnknownText": "Fianza: te la confirmamos por WhatsApp"
+  },
+  "contact": {
+    "whatsapp": "34621244469",
+    "phoneDisplay": "+34 621 24 44 69",
+    "instagram": "https://www.instagram.com/serresdrive/",
+    "wrapCenter": "https://serreswrapcenter.es",
+    "address": { "street": "Av. Can Fatjó dels Aurons 15", "postalCode": "08174", "locality": "Sant Cugat del Vallès", "region": "Barcelona", "country": "ES" },
+    "geo": { "lat": 41.4890, "lng": 2.0823 }
+  },
+  "site": { "origin": "https://serresdrive.com", "name": "Serres Drive" }
+}

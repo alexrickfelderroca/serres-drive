@@ -1,0 +1,257 @@
+{
+  "pages": {
+    "/": {
+      "url": "/",
+      "canonical": "https://serresdrive.com/",
+      "title": "Alquiler de coches de lujo en Barcelona · Serres Drive",
+      "description": "Alquiler de coches de lujo en Barcelona y Sant Cugat: Porsche, Lamborghini, Mercedes-AMG, Audi, Range Rover y Volkswagen desde 150 € al día. Reserva por WhatsApp.",
+      "h1": "Alquiler de coches de lujo en Barcelona",
+      "type": "home",
+      "image": "https://serresdrive.com/assets/img/cars/porsche-911-cabrio/alquiler-porsche-911-cabrio-barcelona-1.jpg"
+    },
+    "/flota/": {
+      "url": "/flota/",
+      "canonical": "https://serresdrive.com/flota/",
+      "title": "Nuestra flota · Serres Drive Barcelona",
+      "description": "Los 13 coches disponibles ahora mismo en Serres Drive, con precio por día, por semana y por mes. Entrega en el área metropolitana de Barcelona.",
+      "h1": "Nuestra flota",
+      "type": "fleet",
+      "image": "https://serresdrive.com/assets/img/cars/lamborghini-urus/alquiler-lamborghini-urus-barcelona-1.jpg"
+    },
+    "/tarifas/": {
+      "url": "/tarifas/",
+      "canonical": "https://serresdrive.com/tarifas/",
+      "title": "Tarifas de alquiler · Serres Drive Barcelona",
+      "description": "Precios de 1 día, 2 días, 3 días, 1 semana y 1 mes para los 13 coches de la flota. Fianza desde 2.000 €. Sin sorpresas.",
+      "h1": "Tarifas",
+      "type": "rates",
+      "image": "https://serresdrive.com/assets/img/cars/mercedes-amg-g63/alquiler-mercedes-amg-g63-barcelona-1.jpg"
+    },
+    "/como-funciona/": {
+      "url": "/como-funciona/",
+      "canonical": "https://serresdrive.com/como-funciona/",
+      "title": "Cómo funciona el alquiler · Serres Drive",
+      "description": "Elige el coche, reserva por WhatsApp, recoge o pide la entrega y conduce. Cuatro pasos y una sola persona al otro lado del teléfono.",
+      "h1": "Cómo funciona",
+      "type": "how",
+      "image": "https://serresdrive.com/assets/img/cars/mercedes-amg-g63/alquiler-mercedes-amg-g63-barcelona-1.jpg"
+    },
+    "/condiciones-de-alquiler/": {
+      "url": "/condiciones-de-alquiler/",
+      "canonical": "https://serresdrive.com/condiciones-de-alquiler/",
+      "title": "Condiciones de alquiler · Serres Drive",
+      "description": "Desde 18 años, sin antigüedad mínima de carnet, 150 km incluidos, fianza desde 2.000 € y entrega en el área metropolitana por 100 €.",
+      "h1": "Condiciones de alquiler",
+      "type": "terms",
+      "image": "https://serresdrive.com/assets/img/cars/porsche-911-carrera-s/alquiler-porsche-911-carrera-s-barcelona-1.jpg"
+    },
+    "/por-que-serres/": {
+      "url": "/por-que-serres/",
+      "canonical": "https://serresdrive.com/por-que-serres/",
+      "title": "Por qué Serres Drive · Alquiler en Sant Cugat",
+      "description": "Flota propia y revisada, entrega donde estés dentro del área metropolitana de Barcelona y trato directo por WhatsApp, sin mostradores ni colas.",
+      "h1": "Por qué Serres Drive",
+      "type": "why",
+      "image": "https://serresdrive.com/assets/img/cars/range-rover-velar/alquiler-range-rover-velar-barcelona-1.jpg"
+    },
+    "/contacto/": {
+      "url": "/contacto/",
+      "canonical": "https://serresdrive.com/contacto/",
+      "title": "Contacto y reservas · Serres Drive Barcelona",
+      "description": "Reserva tu coche por WhatsApp o escríbenos desde el formulario. Serres Drive, Sant Cugat del Vallès, área metropolitana de Barcelona.",
+      "h1": "Contacto",
+      "type": "contact",
+      "image": "https://serresdrive.com/assets/img/cars/mercedes-amg-a45/alquiler-mercedes-amg-a45-barcelona-1.jpg"
+    },
+    "/flota/porsche/": {
+      "url": "/flota/porsche/",
+      "canonical": "https://serresdrive.com/flota/porsche/",
+      "title": "Alquiler de Porsche en Barcelona · Serres Drive",
+      "description": "Disponibles en Serres Drive: Porsche 911 Cabrio (992), Porsche 911 Carrera S (991) y Porsche Cayenne Hybrid. Desde 700 € al día, con entrega en el área metropolitana de Barcelona.",
+      "h1": "Alquiler de Porsche en Barcelona",
+      "type": "brand",
+      "brand": "porsche",
+      "image": "https://serresdrive.com/assets/img/cars/porsche-911-cabrio/alquiler-porsche-911-cabrio-barcelona-1.jpg"
+    },
+    "/flota/lamborghini/": {
+      "url": "/flota/lamborghini/",
+      "canonical": "https://serresdrive.com/flota/lamborghini/",
+      "title": "Alquiler de Lamborghini en Barcelona · Serres Drive",
+      "description": "Disponible en Serres Drive: Lamborghini Urus. Desde 1.100 € al día, con entrega en el área metropolitana de Barcelona.",
+      "h1": "Alquiler de Lamborghini en Barcelona",
+      "type": "brand",
+      "brand": "lamborghini",
+      "image": "https://serresdrive.com/assets/img/cars/lamborghini-urus/alquiler-lamborghini-urus-barcelona-1.jpg"
+    },
+    "/flota/mercedes-amg/": {
+      "url": "/flota/mercedes-amg/",
+      "canonical": "https://serresdrive.com/flota/mercedes-amg/",
+      "title": "Alquiler de Mercedes-AMG en Barcelona · Serres Drive",
+      "description": "Disponibles en Serres Drive: Mercedes-AMG G 63, Mercedes-AMG A45 S, Mercedes GLC y Mercedes A200 4Matic. Desde 150 € al día, con entrega en el área metropolitana de Barcelona.",
+      "h1": "Alquiler de Mercedes-AMG en Barcelona",
+      "type": "brand",
+      "brand": "mercedes-amg",
+      "image": "https://serresdrive.com/assets/img/cars/mercedes-amg-g63/alquiler-mercedes-amg-g63-barcelona-1.jpg"
+    },
+    "/flota/audi/": {
+      "url": "/flota/audi/",
+      "canonical": "https://serresdrive.com/flota/audi/",
+      "title": "Alquiler de Audi en Barcelona · Serres Drive",
+      "description": "Disponibles en Serres Drive: Audi RS 6 Avant, Audi RS 3 Sportback y Audi RS Q3. Desde 450 € al día, con entrega en el área metropolitana de Barcelona.",
+      "h1": "Alquiler de Audi en Barcelona",
+      "type": "brand",
+      "brand": "audi",
+      "image": "https://serresdrive.com/assets/img/cars/audi-rs6-avant/alquiler-audi-rs6-avant-barcelona-1.jpg"
+    },
+    "/flota/range-rover/": {
+      "url": "/flota/range-rover/",
+      "canonical": "https://serresdrive.com/flota/range-rover/",
+      "title": "Alquiler de Range Rover en Barcelona · Serres Drive",
+      "description": "Disponible en Serres Drive: Range Rover Velar. Desde 350 € al día, con entrega en el área metropolitana de Barcelona.",
+      "h1": "Alquiler de Range Rover en Barcelona",
+      "type": "brand",
+      "brand": "range-rover",
+      "image": "https://serresdrive.com/assets/img/cars/range-rover-velar/alquiler-range-rover-velar-barcelona-1.jpg"
+    },
+    "/flota/volkswagen/": {
+      "url": "/flota/volkswagen/",
+      "canonical": "https://serresdrive.com/flota/volkswagen/",
+      "title": "Alquiler de Volkswagen en Barcelona · Serres Drive",
+      "description": "Disponible en Serres Drive: Volkswagen Golf 8.5 R. Desde 400 € al día, con entrega en el área metropolitana de Barcelona.",
+      "h1": "Alquiler de Volkswagen en Barcelona",
+      "type": "brand",
+      "brand": "volkswagen",
+      "image": "https://serresdrive.com/assets/img/cars/volkswagen-golf-r/alquiler-volkswagen-golf-r-barcelona-1.jpg"
+    },
+    "/coches/mercedes-amg-g63/": {
+      "url": "/coches/mercedes-amg-g63/",
+      "canonical": "https://serresdrive.com/coches/mercedes-amg-g63/",
+      "title": "Alquiler Mercedes-AMG G 63 en Barcelona · Serres Drive",
+      "description": "Alquila un Mercedes-AMG G 63 en Barcelona desde 1.000 € al día. 585 CV, 0-100 en 4,5 s. Reserva por WhatsApp con entrega en el área metropolitana.",
+      "h1": "Alquiler Mercedes-AMG G 63 en Barcelona",
+      "type": "car",
+      "slug": "mercedes-amg-g63",
+      "image": "https://serresdrive.com/assets/img/cars/mercedes-amg-g63/alquiler-mercedes-amg-g63-barcelona-1.jpg"
+    },
+    "/coches/lamborghini-urus/": {
+      "url": "/coches/lamborghini-urus/",
+      "canonical": "https://serresdrive.com/coches/lamborghini-urus/",
+      "title": "Alquiler Lamborghini Urus en Barcelona · Serres Drive",
+      "description": "Alquila un Lamborghini Urus en Barcelona desde 1.100 € al día. 650 CV, 0-100 en 3,6 s. Reserva por WhatsApp con entrega en el área metropolitana.",
+      "h1": "Alquiler Lamborghini Urus en Barcelona",
+      "type": "car",
+      "slug": "lamborghini-urus",
+      "image": "https://serresdrive.com/assets/img/cars/lamborghini-urus/alquiler-lamborghini-urus-barcelona-1.jpg"
+    },
+    "/coches/audi-rs6-avant/": {
+      "url": "/coches/audi-rs6-avant/",
+      "canonical": "https://serresdrive.com/coches/audi-rs6-avant/",
+      "title": "Alquiler Audi RS 6 Avant en Barcelona · Serres Drive",
+      "description": "Alquila un Audi RS 6 Avant en Barcelona desde 900 € al día. 600 CV, 0-100 en 3,6 s. Reserva por WhatsApp con entrega en el área metropolitana.",
+      "h1": "Alquiler Audi RS 6 Avant en Barcelona",
+      "type": "car",
+      "slug": "audi-rs6-avant",
+      "image": "https://serresdrive.com/assets/img/cars/audi-rs6-avant/alquiler-audi-rs6-avant-barcelona-1.jpg"
+    },
+    "/coches/porsche-911-cabrio/": {
+      "url": "/coches/porsche-911-cabrio/",
+      "canonical": "https://serresdrive.com/coches/porsche-911-cabrio/",
+      "title": "Alquiler Porsche 911 Cabrio (992) en Barcelona · Serres Drive",
+      "description": "Alquila un Porsche 911 Cabrio (992) en Barcelona desde 800 € al día. 450 CV, 0-100 en 3,9 s. Reserva por WhatsApp con entrega en el área metropolitana.",
+      "h1": "Alquiler Porsche 911 Cabrio (992) en Barcelona",
+      "type": "car",
+      "slug": "porsche-911-cabrio",
+      "image": "https://serresdrive.com/assets/img/cars/porsche-911-cabrio/alquiler-porsche-911-cabrio-barcelona-1.jpg"
+    },
+    "/coches/porsche-911-carrera-s/": {
+      "url": "/coches/porsche-911-carrera-s/",
+      "canonical": "https://serresdrive.com/coches/porsche-911-carrera-s/",
+      "title": "Alquiler Porsche 911 Carrera S (991) en Barcelona · Serres Drive",
+      "description": "Alquila un Porsche 911 Carrera S (991) en Barcelona desde 700 € al día. 400 CV, 0-100 en 4,3 s. Reserva por WhatsApp con entrega en el área metropolitana.",
+      "h1": "Alquiler Porsche 911 Carrera S (991) en Barcelona",
+      "type": "car",
+      "slug": "porsche-911-carrera-s",
+      "image": "https://serresdrive.com/assets/img/cars/porsche-911-carrera-s/alquiler-porsche-911-carrera-s-barcelona-1.jpg"
+    },
+    "/coches/porsche-cayenne-hybrid/": {
+      "url": "/coches/porsche-cayenne-hybrid/",
+      "canonical": "https://serresdrive.com/coches/porsche-cayenne-hybrid/",
+      "title": "Alquiler Porsche Cayenne Hybrid en Barcelona · Serres Drive",
+      "description": "Alquila un Porsche Cayenne Hybrid en Barcelona desde 700 € al día. 470 CV, 0-100 en 4,9 s. Reserva por WhatsApp con entrega en el área metropolitana.",
+      "h1": "Alquiler Porsche Cayenne Hybrid en Barcelona",
+      "type": "car",
+      "slug": "porsche-cayenne-hybrid",
+      "image": "https://serresdrive.com/assets/img/cars/porsche-cayenne-hybrid/alquiler-porsche-cayenne-hybrid-barcelona-1.jpg"
+    },
+    "/coches/mercedes-amg-a45/": {
+      "url": "/coches/mercedes-amg-a45/",
+      "canonical": "https://serresdrive.com/coches/mercedes-amg-a45/",
+      "title": "Alquiler Mercedes-AMG A45 S en Barcelona · Serres Drive",
+      "description": "Alquila un Mercedes-AMG A45 S en Barcelona desde 450 € al día. 421 CV, 0-100 en 3,9 s. Reserva por WhatsApp con entrega en el área metropolitana.",
+      "h1": "Alquiler Mercedes-AMG A45 S en Barcelona",
+      "type": "car",
+      "slug": "mercedes-amg-a45",
+      "image": "https://serresdrive.com/assets/img/cars/mercedes-amg-a45/alquiler-mercedes-amg-a45-barcelona-1.jpg"
+    },
+    "/coches/audi-rs3-sportback/": {
+      "url": "/coches/audi-rs3-sportback/",
+      "canonical": "https://serresdrive.com/coches/audi-rs3-sportback/",
+      "title": "Alquiler Audi RS 3 Sportback en Barcelona · Serres Drive",
+      "description": "Alquila un Audi RS 3 Sportback en Barcelona desde 450 € al día. 400 CV, 0-100 en 3,8 s. Reserva por WhatsApp con entrega en el área metropolitana.",
+      "h1": "Alquiler Audi RS 3 Sportback en Barcelona",
+      "type": "car",
+      "slug": "audi-rs3-sportback",
+      "image": "https://serresdrive.com/assets/img/cars/audi-rs3-sportback/alquiler-audi-rs3-sportback-barcelona-1.jpg"
+    },
+    "/coches/audi-rsq3/": {
+      "url": "/coches/audi-rsq3/",
+      "canonical": "https://serresdrive.com/coches/audi-rsq3/",
+      "title": "Alquiler Audi RS Q3 en Barcelona · Serres Drive",
+      "description": "Alquila un Audi RS Q3 en Barcelona desde 450 € al día. 400 CV, 0-100 en 4,5 s. Reserva por WhatsApp con entrega en el área metropolitana.",
+      "h1": "Alquiler Audi RS Q3 en Barcelona",
+      "type": "car",
+      "slug": "audi-rsq3",
+      "image": "https://serresdrive.com/assets/img/cars/audi-rsq3/alquiler-audi-rsq3-barcelona-1.jpg"
+    },
+    "/coches/volkswagen-golf-r/": {
+      "url": "/coches/volkswagen-golf-r/",
+      "canonical": "https://serresdrive.com/coches/volkswagen-golf-r/",
+      "title": "Alquiler Volkswagen Golf 8.5 R en Barcelona · Serres Drive",
+      "description": "Alquila un Volkswagen Golf 8.5 R en Barcelona desde 400 € al día. 333 CV, 0-100 en 4,6 s. Reserva por WhatsApp con entrega en el área metropolitana.",
+      "h1": "Alquiler Volkswagen Golf 8.5 R en Barcelona",
+      "type": "car",
+      "slug": "volkswagen-golf-r",
+      "image": "https://serresdrive.com/assets/img/cars/volkswagen-golf-r/alquiler-volkswagen-golf-r-barcelona-1.jpg"
+    },
+    "/coches/range-rover-velar/": {
+      "url": "/coches/range-rover-velar/",
+      "canonical": "https://serresdrive.com/coches/range-rover-velar/",
+      "title": "Alquiler Range Rover Velar en Barcelona · Serres Drive",
+      "description": "Alquila un Range Rover Velar en Barcelona desde 350 € al día. 204 CV, 0-100 en 8,3 s. Reserva por WhatsApp con entrega en el área metropolitana.",
+      "h1": "Alquiler Range Rover Velar en Barcelona",
+      "type": "car",
+      "slug": "range-rover-velar",
+      "image": "https://serresdrive.com/assets/img/cars/range-rover-velar/alquiler-range-rover-velar-barcelona-1.jpg"
+    },
+    "/coches/mercedes-glc/": {
+      "url": "/coches/mercedes-glc/",
+      "canonical": "https://serresdrive.com/coches/mercedes-glc/",
+      "title": "Alquiler Mercedes GLC en Barcelona · Serres Drive",
+      "description": "Alquila un Mercedes GLC en Barcelona desde 200 € al día. 258 CV, 0-100 en 6,2 s. Reserva por WhatsApp con entrega en el área metropolitana.",
+      "h1": "Alquiler Mercedes GLC en Barcelona",
+      "type": "car",
+      "slug": "mercedes-glc",
+      "image": "https://serresdrive.com/assets/img/cars/mercedes-glc/alquiler-mercedes-glc-barcelona-1.jpg"
+    },
+    "/coches/mercedes-a200-4matic/": {
+      "url": "/coches/mercedes-a200-4matic/",
+      "canonical": "https://serresdrive.com/coches/mercedes-a200-4matic/",
+      "title": "Alquiler Mercedes A200 4Matic en Barcelona · Serres Drive",
+      "description": "Alquila un Mercedes A200 4Matic en Barcelona desde 150 € al día. 163 CV, 0-100 en 8,2 s. Reserva por WhatsApp con entrega en el área metropolitana.",
+      "h1": "Alquiler Mercedes A200 4Matic en Barcelona",
+      "type": "car",
+      "slug": "mercedes-a200-4matic",
+      "image": "https://serresdrive.com/assets/img/cars/mercedes-a200-4matic/alquiler-mercedes-a200-4matic-barcelona-1.jpg"
+    }
+  }
+}
