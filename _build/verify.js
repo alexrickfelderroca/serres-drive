@@ -86,7 +86,10 @@ const shipped = [];
 (function walk(d) {
   for (const e of fs.readdirSync(d, { withFileTypes: true })) {
     const p = path.join(d, e.name);
-    if (e.isDirectory()) { if (!/^(_build|\.git|\.screenshots|node_modules|Sicur Cars|data|seo)$/.test(e.name)) walk(p); }
+    /* "seo y google ads" is the owner's internal documentation, not shipped
+       pages. Its TZ files legitimately name Ferrari, BMW and the rest while
+       describing what was removed, so walking it produced 13 false failures. */
+    if (e.isDirectory()) { if (!/^(_build|\.git|\.screenshots|node_modules|Sicur Cars|data|seo|seo y google ads)$/.test(e.name)) walk(p); }
     else if (/\.(html|xml|txt)$/.test(e.name)) shipped.push(p);
   }
 })(ROOT);

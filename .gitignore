@@ -103,3 +103,10 @@ Sicur Cars/
 # Internal task spec (Russian). Committing it would serve it at
 # serresdrive.com/serresdrive-claude-code-task_2.md.
 serresdrive-claude-code-task_2.md
+
+# --- Documentacion de negocio: SEO y Google Ads ----------------------
+# "seo y google ads/" son los entregables del propietario: plan de campanas,
+# keywords, presupuestos, pujas y las TZ. Hostinger sirve la raiz del repo,
+# asi que comitearlo lo publica en serresdrive.com — y el repo de GitHub es
+# publico. Es material interno: se lee para aplicarlo, no se despliega.
+seo y google ads/

@@ -1,7 +1,0 @@
-﻿Campaign,Campaign Type,Campaign Status,Budget,Budget type,Bid Strategy Type,Max CPC bid limit,Networks,Languages,Location,Excluded locations
-SD | Marca,Search,Paused,2,Daily,Maximize clicks,0.5,Google search,Spanish;English,40 km around Barcelona (presence),All countries except Spain excluded
-SD | Genérico Lujo | BCN,Search,Paused,10,Daily,Maximize clicks,3.0,Google search,Spanish;English,40 km around Barcelona (presence),All countries except Spain excluded
-SD | Por Marca | BCN,Search,Paused,10,Daily,Maximize clicks,2.5,Google search,Spanish;English,40 km around Barcelona (presence),All countries except Spain excluded
-SD | Por Modelo Premium | BCN,Search,Paused,17,Daily,Maximize clicks,2.5,Google search,Spanish;English,40 km around Barcelona (presence),All countries except Spain excluded
-SD | Por Modelo Económico | BCN,Search,Paused,3,Daily,Maximize clicks,1.0,Google search,Spanish;English,40 km around Barcelona (presence),All countries except Spain excluded
-SD | Ocasiones | BCN,Search,Paused,5,Daily,Maximize clicks,2.5,Google search,Spanish;English,40 km around Barcelona (presence),All countries except Spain excluded
