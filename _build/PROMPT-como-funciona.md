@@ -1,7 +1,13 @@
-# Prompt para el chat nuevo — página «Cómo funciona»
+# Encargo: rehacer la página «Cómo funciona»
 
-Copia todo lo que hay entre las líneas y pégalo como primer mensaje de un chat
-nuevo abierto en `c:\Users\Rickfelder\Desktop\serres-drive-main`.
+> **Cómo usar este archivo.** Abre un chat nuevo en
+> `c:\Users\Rickfelder\Desktop\serres-drive-main` y escribe una sola línea:
+>
+> ```
+> Lee _build/PROMPT-como-funciona.md entero y ejecútalo.
+> ```
+>
+> No hace falta copiar nada. Todo lo que sigue son las instrucciones.
 
 ---
 
@@ -24,6 +30,46 @@ se dispare al llegar a él:
 4. **CONDUCE** — el coche arrancando y saliendo de plano.
 
 Según vas bajando, la película va ocurriendo. No quiero cuatro cajas quietas.
+
+## Cuándo está bien hecho
+
+Estos son los criterios con los que se va a juzgar. Si alguno no se cumple, no
+está terminado:
+
+1. **Se ve una película, no una lista.** Bajando de un tirón, los cuatro pasos
+   se encadenan. Cada uno tiene movimiento propio, no el mismo *fade-in* cuatro
+   veces con distinto texto.
+2. **Los cuatro momentos son reconocibles sin leer el texto.** Coches
+   desfilando · alguien tecleando en WhatsApp · un mapa con un punto · un coche
+   que se va. Si tapas los títulos y no se entiende qué pasa en cada escena,
+   falta trabajo.
+3. **El texto del cliente se lee entero y con calma.** La animación acompaña al
+   texto, no compite con él ni lo tapa.
+4. **En móvil funciona igual de bien.** No es una versión degradada: es la misma
+   película adaptada. Se comprueba a 360, 390 y 768 px.
+5. **Con `prefers-reduced-motion` la página sigue siendo entendible y útil.**
+   Quieta, pero completa.
+6. **Carga igual en los cinco idiomas.** Ver la comprobación de más abajo.
+7. **No baja ninguna métrica.** Lighthouse de accesibilidad sigue en 100,
+   consola limpia, sin scroll horizontal.
+
+## Margen de decisión
+
+El *cómo* de cada escena es tuyo: la idea está descrita, la ejecución no.
+Puedes proponer algo mejor que lo literal si lo argumentas. Dos cosas que están
+deliberadamente abiertas y conviene que resuelvas tú con criterio:
+
+- **El «vídeo» de alguien escribiendo en WhatsApp** no tiene que ser un vídeo.
+  Una recreación de la conversación en HTML/CSS —globos, «escribiendo…», el
+  mensaje apareciendo letra a letra— se ve mejor, pesa mucho menos y se traduce
+  a los cinco idiomas. Un vídeo real no.
+- **El «mapa 3D»** no necesita Google Maps ni Mapbox (ver reglas). Un mapa
+  estilizado del área metropolitana en SVG, con el pin cayendo, encaja con la
+  estética del sitio y no añade dependencias ni cookies de terceros.
+
+**Enseña el resultado antes de darlo por cerrado**: capturas de las cuatro
+escenas, en escritorio y en móvil. Es una página muy visual y hay que verla,
+no describirla.
 
 ## Antes de escribir código, lee esto
 
