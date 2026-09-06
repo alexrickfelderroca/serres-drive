@@ -110,3 +110,12 @@ serresdrive-claude-code-task_2.md
 # asi que comitearlo lo publica en serresdrive.com — y el repo de GitHub es
 # publico. Es material interno: se lee para aplicarlo, no se despliega.
 seo y google ads/
+
+# --- Fotos sueltas en la raiz ----------------------------------------
+# Las fotos nuevas llegan volcadas del movil a la raiz del proyecto
+# (IMG_2151.PNG y compania). Su sitio es "Sicur Cars/<coche>/", desde donde
+# _build/build-images.js genera las versiones web. Comiteadas en la raiz se
+# publican tal cual en serresdrive.com/IMG_2151.PNG — paso una vez.
+/IMG_*.[Pp][Nn][Gg]
+/IMG_*.[Jj][Pp][Gg]
+/IMG_*.[Jj][Pp][Ee][Gg]

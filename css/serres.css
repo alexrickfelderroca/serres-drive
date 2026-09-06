@@ -224,25 +224,20 @@ table{border-collapse:collapse;width:100%}
 .lang-picker a:hover{color:var(--white);background:rgba(255,255,255,.07)}
 .lang-picker a[aria-current="true"]{color:var(--white);border-color:var(--line-2)}
 
-@media (min-width:961px){
-  /* colapsado: solo el idioma activo */
-  .nav-actions .lang-picker a:not([aria-current="true"]){
-    position:absolute;top:calc(100% + 8px);left:0;
-    opacity:0;pointer-events:none;transform:translateY(-6px);
-    background:rgba(12,12,15,.97);backdrop-filter:blur(16px);
-    border-color:var(--line);width:max-content;min-width:100%;
-    transition:opacity .18s var(--ease),transform .18s var(--ease);
-  }
-  .nav-actions .lang-picker a:nth-of-type(1):not([aria-current="true"]){top:calc(100% + 8px)}
-  .nav-actions .lang-picker a:nth-of-type(2):not([aria-current="true"]){top:calc(100% + 48px)}
-  .nav-actions .lang-picker a:nth-of-type(3):not([aria-current="true"]){top:calc(100% + 88px)}
-  .nav-actions .lang-picker a:nth-of-type(4):not([aria-current="true"]){top:calc(100% + 128px)}
-  .nav-actions .lang-picker a:nth-of-type(5):not([aria-current="true"]){top:calc(100% + 168px)}
-  .nav-actions .lang-picker:hover a:not([aria-current="true"]),
-  .nav-actions .lang-picker:focus-within a:not([aria-current="true"]){
-    opacity:1;pointer-events:auto;transform:translateY(0);
-  }
+/* Barra horizontal: los cinco idiomas siempre a la vista, uno al lado del
+   otro. Nada de desplegable — se elige de un clic, sin descubrir que hay
+   algo escondido detrás del idioma activo. */
+.nav-actions .lang-picker{gap:2px;padding:3px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.03)}
+.nav-actions .lang-picker a{padding:5px 8px;gap:5px}
+.nav-actions .lang-picker a .code{font-size:12px;letter-spacing:.06em}
+.nav-actions .lang-picker a[aria-current="true"]{background:rgba(255,255,255,.11);border-color:transparent}
+/* Por debajo de 1200px sólo caben las banderas; el código va al title y al
+   texto para lector de pantalla, así que no se pierde información. */
+@media (max-width:1200px){
+  .nav-actions .lang-picker a .code{display:none}
+  .nav-actions .lang-picker a{padding:5px 6px}
 }
+
 /* En el menú móvil se ven los cinco a la vez. */
 .mobile-menu .lang-picker{flex-wrap:wrap;gap:8px;margin-top:22px;padding-top:20px;border-top:1px solid var(--line)}
 .mobile-menu .lang-picker a{border-color:var(--line-2);font-size:15px;padding:9px 14px}
@@ -622,7 +617,21 @@ svg.ico-brand{width:18px;height:18px;flex:none;color:initial}
   font-size:clamp(13px,1.5vw,15px);color:var(--text-dim);
   text-shadow:0 1px 10px rgba(6,6,8,.85);
 }
-.fc-on .fc-sub{color:#e9e9ee}
+.fc-on .fc-sub{color:#f2f2f5}
+
+/* El rótulo va en degradado cromo y el subtítulo en gris claro, y los coches
+   están fotografiados sobre ciclorama BLANCO: encima del Urus o del Cayenne
+   la cabecera entera se borraba. Se le pone su propio velo oscuro, que se
+   desvanece hacia abajo para no cortar la foto con una línea recta. */
+.fc-on .fc-head{position:relative;isolation:isolate}
+.fc-on .fc-head::before{
+  content:"";position:absolute;z-index:-1;
+  inset:-28px -40px -34px -40px;
+  background:linear-gradient(180deg,
+    rgba(6,6,9,.86) 0%,rgba(6,6,9,.72) 38%,
+    rgba(6,6,9,.38) 70%,rgba(6,6,9,0) 100%);
+  pointer-events:none;
+}
 
 /* El botón verde macizo del nav no se leía como WhatsApp; ahora lleva el
    logo real, que trae su propio verde y no debe heredar currentColor. */

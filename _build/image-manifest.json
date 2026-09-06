@@ -68,56 +68,56 @@
     {
       "n": 1,
       "base": "alquiler-lamborghini-urus-barcelona-1",
-      "width": 1200,
-      "height": 800,
-      "jpgKb": 86,
-      "webpKb": 68,
-      "source": "IMG_2057.jpg"
+      "width": 1123,
+      "height": 749,
+      "jpgKb": 59,
+      "webpKb": 44,
+      "source": "IMG_2153.PNG"
     },
     {
       "n": 2,
       "base": "alquiler-lamborghini-urus-barcelona-2",
-      "width": 1200,
-      "height": 800,
-      "jpgKb": 62,
-      "webpKb": 45,
-      "source": "IMG_2058.jpg"
+      "width": 1129,
+      "height": 753,
+      "jpgKb": 45,
+      "webpKb": 30,
+      "source": "IMG_2152.PNG"
     },
     {
       "n": 3,
       "base": "alquiler-lamborghini-urus-barcelona-3",
-      "width": 1200,
-      "height": 800,
-      "jpgKb": 88,
-      "webpKb": 68,
-      "source": "IMG_2059.jpg"
+      "width": 1127,
+      "height": 751,
+      "jpgKb": 55,
+      "webpKb": 39,
+      "source": "IMG_2151.PNG"
     },
     {
       "n": 4,
       "base": "alquiler-lamborghini-urus-barcelona-4",
-      "width": 1200,
-      "height": 800,
-      "jpgKb": 51,
-      "webpKb": 37,
-      "source": "IMG_2064.jpg"
+      "width": 1132,
+      "height": 755,
+      "jpgKb": 38,
+      "webpKb": 25,
+      "source": "IMG_2156.PNG"
     },
     {
       "n": 5,
       "base": "alquiler-lamborghini-urus-barcelona-5",
-      "width": 1200,
-      "height": 800,
-      "jpgKb": 117,
-      "webpKb": 98,
-      "source": "IMG_2060.jpg"
+      "width": 1128,
+      "height": 752,
+      "jpgKb": 86,
+      "webpKb": 63,
+      "source": "IMG_2162.PNG"
     },
     {
       "n": 6,
       "base": "alquiler-lamborghini-urus-barcelona-6",
       "width": 1200,
       "height": 800,
-      "jpgKb": 99,
-      "webpKb": 88,
-      "source": "IMG_2061.jpg"
+      "jpgKb": 98,
+      "webpKb": 90,
+      "source": "IMG_2164.JPG"
     },
     {
       "n": 7,
@@ -126,7 +126,7 @@
       "height": 800,
       "jpgKb": 76,
       "webpKb": 58,
-      "source": "IMG_2063.jpg"
+      "source": "IMG_2160.JPG"
     }
   ],
   "audi-rs6-avant": [
