@@ -8,6 +8,10 @@ Hostinger desde la raíz.
 - **13 coches**, seis marcas. La flota real; no hay ningún coche en la web que
   no se pueda alquilar.
 - **Reservas por WhatsApp**, con el mensaje prerrellenado por coche.
+- **Portada**: hero 3D con el Porsche sobre el techo de LED hexagonales del
+  taller, cinco mosaicos de marca (foto generada de cuatro coches de la marca
+  en nuestro taller + logo + «Ver coches») y la banda de Serres Wrap Center.
+  Sin dirección postal en ninguna página: el propietario no la publica.
 - **Cinco idiomas, cada uno con sus propias URLs:** español (raíz), inglés
   (`/en/`), ruso (`/ru/`), catalán (`/ca/`) y francés (`/fr/`), con `hreflang`
   entre las cinco y selector con banderas en el menú.
@@ -32,6 +36,12 @@ _build/i18n/es.json    ← DICCIONARIO FUENTE. Todo el texto de la web sale de
 _build/                ← generadores (no los sirve nadie, pero viven en el repo
                          para que el sitio se pueda reconstruir)
   build-images.js        Sicur Cars/ → assets/img/cars/<slug>/ (JPG + WebP)
+  build-brand-shots.js   brand-shots-src/manifest.json (URLs de Higgsfield) →
+                         originales en brand-shots-src/ → assets/img/brands/
+                         <marca>.jpg|webp (1600) y <marca>-800.jpg|webp
+  build-brand-logos.js   brand-logos-src/ (logos del propietario) →
+                         assets/img/brands/logos/<marca>.png transparentes
+  serve.js               servidor estático local (8131) para verificar
   build-data.js          fleet-base + fleet-specs + manifiesto → data/fleet.json
   build-seo-meta.js      data/fleet.json → data/seo-meta.json
   build-site.js          → las 26 páginas + 404.html + sitemap.xml
@@ -69,7 +79,8 @@ node _build/verify.js            # 212 comprobaciones; debe salir FAIL 0
 | Cambiar un title o una description | `_build/build-seo-meta.js` → `build-seo-meta.js` → `build-site.js` |
 | Añadir o quitar un coche | `_build/fleet-base.json` + `_build/image-selection.json` → cadena completa |
 | Cambiar diseño (todo menos portada) | `css/serres.css` |
-| Cambiar la portada | `css/home.css`, `css/featured.css`, `css/preloader.css` |
+| Cambiar la portada | `css/home.css`, `css/preloader.css`; el hero 3D en `js/experience.js`; el bloque `/* --- home` de `build-site.js` |
+| Cambiar una foto o un logo de marca | `_build/brand-shots-src/manifest.json` → `build-brand-shots.js`; `_build/brand-logos-src/` → `build-brand-logos.js`; altura óptica de cada logo en `TILES` de `build-site.js` |
 | Cambiar comportamiento | `js/site.js` (script único) |
 | Cambiar la película de Cómo funciona | `css/how.css`, `js/how.js`, `_build/how-map.js` y el bloque `/como-funciona` de `build-site.js` |
 | Cambiar un texto | `_build/i18n/es.json` **y su equivalente en los otros 4** |
@@ -93,8 +104,8 @@ equivalencias que mantener.
 ```
 /  ·  /en/  ·  /ru/  ·  /ca/  ·  /fr/     mismas rutas bajo cada prefijo
 
-/                             portada: hero 3D con scroll + Destacados +
-                              tubo de la flota + Wrap Center + CTA
+/                             portada: hero 3D con scroll + mosaicos de
+                              marcas + Wrap Center + CTA
 /flota/                       catálogo con los 13 coches
 /flota/{marca}/               porsche · lamborghini · mercedes-amg · audi ·
                               range-rover · volkswagen
@@ -177,9 +188,10 @@ puro. Espaciado en la escala de 4/8 px.
 
 **Motion:** en las páginas interiores, solo hover y focus — sin apariciones
 por scroll ni carruseles; las tarjetas simplemente están ahí. Dos excepciones:
-la **portada**, restaurada a petición del propietario (hero 3D con three.js,
-scroll suave con Lenis + GSAP ScrollTrigger, carrusel «Destacados» y el tubo de
-la flota), y **/como-funciona/**, que a petición del propietario es una
+la **portada** (hero 3D con three.js y scroll suave con Lenis + GSAP
+ScrollTrigger; el Porsche da una vuelta mientras bajas y se apaga cuando llega
+la sección de marcas — el carrusel «Destacados» y el tubo de la flota se
+quitaron el 07-09-2026 a petición del propietario), y **/como-funciona/**, que a petición del propietario es una
 película en cuatro escenas que avanza con el scroll (mismo GSAP + ScrollTrigger
 + Lenis, escenarios pegados con `position:sticky`). En las dos, el marcado es
 también el fotograma final: sin JS, sin GSAP o con `prefers-reduced-motion` se
@@ -194,26 +206,34 @@ de 720 px desplazada en horizontal dejaba los precios cortados.
 
 ## 7. Estado de las comprobaciones
 
-Última verificación (07-09-2026, `_build/shot.js` + `_build/lh.js` sobre el
-sitio generado, servido en local):
+Última verificación (07-09-2026, portada nueva; `_build/serve.js` + Chrome
+DevTools MCP para las capturas, `_build/shot.js` para los idiomas y
+reduced-motion, `_build/lh.js` para Lighthouse):
 
-- Lighthouse móvil — Accesibilidad **100**, Buenas prácticas **100**, SEO **100**
-  en portada, tarifas, cómo funciona (español y ruso).
-- Sin scroll horizontal a 360 / 390 / 768 / 1280 / 1440 px en las páginas
-  tocadas. **Excepción conocida:** en ruso el nav de escritorio desborda entre
-  1151 y ~1560 px (las etiquetas rusas son más largas y el corte a menú móvil
-  está en 1150); anotado, pendiente.
-- /como-funciona/ carga igual en los cinco idiomas, medido (13 fichas, ruta del
-  mapa, 4 globos, medidor, GSAP y Lenis en todos), con y sin
-  `prefers-reduced-motion`.
-- Consola sin errores ni avisos.
-- `node _build/verify.js` → **656 comprobaciones, 0 fallos** (precios, fianzas,
-  coches retirados, idioma declarado y `hreflang` de las 130 páginas).
+- Lighthouse móvil en portada, español y ruso — Accesibilidad **100**, Buenas
+  prácticas **100**, SEO **100**, sin ninguna auditoría fallida (el enlace de
+  la foto del taller llevaba un `aria-label` que no contenía su texto visible;
+  arreglado). Escritorio, español: 100 / 100 / 100.
+- Sin scroll horizontal en portada a 360 (ruso), 390 (los cinco idiomas) y
+  1440 px. En ruso el titular ya cabe en móvil (antes «АВТОМОБИЛЕЙ» desbordaba
+  y la página entera se alejaba): Barlow Condensed no tiene cirílico y el
+  titular cae en la fuente de reserva, así que en ruso y francés lleva su
+  propio tamaño en `css/home.css`. **Pendiente:** el nav de escritorio en ruso
+  sigue desbordando entre 1151 y ~1560 px (etiquetas más largas; corte a menú
+  móvil en 1150), anotado.
+- Con `prefers-reduced-motion`: sin lienzo WebGL ni Lenis, el titular sobre el
+  fondo del taller y los cinco mosaicos, medido en escritorio y móvil.
+- Consola sin errores ni avisos; sin imágenes rotas ni peticiones fallidas en
+  los cinco idiomas.
+- `node _build/verify.js` → **656 comprobaciones, 0 fallos**.
+- Capturas de las dos pasadas en `.screenshots/portada-marcas/` (ignorada por git).
 
 ## 8. Pendiente de confirmar con el propietario
 
-Está recogido en `_build/OWNER-TODO.md`. Resumen: el teléfono y el WhatsApp
-propios de Serres Drive, la fianza del Urus y del RS 6, si los 150 km son por
+Está recogido en `_build/OWNER-TODO.md`. Resueltos el 07-09-2026: el teléfono
+de reservas es el del propietario (+34 649 66 33 80) y la dirección postal no se
+publica (ni en contacto, ni en el schema, ni coordenadas). Resumen de lo que
+queda: la fianza del Urus y del RS 6, si los 150 km son por
 día o por alquiler, y las fichas técnicas de los coches marcados con confianza
 media. Nada de eso está inventado en la web: donde falta el dato, la web dice
 que se confirma por WhatsApp.

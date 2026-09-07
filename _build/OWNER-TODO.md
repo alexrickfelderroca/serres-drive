@@ -2,7 +2,11 @@
 
 > **Actualizado 06-09-2026.** El propietario ha decidido:
 > - **Contacto (punto 1): RESUELTO.** Correo `serresdrive@gmail.com` e Instagram
->   `@serres.drive` ya en la web. Se mantiene el telefono `+34 621 24 44 69`.
+>   `@serres.drive` ya en la web. **07-09-2026:** el telefono de reservas pasa a
+>   ser el del propietario, `+34 649 66 33 80` (WhatsApp, `tel:` y schema), y
+>   **la direccion postal desaparece de la web** (contacto, schema y
+>   coordenadas): no se puede publicar direccion. Queda solo "Sant Cugat del
+>   Vallès, Barcelona" como localidad.
 > - **A200 4Matic (punto 3): se deja como esta**, a peticion del propietario.
 >   La ficha publica 163 CV y traccion AWD. Queda escrito abajo por si algun dia
 >   se quiere corregir.
@@ -26,7 +30,7 @@ Ordenado por lo que más daño hace si está mal.
 - Correo: **serresdrive@gmail.com** (pie, pagina de contacto, portada y schema).
 - Instagram: **@serres.drive** — ojo, con punto; antes estaba mal como
   `instagram.com/serresdrive/`, que no es la cuenta.
-- Telefono / WhatsApp: **+34 621 24 44 69**, confirmado por el propietario.
+- Telefono / WhatsApp: **+34 649 66 33 80**, confirmado por el propietario.
 - `info@serreswrapcenter.es` sigue sin aparecer en ninguna pagina.
 
 Si cambia algo: `_build/fleet-base.json` -> bloque `contact`, y regenerar.

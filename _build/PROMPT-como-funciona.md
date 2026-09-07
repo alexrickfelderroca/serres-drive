@@ -153,7 +153,7 @@ Ctrl+Shift+R antes de perseguir un fantasma.
 - **Nada de bibliotecas nuevas.** GSAP, ScrollTrigger y Lenis ya están (por
   CDN, en la portada). Si necesitas el mapa, hazlo con SVG o canvas: no metas
   Google Maps ni Mapbox sin preguntar.
-- **El teléfono es `+34 621 24 44 69` y el WhatsApp sale de
+- **El teléfono es `+34 649 66 33 80` y el WhatsApp sale de
   `data/fleet.json` → `contact`.** No inventes números para la animación de
   la conversación; usa el real o un chat sin número visible.
 

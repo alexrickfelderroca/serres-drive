@@ -5,22 +5,22 @@
     "name": "Serres Drive"
   },
   "contact": {
-    "whatsapp": "34621244469",
-    "phoneDisplay": "+34 621 24 44 69",
+    "whatsapp": "34649663380",
+    "phoneDisplay": "+34 649 66 33 80",
     "email": "serresdrive@gmail.com",
     "instagram": "https://www.instagram.com/serres.drive/",
     "instagramHandle": "@serres.drive",
     "wrapCenter": "https://serreswrapcenter.es",
+    "_addressNote": "Sin calle ni codigo postal a proposito (07-09-2026): el propietario no quiere publicar direccion. Solo localidad y provincia, para el pie y el schema.",
     "address": {
-      "street": "Av. Can Fatjó dels Aurons 15",
-      "postalCode": "08174",
       "locality": "Sant Cugat del Vallès",
       "region": "Barcelona",
       "country": "ES"
     },
+    "_geoNote": "Solo para el punto 'Serres Drive' del mapa esquematico de /como-funciona (_build/how-map.js). Es el centro del municipio, NO el taller: no va al schema ni a ninguna otra parte.",
     "geo": {
-      "lat": 41.489,
-      "lng": 2.0823
+      "lat": 41.4735,
+      "lng": 2.0865
     }
   },
   "terms": {

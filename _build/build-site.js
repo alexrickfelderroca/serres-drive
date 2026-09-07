@@ -79,8 +79,8 @@ const asset = (p) => {
   return v ? `${p}?v=${v}` : p;
 };
 /* Mismo mecanismo para los assets que solo usa la portada restaurada. */
-const VH = 'v=' + assetHash('css/home.css', 'css/featured.css', 'css/preloader.css',
-  'js/preloader.js', 'js/experience.js', 'js/featured.js', 'js/fleet.js');
+const VH = 'v=' + assetHash('css/home.css', 'css/preloader.css',
+  'js/preloader.js', 'js/experience.js');
 /* Y para la película de /como-funciona. Sin esto .htaccess los deja un año
    en caché (immutable) y ningún cambio llega a quien ya haya entrado. */
 const VW = 'v=' + assetHash('css/how.css', 'js/how.js');
@@ -353,13 +353,14 @@ const businessSchema = {
   logo: `${origin}/assets/brand/serres-wordmark-flat.svg`,
   priceRange: '€€€',
   currenciesAccepted: 'EUR',
+  /* Sin calle, codigo postal ni coordenadas (07-09-2026): el propietario
+     no quiere publicar direccion. Localidad y provincia bastan para el
+     area de servicio; los datos viven en _build/fleet-base.json. */
   address: {
     '@type': 'PostalAddress',
-    streetAddress: C.address.street, postalCode: C.address.postalCode,
     addressLocality: C.address.locality, addressRegion: C.address.region,
     addressCountry: C.address.country,
   },
-  geo: { '@type': 'GeoCoordinates', latitude: C.geo.lat, longitude: C.geo.lng },
   areaServed: [
     { '@type': 'City', name: 'Barcelona' },
     { '@type': 'City', name: C.address.locality },
@@ -414,29 +415,85 @@ for (const lang of LANGS) {
   LG = lang; L = lang.dict; seo = seoAll[lang.code].pages;
 
 /* --- home ------------------------------------------------------------- */
-/* La portada vuelve a la experiencia anterior a peticion del propietario:
-   hero 3D con el Porsche y scroll suave, carrusel "Destacados", el tubo
-   "Toda la flota, en movimiento", la banda de Serres Wrap Center y el CTA
-   final. Se restauran home.css / featured.css / preloader.css y sus
-   scripts tal cual estaban (cero colisiones de selectores con serres.css,
-   comprobado).
+/* Portada (07-09-2026, a peticion del propietario):
+     1. el hero 3D con el Porsche (three.js + Lenis + GSAP), mas llamativo:
+        techo de LED hexagonales como el del taller, luz fria que cae de
+        arriba, charco de luz en el suelo, una fila del titular en cromo y
+        el CTA principal relleno (css/home.css, sin tocar el HTML);
+     2. MARCAS: cinco mosaicos (Porsche, Lamborghini, Mercedes-AMG, Audi,
+        Volkswagen) con la foto de cuatro coches de la marca en nuestro
+        taller, el logo encima y un boton "Ver coches" a /flota/<marca>/;
+     3. la banda de Serres Wrap Center y el CTA final, como estaban.
 
-   Lo unico que NO vuelve son los coches que ya no existen: el carrusel
-   llevaba un Ferrari F8 y un Huracan, y el tubo los 31 antiguos. Ahora
-   ambos leen los 13 reales, porque la ETAPA 1 prohibe ensenar coches no
-   disponibles ni como decoracion. El modelo 3D del hero sigue siendo el
-   GT3 RS: es el unico .glb que existe, y esta anotado en OWNER-TODO.
+   Fuera quedan el carrusel "Destacados" y el anillo 3D de fotos ("Toda la
+   flota, en movimiento"), con sus assets: css/featured.css, js/featured.js,
+   js/fleet.js, assets/img/cars/ring/ y las diapositivas
+   assets/img/cars/<slug>.jpg. El modelo del hero sigue siendo el GT3 RS:
+   es el unico .glb que existe, y esta anotado en OWNER-TODO.
 
-   El resto de paginas no cambia: siguen con serres.css y site.js.        */
+   Range Rover no tiene mosaico: el propietario mando cinco logos y el de
+   Range Rover no venia. El Velar sigue en /flota/ y en /flota/range-rover/.
+
+   Las fotos de marca las genero Higgsfield (nano_banana_pro, 2K, 16:9) con
+   el taller descrito a mano: pared negra mate, hormigon gris pulido y
+   rejilla de LED hexagonales. Originales en _build/brand-shots-src/,
+   derivados por _build/build-brand-shots.js. Los logos salen de los
+   archivos del propietario pasados a PNG transparente por
+   _build/build-brand-logos.js.                                          */
 {
   const url = '/', r = rel(url), ra = rel(lp(url)), meta = seo[url];
-  /* Cuatro, no cinco: cada coche anade su tramo de scroll, y con cinco el
-     carrusel pedia 540vh. Son los cuatro tope de gama de la flota. */
-  const featured = ['lamborghini-urus', 'mercedes-amg-g63', 'audi-rs6-avant',
-    'porsche-911-cabrio'].map(car);
+
+  /* Los cinco mosaicos, en este orden. Porsche va a lo ancho (es la marca
+     con mas coches y el coche del hero): 21:9 en escritorio; los otros
+     cuatro en dos columnas a 16:9. La altura optica del logo va por marca,
+     igual que en /flota: el escudo de Porsche es vertical y los aros de
+     Audi una tira; con la misma altura uno se comeria el mosaico. */
+  const TILES = [
+    { slug: 'porsche',      logoH: 96, wide: true },
+    { slug: 'lamborghini',  logoH: 92 },
+    { slug: 'mercedes-amg', logoH: 84 },
+    { slug: 'audi',         logoH: 44 },
+    { slug: 'volkswagen',   logoH: 84 },
+  ];
+
+  /* Ancho y alto de un PNG leidos de su cabecera IHDR (bytes 16-23), para
+     que el <img> del logo lleve width/height y no mueva nada al cargar.
+     Sin sharp: este generador no lo necesita para nada mas. */
+  const pngSize = (rel) => {
+    const p = path.join(ROOT, rel);
+    if (!fs.existsSync(p)) throw new Error(`falta ${rel}: genera los logos con _build/build-brand-logos.js antes de construir la portada`);
+    const b = fs.readFileSync(p);
+    return [b.readUInt32BE(16), b.readUInt32BE(20)];
+  };
+  const tileMeta = (b) => {
+    const cars = carsOf(b.slug);
+    const from = eur(Math.min(...cars.map(c => c.prices.d1)));
+    return f(cars.length === 1 ? L.home.brandsMetaOne : L.home.brandsMetaMany, { n: cars.length, price: from });
+  };
+  const tile = (t) => {
+    const b = fleet.brands.find(x => x.slug === t.slug);
+    const logo = `assets/img/brands/logos/${t.slug}.png`;
+    const [lw, lh] = pngSize(logo);
+    const shot = `assets/img/brands/${t.slug}`;
+    for (const sfx of ['.jpg', '.webp', '-800.jpg', '-800.webp']) {
+      if (!fs.existsSync(path.join(ROOT, shot + sfx))) throw new Error(`falta ${shot + sfx}: genera las fotos de marca con _build/build-brand-shots.js`);
+    }
+    const sizes = t.wide ? '(max-width:760px) 100vw, min(1240px, 100vw)' : '(max-width:760px) 100vw, 620px';
+    return `<a class="brand-tile${t.wide ? ' brand-tile--wide' : ''}" href="${r}flota/${b.slug}/" style="--logo-h:${t.logoH}px">
+          <picture class="brand-tile-shot">
+            <source type="image/webp" srcset="${ra}${asset(shot + '-800.webp')} 800w, ${ra}${asset(shot + '.webp')} 1600w" sizes="${sizes}">
+            <img src="${ra}${asset(shot + '.jpg')}" srcset="${ra}${asset(shot + '-800.jpg')} 800w, ${ra}${asset(shot + '.jpg')} 1600w" sizes="${sizes}" alt="" width="1600" height="900" loading="lazy" decoding="async">
+          </picture>
+          <span class="brand-tile-veil" aria-hidden="true"></span>
+          <span class="brand-tile-body">
+            <img class="brand-tile-logo" src="${ra}${asset(logo)}" alt="${esc(b.label)}" width="${lw}" height="${lh}" loading="lazy" decoding="async">
+            <span class="brand-tile-meta">${esc(tileMeta(b))}</span>
+            <span class="btn btn--primary brand-tile-btn">${L.home.brandsCta} ${btnArrow}</span>
+          </span>
+        </a>`;
+  };
 
   const extraHead = `<link rel="stylesheet" href="${ra}css/home.css?${VH}">
-<link rel="stylesheet" href="${ra}css/featured.css?${VH}">
 <link rel="stylesheet" href="${ra}css/preloader.css?${VH}">
 <script src="${ra}js/preloader.js?${VH}"></script>`;
 
@@ -455,25 +512,7 @@ for (const lang of LANGS) {
   "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
 }}
 </script>
-<script src="${ra}js/fleet.js?${VH}"></script>
-<script type="module" src="${ra}js/experience.js?${VH}"></script>
-<script src="${ra}js/featured.js?${VH}"></script>
-<!-- Rellena la rejilla de respaldo de .oa-choose desde la flota. Si no hay
-     WebGL ni JS, se queda el enlace estatico "Ver la flota completa". -->
-<script>
-(function () {
-  var grid = document.getElementById("chooseGrid");
-  var fleet = window.SERRES_FLEET;
-  if (!grid || !fleet || !fleet.length) return;
-  function eur(n){ return String(n).replace(/\\B(?=(\\d{3})+(?!\\d))/g, "."); }
-  var items = fleet.map(function (c) {
-    var px = c.prices && c.prices.d1 ? eur(c.prices.d1) + " €/d" : "";
-    return '<a href="${r}coches/' + encodeURIComponent(c.slug) + '/"><span>' + c.name + '</span><span class="px">' + px + '</span></a>';
-  });
-  items.push('<a href="${r}flota/"><span>${L.common.seeFullFleet}</span><span class="px">&rarr;</span></a>');
-  grid.innerHTML = items.join("");
-})();
-</script>`;
+<script type="module" src="${ra}js/experience.js?${VH}"></script>`;
 
   const body = `  <section class="oa-intro">
     <h1 class="oa-title">
@@ -498,81 +537,39 @@ for (const lang of LANGS) {
     </div>
   </section>
 
-  <!-- DESTACADOS — carrusel sticky de cinco coches de la flota. El markup es
-       el fallback sin JS: cinco fotos apiladas, legibles y enlazadas.
-       js/featured.js lo convierte en el barrido por scroll. -->
-  <section class="fc-sec" id="featured">
-    <div class="fc-pin">
-      <div class="fc-head">
-        <!-- Dos gemelos en la misma celda: la sombra (con forma de letra, no
-             una caja) debajo y el degradado de oro encima. El oro va con
-             background-clip:text, que no admite text-shadow en el mismo
-             elemento; por eso el gemelo. Ver featured.css. -->
-        <p class="fc-eyebrow"><span class="fc-eyebrow-t"><span class="fc-eyebrow-sh" aria-hidden="true">${L.home.featured}</span><span class="fc-eyebrow-v">${L.home.featured}</span></span></p>
+  <!-- MARCAS — cinco mosaicos con la foto de la marca en nuestro taller,
+       el logo y un boton a /flota/<marca>/. Es la seccion sobre la que el
+       Porsche del hero termina de girar y se apaga (js/experience.js). -->
+  <section class="brands" id="marcas" aria-labelledby="marcas-h">
+    <div class="wrap">
+      <div class="section-head brands-head">
+        <p class="eyebrow">${L.home.brandsEyebrow}</p>
+        <h2 class="h-lg" id="marcas-h">${L.home.brandsTitle}</h2>
+        <p class="lede">${L.home.brandsBody}</p>
       </div>
-      <div class="fc-stage">
-        ${featured.map(c => `<a class="fc-slide" href="${r}coches/${c.slug}/">
-          <picture>
-            <source type="image/webp" srcset="${ra}${asset(`assets/img/cars/${c.slug}.webp`)}">
-            <img src="${ra}${asset(`assets/img/cars/${c.slug}.jpg`)}" alt="${esc(c.name)} ${L.common.rentalAlt}" loading="lazy" decoding="async" width="1800" height="1013">
-          </picture>
-          <h2 class="fc-title"><span class="fc-brand">${esc(brandOf(c).label)}</span>${esc(c.name.replace(brandOf(c).label, '').replace(/^[\\s-]+/, '') || c.name)}</h2>
-        </a>`).join('\n        ')}
+      <div class="brands-grid">
+        ${TILES.map(tile).join('\n        ')}
       </div>
-      <div class="fc-progress" aria-hidden="true">${featured.map(() => '<i></i>').join('')}</div>
-      <p class="fc-hint">${L.home.keepScrolling}</p>
-    </div>
-  </section>
-
-  <!-- ELIGE TU COCHE — el anillo WebGL gira alrededor del Porsche. Esta
-       seccion aporta el recorrido de scroll y el fallback sin WebGL. -->
-  <section class="oa-choose" id="choose">
-    <div class="oa-choose-head">
-      <p>${L.home.chooseKicker}</p>
-      <h2>${L.home.chooseTitle}</h2>
-    </div>
-    <div class="oa-choose-grid" id="chooseGrid" aria-label="${L.nav.fleet}">
-      <a href="${r}flota/">${L.common.seeFullFleet}</a>
-    </div>
-  </section>
-
-  <section class="oa-outro">
-    <div class="oa-footer">
-      <p>${L.home.outro}</p>
-      <p>© ${new Date().getFullYear()} · BCN</p>
     </div>
   </section>
 `;
 
-  const afterMain = `<div class="sd-choose-ui" aria-hidden="true">
-  <div class="cu-title">
-    <span class="cu-kicker">${L.home.chooseKicker}</span>
-    <span class="cu-h">${L.home.chooseUiTitle}</span>
-  </div>
-  <div class="cu-hint">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M8 12h8M8 12l3-3M8 12l3 3M16 12l-3-3M16 12l-3 3"/></svg>
-    Desliza para girar
-  </div>
-</div>
-<div class="sd-tooltip" role="status" aria-live="polite"></div>
-<div class="sd-cursor" aria-hidden="true"></div>
-
-<div class="sd-below">
+  const afterMain = `<div class="sd-below">
   <!-- NEGOCIO HERMANO — Serres Wrap Center. -->
   <section class="section swc" id="wrap-center">
     <div class="wrap">
       <div class="swc-band">
         <div class="swc-copy">
           <span class="eyebrow">${L.footer.wrapCenter}</span>
-          <h2 class="h-md">Antes de conducirlo, <span class="gold-text">${L.home.swcTitleB}</span>.</h2>
+          <h2 class="h-md">${L.home.swcTitleA} <span class="gold-text">${L.home.swcTitleB}</span>.</h2>
           <p class="lede">${L.home.swcBody}</p>
           <ul class="chips" style="margin:18px 0">
             <li class="chip">${L.home.swcTags[0]}</li><li class="chip">${L.home.swcTags[1]}</li><li class="chip">${L.home.swcTags[2]}</li><li class="chip">${L.home.swcTags[3]}</li><li class="chip">${L.home.swcTags[4]}</li>
           </ul>
-          <a class="btn btn--secondary" href="${C.wrapCenter}" target="_blank" rel="noopener">Visitar Serres Wrap Center ${btnArrow}</a>
+          <a class="btn btn--secondary" href="${C.wrapCenter}" target="_blank" rel="noopener">${L.home.swcCta} ${btnArrow}</a>
         </div>
         <a class="swc-shot" href="${C.wrapCenter}" target="_blank" rel="noopener"
-           aria-label="${L.home.swcShotAria}">
+           aria-label="${L.home.swcShotTag} · ${L.home.swcShotAria}">
           <img src="${ra}${asset("assets/img/wrapcenter/hero-poster.jpg")}" width="1600" height="900" loading="lazy" decoding="async"
                alt="${L.home.swcShotAlt}">
           <span class="swc-shot-tag">${L.home.swcShotTag}</span>
@@ -602,7 +599,7 @@ for (const lang of LANGS) {
 `;
 
   /* experience.js sale por la puerta de atras si no encuentra .sd-model y
-     .oa-exp (js/experience.js:34, "not the home page"), asi que el lienzo
+     .oa-exp (js/experience.js, "not the home page"), asi que el lienzo
      WebGL y su fondo tienen que estar en el DOM antes de <main>, y <main>
      tiene que llevar la clase .oa-exp. Sin esto no hay hero 3D y no avisa. */
   const beforeMain = `<div class="oa-backdrop" aria-hidden="true"></div>
@@ -1083,7 +1080,6 @@ ${scene({ n: 4, kind: 'drive', title: steps[3][1], body: steps[3][2], stage: sta
         <a class="btn btn--secondary" href="${C.instagram}" target="_blank" rel="noopener" aria-label="Instagram ${esc(C.instagramHandle)}">${ICON.ig}<span>${L.contact.instagram}</span></a>
       </div>
       <ul class="terms-list" style="margin-top:24px">
-        <li><span class="k">${L.contact.where}</span><span class="v">${esc(C.address.street)}, ${C.address.postalCode} ${esc(C.address.locality)} (${esc(C.address.region)})</span></li>
         <li><span class="k">${L.terms.delivery}</span><span class="v">Área metropolitana de Barcelona · ${eur(T.deliveryFee)}</span></li>
         <li><span class="k">${L.contact.email}</span><span class="v"><a class="ico-link" href="mailto:${C.email}">${ICON.gmail}<span>${C.email}</span></a></span></li>
         <li><span class="k">${L.contact.instagram}</span><span class="v"><a class="ico-link" href="${C.instagram}" target="_blank" rel="noopener">${ICON.ig}<span>${esc(C.instagramHandle)}</span></a></span></li>
