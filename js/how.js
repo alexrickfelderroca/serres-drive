@@ -254,7 +254,6 @@
     var needle = sec.querySelector(".gauge .needle");
     var start = sec.querySelector(".drive-start");
     var dash = sec.querySelector(".drive-road .dash");
-    var lines = sec.querySelector(".drive-lines");
     var speedEl = sec.querySelector(".drive-speed b");
     var s = { rpm: 0, speed: 0 };
     function render() {
@@ -285,8 +284,7 @@
     tl.to(s, { rpm: 0.9, duration: 0.12, ease: "power2.inOut" }, 0.26);
     tl.to(car, { y: 1.6, duration: 0.012, repeat: 15, yoyo: true }, 0.18);
     /* acelera y se va hacia el horizonte: el coche (visto desde arriba)
-       encoge hacia el punto de fuga de la carretera, con estelas detrás y
-       trazos de velocidad que bajan por los arcenes. */
+       encoge hacia el punto de fuga de la carretera, con estelas detrás. */
     var stage = sec.querySelector(".drive");
     /* Distancia vertical del centro del coche al punto de fuga. El SVG de la
        carretera va con preserveAspectRatio "xMidYMax slice": escala k =
@@ -307,10 +305,6 @@
       tl.fromTo(g, { opacity: 0, yPercent: 0, scale: 1 }, { opacity: 0.34 - i * 0.09, yPercent: (i + 1) * 9, scale: 1 + (i + 1) * 0.05, duration: 0.2, ease: "power2.in" }, 0.56);
       tl.to(g, { opacity: 0, duration: 0.1 }, 0.78);
     });
-    if (lines) {
-      tl.fromTo(lines, { opacity: 0, y: -40 }, { opacity: 1, y: 260, duration: 0.3, ease: "power2.in" }, 0.56);
-      tl.to(lines, { opacity: 0, duration: 0.08 }, 0.86);
-    }
     /* las marcas del carril corren hacia la cámara: la carretera pasa bajo el coche */
     if (dash) tl.fromTo(dash, { strokeDashoffset: 0 }, { strokeDashoffset: 680, duration: 0.5, ease: "power2.in" }, 0.5);
     /* se ha ido: la aguja cae, el marcador se apaga */

@@ -368,13 +368,6 @@ html.lenis,.lenis.lenis-smooth{scroll-behavior:auto!important}
 /* Estelas: copias del coche que quedan atrás cuando sale. */
 .drive-ghost{position:absolute;inset:0;opacity:0;pointer-events:none}
 .drive-ghost img{filter:blur(3px) brightness(1.15)}
-/* Líneas de velocidad: trazos que bajan por los dos lados de la carretera. */
-.drive-lines{position:absolute;inset:0;pointer-events:none;opacity:0}
-.drive-lines i{position:absolute;width:2px;border-radius:2px;background:linear-gradient(180deg,transparent,rgba(238,240,244,.85))}
-.drive-lines i:nth-child(1){left:24%;top:30%;height:22%}
-.drive-lines i:nth-child(2){left:31%;top:22%;height:15%}
-.drive-lines i:nth-child(3){left:69%;top:34%;height:26%}
-.drive-lines i:nth-child(4){left:76%;top:24%;height:14%}
 /* El cuadro: cuentarrevoluciones + botón de arranque, como un HUD. */
 .drive-dash{
   position:absolute;left:18px;bottom:16px;z-index:3;display:flex;align-items:flex-end;gap:14px;

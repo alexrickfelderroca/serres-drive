@@ -927,7 +927,6 @@ ${others.length ? `<section class="section--tight" style="padding-top:0">
           <path class="edge" d="M120 600L455 330M880 600L545 330"/>
           <path class="dash" d="M500 600V330"/>
         </svg>
-        <span class="drive-lines"><i></i><i></i><i></i><i></i></span>
         <div class="drive-car">
           <span class="drive-ghost">${carPic}</span><span class="drive-ghost">${carPic}</span><span class="drive-ghost">${carPic}</span>
           <span class="drive-shot">${carPic}</span>

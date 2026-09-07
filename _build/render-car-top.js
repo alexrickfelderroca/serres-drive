@@ -36,10 +36,10 @@ const VIEWS = probe
       { name: 'chase-30-off', elev: 30, azim: -78, yaw: 0 },
     ]
   /* Camara de persecucion: detras del coche, a 30 grados, como un dron que
-     lo sigue, 7 grados escorado para que asomen las ruedas del lado derecho
-     apoyadas en el asfalto (de frente las tapa la zaga ancha del GT3).
+     lo sigue, justo detras: escorado unos grados el coche se veia ladeado
+     sobre el carril.
      Una planta pura (elev ~90) parecia que el coche volaba. */
-  : [{ name: 'gt3-top', elev: 26, azim: -83, yaw: 0 }];
+  : [{ name: 'gt3-top', elev: 26, azim: -90, yaw: 0 }];
 
 const W = 2000, H = 2000;
 
