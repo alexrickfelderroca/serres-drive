@@ -41,17 +41,11 @@ html.lenis,.lenis.lenis-smooth{scroll-behavior:auto!important}
   --wa-input:#2a3942;
 }
 
-/* ---------- intro: pista de que hay que bajar ------------------------- */
+/* ---------- intro ------------------------------------------------------
+   Sin la pista "Baja para ver la película": el propietario la quito el
+   07-09-2026. */
 .how-intro{padding-bottom:clamp(20px,3vw,40px)}
 .how-intro .section-head{margin-bottom:0}
-.how-hint{
-  display:none;align-items:center;gap:10px;margin-top:22px;
-  font-family:var(--font-head);font-size:13px;font-weight:600;
-  letter-spacing:.22em;text-transform:uppercase;color:var(--text-mute);
-}
-.how-hint svg{width:18px;height:18px;color:var(--gold);animation:how-bob 1.8s var(--ease) infinite}
-body.how-film .how-hint{display:inline-flex}
-@keyframes how-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
 
 /* ---------- escena: la unidad ---------------------------------------- */
 .film{position:relative}
@@ -479,6 +473,6 @@ body.how-film .how-hint{display:inline-flex}
    además se apagan las animaciones de tiempo que quedan en CSS.
    ===================================================================== */
 @media (prefers-reduced-motion:reduce){
-  .how-hint svg,.wa-typing i,.wa-caret{animation:none}
+  .wa-typing i,.wa-caret{animation:none}
   .film-rail,.film-rail li,.film-rail li::before,.pick-tile{transition:none}
 }

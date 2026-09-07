@@ -143,7 +143,6 @@
       { "n": "04", "title": "Conduce", "body": "Disfruta del viaje y devuelve el vehículo en el plazo acordado." }
     ],
     "shotAlt": "Mercedes-AMG G 63 de la flota de Serres Drive",
-    "filmHint": "Baja para ver la película",
     "filmAria": "Cómo funciona, en cuatro escenas",
     "stepOf": "Paso {n} de {total}",
     "scene": "Escena",
