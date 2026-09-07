@@ -345,28 +345,29 @@ html.lenis,.lenis.lenis-smooth{scroll-behavior:auto!important}
 .drive-road .dash{fill:none;stroke:rgba(238,240,244,.55);stroke-width:2.2;stroke-dasharray:38 30;stroke-linecap:round}
 .drive-road .horizon{fill:none;stroke:rgba(255,255,255,.08);stroke-width:1}
 .drive-road .glow{fill:url(#drvGlow)}
+/* El coche visto desde arriba (render del GT3, fondo transparente), sobre
+   el carril: su centro va al 74 % de alto, donde la carretera mide ~43 % del
+   ancho. Al arrancar se va hacia el punto de fuga (js/how.js). */
 .drive-car{
-  position:absolute;left:50%;top:46%;width:min(74%,640px);transform:translate(-50%,-50%);
+  position:absolute;left:50%;top:74%;width:min(20%,190px);transform:translate(-50%,-50%);
   will-change:transform;
 }
 .film-on .drive-car{transform:none}
-.drive-car .drive-shot{
-  position:relative;display:block;border-radius:18px;overflow:hidden;
-  border:1px solid var(--line-2);background:var(--panel);box-shadow:var(--shadow-3);
+.drive-car .drive-shot{position:relative;display:block}
+.drive-car img{
+  width:100%;height:auto;
+  filter:drop-shadow(0 16px 18px rgba(0,0,0,.7)) drop-shadow(0 2px 4px rgba(0,0,0,.55));
 }
-.drive-car img{width:100%;height:auto;aspect-ratio:3/2;object-fit:cover}
-/* Estelas: copias de la foto que quedan atrás cuando el coche sale. */
-.drive-ghost{
-  position:absolute;inset:0;border-radius:18px;overflow:hidden;opacity:0;pointer-events:none;
-}
-.drive-ghost img{width:100%;height:100%;object-fit:cover;filter:blur(2px) brightness(1.1)}
-/* Líneas de velocidad, a la izquierda del coche. */
+/* Estelas: copias del coche que quedan atrás cuando sale. */
+.drive-ghost{position:absolute;inset:0;opacity:0;pointer-events:none}
+.drive-ghost img{filter:blur(3px) brightness(1.15)}
+/* Líneas de velocidad: trazos que bajan por los dos lados de la carretera. */
 .drive-lines{position:absolute;inset:0;pointer-events:none;opacity:0}
-.drive-lines i{position:absolute;height:2px;border-radius:2px;background:linear-gradient(90deg,transparent,rgba(238,240,244,.85))}
-.drive-lines i:nth-child(1){top:36%;left:-10%;width:34%}
-.drive-lines i:nth-child(2){top:44%;left:-18%;width:28%}
-.drive-lines i:nth-child(3){top:52%;left:-8%;width:40%}
-.drive-lines i:nth-child(4){top:60%;left:-16%;width:24%}
+.drive-lines i{position:absolute;width:2px;border-radius:2px;background:linear-gradient(180deg,transparent,rgba(238,240,244,.85))}
+.drive-lines i:nth-child(1){left:24%;top:30%;height:22%}
+.drive-lines i:nth-child(2){left:31%;top:22%;height:15%}
+.drive-lines i:nth-child(3){left:69%;top:34%;height:26%}
+.drive-lines i:nth-child(4){left:76%;top:24%;height:14%}
 /* El cuadro: cuentarrevoluciones + botón de arranque, como un HUD. */
 .drive-dash{
   position:absolute;left:18px;bottom:16px;z-index:3;display:flex;align-items:flex-end;gap:14px;
@@ -441,7 +442,7 @@ html.lenis,.lenis.lenis-smooth{scroll-behavior:auto!important}
 @media (max-width:760px){
   .drive-dash{left:12px;bottom:12px;gap:10px}
   .drive-start{width:54px;height:54px}
-  .drive-car{width:min(86%,520px);top:44%}
+  .drive-car{width:min(26%,150px);top:74%}
   .drive-speed{right:12px;bottom:14px}
   /* El fotograma final del chat tiene que caber ENTERO, con la tarjeta
      del coche: se gana altura quitando la claqueta y el chip del día y

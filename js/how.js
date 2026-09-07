@@ -284,19 +284,35 @@
     tl.to(s, { rpm: 3.2, duration: 0.1, ease: "power2.out" }, 0.16);
     tl.to(s, { rpm: 0.9, duration: 0.12, ease: "power2.inOut" }, 0.26);
     tl.to(car, { y: 1.6, duration: 0.012, repeat: 15, yoyo: true }, 0.18);
-    /* acelera y sale de plano por la derecha, con estelas y líneas de velocidad */
+    /* acelera y se va hacia el horizonte: el coche (visto desde arriba)
+       encoge hacia el punto de fuga de la carretera, con estelas detrás y
+       trazos de velocidad que bajan por los arcenes. */
+    var stage = sec.querySelector(".drive");
+    /* Distancia vertical del centro del coche al punto de fuga. El SVG de la
+       carretera va con preserveAspectRatio "xMidYMax slice": escala k =
+       max(w/1000, h/600), anclado abajo; el horizonte está en y=330 de 600,
+       o sea a 270·k del borde inferior. El centro del coche coincide con su
+       offsetTop (top:74 % + translate(-50%,-50%)). Va como función para que
+       invalidateOnRefresh la recalcule al redimensionar. */
+    function toVanish() {
+      if (!stage) return -260;
+      var h = stage.clientHeight, w = stage.clientWidth;
+      var k = Math.max(w / 1000, h / 600);
+      return (h - 270 * k) - car.offsetTop;
+    }
     tl.to(s, { rpm: 6.4, duration: 0.3, ease: "power2.in" }, 0.48);
     tl.to(s, { speed: 120, duration: 0.34, ease: "power2.in" }, 0.5);
-    tl.to(car, { xPercent: 140, skewX: -5, duration: 0.34, ease: "power3.in" }, 0.5);
+    tl.to(car, { y: toVanish, scale: 0.05, duration: 0.36, ease: "power2.in" }, 0.5);
     ghosts.forEach(function (g, i) {
-      tl.fromTo(g, { opacity: 0, xPercent: 0 }, { opacity: 0.36 - i * 0.1, xPercent: -(i + 1) * 9, duration: 0.2, ease: "power2.in" }, 0.58);
-      tl.to(g, { opacity: 0, duration: 0.1 }, 0.8);
+      tl.fromTo(g, { opacity: 0, yPercent: 0, scale: 1 }, { opacity: 0.34 - i * 0.09, yPercent: (i + 1) * 9, scale: 1 + (i + 1) * 0.05, duration: 0.2, ease: "power2.in" }, 0.56);
+      tl.to(g, { opacity: 0, duration: 0.1 }, 0.78);
     });
     if (lines) {
-      tl.fromTo(lines, { opacity: 0, x: 60 }, { opacity: 1, x: -260, duration: 0.3, ease: "power2.in" }, 0.56);
+      tl.fromTo(lines, { opacity: 0, y: -40 }, { opacity: 1, y: 260, duration: 0.3, ease: "power2.in" }, 0.56);
       tl.to(lines, { opacity: 0, duration: 0.08 }, 0.86);
     }
-    if (dash) tl.fromTo(dash, { strokeDashoffset: 0 }, { strokeDashoffset: -680, duration: 0.5, ease: "power2.in" }, 0.5);
+    /* las marcas del carril corren hacia la cámara: la carretera pasa bajo el coche */
+    if (dash) tl.fromTo(dash, { strokeDashoffset: 0 }, { strokeDashoffset: 680, duration: 0.5, ease: "power2.in" }, 0.5);
     /* se ha ido: la aguja cae, el marcador se apaga */
     tl.to(s, { rpm: 0, duration: 0.08 }, 0.86);
     if (speedEl) tl.to(speedEl, { opacity: 0.35, duration: 0.06 }, 0.9);

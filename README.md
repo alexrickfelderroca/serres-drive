@@ -42,6 +42,8 @@ _build/                ← generadores (no los sirve nadie, pero viven en el rep
   build-brand-logos.js   brand-logos-src/ (logos del propietario) →
                          assets/img/brands/logos/<marca>.png transparentes
   serve.js               servidor estático local (8131) para verificar
+  render-car-top.js      GT3 del hero visto desde arriba, fondo transparente
+                         (three.js en el Chrome del sistema) → assets/img/how/
   build-data.js          fleet-base + fleet-specs + manifiesto → data/fleet.json
   build-seo-meta.js      data/fleet.json → data/seo-meta.json
   build-site.js          → las 26 páginas + 404.html + sitemap.xml
@@ -82,7 +84,7 @@ node _build/verify.js            # 212 comprobaciones; debe salir FAIL 0
 | Cambiar la portada | `css/home.css`, `css/preloader.css`; el hero 3D en `js/experience.js`; el bloque `/* --- home` de `build-site.js` |
 | Cambiar una foto o un logo de marca | `_build/brand-shots-src/manifest.json` → `build-brand-shots.js`; `_build/brand-logos-src/` → `build-brand-logos.js`; altura óptica de cada logo en `TILES` de `build-site.js` |
 | Cambiar comportamiento | `js/site.js` (script único) |
-| Cambiar la película de Cómo funciona | `css/how.css`, `js/how.js`, `_build/how-map.js` y el bloque `/como-funciona` de `build-site.js` |
+| Cambiar la película de Cómo funciona | `css/how.css`, `js/how.js`, `_build/how-map.js`, `_build/render-car-top.js` (el coche cenital de la escena 04) y el bloque `/como-funciona` de `build-site.js` |
 | Cambiar un texto | `_build/i18n/es.json` **y su equivalente en los otros 4** |
 | Añadir un idioma | un `<código>.json` en `_build/i18n/` + su código en `LANGS` |
 

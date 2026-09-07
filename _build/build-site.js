@@ -78,6 +78,15 @@ const asset = (p) => {
   const v = _assetV.get(p);
   return v ? `${p}?v=${v}` : p;
 };
+/* Ancho y alto de un PNG leidos de su cabecera IHDR (bytes 16-23), para que
+   un <img> lleve width/height sin cargar sharp en este generador. Falla en
+   voz alta si el archivo no esta: los logos y renders se generan aparte. */
+const pngSize = (rel, hint) => {
+  const p = path.join(ROOT, rel);
+  if (!fs.existsSync(p)) throw new Error(`falta ${rel}: ${hint}`);
+  const b = fs.readFileSync(p);
+  return [b.readUInt32BE(16), b.readUInt32BE(20)];
+};
 /* Mismo mecanismo para los assets que solo usa la portada restaurada. */
 const VH = 'v=' + assetHash('css/home.css', 'css/preloader.css',
   'js/preloader.js', 'js/experience.js');
@@ -456,15 +465,6 @@ for (const lang of LANGS) {
     { slug: 'volkswagen',   logoH: 84 },
   ];
 
-  /* Ancho y alto de un PNG leidos de su cabecera IHDR (bytes 16-23), para
-     que el <img> del logo lleve width/height y no mueva nada al cargar.
-     Sin sharp: este generador no lo necesita para nada mas. */
-  const pngSize = (rel) => {
-    const p = path.join(ROOT, rel);
-    if (!fs.existsSync(p)) throw new Error(`falta ${rel}: genera los logos con _build/build-brand-logos.js antes de construir la portada`);
-    const b = fs.readFileSync(p);
-    return [b.readUInt32BE(16), b.readUInt32BE(20)];
-  };
   const tileMeta = (b) => {
     const cars = carsOf(b.slug);
     const from = eur(Math.min(...cars.map(c => c.prices.d1)));
@@ -473,7 +473,7 @@ for (const lang of LANGS) {
   const tile = (t) => {
     const b = fleet.brands.find(x => x.slug === t.slug);
     const logo = `assets/img/brands/logos/${t.slug}.png`;
-    const [lw, lh] = pngSize(logo);
+    const [lw, lh] = pngSize(logo, 'genera los logos con _build/build-brand-logos.js');
     const shot = `assets/img/brands/${t.slug}`;
     for (const sfx of ['.jpg', '.webp', '-800.jpg', '-800.webp']) {
       if (!fs.existsSync(path.join(ROOT, shot + sfx))) throw new Error(`falta ${shot + sfx}: genera las fotos de marca con _build/build-brand-shots.js`);
@@ -914,8 +914,11 @@ ${others.length ? `<section class="section--tight" style="padding-top:0">
             <text x="60" y="90" text-anchor="middle">RPM ×1000</text>
           </svg>`;
   })();
-  const g0 = hero.gallery[0];
-  const heroPic = `<picture><source type="image/webp" srcset="${ra}${asset(g0.webp)}"><img src="${ra}${asset(g0.jpg)}" width="${g0.width}" height="${g0.height}" alt="" loading="lazy" decoding="async"></picture>`;
+  /* El coche visto desde arriba: render del GT3 del hero con fondo
+     transparente (_build/render-car-top.js). Antes iba la foto 3/4 del G 63
+     en una tarjeta, que sobre la carretera en perspectiva quedaba pegada. */
+  const [cw, ch] = pngSize('assets/img/how/gt3-top.png', 'renderiza el coche con _build/render-car-top.js');
+  const carPic = `<picture><source type="image/webp" srcset="${ra}${asset('assets/img/how/gt3-top.webp')}"><img src="${ra}${asset('assets/img/how/gt3-top.png')}" width="${cw}" height="${ch}" alt="" loading="lazy" decoding="async"></picture>`;
   const stageDrive = `<div class="drive" aria-hidden="true">
         <svg class="drive-road" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMax slice">
           <defs><radialGradient id="drvGlow" cx=".5" cy="1" r=".7"><stop offset="0" stop-color="#c9cdd7" stop-opacity=".14"/><stop offset="1" stop-color="#c9cdd7" stop-opacity="0"/></radialGradient></defs>
@@ -926,8 +929,8 @@ ${others.length ? `<section class="section--tight" style="padding-top:0">
         </svg>
         <span class="drive-lines"><i></i><i></i><i></i><i></i></span>
         <div class="drive-car">
-          <span class="drive-ghost">${heroPic}</span><span class="drive-ghost">${heroPic}</span><span class="drive-ghost">${heroPic}</span>
-          <span class="drive-shot">${heroPic}</span>
+          <span class="drive-ghost">${carPic}</span><span class="drive-ghost">${carPic}</span><span class="drive-ghost">${carPic}</span>
+          <span class="drive-shot">${carPic}</span>
         </div>
         <div class="drive-dash">
           ${gauge}
