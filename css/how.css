@@ -300,7 +300,6 @@ html.lenis,.lenis.lenis-smooth{scroll-behavior:auto!important}
 .hm{display:block;width:100%;height:100%;font-family:var(--font-body)}
 .hm-land{fill:#111217}
 .hm-dots{opacity:.9}
-.hm-ridge{fill:none;stroke:#1a1c24;stroke-width:46;stroke-linecap:round}
 .hm-sea{fill:url(#hmSea)}
 .hm-coast{fill:none;stroke:rgba(160,176,204,.42);stroke-width:1.6}
 .hm-river{fill:none;stroke:rgba(120,150,200,.28);stroke-width:1.6}
