@@ -31,11 +31,15 @@ const probeDir = probe ? process.argv[process.argv.indexOf('--probe') + 1] : nul
    la pone a su lado. En la imagen final el morro apunta hacia arriba. */
 const VIEWS = probe
   ? [
-      { name: 'top-90', elev: 88, azim: -90, yaw: 0 },
-      { name: 'rear-66', elev: 66, azim: -90, yaw: 0 },
-      { name: 'rear-54-3q', elev: 54, azim: -72, yaw: 0 },
+      { name: 'chase-24', elev: 24, azim: -90, yaw: 0 },
+      { name: 'chase-30', elev: 30, azim: -90, yaw: 0 },
+      { name: 'chase-30-off', elev: 30, azim: -78, yaw: 0 },
     ]
-  : [{ name: 'gt3-top', elev: 62, azim: -90, yaw: 0 }];
+  /* Camara de persecucion: detras del coche, a 30 grados, como un dron que
+     lo sigue, 7 grados escorado para que asomen las ruedas del lado derecho
+     apoyadas en el asfalto (de frente las tapa la zaga ancha del GT3).
+     Una planta pura (elev ~90) parecia que el coche volaba. */
+  : [{ name: 'gt3-top', elev: 26, azim: -83, yaw: 0 }];
 
 const W = 2000, H = 2000;
 

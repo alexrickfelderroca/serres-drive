@@ -345,18 +345,25 @@ html.lenis,.lenis.lenis-smooth{scroll-behavior:auto!important}
 .drive-road .dash{fill:none;stroke:rgba(238,240,244,.55);stroke-width:2.2;stroke-dasharray:38 30;stroke-linecap:round}
 .drive-road .horizon{fill:none;stroke:rgba(255,255,255,.08);stroke-width:1}
 .drive-road .glow{fill:url(#drvGlow)}
-/* El coche visto desde arriba (render del GT3, fondo transparente), sobre
-   el carril: su centro va al 74 % de alto, donde la carretera mide ~43 % del
-   ancho. Al arrancar se va hacia el punto de fuga (js/how.js). */
+/* El coche visto desde atras y arriba (render del GT3 con camara de
+   persecucion, fondo transparente), rodando sobre el carril: su centro va al
+   72 % de alto, donde la carretera mide ~45 % del ancho. Debajo, una sombra
+   de contacto para que se lea apoyado en el asfalto y no volando. Al arrancar
+   se va hacia el punto de fuga (js/how.js). */
 .drive-car{
-  position:absolute;left:50%;top:74%;width:min(20%,190px);transform:translate(-50%,-50%);
+  position:absolute;left:50%;top:72%;width:min(28%,250px);transform:translate(-50%,-50%);
   will-change:transform;
 }
 .film-on .drive-car{transform:none}
-.drive-car .drive-shot{position:relative;display:block}
+.drive-car .drive-shot{position:relative;display:block;isolation:isolate}
+.drive-car .drive-shot::after{
+  content:"";position:absolute;z-index:-1;left:4%;right:4%;bottom:-5%;height:18%;border-radius:50%;
+  background:radial-gradient(50% 50% at 50% 50%,rgba(0,0,0,.8),rgba(0,0,0,0) 74%);
+  filter:blur(3px);
+}
 .drive-car img{
   width:100%;height:auto;
-  filter:drop-shadow(0 16px 18px rgba(0,0,0,.7)) drop-shadow(0 2px 4px rgba(0,0,0,.55));
+  filter:drop-shadow(0 6px 8px rgba(0,0,0,.55));
 }
 /* Estelas: copias del coche que quedan atrás cuando sale. */
 .drive-ghost{position:absolute;inset:0;opacity:0;pointer-events:none}
@@ -442,7 +449,7 @@ html.lenis,.lenis.lenis-smooth{scroll-behavior:auto!important}
 @media (max-width:760px){
   .drive-dash{left:12px;bottom:12px;gap:10px}
   .drive-start{width:54px;height:54px}
-  .drive-car{width:min(26%,150px);top:74%}
+  .drive-car{width:min(34%,170px);top:72%}
   .drive-speed{right:12px;bottom:14px}
   /* El fotograma final del chat tiene que caber ENTERO, con la tarjeta
      del coche: se gana altura quitando la claqueta y el chip del día y
