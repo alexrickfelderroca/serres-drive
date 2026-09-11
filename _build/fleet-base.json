@@ -1,36 +1,488 @@
 {
-  "_source": "Prices, slugs, deposits and brand pages are transcribed verbatim from serresdrive-claude-code-task_2.md, ETAPA 0 (revision 04.09.2026). The owner's fleet.json referenced by that document does not exist on this machine (~/Desktop/GOOGLE ADS/serresdrive/ is empty), so this file IS the single source of truth. Specs and copy are merged in from _build/fleet-specs.json.",
+  "_source": "Prices, slugs, deposits and brand pages are transcribed verbatim from serresdrive-claude-code-task_2.md, ETAPA 0 (revision 04.09.2026). The owner's fleet.json referenced by that document does not exist on this machine (~/Desktop/GOOGLE ADS/serresdrive/ is empty), so this file IS the single source of truth. Specs and copy are merged in from _build/fleet-specs.json. 11.09.2026: se incorporan 13 coches del proveedor Stratos. Sus precios/dia son los que paso Alex por chat (PVP de Serres Drive, por encima de la tarifa mayorista del proveedor); fianza, km/dia y km extra salen de la tabla de tarifas de Stratos. Los tramos de fianza de la flota propia (5.000 premium / 3.500 gama media / 2.000 resto) tambien los fijo Alex ese dia.",
   "cars": [
-    { "slug": "mercedes-amg-g63",       "name": "Mercedes-AMG G 63",           "brand": "mercedes-amg", "brandLabel": "Mercedes-AMG", "prices": { "d1": 1000, "d2": 1700, "d3": 2700, "w1": 6000, "m1": 12000 }, "deposit": 5000 },
-    { "slug": "lamborghini-urus",       "name": "Lamborghini Urus",            "brand": "lamborghini",  "brandLabel": "Lamborghini",  "prices": { "d1": 1100, "d2": 1900, "d3": 3000, "w1": 6500, "m1": 13000 }, "deposit": null },
-    { "slug": "audi-rs6-avant",         "name": "Audi RS 6 Avant",             "brand": "audi",         "brandLabel": "Audi",         "prices": { "d1": 900,  "d2": 1600, "d3": 2500, "w1": 5500, "m1": 11000 }, "deposit": null },
-    { "slug": "porsche-911-cabrio",     "name": "Porsche 911 Cabrio (992)",    "brand": "porsche",      "brandLabel": "Porsche",      "prices": { "d1": 800,  "d2": 1500, "d3": 2200, "w1": 4600, "m1": 9000 },  "deposit": 2000 },
-    { "slug": "porsche-911-carrera-s",  "name": "Porsche 911 Carrera S (991)", "brand": "porsche",      "brandLabel": "Porsche",      "prices": { "d1": 700,  "d2": 1300, "d3": 2000, "w1": 3500, "m1": 7500 },  "deposit": 2000 },
-    { "slug": "porsche-cayenne-hybrid", "name": "Porsche Cayenne Hybrid",      "brand": "porsche",      "brandLabel": "Porsche",      "prices": { "d1": 700,  "d2": 1300, "d3": 2000, "w1": 3500, "m1": 7500 },  "deposit": 2000 },
-    { "slug": "mercedes-amg-a45",       "name": "Mercedes-AMG A45 S",          "brand": "mercedes-amg", "brandLabel": "Mercedes-AMG", "prices": { "d1": 450,  "d2": 800,  "d3": 1100, "w1": 2000, "m1": 5000 },  "deposit": 2000 },
-    { "slug": "audi-rs3-sportback",     "name": "Audi RS 3 Sportback",         "brand": "audi",         "brandLabel": "Audi",         "prices": { "d1": 450,  "d2": 800,  "d3": 1100, "w1": 2000, "m1": 5000 },  "deposit": 2000 },
-    { "slug": "audi-rsq3",              "name": "Audi RS Q3",                  "brand": "audi",         "brandLabel": "Audi",         "prices": { "d1": 450,  "d2": 800,  "d3": 1100, "w1": 2000, "m1": 5000 },  "deposit": 2000 },
-    { "slug": "volkswagen-golf-r",      "name": "Volkswagen Golf 8.5 R",       "brand": "volkswagen",   "brandLabel": "Volkswagen",   "prices": { "d1": 400,  "d2": 750,  "d3": 1000, "w1": 1800, "m1": 4500 },  "deposit": 2000 },
-    { "slug": "range-rover-velar",      "name": "Range Rover Velar",           "brand": "range-rover",  "brandLabel": "Range Rover",  "prices": { "d1": 350,  "d2": 700,  "d3": 900,  "w1": 1800, "m1": 4300 },  "deposit": 2000 },
-    { "slug": "mercedes-glc",           "name": "Mercedes GLC",                "brand": "mercedes-amg", "brandLabel": "Mercedes-Benz","prices": { "d1": 200,  "d2": 350,  "d3": 550,  "w1": 1000, "m1": 2500 },  "deposit": 2000 },
-    { "slug": "mercedes-a200-4matic",   "name": "Mercedes A200 4Matic",        "brand": "mercedes-amg", "brandLabel": "Mercedes-Benz","prices": { "d1": 150,  "d2": 250,  "d3": 400,  "w1": 900,  "m1": 1800 },  "deposit": 2000 }
+    {
+      "slug": "mercedes-amg-g63",
+      "name": "Mercedes-AMG G 63",
+      "brand": "mercedes-amg",
+      "brandLabel": "Mercedes-AMG",
+      "prices": {
+        "d1": 1000,
+        "d2": 1700,
+        "d3": 2700,
+        "w1": 6000,
+        "m1": 12000
+      },
+      "deposit": 5000,
+      "kmPerDay": 150,
+      "kmExtra": null,
+      "location": "Barcelona"
+    },
+    {
+      "slug": "lamborghini-urus",
+      "name": "Lamborghini Urus",
+      "brand": "lamborghini",
+      "brandLabel": "Lamborghini",
+      "prices": {
+        "d1": 1100,
+        "d2": 1900,
+        "d3": 3000,
+        "w1": 6500,
+        "m1": 13000
+      },
+      "deposit": 5000,
+      "kmPerDay": 150,
+      "kmExtra": null,
+      "location": "Barcelona"
+    },
+    {
+      "slug": "audi-rs6-avant",
+      "name": "Audi RS 6 Avant",
+      "brand": "audi",
+      "brandLabel": "Audi",
+      "prices": {
+        "d1": 900,
+        "d2": 1600,
+        "d3": 2500,
+        "w1": 5500,
+        "m1": 11000
+      },
+      "deposit": 5000,
+      "kmPerDay": 150,
+      "kmExtra": null,
+      "location": "Barcelona"
+    },
+    {
+      "slug": "porsche-911-cabrio",
+      "name": "Porsche 911 Cabrio (992)",
+      "brand": "porsche",
+      "brandLabel": "Porsche",
+      "prices": {
+        "d1": 800,
+        "d2": 1500,
+        "d3": 2200,
+        "w1": 4600,
+        "m1": 9000
+      },
+      "deposit": 5000,
+      "kmPerDay": 150,
+      "kmExtra": null,
+      "location": "Barcelona"
+    },
+    {
+      "slug": "porsche-911-carrera-s",
+      "name": "Porsche 911 Carrera S (991)",
+      "brand": "porsche",
+      "brandLabel": "Porsche",
+      "prices": {
+        "d1": 700,
+        "d2": 1300,
+        "d3": 2000,
+        "w1": 3500,
+        "m1": 7500
+      },
+      "deposit": 5000,
+      "kmPerDay": 150,
+      "kmExtra": null,
+      "location": "Barcelona"
+    },
+    {
+      "slug": "porsche-cayenne-hybrid",
+      "name": "Porsche Cayenne Hybrid",
+      "brand": "porsche",
+      "brandLabel": "Porsche",
+      "prices": {
+        "d1": 700,
+        "d2": 1300,
+        "d3": 2000,
+        "w1": 3500,
+        "m1": 7500
+      },
+      "deposit": 5000,
+      "kmPerDay": 150,
+      "kmExtra": null,
+      "location": "Barcelona"
+    },
+    {
+      "slug": "mercedes-amg-a45",
+      "name": "Mercedes-AMG A45 S",
+      "brand": "mercedes-amg",
+      "brandLabel": "Mercedes-AMG",
+      "prices": {
+        "d1": 450,
+        "d2": 800,
+        "d3": 1100,
+        "w1": 2000,
+        "m1": 5000
+      },
+      "deposit": 3500,
+      "kmPerDay": 150,
+      "kmExtra": null,
+      "location": "Barcelona"
+    },
+    {
+      "slug": "audi-rs3-sportback",
+      "name": "Audi RS 3 Sportback",
+      "brand": "audi",
+      "brandLabel": "Audi",
+      "prices": {
+        "d1": 450,
+        "d2": 800,
+        "d3": 1100,
+        "w1": 2000,
+        "m1": 5000
+      },
+      "deposit": 3500,
+      "kmPerDay": 150,
+      "kmExtra": null,
+      "location": "Barcelona"
+    },
+    {
+      "slug": "audi-rsq3",
+      "name": "Audi RS Q3",
+      "brand": "audi",
+      "brandLabel": "Audi",
+      "prices": {
+        "d1": 450,
+        "d2": 800,
+        "d3": 1100,
+        "w1": 2000,
+        "m1": 5000
+      },
+      "deposit": 3500,
+      "kmPerDay": 150,
+      "kmExtra": null,
+      "location": "Barcelona"
+    },
+    {
+      "slug": "volkswagen-golf-r",
+      "name": "Volkswagen Golf 8.5 R",
+      "brand": "volkswagen",
+      "brandLabel": "Volkswagen",
+      "prices": {
+        "d1": 400,
+        "d2": 750,
+        "d3": 1000,
+        "w1": 1800,
+        "m1": 4500
+      },
+      "deposit": 3500,
+      "kmPerDay": 150,
+      "kmExtra": null,
+      "location": "Barcelona"
+    },
+    {
+      "slug": "range-rover-velar",
+      "name": "Range Rover Velar",
+      "brand": "range-rover",
+      "brandLabel": "Range Rover",
+      "prices": {
+        "d1": 350,
+        "d2": 700,
+        "d3": 900,
+        "w1": 1800,
+        "m1": 4300
+      },
+      "deposit": 3500,
+      "kmPerDay": 150,
+      "kmExtra": null,
+      "location": "Barcelona"
+    },
+    {
+      "slug": "mercedes-glc",
+      "name": "Mercedes GLC",
+      "brand": "mercedes-amg",
+      "brandLabel": "Mercedes-Benz",
+      "prices": {
+        "d1": 200,
+        "d2": 350,
+        "d3": 550,
+        "w1": 1000,
+        "m1": 2500
+      },
+      "deposit": 2000,
+      "kmPerDay": 150,
+      "kmExtra": null,
+      "location": "Barcelona"
+    },
+    {
+      "slug": "mercedes-a200-4matic",
+      "name": "Mercedes A200 4Matic",
+      "brand": "mercedes-amg",
+      "brandLabel": "Mercedes-Benz",
+      "prices": {
+        "d1": 150,
+        "d2": 250,
+        "d3": 400,
+        "w1": 900,
+        "m1": 1800
+      },
+      "deposit": 2000,
+      "kmPerDay": 150,
+      "kmExtra": null,
+      "location": "Barcelona"
+    },
+    {
+      "slug": "lamborghini-huracan-evo-spyder",
+      "name": "Lamborghini Huracán EVO Spyder",
+      "brand": "lamborghini",
+      "brandLabel": "Lamborghini",
+      "prices": {
+        "d1": 1400,
+        "d2": null,
+        "d3": null,
+        "w1": null,
+        "m1": null
+      },
+      "deposit": 7000,
+      "kmPerDay": 150,
+      "kmExtra": 5,
+      "location": null
+    },
+    {
+      "slug": "lamborghini-urus-s",
+      "name": "Lamborghini Urus S",
+      "brand": "lamborghini",
+      "brandLabel": "Lamborghini",
+      "prices": {
+        "d1": 1100,
+        "d2": null,
+        "d3": null,
+        "w1": null,
+        "m1": null
+      },
+      "deposit": 6000,
+      "kmPerDay": 150,
+      "kmExtra": 5,
+      "location": null
+    },
+    {
+      "slug": "aston-martin-dbx",
+      "name": "Aston Martin DBX",
+      "brand": "aston-martin",
+      "brandLabel": "Aston Martin",
+      "prices": {
+        "d1": 1000,
+        "d2": null,
+        "d3": null,
+        "w1": null,
+        "m1": null
+      },
+      "deposit": 6000,
+      "kmPerDay": 150,
+      "kmExtra": 5,
+      "location": null
+    },
+    {
+      "slug": "mercedes-amg-g63-verde-oliva",
+      "name": "Mercedes-AMG G 63 Verde Oliva",
+      "brand": "mercedes-amg",
+      "brandLabel": "Mercedes-AMG",
+      "prices": {
+        "d1": 1000,
+        "d2": null,
+        "d3": null,
+        "w1": null,
+        "m1": null
+      },
+      "deposit": 5000,
+      "kmPerDay": 150,
+      "kmExtra": 5,
+      "location": null
+    },
+    {
+      "slug": "range-rover-sv",
+      "name": "Range Rover SV",
+      "brand": "range-rover",
+      "brandLabel": "Range Rover",
+      "prices": {
+        "d1": 800,
+        "d2": null,
+        "d3": null,
+        "w1": null,
+        "m1": null
+      },
+      "deposit": 5000,
+      "kmPerDay": 150,
+      "kmExtra": 5,
+      "location": null
+    },
+    {
+      "slug": "range-rover-vogue",
+      "name": "Range Rover Vogue",
+      "brand": "range-rover",
+      "brandLabel": "Range Rover",
+      "prices": {
+        "d1": 800,
+        "d2": null,
+        "d3": null,
+        "w1": null,
+        "m1": null
+      },
+      "deposit": 3000,
+      "kmPerDay": 150,
+      "kmExtra": 4,
+      "location": null
+    },
+    {
+      "slug": "mercedes-gls",
+      "name": "Mercedes-Benz GLS",
+      "brand": "mercedes-amg",
+      "brandLabel": "Mercedes-Benz",
+      "prices": {
+        "d1": 700,
+        "d2": null,
+        "d3": null,
+        "w1": null,
+        "m1": null
+      },
+      "deposit": 3000,
+      "kmPerDay": 150,
+      "kmExtra": 3.5,
+      "location": null
+    },
+    {
+      "slug": "range-rover-sport-svr",
+      "name": "Range Rover Sport SVR",
+      "brand": "range-rover",
+      "brandLabel": "Range Rover",
+      "prices": {
+        "d1": 600,
+        "d2": null,
+        "d3": null,
+        "w1": null,
+        "m1": null
+      },
+      "deposit": 4000,
+      "kmPerDay": 150,
+      "kmExtra": 5,
+      "location": null
+    },
+    {
+      "slug": "mercedes-gle-coupe",
+      "name": "Mercedes-Benz GLE Coupé",
+      "brand": "mercedes-amg",
+      "brandLabel": "Mercedes-Benz",
+      "prices": {
+        "d1": 600,
+        "d2": null,
+        "d3": null,
+        "w1": null,
+        "m1": null
+      },
+      "deposit": 3000,
+      "kmPerDay": 150,
+      "kmExtra": 3.5,
+      "location": null
+    },
+    {
+      "slug": "range-rover-sport",
+      "name": "Range Rover Sport",
+      "brand": "range-rover",
+      "brandLabel": "Range Rover",
+      "prices": {
+        "d1": 550,
+        "d2": null,
+        "d3": null,
+        "w1": null,
+        "m1": null
+      },
+      "deposit": 3000,
+      "kmPerDay": 150,
+      "kmExtra": 4,
+      "location": null
+    },
+    {
+      "slug": "mercedes-amg-glc-43",
+      "name": "Mercedes-AMG GLC 43",
+      "brand": "mercedes-amg",
+      "brandLabel": "Mercedes-AMG",
+      "prices": {
+        "d1": 500,
+        "d2": null,
+        "d3": null,
+        "w1": null,
+        "m1": null
+      },
+      "deposit": 3000,
+      "kmPerDay": 150,
+      "kmExtra": 3.5,
+      "location": null
+    },
+    {
+      "slug": "mercedes-clase-v",
+      "name": "Mercedes-Benz Clase V",
+      "brand": "mercedes-amg",
+      "brandLabel": "Mercedes-Benz",
+      "prices": {
+        "d1": 350,
+        "d2": null,
+        "d3": null,
+        "w1": null,
+        "m1": null
+      },
+      "deposit": 1000,
+      "kmPerDay": 200,
+      "kmExtra": 0.5,
+      "location": null
+    },
+    {
+      "slug": "mercedes-glc-coupe",
+      "name": "Mercedes-Benz GLC Coupé",
+      "brand": "mercedes-amg",
+      "brandLabel": "Mercedes-Benz",
+      "prices": {
+        "d1": 330,
+        "d2": null,
+        "d3": null,
+        "w1": null,
+        "m1": null
+      },
+      "deposit": 2000,
+      "kmPerDay": 150,
+      "kmExtra": 2,
+      "location": null
+    }
   ],
   "brands": [
-    { "slug": "porsche",      "label": "Porsche" },
-    { "slug": "lamborghini",  "label": "Lamborghini" },
-    { "slug": "mercedes-amg", "label": "Mercedes-AMG" },
-    { "slug": "audi",         "label": "Audi" },
-    { "slug": "range-rover",  "label": "Range Rover" },
-    { "slug": "volkswagen",   "label": "Volkswagen" }
+    {
+      "slug": "porsche",
+      "label": "Porsche"
+    },
+    {
+      "slug": "lamborghini",
+      "label": "Lamborghini"
+    },
+    {
+      "slug": "aston-martin",
+      "label": "Aston Martin"
+    },
+    {
+      "slug": "mercedes-amg",
+      "label": "Mercedes-AMG"
+    },
+    {
+      "slug": "audi",
+      "label": "Audi"
+    },
+    {
+      "slug": "range-rover",
+      "label": "Range Rover"
+    },
+    {
+      "slug": "volkswagen",
+      "label": "Volkswagen"
+    }
   ],
   "terms": {
     "minAge": 18,
     "licenceNote": "Solo permiso de conducir en vigor. Sin antigüedad mínima.",
     "kmIncluded": 150,
-    "kmUnitConfirmed": false,
+    "kmUnitConfirmed": true,
     "depositFrom": 2000,
     "deliveryFee": 100,
-    "depositUnknownText": "Fianza: te la confirmamos por WhatsApp"
+    "depositUnknownText": "Fianza: te la confirmamos por WhatsApp",
+    "_kmUnitNote": "Confirmado por Alex el 11.09.2026: los kilometros son POR DIA. Hasta entonces la web decia \"150 km incluidos\" sin unidad, a proposito (punto 2 de OWNER-TODO)."
   },
   "contact": {
     "whatsapp": "34649663380",
@@ -40,9 +492,19 @@
     "instagramHandle": "@serres.drive",
     "wrapCenter": "https://serreswrapcenter.es",
     "_addressNote": "Sin calle ni codigo postal a proposito (07-09-2026): el propietario no quiere publicar direccion. Solo localidad y provincia, para el pie y el schema.",
-    "address": { "locality": "Sant Cugat del Vallès", "region": "Barcelona", "country": "ES" },
+    "address": {
+      "locality": "Sant Cugat del Vallès",
+      "region": "Barcelona",
+      "country": "ES"
+    },
     "_geoNote": "Solo para el punto 'Serres Drive' del mapa esquematico de /como-funciona (_build/how-map.js). Es el centro del municipio, NO el taller: no va al schema ni a ninguna otra parte.",
-    "geo": { "lat": 41.4735, "lng": 2.0865 }
+    "geo": {
+      "lat": 41.4735,
+      "lng": 2.0865
+    }
   },
-  "site": { "origin": "https://serresdrive.com", "name": "Serres Drive" }
+  "site": {
+    "origin": "https://serresdrive.com",
+    "name": "Serres Drive"
+  }
 }

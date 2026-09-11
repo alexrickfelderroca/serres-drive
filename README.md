@@ -5,8 +5,14 @@ Barcelona). Sitio estático en español, **sin framework y sin paso de build en
 producción**: lo que hay en el repositorio es exactamente lo que sirve
 Hostinger desde la raíz.
 
-- **13 coches**, seis marcas. La flota real; no hay ningún coche en la web que
-  no se pueda alquilar.
+- **26 coches**, siete marcas. Trece de la flota propia, en Barcelona, y trece
+  del proveedor **Stratos**, repartidos por España (alta del 11-09-2026). La
+  flota real; no hay ningún coche en la web que no se pueda alquilar.
+- **Fianza, kilómetros incluidos y precio del kilómetro extra, por coche.**
+  Lo que no está confirmado no se inventa: se dice «te lo confirmamos por
+  WhatsApp», igual que ya se hacía con las fianzas desconocidas.
+- **Ubicación por coche.** Los de la flota propia llevan «Barcelona»; los de
+  Stratos salen sin ubicación a propósito, porque están dispersos.
 - **Reservas por WhatsApp**, con el mensaje prerrellenado por coche.
 - **Portada**: hero 3D con el Porsche sobre el techo de LED hexagonales del
   taller, cinco mosaicos de marca (foto generada de cuatro coches de la marca
@@ -15,7 +21,7 @@ Hostinger desde la raíz.
 - **Cinco idiomas, cada uno con sus propias URLs:** español (raíz), inglés
   (`/en/`), ruso (`/ru/`), catalán (`/ca/`) y francés (`/fr/`), con `hreflang`
   entre las cinco y selector con banderas en el menú.
-- **130 páginas** (26 × 5 idiomas) con `<title>`, `description`, `H1`,
+- **200 páginas** (40 × 5 idiomas) con `<title>`, `description`, `H1`,
   `canonical`, `hreflang` y schema propios.
 
 ---
@@ -35,7 +41,9 @@ _build/i18n/es.json    ← DICCIONARIO FUENTE. Todo el texto de la web sale de
 
 _build/                ← generadores (no los sirve nadie, pero viven en el repo
                          para que el sitio se pueda reconstruir)
-  build-images.js        Sicur Cars/ → assets/img/cars/<slug>/ (JPG + WebP)
+  build-images.js        Sicur Cars/ y Stratos/ → assets/img/cars/<slug>/
+                         (JPG + WebP). La carpeta origen de cada coche la
+                         decide "root" en image-selection.json.
   build-brand-shots.js   brand-shots-src/manifest.json (URLs de Higgsfield) →
                          originales en brand-shots-src/ → assets/img/brands/
                          <marca>.jpg|webp (1600) y <marca>-800.jpg|webp
@@ -46,7 +54,7 @@ _build/                ← generadores (no los sirve nadie, pero viven en el rep
                          (three.js en el Chrome del sistema) → assets/img/how/
   build-data.js          fleet-base + fleet-specs + manifiesto → data/fleet.json
   build-seo-meta.js      data/fleet.json → data/seo-meta.json
-  build-site.js          → las 26 páginas + 404.html + sitemap.xml
+  build-site.js          → las 40 páginas + 404.html + sitemap.xml
   build-redirects.js     → .htaccess + seo/redirects/
   how-map.js             mapa SVG del área metropolitana para /como-funciona
   verify.js              compara el HTML generado con los números del encargo
@@ -69,8 +77,11 @@ node _build/build-redirects.js
 node _build/verify.js            # 212 comprobaciones; debe salir FAIL 0
 ```
 
-`build-images.js` solo hace falta si cambian las fotos: necesita la carpeta
-`Sicur Cars/` (los originales del propietario, ignorada por git) y `sharp`.
+`build-images.js` solo hace falta si cambian las fotos: necesita `Sicur Cars/`
+y `Stratos/` (los originales, las dos ignoradas por git) y `sharp`. `sharp` se
+localiza con `_build/sharp-resolve.js`, que prueba varias rutas; si no aparece
+por ninguna, el propio script dice cómo instalarlo. Antes estaba clavado con
+ruta absoluta a un proyecto hermano que ya no existe.
 
 ### Cambios habituales
 
@@ -108,11 +119,12 @@ equivalencias que mantener.
 
 /                             portada: hero 3D con scroll + mosaicos de
                               marcas + Wrap Center + CTA
-/flota/                       catálogo con los 13 coches
-/flota/{marca}/               porsche · lamborghini · mercedes-amg · audi ·
-                              range-rover · volkswagen
-/coches/{slug}/               13 fichas
-/tarifas/                     una tabla con las 5 duraciones
+/flota/                       catálogo con los 26 coches
+/flota/{marca}/               porsche · lamborghini · aston-martin ·
+                              mercedes-amg · audi · range-rover · volkswagen
+/coches/{slug}/               26 fichas
+/tarifas/                     una tabla con las 5 duraciones, la fianza,
+                              los km/día y el precio del km extra
 /como-funciona/               los 4 pasos como película que avanza con el
                               scroll: desfile de la flota · chat de WhatsApp
                               · mapa con la ruta de entrega · el coche arranca
@@ -129,7 +141,7 @@ reescrituras. `.htaccess` solo se ocupa de los 301 y de la caché.
 
 ## 3. Redirecciones
 
-`.htaccess` (generado) cubre **61 destinos 301**: las 13 fichas antiguas que
+`.htaccess` (generado) cubre los destinos 301: las fichas antiguas que
 siguen vivas, las 18 de coches que salieron de la flota, las 6 páginas de marca
 antiguas, las 5 páginas antiguas (`fleet.html` → `/flota/`…), `car.html?slug=`,
 los 19 valores de `?marca=` y un comodín para cualquier `alquiler-*.html` que
@@ -147,8 +159,9 @@ intactos).
 
 ## 4. Fotografía
 
-Las fotos de la flota salen de las carpetas del propietario (`Sicur Cars/`, una
-por coche). `_build/build-images.js` recorta cada una a 3:2 con un encuadre
+Las fotos salen de dos carpetas de originales, una subcarpeta por coche:
+`Sicur Cars/` (flota propia) y `Stratos/` (las del proveedor). Cuál se usa lo
+dice `"root"` en `_build/image-selection.json`. `_build/build-images.js` recorta cada una a 3:2 con un encuadre
 centrado en el coche —`position:'attention'` de sharp se quedaba con la copa de
 los árboles en las tomas de exterior— y escribe cuatro archivos por foto:
 
@@ -163,7 +176,8 @@ Los originales llegan a 1290 px de ancho como mucho, así que **no se escala
 hacia arriba**: 1200 px es el tope real. La calidad baja automáticamente hasta
 que cada archivo entra en su presupuesto; todos los hero están por debajo de
 150 KB. La foto 1 de cada coche es siempre un tres cuartos delantero, para que
-las 13 tarjetas compartan encuadre aunque las sesiones sean distintas.
+las 26 tarjetas compartan encuadre aunque los reportajes sean de dos
+proveedores distintos.
 
 `_build/image-selection.json` es la selección y el orden, elegidos a ojo.
 

@@ -14,7 +14,7 @@
         "url": "/flota/",
         "canonical": "https://serresdrive.com/flota/",
         "title": "Nuestra flota · Serres Drive Barcelona",
-        "description": "Los 13 coches disponibles ahora mismo en Serres Drive, con precio por día, por semana y por mes. Entrega en el área metropolitana de Barcelona.",
+        "description": "Los 26 coches disponibles ahora mismo en Serres Drive, con precio por día, por semana y por mes. Entrega en el área metropolitana de Barcelona.",
         "h1": "Nuestra flota",
         "type": "fleet",
         "image": "https://serresdrive.com/assets/img/cars/lamborghini-urus/alquiler-lamborghini-urus-barcelona-1.jpg"
@@ -23,7 +23,7 @@
         "url": "/tarifas/",
         "canonical": "https://serresdrive.com/tarifas/",
         "title": "Tarifas de alquiler · Serres Drive Barcelona",
-        "description": "Precios de 1 día, 2 días, 3 días, 1 semana y 1 mes para los 13 coches de la flota. Fianza desde 2.000 €. Sin sorpresas.",
+        "description": "Precios de 1 día, 2 días, 3 días, 1 semana y 1 mes para los 26 coches de la flota. Fianza desde 1.000 €. Sin sorpresas.",
         "h1": "Tarifas",
         "type": "rates",
         "image": "https://serresdrive.com/assets/img/cars/mercedes-amg-g63/alquiler-mercedes-amg-g63-barcelona-1.jpg"
@@ -41,7 +41,7 @@
         "url": "/condiciones-de-alquiler/",
         "canonical": "https://serresdrive.com/condiciones-de-alquiler/",
         "title": "Condiciones de alquiler · Serres Drive",
-        "description": "Desde 18 años, sin antigüedad mínima de carnet, 150 km incluidos, fianza desde 2.000 € y entrega en el área metropolitana por 100 €.",
+        "description": "Desde 18 años, sin antigüedad mínima de carnet, 150 km incluidos, fianza desde 1.000 € y entrega en el área metropolitana por 100 €.",
         "h1": "Condiciones de alquiler",
         "type": "terms",
         "image": "https://serresdrive.com/assets/img/cars/porsche-911-carrera-s/alquiler-porsche-911-carrera-s-barcelona-1.jpg"
@@ -78,17 +78,27 @@
         "url": "/flota/lamborghini/",
         "canonical": "https://serresdrive.com/flota/lamborghini/",
         "title": "Alquiler de Lamborghini en Barcelona · Serres Drive",
-        "description": "Disponible en Serres Drive: Lamborghini Urus. Desde 1.100 € al día, con entrega en el área metropolitana de Barcelona.",
+        "description": "Disponibles en Serres Drive: Lamborghini Urus, Lamborghini Huracán EVO Spyder y Lamborghini Urus S. Desde 1.100 € al día, con entrega en el área metropolitana de Barcelona.",
         "h1": "Alquiler de Lamborghini en Barcelona",
         "type": "brand",
         "brand": "lamborghini",
         "image": "https://serresdrive.com/assets/img/cars/lamborghini-urus/alquiler-lamborghini-urus-barcelona-1.jpg"
       },
+      "/flota/aston-martin/": {
+        "url": "/flota/aston-martin/",
+        "canonical": "https://serresdrive.com/flota/aston-martin/",
+        "title": "Alquiler de Aston Martin en Barcelona · Serres Drive",
+        "description": "Disponible en Serres Drive: Aston Martin DBX. Desde 1.000 € al día, con entrega en el área metropolitana de Barcelona.",
+        "h1": "Alquiler de Aston Martin en Barcelona",
+        "type": "brand",
+        "brand": "aston-martin",
+        "image": "https://serresdrive.com/assets/img/cars/aston-martin-dbx/alquiler-aston-martin-dbx-barcelona-1.jpg"
+      },
       "/flota/mercedes-amg/": {
         "url": "/flota/mercedes-amg/",
         "canonical": "https://serresdrive.com/flota/mercedes-amg/",
         "title": "Alquiler de Mercedes-AMG en Barcelona · Serres Drive",
-        "description": "Disponibles en Serres Drive: Mercedes-AMG G 63, Mercedes-AMG A45 S, Mercedes GLC y Mercedes A200 4Matic. Desde 150 € al día, con entrega en el área metropolitana de Barcelona.",
+        "description": "Disponibles en Serres Drive: Mercedes-AMG G 63, Mercedes-AMG A45 S, Mercedes GLC, Mercedes A200 4Matic, Mercedes-AMG G 63 Verde Oliva, Mercedes-Benz GLS, Mercedes-Benz GLE Coupé, Mercedes-AMG GLC 43, Mercedes-Benz Clase V y Mercedes-Benz GLC Coupé. Desde 150 € al día, con entrega en el área metropolitana de Barcelona.",
         "h1": "Alquiler de Mercedes-AMG en Barcelona",
         "type": "brand",
         "brand": "mercedes-amg",
@@ -108,7 +118,7 @@
         "url": "/flota/range-rover/",
         "canonical": "https://serresdrive.com/flota/range-rover/",
         "title": "Alquiler de Range Rover en Barcelona · Serres Drive",
-        "description": "Disponible en Serres Drive: Range Rover Velar. Desde 350 € al día, con entrega en el área metropolitana de Barcelona.",
+        "description": "Disponibles en Serres Drive: Range Rover Velar, Range Rover SV, Range Rover Vogue, Range Rover Sport SVR y Range Rover Sport. Desde 350 € al día, con entrega en el área metropolitana de Barcelona.",
         "h1": "Alquiler de Range Rover en Barcelona",
         "type": "brand",
         "brand": "range-rover",
@@ -253,6 +263,136 @@
         "type": "car",
         "slug": "mercedes-a200-4matic",
         "image": "https://serresdrive.com/assets/img/cars/mercedes-a200-4matic/alquiler-mercedes-a200-4matic-barcelona-1.jpg"
+      },
+      "/coches/lamborghini-huracan-evo-spyder/": {
+        "url": "/coches/lamborghini-huracan-evo-spyder/",
+        "canonical": "https://serresdrive.com/coches/lamborghini-huracan-evo-spyder/",
+        "title": "Alquiler Lamborghini Huracán EVO Spyder en Barcelona · Serres Drive",
+        "description": "Alquila un Lamborghini Huracán EVO Spyder en Barcelona desde 1.400 € al día. 640 CV, 0-100 en 3,1 s. Reserva por WhatsApp con entrega en el área metropolitana.",
+        "h1": "Alquiler Lamborghini Huracán EVO Spyder en Barcelona",
+        "type": "car",
+        "slug": "lamborghini-huracan-evo-spyder",
+        "image": "https://serresdrive.com/assets/img/cars/lamborghini-huracan-evo-spyder/alquiler-lamborghini-huracan-evo-spyder-barcelona-1.jpg"
+      },
+      "/coches/lamborghini-urus-s/": {
+        "url": "/coches/lamborghini-urus-s/",
+        "canonical": "https://serresdrive.com/coches/lamborghini-urus-s/",
+        "title": "Alquiler Lamborghini Urus S en Barcelona · Serres Drive",
+        "description": "Alquila un Lamborghini Urus S en Barcelona desde 1.100 € al día. 666 CV, 0-100 en 3,5 s. Reserva por WhatsApp con entrega en el área metropolitana.",
+        "h1": "Alquiler Lamborghini Urus S en Barcelona",
+        "type": "car",
+        "slug": "lamborghini-urus-s",
+        "image": "https://serresdrive.com/assets/img/cars/lamborghini-urus-s/alquiler-lamborghini-urus-s-barcelona-1.jpg"
+      },
+      "/coches/aston-martin-dbx/": {
+        "url": "/coches/aston-martin-dbx/",
+        "canonical": "https://serresdrive.com/coches/aston-martin-dbx/",
+        "title": "Alquiler Aston Martin DBX en Barcelona · Serres Drive",
+        "description": "Alquila un Aston Martin DBX en Barcelona desde 1.000 € al día. 707 CV, 0-100 en 3,3 s. Reserva por WhatsApp con entrega en el área metropolitana.",
+        "h1": "Alquiler Aston Martin DBX en Barcelona",
+        "type": "car",
+        "slug": "aston-martin-dbx",
+        "image": "https://serresdrive.com/assets/img/cars/aston-martin-dbx/alquiler-aston-martin-dbx-barcelona-1.jpg"
+      },
+      "/coches/mercedes-amg-g63-verde-oliva/": {
+        "url": "/coches/mercedes-amg-g63-verde-oliva/",
+        "canonical": "https://serresdrive.com/coches/mercedes-amg-g63-verde-oliva/",
+        "title": "Alquiler Mercedes-AMG G 63 Verde Oliva en Barcelona · Serres Drive",
+        "description": "Alquila un Mercedes-AMG G 63 Verde Oliva en Barcelona desde 1.000 € al día. 585 CV, 0-100 en 4,5 s. Reserva por WhatsApp con entrega en el área metropolitana.",
+        "h1": "Alquiler Mercedes-AMG G 63 Verde Oliva en Barcelona",
+        "type": "car",
+        "slug": "mercedes-amg-g63-verde-oliva",
+        "image": "https://serresdrive.com/assets/img/cars/mercedes-amg-g63-verde-oliva/alquiler-mercedes-amg-g63-verde-oliva-barcelona-1.jpg"
+      },
+      "/coches/range-rover-sv/": {
+        "url": "/coches/range-rover-sv/",
+        "canonical": "https://serresdrive.com/coches/range-rover-sv/",
+        "title": "Alquiler Range Rover SV en Barcelona · Serres Drive",
+        "description": "Alquila un Range Rover SV en Barcelona desde 800 € al día. 565 CV, 0-100 en 5,4 s. Reserva por WhatsApp con entrega en el área metropolitana.",
+        "h1": "Alquiler Range Rover SV en Barcelona",
+        "type": "car",
+        "slug": "range-rover-sv",
+        "image": "https://serresdrive.com/assets/img/cars/range-rover-sv/alquiler-range-rover-sv-barcelona-1.jpg"
+      },
+      "/coches/range-rover-vogue/": {
+        "url": "/coches/range-rover-vogue/",
+        "canonical": "https://serresdrive.com/coches/range-rover-vogue/",
+        "title": "Alquiler Range Rover Vogue en Barcelona · Serres Drive",
+        "description": "Alquila un Range Rover Vogue en Barcelona desde 800 € al día. 258 CV, 0-100 en 7,9 s. Reserva por WhatsApp con entrega en el área metropolitana.",
+        "h1": "Alquiler Range Rover Vogue en Barcelona",
+        "type": "car",
+        "slug": "range-rover-vogue",
+        "image": "https://serresdrive.com/assets/img/cars/range-rover-vogue/alquiler-range-rover-vogue-barcelona-1.jpg"
+      },
+      "/coches/mercedes-gls/": {
+        "url": "/coches/mercedes-gls/",
+        "canonical": "https://serresdrive.com/coches/mercedes-gls/",
+        "title": "Alquiler Mercedes-Benz GLS en Barcelona · Serres Drive",
+        "description": "Alquila un Mercedes-Benz GLS en Barcelona desde 700 € al día. 367 CV, 0-100 en 6,1 s. Reserva por WhatsApp con entrega en el área metropolitana.",
+        "h1": "Alquiler Mercedes-Benz GLS en Barcelona",
+        "type": "car",
+        "slug": "mercedes-gls",
+        "image": "https://serresdrive.com/assets/img/cars/mercedes-gls/alquiler-mercedes-gls-barcelona-1.jpg"
+      },
+      "/coches/range-rover-sport-svr/": {
+        "url": "/coches/range-rover-sport-svr/",
+        "canonical": "https://serresdrive.com/coches/range-rover-sport-svr/",
+        "title": "Alquiler Range Rover Sport SVR en Barcelona · Serres Drive",
+        "description": "Alquila un Range Rover Sport SVR en Barcelona desde 600 € al día. 575 CV, 0-100 en 4,5 s. Reserva por WhatsApp con entrega en el área metropolitana.",
+        "h1": "Alquiler Range Rover Sport SVR en Barcelona",
+        "type": "car",
+        "slug": "range-rover-sport-svr",
+        "image": "https://serresdrive.com/assets/img/cars/range-rover-sport-svr/alquiler-range-rover-sport-svr-barcelona-1.jpg"
+      },
+      "/coches/mercedes-gle-coupe/": {
+        "url": "/coches/mercedes-gle-coupe/",
+        "canonical": "https://serresdrive.com/coches/mercedes-gle-coupe/",
+        "title": "Alquiler Mercedes-Benz GLE Coupé en Barcelona · Serres Drive",
+        "description": "Alquila un Mercedes-Benz GLE Coupé en Barcelona desde 600 € al día. 269 CV, 0-100 en 6,9 s. Reserva por WhatsApp con entrega en el área metropolitana.",
+        "h1": "Alquiler Mercedes-Benz GLE Coupé en Barcelona",
+        "type": "car",
+        "slug": "mercedes-gle-coupe",
+        "image": "https://serresdrive.com/assets/img/cars/mercedes-gle-coupe/alquiler-mercedes-gle-coupe-barcelona-1.jpg"
+      },
+      "/coches/range-rover-sport/": {
+        "url": "/coches/range-rover-sport/",
+        "canonical": "https://serresdrive.com/coches/range-rover-sport/",
+        "title": "Alquiler Range Rover Sport en Barcelona · Serres Drive",
+        "description": "Alquila un Range Rover Sport en Barcelona desde 550 € al día. 340 CV, 0-100 en 7,2 s. Reserva por WhatsApp con entrega en el área metropolitana.",
+        "h1": "Alquiler Range Rover Sport en Barcelona",
+        "type": "car",
+        "slug": "range-rover-sport",
+        "image": "https://serresdrive.com/assets/img/cars/range-rover-sport/alquiler-range-rover-sport-barcelona-1.jpg"
+      },
+      "/coches/mercedes-amg-glc-43/": {
+        "url": "/coches/mercedes-amg-glc-43/",
+        "canonical": "https://serresdrive.com/coches/mercedes-amg-glc-43/",
+        "title": "Alquiler Mercedes-AMG GLC 43 en Barcelona · Serres Drive",
+        "description": "Alquila un Mercedes-AMG GLC 43 en Barcelona desde 500 € al día. 421 CV, 0-100 en 4,8 s. Reserva por WhatsApp con entrega en el área metropolitana.",
+        "h1": "Alquiler Mercedes-AMG GLC 43 en Barcelona",
+        "type": "car",
+        "slug": "mercedes-amg-glc-43",
+        "image": "https://serresdrive.com/assets/img/cars/mercedes-amg-glc-43/alquiler-mercedes-amg-glc-43-barcelona-1.jpg"
+      },
+      "/coches/mercedes-clase-v/": {
+        "url": "/coches/mercedes-clase-v/",
+        "canonical": "https://serresdrive.com/coches/mercedes-clase-v/",
+        "title": "Alquiler Mercedes-Benz Clase V en Barcelona · Serres Drive",
+        "description": "Alquila un Mercedes-Benz Clase V en Barcelona desde 350 € al día. 239 CV, 0-100 en 7,9 s. Reserva por WhatsApp con entrega en el área metropolitana.",
+        "h1": "Alquiler Mercedes-Benz Clase V en Barcelona",
+        "type": "car",
+        "slug": "mercedes-clase-v",
+        "image": "https://serresdrive.com/assets/img/cars/mercedes-clase-v/alquiler-mercedes-clase-v-barcelona-1.jpg"
+      },
+      "/coches/mercedes-glc-coupe/": {
+        "url": "/coches/mercedes-glc-coupe/",
+        "canonical": "https://serresdrive.com/coches/mercedes-glc-coupe/",
+        "title": "Alquiler Mercedes-Benz GLC Coupé en Barcelona · Serres Drive",
+        "description": "Alquila un Mercedes-Benz GLC Coupé en Barcelona desde 330 € al día. 197 CV, 0-100 en 8,1 s. Reserva por WhatsApp con entrega en el área metropolitana.",
+        "h1": "Alquiler Mercedes-Benz GLC Coupé en Barcelona",
+        "type": "car",
+        "slug": "mercedes-glc-coupe",
+        "image": "https://serresdrive.com/assets/img/cars/mercedes-glc-coupe/alquiler-mercedes-glc-coupe-barcelona-1.jpg"
       }
     }
   },
@@ -271,7 +411,7 @@
         "url": "/flota/",
         "canonical": "https://serresdrive.com/en/flota/",
         "title": "Our fleet · Serres Drive Barcelona",
-        "description": "The 13 cars available right now at Serres Drive, with the price by day, by week and by month. Delivery across the Barcelona metropolitan area.",
+        "description": "The 26 cars available right now at Serres Drive, with the price by day, by week and by month. Delivery across the Barcelona metropolitan area.",
         "h1": "Our fleet",
         "type": "fleet",
         "image": "https://serresdrive.com/assets/img/cars/lamborghini-urus/alquiler-lamborghini-urus-barcelona-1.jpg"
@@ -280,7 +420,7 @@
         "url": "/tarifas/",
         "canonical": "https://serresdrive.com/en/tarifas/",
         "title": "Hire rates · Serres Drive Barcelona",
-        "description": "Prices for 1 day, 2 days, 3 days, 1 week and 1 month on all 13 cars in the fleet. Deposit from 2.000 €, VAT included. No surprises at the end.",
+        "description": "Prices for 1 day, 2 days, 3 days, 1 week and 1 month on all 26 cars in the fleet. Deposit from 1.000 €, VAT included. No surprises at the end.",
         "h1": "Rates",
         "type": "rates",
         "image": "https://serresdrive.com/assets/img/cars/mercedes-amg-g63/alquiler-mercedes-amg-g63-barcelona-1.jpg"
@@ -298,7 +438,7 @@
         "url": "/condiciones-de-alquiler/",
         "canonical": "https://serresdrive.com/en/condiciones-de-alquiler/",
         "title": "Hire terms and conditions · Serres Drive",
-        "description": "From 18 years old, no minimum years on your licence, 150 km included, deposit from 2.000 € and delivery across the metropolitan area for 100 €.",
+        "description": "From 18 years old, no minimum years on your licence, 150 km included, deposit from 1.000 € and delivery across the metropolitan area for 100 €.",
         "h1": "Hire terms",
         "type": "terms",
         "image": "https://serresdrive.com/assets/img/cars/porsche-911-carrera-s/alquiler-porsche-911-carrera-s-barcelona-1.jpg"
@@ -335,17 +475,27 @@
         "url": "/flota/lamborghini/",
         "canonical": "https://serresdrive.com/en/flota/lamborghini/",
         "title": "Lamborghini hire in Barcelona · Serres Drive",
-        "description": "Available at Serres Drive: Lamborghini Urus. From 1.100 € a day, with delivery across the Barcelona metropolitan area.",
+        "description": "Available at Serres Drive: Lamborghini Urus, Lamborghini Huracán EVO Spyder and Lamborghini Urus S. From 1.100 € a day, with delivery across the Barcelona metropolitan area.",
         "h1": "Lamborghini hire in Barcelona",
         "type": "brand",
         "brand": "lamborghini",
         "image": "https://serresdrive.com/assets/img/cars/lamborghini-urus/alquiler-lamborghini-urus-barcelona-1.jpg"
       },
+      "/flota/aston-martin/": {
+        "url": "/flota/aston-martin/",
+        "canonical": "https://serresdrive.com/en/flota/aston-martin/",
+        "title": "Aston Martin hire in Barcelona · Serres Drive",
+        "description": "Available at Serres Drive: Aston Martin DBX. From 1.000 € a day, with delivery across the Barcelona metropolitan area.",
+        "h1": "Aston Martin hire in Barcelona",
+        "type": "brand",
+        "brand": "aston-martin",
+        "image": "https://serresdrive.com/assets/img/cars/aston-martin-dbx/alquiler-aston-martin-dbx-barcelona-1.jpg"
+      },
       "/flota/mercedes-amg/": {
         "url": "/flota/mercedes-amg/",
         "canonical": "https://serresdrive.com/en/flota/mercedes-amg/",
         "title": "Mercedes-AMG hire in Barcelona · Serres Drive",
-        "description": "Available at Serres Drive: Mercedes-AMG G 63, Mercedes-AMG A45 S, Mercedes GLC and Mercedes A200 4Matic. From 150 € a day, with delivery across the Barcelona metropolitan area.",
+        "description": "Available at Serres Drive: Mercedes-AMG G 63, Mercedes-AMG A45 S, Mercedes GLC, Mercedes A200 4Matic, Mercedes-AMG G 63 Verde Oliva, Mercedes-Benz GLS, Mercedes-Benz GLE Coupé, Mercedes-AMG GLC 43, Mercedes-Benz Clase V and Mercedes-Benz GLC Coupé. From 150 € a day, with delivery across the Barcelona metropolitan area.",
         "h1": "Mercedes-AMG hire in Barcelona",
         "type": "brand",
         "brand": "mercedes-amg",
@@ -365,7 +515,7 @@
         "url": "/flota/range-rover/",
         "canonical": "https://serresdrive.com/en/flota/range-rover/",
         "title": "Range Rover hire in Barcelona · Serres Drive",
-        "description": "Available at Serres Drive: Range Rover Velar. From 350 € a day, with delivery across the Barcelona metropolitan area.",
+        "description": "Available at Serres Drive: Range Rover Velar, Range Rover SV, Range Rover Vogue, Range Rover Sport SVR and Range Rover Sport. From 350 € a day, with delivery across the Barcelona metropolitan area.",
         "h1": "Range Rover hire in Barcelona",
         "type": "brand",
         "brand": "range-rover",
@@ -510,6 +660,136 @@
         "type": "car",
         "slug": "mercedes-a200-4matic",
         "image": "https://serresdrive.com/assets/img/cars/mercedes-a200-4matic/alquiler-mercedes-a200-4matic-barcelona-1.jpg"
+      },
+      "/coches/lamborghini-huracan-evo-spyder/": {
+        "url": "/coches/lamborghini-huracan-evo-spyder/",
+        "canonical": "https://serresdrive.com/en/coches/lamborghini-huracan-evo-spyder/",
+        "title": "Lamborghini Huracán EVO Spyder hire in Barcelona · Serres Drive",
+        "description": "Hire a Lamborghini Huracán EVO Spyder in Barcelona from 1.400 € a day. 640 hp, 0-100 km/h in 3,1 s. Book on WhatsApp and we deliver it across the metropolitan area.",
+        "h1": "Lamborghini Huracán EVO Spyder hire in Barcelona",
+        "type": "car",
+        "slug": "lamborghini-huracan-evo-spyder",
+        "image": "https://serresdrive.com/assets/img/cars/lamborghini-huracan-evo-spyder/alquiler-lamborghini-huracan-evo-spyder-barcelona-1.jpg"
+      },
+      "/coches/lamborghini-urus-s/": {
+        "url": "/coches/lamborghini-urus-s/",
+        "canonical": "https://serresdrive.com/en/coches/lamborghini-urus-s/",
+        "title": "Lamborghini Urus S hire in Barcelona · Serres Drive",
+        "description": "Hire a Lamborghini Urus S in Barcelona from 1.100 € a day. 666 hp, 0-100 km/h in 3,5 s. Book on WhatsApp and we deliver it across the metropolitan area.",
+        "h1": "Lamborghini Urus S hire in Barcelona",
+        "type": "car",
+        "slug": "lamborghini-urus-s",
+        "image": "https://serresdrive.com/assets/img/cars/lamborghini-urus-s/alquiler-lamborghini-urus-s-barcelona-1.jpg"
+      },
+      "/coches/aston-martin-dbx/": {
+        "url": "/coches/aston-martin-dbx/",
+        "canonical": "https://serresdrive.com/en/coches/aston-martin-dbx/",
+        "title": "Aston Martin DBX hire in Barcelona · Serres Drive",
+        "description": "Hire a Aston Martin DBX in Barcelona from 1.000 € a day. 707 hp, 0-100 km/h in 3,3 s. Book on WhatsApp and we deliver it across the metropolitan area.",
+        "h1": "Aston Martin DBX hire in Barcelona",
+        "type": "car",
+        "slug": "aston-martin-dbx",
+        "image": "https://serresdrive.com/assets/img/cars/aston-martin-dbx/alquiler-aston-martin-dbx-barcelona-1.jpg"
+      },
+      "/coches/mercedes-amg-g63-verde-oliva/": {
+        "url": "/coches/mercedes-amg-g63-verde-oliva/",
+        "canonical": "https://serresdrive.com/en/coches/mercedes-amg-g63-verde-oliva/",
+        "title": "Mercedes-AMG G 63 Verde Oliva hire in Barcelona · Serres Drive",
+        "description": "Hire a Mercedes-AMG G 63 Verde Oliva in Barcelona from 1.000 € a day. 585 hp, 0-100 km/h in 4,5 s. Book on WhatsApp and we deliver it across the metropolitan area.",
+        "h1": "Mercedes-AMG G 63 Verde Oliva hire in Barcelona",
+        "type": "car",
+        "slug": "mercedes-amg-g63-verde-oliva",
+        "image": "https://serresdrive.com/assets/img/cars/mercedes-amg-g63-verde-oliva/alquiler-mercedes-amg-g63-verde-oliva-barcelona-1.jpg"
+      },
+      "/coches/range-rover-sv/": {
+        "url": "/coches/range-rover-sv/",
+        "canonical": "https://serresdrive.com/en/coches/range-rover-sv/",
+        "title": "Range Rover SV hire in Barcelona · Serres Drive",
+        "description": "Hire a Range Rover SV in Barcelona from 800 € a day. 565 hp, 0-100 km/h in 5,4 s. Book on WhatsApp and we deliver it across the metropolitan area.",
+        "h1": "Range Rover SV hire in Barcelona",
+        "type": "car",
+        "slug": "range-rover-sv",
+        "image": "https://serresdrive.com/assets/img/cars/range-rover-sv/alquiler-range-rover-sv-barcelona-1.jpg"
+      },
+      "/coches/range-rover-vogue/": {
+        "url": "/coches/range-rover-vogue/",
+        "canonical": "https://serresdrive.com/en/coches/range-rover-vogue/",
+        "title": "Range Rover Vogue hire in Barcelona · Serres Drive",
+        "description": "Hire a Range Rover Vogue in Barcelona from 800 € a day. 258 hp, 0-100 km/h in 7,9 s. Book on WhatsApp and we deliver it across the metropolitan area.",
+        "h1": "Range Rover Vogue hire in Barcelona",
+        "type": "car",
+        "slug": "range-rover-vogue",
+        "image": "https://serresdrive.com/assets/img/cars/range-rover-vogue/alquiler-range-rover-vogue-barcelona-1.jpg"
+      },
+      "/coches/mercedes-gls/": {
+        "url": "/coches/mercedes-gls/",
+        "canonical": "https://serresdrive.com/en/coches/mercedes-gls/",
+        "title": "Mercedes-Benz GLS hire in Barcelona · Serres Drive",
+        "description": "Hire a Mercedes-Benz GLS in Barcelona from 700 € a day. 367 hp, 0-100 km/h in 6,1 s. Book on WhatsApp and we deliver it across the metropolitan area.",
+        "h1": "Mercedes-Benz GLS hire in Barcelona",
+        "type": "car",
+        "slug": "mercedes-gls",
+        "image": "https://serresdrive.com/assets/img/cars/mercedes-gls/alquiler-mercedes-gls-barcelona-1.jpg"
+      },
+      "/coches/range-rover-sport-svr/": {
+        "url": "/coches/range-rover-sport-svr/",
+        "canonical": "https://serresdrive.com/en/coches/range-rover-sport-svr/",
+        "title": "Range Rover Sport SVR hire in Barcelona · Serres Drive",
+        "description": "Hire a Range Rover Sport SVR in Barcelona from 600 € a day. 575 hp, 0-100 km/h in 4,5 s. Book on WhatsApp and we deliver it across the metropolitan area.",
+        "h1": "Range Rover Sport SVR hire in Barcelona",
+        "type": "car",
+        "slug": "range-rover-sport-svr",
+        "image": "https://serresdrive.com/assets/img/cars/range-rover-sport-svr/alquiler-range-rover-sport-svr-barcelona-1.jpg"
+      },
+      "/coches/mercedes-gle-coupe/": {
+        "url": "/coches/mercedes-gle-coupe/",
+        "canonical": "https://serresdrive.com/en/coches/mercedes-gle-coupe/",
+        "title": "Mercedes-Benz GLE Coupé hire in Barcelona · Serres Drive",
+        "description": "Hire a Mercedes-Benz GLE Coupé in Barcelona from 600 € a day. 269 hp, 0-100 km/h in 6,9 s. Book on WhatsApp and we deliver it across the metropolitan area.",
+        "h1": "Mercedes-Benz GLE Coupé hire in Barcelona",
+        "type": "car",
+        "slug": "mercedes-gle-coupe",
+        "image": "https://serresdrive.com/assets/img/cars/mercedes-gle-coupe/alquiler-mercedes-gle-coupe-barcelona-1.jpg"
+      },
+      "/coches/range-rover-sport/": {
+        "url": "/coches/range-rover-sport/",
+        "canonical": "https://serresdrive.com/en/coches/range-rover-sport/",
+        "title": "Range Rover Sport hire in Barcelona · Serres Drive",
+        "description": "Hire a Range Rover Sport in Barcelona from 550 € a day. 340 hp, 0-100 km/h in 7,2 s. Book on WhatsApp and we deliver it across the metropolitan area.",
+        "h1": "Range Rover Sport hire in Barcelona",
+        "type": "car",
+        "slug": "range-rover-sport",
+        "image": "https://serresdrive.com/assets/img/cars/range-rover-sport/alquiler-range-rover-sport-barcelona-1.jpg"
+      },
+      "/coches/mercedes-amg-glc-43/": {
+        "url": "/coches/mercedes-amg-glc-43/",
+        "canonical": "https://serresdrive.com/en/coches/mercedes-amg-glc-43/",
+        "title": "Mercedes-AMG GLC 43 hire in Barcelona · Serres Drive",
+        "description": "Hire a Mercedes-AMG GLC 43 in Barcelona from 500 € a day. 421 hp, 0-100 km/h in 4,8 s. Book on WhatsApp and we deliver it across the metropolitan area.",
+        "h1": "Mercedes-AMG GLC 43 hire in Barcelona",
+        "type": "car",
+        "slug": "mercedes-amg-glc-43",
+        "image": "https://serresdrive.com/assets/img/cars/mercedes-amg-glc-43/alquiler-mercedes-amg-glc-43-barcelona-1.jpg"
+      },
+      "/coches/mercedes-clase-v/": {
+        "url": "/coches/mercedes-clase-v/",
+        "canonical": "https://serresdrive.com/en/coches/mercedes-clase-v/",
+        "title": "Mercedes-Benz Clase V hire in Barcelona · Serres Drive",
+        "description": "Hire a Mercedes-Benz Clase V in Barcelona from 350 € a day. 239 hp, 0-100 km/h in 7,9 s. Book on WhatsApp and we deliver it across the metropolitan area.",
+        "h1": "Mercedes-Benz Clase V hire in Barcelona",
+        "type": "car",
+        "slug": "mercedes-clase-v",
+        "image": "https://serresdrive.com/assets/img/cars/mercedes-clase-v/alquiler-mercedes-clase-v-barcelona-1.jpg"
+      },
+      "/coches/mercedes-glc-coupe/": {
+        "url": "/coches/mercedes-glc-coupe/",
+        "canonical": "https://serresdrive.com/en/coches/mercedes-glc-coupe/",
+        "title": "Mercedes-Benz GLC Coupé hire in Barcelona · Serres Drive",
+        "description": "Hire a Mercedes-Benz GLC Coupé in Barcelona from 330 € a day. 197 hp, 0-100 km/h in 8,1 s. Book on WhatsApp and we deliver it across the metropolitan area.",
+        "h1": "Mercedes-Benz GLC Coupé hire in Barcelona",
+        "type": "car",
+        "slug": "mercedes-glc-coupe",
+        "image": "https://serresdrive.com/assets/img/cars/mercedes-glc-coupe/alquiler-mercedes-glc-coupe-barcelona-1.jpg"
       }
     }
   },
@@ -528,7 +808,7 @@
         "url": "/flota/",
         "canonical": "https://serresdrive.com/ru/flota/",
         "title": "Наш автопарк · Serres Drive Барселона",
-        "description": "13 автомобилей, доступных в Serres Drive прямо сейчас: цена за день, за неделю и за месяц видна сразу. Доставка по Барселоне и пригородам.",
+        "description": "26 автомобилей, доступных в Serres Drive прямо сейчас: цена за день, за неделю и за месяц видна сразу. Доставка по Барселоне и пригородам.",
         "h1": "Наш автопарк",
         "type": "fleet",
         "image": "https://serresdrive.com/assets/img/cars/lamborghini-urus/alquiler-lamborghini-urus-barcelona-1.jpg"
@@ -537,7 +817,7 @@
         "url": "/tarifas/",
         "canonical": "https://serresdrive.com/ru/tarifas/",
         "title": "Тарифы аренды · Serres Drive Барселона",
-        "description": "Цены за 1 день, 2 дня, 3 дня, 1 неделю и 1 месяц на все 13 автомобилей автопарка. Залог от 2.000 €. Никаких доплат и сюрпризов в конце.",
+        "description": "Цены за 1 день, 2 дня, 3 дня, 1 неделю и 1 месяц на все 26 автомобилей автопарка. Залог от 1.000 €. Никаких доплат и сюрпризов в конце.",
         "h1": "Тарифы",
         "type": "rates",
         "image": "https://serresdrive.com/assets/img/cars/mercedes-amg-g63/alquiler-mercedes-amg-g63-barcelona-1.jpg"
@@ -555,7 +835,7 @@
         "url": "/condiciones-de-alquiler/",
         "canonical": "https://serresdrive.com/ru/condiciones-de-alquiler/",
         "title": "Условия аренды · Serres Drive",
-        "description": "От 18 лет, без минимального стажа за рулём, 150 км включено, залог от 2.000 € и доставка по Барселоне и пригородам за 100 €. Без сюрпризов.",
+        "description": "От 18 лет, без минимального стажа за рулём, 150 км включено, залог от 1.000 € и доставка по Барселоне и пригородам за 100 €. Без сюрпризов.",
         "h1": "Условия аренды",
         "type": "terms",
         "image": "https://serresdrive.com/assets/img/cars/porsche-911-carrera-s/alquiler-porsche-911-carrera-s-barcelona-1.jpg"
@@ -592,17 +872,27 @@
         "url": "/flota/lamborghini/",
         "canonical": "https://serresdrive.com/ru/flota/lamborghini/",
         "title": "Аренда Lamborghini в Барселоне · Serres Drive",
-        "description": "В наличии в Serres Drive: Lamborghini Urus. От 1.100 € в сутки, с доставкой и возвратом по Барселоне и пригородам. Бронь — в WhatsApp за пару сообщений.",
+        "description": "Сейчас в наличии в Serres Drive: Lamborghini Urus, Lamborghini Huracán EVO Spyder и Lamborghini Urus S. От 1.100 € в сутки, с доставкой и возвратом по Барселоне и пригородам. Бронь в WhatsApp за пару минут.",
         "h1": "Аренда Lamborghini в Барселоне",
         "type": "brand",
         "brand": "lamborghini",
         "image": "https://serresdrive.com/assets/img/cars/lamborghini-urus/alquiler-lamborghini-urus-barcelona-1.jpg"
       },
+      "/flota/aston-martin/": {
+        "url": "/flota/aston-martin/",
+        "canonical": "https://serresdrive.com/ru/flota/aston-martin/",
+        "title": "Аренда Aston Martin в Барселоне · Serres Drive",
+        "description": "В наличии в Serres Drive: Aston Martin DBX. От 1.000 € в сутки, с доставкой и возвратом по Барселоне и пригородам. Бронь — в WhatsApp за пару сообщений.",
+        "h1": "Аренда Aston Martin в Барселоне",
+        "type": "brand",
+        "brand": "aston-martin",
+        "image": "https://serresdrive.com/assets/img/cars/aston-martin-dbx/alquiler-aston-martin-dbx-barcelona-1.jpg"
+      },
       "/flota/mercedes-amg/": {
         "url": "/flota/mercedes-amg/",
         "canonical": "https://serresdrive.com/ru/flota/mercedes-amg/",
         "title": "Аренда Mercedes-AMG в Барселоне · Serres Drive",
-        "description": "Сейчас в наличии в Serres Drive: Mercedes-AMG G 63, Mercedes-AMG A45 S, Mercedes GLC и Mercedes A200 4Matic. От 150 € в сутки, с доставкой и возвратом по Барселоне и пригородам. Бронь в WhatsApp за пару минут.",
+        "description": "Сейчас в наличии в Serres Drive: Mercedes-AMG G 63, Mercedes-AMG A45 S, Mercedes GLC, Mercedes A200 4Matic, Mercedes-AMG G 63 Verde Oliva, Mercedes-Benz GLS, Mercedes-Benz GLE Coupé, Mercedes-AMG GLC 43, Mercedes-Benz Clase V и Mercedes-Benz GLC Coupé. От 150 € в сутки, с доставкой и возвратом по Барселоне и пригородам. Бронь в WhatsApp за пару минут.",
         "h1": "Аренда Mercedes-AMG в Барселоне",
         "type": "brand",
         "brand": "mercedes-amg",
@@ -622,7 +912,7 @@
         "url": "/flota/range-rover/",
         "canonical": "https://serresdrive.com/ru/flota/range-rover/",
         "title": "Аренда Range Rover в Барселоне · Serres Drive",
-        "description": "В наличии в Serres Drive: Range Rover Velar. От 350 € в сутки, с доставкой и возвратом по Барселоне и пригородам. Бронь — в WhatsApp за пару сообщений.",
+        "description": "Сейчас в наличии в Serres Drive: Range Rover Velar, Range Rover SV, Range Rover Vogue, Range Rover Sport SVR и Range Rover Sport. От 350 € в сутки, с доставкой и возвратом по Барселоне и пригородам. Бронь в WhatsApp за пару минут.",
         "h1": "Аренда Range Rover в Барселоне",
         "type": "brand",
         "brand": "range-rover",
@@ -767,6 +1057,136 @@
         "type": "car",
         "slug": "mercedes-a200-4matic",
         "image": "https://serresdrive.com/assets/img/cars/mercedes-a200-4matic/alquiler-mercedes-a200-4matic-barcelona-1.jpg"
+      },
+      "/coches/lamborghini-huracan-evo-spyder/": {
+        "url": "/coches/lamborghini-huracan-evo-spyder/",
+        "canonical": "https://serresdrive.com/ru/coches/lamborghini-huracan-evo-spyder/",
+        "title": "Аренда Lamborghini Huracán EVO Spyder в Барселоне · Serres Drive",
+        "description": "Возьми Lamborghini Huracán EVO Spyder в Барселоне от 1.400 € в сутки. 640 л.с., 0-100 за 3,1 s. Бронь в WhatsApp, доставка и возврат в пределах Барселоны и пригородов.",
+        "h1": "Аренда Lamborghini Huracán EVO Spyder в Барселоне",
+        "type": "car",
+        "slug": "lamborghini-huracan-evo-spyder",
+        "image": "https://serresdrive.com/assets/img/cars/lamborghini-huracan-evo-spyder/alquiler-lamborghini-huracan-evo-spyder-barcelona-1.jpg"
+      },
+      "/coches/lamborghini-urus-s/": {
+        "url": "/coches/lamborghini-urus-s/",
+        "canonical": "https://serresdrive.com/ru/coches/lamborghini-urus-s/",
+        "title": "Аренда Lamborghini Urus S в Барселоне · Serres Drive",
+        "description": "Возьми Lamborghini Urus S в Барселоне от 1.100 € в сутки. 666 л.с., 0-100 за 3,5 s. Бронь в WhatsApp, доставка и возврат в пределах Барселоны и пригородов.",
+        "h1": "Аренда Lamborghini Urus S в Барселоне",
+        "type": "car",
+        "slug": "lamborghini-urus-s",
+        "image": "https://serresdrive.com/assets/img/cars/lamborghini-urus-s/alquiler-lamborghini-urus-s-barcelona-1.jpg"
+      },
+      "/coches/aston-martin-dbx/": {
+        "url": "/coches/aston-martin-dbx/",
+        "canonical": "https://serresdrive.com/ru/coches/aston-martin-dbx/",
+        "title": "Аренда Aston Martin DBX в Барселоне · Serres Drive",
+        "description": "Возьми Aston Martin DBX в Барселоне от 1.000 € в сутки. 707 л.с., 0-100 за 3,3 s. Бронь в WhatsApp, доставка и возврат в пределах Барселоны и пригородов.",
+        "h1": "Аренда Aston Martin DBX в Барселоне",
+        "type": "car",
+        "slug": "aston-martin-dbx",
+        "image": "https://serresdrive.com/assets/img/cars/aston-martin-dbx/alquiler-aston-martin-dbx-barcelona-1.jpg"
+      },
+      "/coches/mercedes-amg-g63-verde-oliva/": {
+        "url": "/coches/mercedes-amg-g63-verde-oliva/",
+        "canonical": "https://serresdrive.com/ru/coches/mercedes-amg-g63-verde-oliva/",
+        "title": "Аренда Mercedes-AMG G 63 Verde Oliva в Барселоне · Serres Drive",
+        "description": "Возьми Mercedes-AMG G 63 Verde Oliva в Барселоне от 1.000 € в сутки. 585 л.с., 0-100 за 4,5 s. Бронь в WhatsApp, доставка и возврат в пределах Барселоны и пригородов.",
+        "h1": "Аренда Mercedes-AMG G 63 Verde Oliva в Барселоне",
+        "type": "car",
+        "slug": "mercedes-amg-g63-verde-oliva",
+        "image": "https://serresdrive.com/assets/img/cars/mercedes-amg-g63-verde-oliva/alquiler-mercedes-amg-g63-verde-oliva-barcelona-1.jpg"
+      },
+      "/coches/range-rover-sv/": {
+        "url": "/coches/range-rover-sv/",
+        "canonical": "https://serresdrive.com/ru/coches/range-rover-sv/",
+        "title": "Аренда Range Rover SV в Барселоне · Serres Drive",
+        "description": "Возьми Range Rover SV в Барселоне от 800 € в сутки. 565 л.с., 0-100 за 5,4 s. Бронь в WhatsApp, доставка и возврат в пределах Барселоны и пригородов.",
+        "h1": "Аренда Range Rover SV в Барселоне",
+        "type": "car",
+        "slug": "range-rover-sv",
+        "image": "https://serresdrive.com/assets/img/cars/range-rover-sv/alquiler-range-rover-sv-barcelona-1.jpg"
+      },
+      "/coches/range-rover-vogue/": {
+        "url": "/coches/range-rover-vogue/",
+        "canonical": "https://serresdrive.com/ru/coches/range-rover-vogue/",
+        "title": "Аренда Range Rover Vogue в Барселоне · Serres Drive",
+        "description": "Возьми Range Rover Vogue в Барселоне от 800 € в сутки. 258 л.с., 0-100 за 7,9 s. Бронь в WhatsApp, доставка и возврат в пределах Барселоны и пригородов.",
+        "h1": "Аренда Range Rover Vogue в Барселоне",
+        "type": "car",
+        "slug": "range-rover-vogue",
+        "image": "https://serresdrive.com/assets/img/cars/range-rover-vogue/alquiler-range-rover-vogue-barcelona-1.jpg"
+      },
+      "/coches/mercedes-gls/": {
+        "url": "/coches/mercedes-gls/",
+        "canonical": "https://serresdrive.com/ru/coches/mercedes-gls/",
+        "title": "Аренда Mercedes-Benz GLS в Барселоне · Serres Drive",
+        "description": "Возьми Mercedes-Benz GLS в Барселоне от 700 € в сутки. 367 л.с., 0-100 за 6,1 s. Бронь в WhatsApp, доставка и возврат в пределах Барселоны и пригородов.",
+        "h1": "Аренда Mercedes-Benz GLS в Барселоне",
+        "type": "car",
+        "slug": "mercedes-gls",
+        "image": "https://serresdrive.com/assets/img/cars/mercedes-gls/alquiler-mercedes-gls-barcelona-1.jpg"
+      },
+      "/coches/range-rover-sport-svr/": {
+        "url": "/coches/range-rover-sport-svr/",
+        "canonical": "https://serresdrive.com/ru/coches/range-rover-sport-svr/",
+        "title": "Аренда Range Rover Sport SVR в Барселоне · Serres Drive",
+        "description": "Возьми Range Rover Sport SVR в Барселоне от 600 € в сутки. 575 л.с., 0-100 за 4,5 s. Бронь в WhatsApp, доставка и возврат в пределах Барселоны и пригородов.",
+        "h1": "Аренда Range Rover Sport SVR в Барселоне",
+        "type": "car",
+        "slug": "range-rover-sport-svr",
+        "image": "https://serresdrive.com/assets/img/cars/range-rover-sport-svr/alquiler-range-rover-sport-svr-barcelona-1.jpg"
+      },
+      "/coches/mercedes-gle-coupe/": {
+        "url": "/coches/mercedes-gle-coupe/",
+        "canonical": "https://serresdrive.com/ru/coches/mercedes-gle-coupe/",
+        "title": "Аренда Mercedes-Benz GLE Coupé в Барселоне · Serres Drive",
+        "description": "Возьми Mercedes-Benz GLE Coupé в Барселоне от 600 € в сутки. 269 л.с., 0-100 за 6,9 s. Бронь в WhatsApp, доставка и возврат в пределах Барселоны и пригородов.",
+        "h1": "Аренда Mercedes-Benz GLE Coupé в Барселоне",
+        "type": "car",
+        "slug": "mercedes-gle-coupe",
+        "image": "https://serresdrive.com/assets/img/cars/mercedes-gle-coupe/alquiler-mercedes-gle-coupe-barcelona-1.jpg"
+      },
+      "/coches/range-rover-sport/": {
+        "url": "/coches/range-rover-sport/",
+        "canonical": "https://serresdrive.com/ru/coches/range-rover-sport/",
+        "title": "Аренда Range Rover Sport в Барселоне · Serres Drive",
+        "description": "Возьми Range Rover Sport в Барселоне от 550 € в сутки. 340 л.с., 0-100 за 7,2 s. Бронь в WhatsApp, доставка и возврат в пределах Барселоны и пригородов.",
+        "h1": "Аренда Range Rover Sport в Барселоне",
+        "type": "car",
+        "slug": "range-rover-sport",
+        "image": "https://serresdrive.com/assets/img/cars/range-rover-sport/alquiler-range-rover-sport-barcelona-1.jpg"
+      },
+      "/coches/mercedes-amg-glc-43/": {
+        "url": "/coches/mercedes-amg-glc-43/",
+        "canonical": "https://serresdrive.com/ru/coches/mercedes-amg-glc-43/",
+        "title": "Аренда Mercedes-AMG GLC 43 в Барселоне · Serres Drive",
+        "description": "Возьми Mercedes-AMG GLC 43 в Барселоне от 500 € в сутки. 421 л.с., 0-100 за 4,8 s. Бронь в WhatsApp, доставка и возврат в пределах Барселоны и пригородов.",
+        "h1": "Аренда Mercedes-AMG GLC 43 в Барселоне",
+        "type": "car",
+        "slug": "mercedes-amg-glc-43",
+        "image": "https://serresdrive.com/assets/img/cars/mercedes-amg-glc-43/alquiler-mercedes-amg-glc-43-barcelona-1.jpg"
+      },
+      "/coches/mercedes-clase-v/": {
+        "url": "/coches/mercedes-clase-v/",
+        "canonical": "https://serresdrive.com/ru/coches/mercedes-clase-v/",
+        "title": "Аренда Mercedes-Benz Clase V в Барселоне · Serres Drive",
+        "description": "Возьми Mercedes-Benz Clase V в Барселоне от 350 € в сутки. 239 л.с., 0-100 за 7,9 s. Бронь в WhatsApp, доставка и возврат в пределах Барселоны и пригородов.",
+        "h1": "Аренда Mercedes-Benz Clase V в Барселоне",
+        "type": "car",
+        "slug": "mercedes-clase-v",
+        "image": "https://serresdrive.com/assets/img/cars/mercedes-clase-v/alquiler-mercedes-clase-v-barcelona-1.jpg"
+      },
+      "/coches/mercedes-glc-coupe/": {
+        "url": "/coches/mercedes-glc-coupe/",
+        "canonical": "https://serresdrive.com/ru/coches/mercedes-glc-coupe/",
+        "title": "Аренда Mercedes-Benz GLC Coupé в Барселоне · Serres Drive",
+        "description": "Возьми Mercedes-Benz GLC Coupé в Барселоне от 330 € в сутки. 197 л.с., 0-100 за 8,1 s. Бронь в WhatsApp, доставка и возврат в пределах Барселоны и пригородов.",
+        "h1": "Аренда Mercedes-Benz GLC Coupé в Барселоне",
+        "type": "car",
+        "slug": "mercedes-glc-coupe",
+        "image": "https://serresdrive.com/assets/img/cars/mercedes-glc-coupe/alquiler-mercedes-glc-coupe-barcelona-1.jpg"
       }
     }
   },
@@ -785,7 +1205,7 @@
         "url": "/flota/",
         "canonical": "https://serresdrive.com/ca/flota/",
         "title": "La nostra flota · Serres Drive Barcelona",
-        "description": "Els 13 cotxes disponibles ara mateix a Serres Drive, amb preu per dia, per setmana i per mes. Lliurament a l'àrea metropolitana de Barcelona.",
+        "description": "Els 26 cotxes disponibles ara mateix a Serres Drive, amb preu per dia, per setmana i per mes. Lliurament a l'àrea metropolitana de Barcelona.",
         "h1": "La nostra flota",
         "type": "fleet",
         "image": "https://serresdrive.com/assets/img/cars/lamborghini-urus/alquiler-lamborghini-urus-barcelona-1.jpg"
@@ -794,7 +1214,7 @@
         "url": "/tarifas/",
         "canonical": "https://serresdrive.com/ca/tarifas/",
         "title": "Tarifes de lloguer · Serres Drive Barcelona",
-        "description": "Preus d'1 dia, 2 dies, 3 dies, 1 setmana i 1 mes per als 13 cotxes de la flota. Fiança des de 2.000 €. Preu tancat, sense lletra petita ni sorpreses.",
+        "description": "Preus d'1 dia, 2 dies, 3 dies, 1 setmana i 1 mes per als 26 cotxes de la flota. Fiança des de 1.000 €. Preu tancat, sense lletra petita ni sorpreses.",
         "h1": "Tarifes",
         "type": "rates",
         "image": "https://serresdrive.com/assets/img/cars/mercedes-amg-g63/alquiler-mercedes-amg-g63-barcelona-1.jpg"
@@ -812,7 +1232,7 @@
         "url": "/condiciones-de-alquiler/",
         "canonical": "https://serresdrive.com/ca/condiciones-de-alquiler/",
         "title": "Condicions de lloguer · Serres Drive",
-        "description": "Des dels 18 anys, sense antiguitat mínima de carnet, 150 km inclosos, fiança des de 2.000 € i lliurament a tota l'àrea metropolitana per 100 €.",
+        "description": "Des dels 18 anys, sense antiguitat mínima de carnet, 150 km inclosos, fiança des de 1.000 € i lliurament a tota l'àrea metropolitana per 100 €.",
         "h1": "Condicions de lloguer",
         "type": "terms",
         "image": "https://serresdrive.com/assets/img/cars/porsche-911-carrera-s/alquiler-porsche-911-carrera-s-barcelona-1.jpg"
@@ -849,17 +1269,27 @@
         "url": "/flota/lamborghini/",
         "canonical": "https://serresdrive.com/ca/flota/lamborghini/",
         "title": "Lloguer de cotxes Lamborghini a Barcelona · Serres Drive",
-        "description": "Disponible a Serres Drive: Lamborghini Urus. Des de 1.100 € al dia, amb lliurament a l'àrea metropolitana de Barcelona. Reserva'l per WhatsApp.",
+        "description": "Disponibles a Serres Drive: Lamborghini Urus, Lamborghini Huracán EVO Spyder i Lamborghini Urus S. Des de 1.100 € al dia, amb lliurament a l'àrea metropolitana de Barcelona.",
         "h1": "Lloguer de cotxes Lamborghini a Barcelona",
         "type": "brand",
         "brand": "lamborghini",
         "image": "https://serresdrive.com/assets/img/cars/lamborghini-urus/alquiler-lamborghini-urus-barcelona-1.jpg"
       },
+      "/flota/aston-martin/": {
+        "url": "/flota/aston-martin/",
+        "canonical": "https://serresdrive.com/ca/flota/aston-martin/",
+        "title": "Lloguer de cotxes Aston Martin a Barcelona · Serres Drive",
+        "description": "Disponible a Serres Drive: Aston Martin DBX. Des de 1.000 € al dia, amb lliurament a l'àrea metropolitana de Barcelona. Reserva'l per WhatsApp.",
+        "h1": "Lloguer de cotxes Aston Martin a Barcelona",
+        "type": "brand",
+        "brand": "aston-martin",
+        "image": "https://serresdrive.com/assets/img/cars/aston-martin-dbx/alquiler-aston-martin-dbx-barcelona-1.jpg"
+      },
       "/flota/mercedes-amg/": {
         "url": "/flota/mercedes-amg/",
         "canonical": "https://serresdrive.com/ca/flota/mercedes-amg/",
         "title": "Lloguer de cotxes Mercedes-AMG a Barcelona · Serres Drive",
-        "description": "Disponibles a Serres Drive: Mercedes-AMG G 63, Mercedes-AMG A45 S, Mercedes GLC i Mercedes A200 4Matic. Des de 150 € al dia, amb lliurament a l'àrea metropolitana de Barcelona.",
+        "description": "Disponibles a Serres Drive: Mercedes-AMG G 63, Mercedes-AMG A45 S, Mercedes GLC, Mercedes A200 4Matic, Mercedes-AMG G 63 Verde Oliva, Mercedes-Benz GLS, Mercedes-Benz GLE Coupé, Mercedes-AMG GLC 43, Mercedes-Benz Clase V i Mercedes-Benz GLC Coupé. Des de 150 € al dia, amb lliurament a l'àrea metropolitana de Barcelona.",
         "h1": "Lloguer de cotxes Mercedes-AMG a Barcelona",
         "type": "brand",
         "brand": "mercedes-amg",
@@ -879,7 +1309,7 @@
         "url": "/flota/range-rover/",
         "canonical": "https://serresdrive.com/ca/flota/range-rover/",
         "title": "Lloguer de cotxes Range Rover a Barcelona · Serres Drive",
-        "description": "Disponible a Serres Drive: Range Rover Velar. Des de 350 € al dia, amb lliurament a l'àrea metropolitana de Barcelona. Reserva'l per WhatsApp.",
+        "description": "Disponibles a Serres Drive: Range Rover Velar, Range Rover SV, Range Rover Vogue, Range Rover Sport SVR i Range Rover Sport. Des de 350 € al dia, amb lliurament a l'àrea metropolitana de Barcelona.",
         "h1": "Lloguer de cotxes Range Rover a Barcelona",
         "type": "brand",
         "brand": "range-rover",
@@ -1024,6 +1454,136 @@
         "type": "car",
         "slug": "mercedes-a200-4matic",
         "image": "https://serresdrive.com/assets/img/cars/mercedes-a200-4matic/alquiler-mercedes-a200-4matic-barcelona-1.jpg"
+      },
+      "/coches/lamborghini-huracan-evo-spyder/": {
+        "url": "/coches/lamborghini-huracan-evo-spyder/",
+        "canonical": "https://serresdrive.com/ca/coches/lamborghini-huracan-evo-spyder/",
+        "title": "Lloguer Lamborghini Huracán EVO Spyder a Barcelona · Serres Drive",
+        "description": "Lloga un Lamborghini Huracán EVO Spyder a Barcelona des de 1.400 € al dia. 640 CV, 0-100 en 3,1 s. Reserva per WhatsApp amb lliurament a l'àrea metropolitana.",
+        "h1": "Lloguer Lamborghini Huracán EVO Spyder a Barcelona",
+        "type": "car",
+        "slug": "lamborghini-huracan-evo-spyder",
+        "image": "https://serresdrive.com/assets/img/cars/lamborghini-huracan-evo-spyder/alquiler-lamborghini-huracan-evo-spyder-barcelona-1.jpg"
+      },
+      "/coches/lamborghini-urus-s/": {
+        "url": "/coches/lamborghini-urus-s/",
+        "canonical": "https://serresdrive.com/ca/coches/lamborghini-urus-s/",
+        "title": "Lloguer Lamborghini Urus S a Barcelona · Serres Drive",
+        "description": "Lloga un Lamborghini Urus S a Barcelona des de 1.100 € al dia. 666 CV, 0-100 en 3,5 s. Reserva per WhatsApp amb lliurament a l'àrea metropolitana.",
+        "h1": "Lloguer Lamborghini Urus S a Barcelona",
+        "type": "car",
+        "slug": "lamborghini-urus-s",
+        "image": "https://serresdrive.com/assets/img/cars/lamborghini-urus-s/alquiler-lamborghini-urus-s-barcelona-1.jpg"
+      },
+      "/coches/aston-martin-dbx/": {
+        "url": "/coches/aston-martin-dbx/",
+        "canonical": "https://serresdrive.com/ca/coches/aston-martin-dbx/",
+        "title": "Lloguer Aston Martin DBX a Barcelona · Serres Drive",
+        "description": "Lloga un Aston Martin DBX a Barcelona des de 1.000 € al dia. 707 CV, 0-100 en 3,3 s. Reserva per WhatsApp amb lliurament a l'àrea metropolitana.",
+        "h1": "Lloguer Aston Martin DBX a Barcelona",
+        "type": "car",
+        "slug": "aston-martin-dbx",
+        "image": "https://serresdrive.com/assets/img/cars/aston-martin-dbx/alquiler-aston-martin-dbx-barcelona-1.jpg"
+      },
+      "/coches/mercedes-amg-g63-verde-oliva/": {
+        "url": "/coches/mercedes-amg-g63-verde-oliva/",
+        "canonical": "https://serresdrive.com/ca/coches/mercedes-amg-g63-verde-oliva/",
+        "title": "Lloguer Mercedes-AMG G 63 Verde Oliva a Barcelona · Serres Drive",
+        "description": "Lloga un Mercedes-AMG G 63 Verde Oliva a Barcelona des de 1.000 € al dia. 585 CV, 0-100 en 4,5 s. Reserva per WhatsApp amb lliurament a l'àrea metropolitana.",
+        "h1": "Lloguer Mercedes-AMG G 63 Verde Oliva a Barcelona",
+        "type": "car",
+        "slug": "mercedes-amg-g63-verde-oliva",
+        "image": "https://serresdrive.com/assets/img/cars/mercedes-amg-g63-verde-oliva/alquiler-mercedes-amg-g63-verde-oliva-barcelona-1.jpg"
+      },
+      "/coches/range-rover-sv/": {
+        "url": "/coches/range-rover-sv/",
+        "canonical": "https://serresdrive.com/ca/coches/range-rover-sv/",
+        "title": "Lloguer Range Rover SV a Barcelona · Serres Drive",
+        "description": "Lloga un Range Rover SV a Barcelona des de 800 € al dia. 565 CV, 0-100 en 5,4 s. Reserva per WhatsApp amb lliurament a l'àrea metropolitana.",
+        "h1": "Lloguer Range Rover SV a Barcelona",
+        "type": "car",
+        "slug": "range-rover-sv",
+        "image": "https://serresdrive.com/assets/img/cars/range-rover-sv/alquiler-range-rover-sv-barcelona-1.jpg"
+      },
+      "/coches/range-rover-vogue/": {
+        "url": "/coches/range-rover-vogue/",
+        "canonical": "https://serresdrive.com/ca/coches/range-rover-vogue/",
+        "title": "Lloguer Range Rover Vogue a Barcelona · Serres Drive",
+        "description": "Lloga un Range Rover Vogue a Barcelona des de 800 € al dia. 258 CV, 0-100 en 7,9 s. Reserva per WhatsApp amb lliurament a l'àrea metropolitana.",
+        "h1": "Lloguer Range Rover Vogue a Barcelona",
+        "type": "car",
+        "slug": "range-rover-vogue",
+        "image": "https://serresdrive.com/assets/img/cars/range-rover-vogue/alquiler-range-rover-vogue-barcelona-1.jpg"
+      },
+      "/coches/mercedes-gls/": {
+        "url": "/coches/mercedes-gls/",
+        "canonical": "https://serresdrive.com/ca/coches/mercedes-gls/",
+        "title": "Lloguer Mercedes-Benz GLS a Barcelona · Serres Drive",
+        "description": "Lloga un Mercedes-Benz GLS a Barcelona des de 700 € al dia. 367 CV, 0-100 en 6,1 s. Reserva per WhatsApp amb lliurament a l'àrea metropolitana.",
+        "h1": "Lloguer Mercedes-Benz GLS a Barcelona",
+        "type": "car",
+        "slug": "mercedes-gls",
+        "image": "https://serresdrive.com/assets/img/cars/mercedes-gls/alquiler-mercedes-gls-barcelona-1.jpg"
+      },
+      "/coches/range-rover-sport-svr/": {
+        "url": "/coches/range-rover-sport-svr/",
+        "canonical": "https://serresdrive.com/ca/coches/range-rover-sport-svr/",
+        "title": "Lloguer Range Rover Sport SVR a Barcelona · Serres Drive",
+        "description": "Lloga un Range Rover Sport SVR a Barcelona des de 600 € al dia. 575 CV, 0-100 en 4,5 s. Reserva per WhatsApp amb lliurament a l'àrea metropolitana.",
+        "h1": "Lloguer Range Rover Sport SVR a Barcelona",
+        "type": "car",
+        "slug": "range-rover-sport-svr",
+        "image": "https://serresdrive.com/assets/img/cars/range-rover-sport-svr/alquiler-range-rover-sport-svr-barcelona-1.jpg"
+      },
+      "/coches/mercedes-gle-coupe/": {
+        "url": "/coches/mercedes-gle-coupe/",
+        "canonical": "https://serresdrive.com/ca/coches/mercedes-gle-coupe/",
+        "title": "Lloguer Mercedes-Benz GLE Coupé a Barcelona · Serres Drive",
+        "description": "Lloga un Mercedes-Benz GLE Coupé a Barcelona des de 600 € al dia. 269 CV, 0-100 en 6,9 s. Reserva per WhatsApp amb lliurament a l'àrea metropolitana.",
+        "h1": "Lloguer Mercedes-Benz GLE Coupé a Barcelona",
+        "type": "car",
+        "slug": "mercedes-gle-coupe",
+        "image": "https://serresdrive.com/assets/img/cars/mercedes-gle-coupe/alquiler-mercedes-gle-coupe-barcelona-1.jpg"
+      },
+      "/coches/range-rover-sport/": {
+        "url": "/coches/range-rover-sport/",
+        "canonical": "https://serresdrive.com/ca/coches/range-rover-sport/",
+        "title": "Lloguer Range Rover Sport a Barcelona · Serres Drive",
+        "description": "Lloga un Range Rover Sport a Barcelona des de 550 € al dia. 340 CV, 0-100 en 7,2 s. Reserva per WhatsApp amb lliurament a l'àrea metropolitana.",
+        "h1": "Lloguer Range Rover Sport a Barcelona",
+        "type": "car",
+        "slug": "range-rover-sport",
+        "image": "https://serresdrive.com/assets/img/cars/range-rover-sport/alquiler-range-rover-sport-barcelona-1.jpg"
+      },
+      "/coches/mercedes-amg-glc-43/": {
+        "url": "/coches/mercedes-amg-glc-43/",
+        "canonical": "https://serresdrive.com/ca/coches/mercedes-amg-glc-43/",
+        "title": "Lloguer Mercedes-AMG GLC 43 a Barcelona · Serres Drive",
+        "description": "Lloga un Mercedes-AMG GLC 43 a Barcelona des de 500 € al dia. 421 CV, 0-100 en 4,8 s. Reserva per WhatsApp amb lliurament a l'àrea metropolitana.",
+        "h1": "Lloguer Mercedes-AMG GLC 43 a Barcelona",
+        "type": "car",
+        "slug": "mercedes-amg-glc-43",
+        "image": "https://serresdrive.com/assets/img/cars/mercedes-amg-glc-43/alquiler-mercedes-amg-glc-43-barcelona-1.jpg"
+      },
+      "/coches/mercedes-clase-v/": {
+        "url": "/coches/mercedes-clase-v/",
+        "canonical": "https://serresdrive.com/ca/coches/mercedes-clase-v/",
+        "title": "Lloguer Mercedes-Benz Clase V a Barcelona · Serres Drive",
+        "description": "Lloga un Mercedes-Benz Clase V a Barcelona des de 350 € al dia. 239 CV, 0-100 en 7,9 s. Reserva per WhatsApp amb lliurament a l'àrea metropolitana.",
+        "h1": "Lloguer Mercedes-Benz Clase V a Barcelona",
+        "type": "car",
+        "slug": "mercedes-clase-v",
+        "image": "https://serresdrive.com/assets/img/cars/mercedes-clase-v/alquiler-mercedes-clase-v-barcelona-1.jpg"
+      },
+      "/coches/mercedes-glc-coupe/": {
+        "url": "/coches/mercedes-glc-coupe/",
+        "canonical": "https://serresdrive.com/ca/coches/mercedes-glc-coupe/",
+        "title": "Lloguer Mercedes-Benz GLC Coupé a Barcelona · Serres Drive",
+        "description": "Lloga un Mercedes-Benz GLC Coupé a Barcelona des de 330 € al dia. 197 CV, 0-100 en 8,1 s. Reserva per WhatsApp amb lliurament a l'àrea metropolitana.",
+        "h1": "Lloguer Mercedes-Benz GLC Coupé a Barcelona",
+        "type": "car",
+        "slug": "mercedes-glc-coupe",
+        "image": "https://serresdrive.com/assets/img/cars/mercedes-glc-coupe/alquiler-mercedes-glc-coupe-barcelona-1.jpg"
       }
     }
   },
@@ -1042,7 +1602,7 @@
         "url": "/flota/",
         "canonical": "https://serresdrive.com/fr/flota/",
         "title": "Notre flotte · Serres Drive Barcelone",
-        "description": "Les 13 voitures disponibles chez Serres Drive, avec le prix par jour, par semaine et par mois. Livraison dans l'aire métropolitaine de Barcelone.",
+        "description": "Les 26 voitures disponibles chez Serres Drive, avec le prix par jour, par semaine et par mois. Livraison dans l'aire métropolitaine de Barcelone.",
         "h1": "Notre flotte",
         "type": "fleet",
         "image": "https://serresdrive.com/assets/img/cars/lamborghini-urus/alquiler-lamborghini-urus-barcelona-1.jpg"
@@ -1051,7 +1611,7 @@
         "url": "/tarifas/",
         "canonical": "https://serresdrive.com/fr/tarifas/",
         "title": "Tarifs de location · Serres Drive Barcelone",
-        "description": "Les prix 1 jour, 2 jours, 3 jours, 1 semaine et 1 mois pour les 13 voitures de la flotte. Caution dès 2.000 €. Sans mauvaise surprise à la fin.",
+        "description": "Les prix 1 jour, 2 jours, 3 jours, 1 semaine et 1 mois pour les 26 voitures de la flotte. Caution dès 1.000 €. Sans mauvaise surprise à la fin.",
         "h1": "Tarifs",
         "type": "rates",
         "image": "https://serresdrive.com/assets/img/cars/mercedes-amg-g63/alquiler-mercedes-amg-g63-barcelona-1.jpg"
@@ -1069,7 +1629,7 @@
         "url": "/condiciones-de-alquiler/",
         "canonical": "https://serresdrive.com/fr/condiciones-de-alquiler/",
         "title": "Conditions de location · Serres Drive",
-        "description": "Dès 18 ans, sans ancienneté minimale de permis, 150 km inclus, caution dès 2.000 € et livraison dans l'aire métropolitaine de Barcelone pour 100 €.",
+        "description": "Dès 18 ans, sans ancienneté minimale de permis, 150 km inclus, caution dès 1.000 € et livraison dans l'aire métropolitaine de Barcelone pour 100 €.",
         "h1": "Conditions de location",
         "type": "terms",
         "image": "https://serresdrive.com/assets/img/cars/porsche-911-carrera-s/alquiler-porsche-911-carrera-s-barcelona-1.jpg"
@@ -1106,17 +1666,27 @@
         "url": "/flota/lamborghini/",
         "canonical": "https://serresdrive.com/fr/flota/lamborghini/",
         "title": "Location de Lamborghini à Barcelone · Serres Drive",
-        "description": "Disponible chez Serres Drive : Lamborghini Urus. Dès 1.100 € par jour, avec livraison dans l'aire métropolitaine de Barcelone.",
+        "description": "Disponibles chez Serres Drive : Lamborghini Urus, Lamborghini Huracán EVO Spyder et Lamborghini Urus S. Dès 1.100 € par jour, avec livraison dans l'aire métropolitaine de Barcelone.",
         "h1": "Location de Lamborghini à Barcelone",
         "type": "brand",
         "brand": "lamborghini",
         "image": "https://serresdrive.com/assets/img/cars/lamborghini-urus/alquiler-lamborghini-urus-barcelona-1.jpg"
       },
+      "/flota/aston-martin/": {
+        "url": "/flota/aston-martin/",
+        "canonical": "https://serresdrive.com/fr/flota/aston-martin/",
+        "title": "Location de Aston Martin à Barcelone · Serres Drive",
+        "description": "Disponible chez Serres Drive : Aston Martin DBX. Dès 1.000 € par jour, avec livraison dans l'aire métropolitaine de Barcelone.",
+        "h1": "Location de Aston Martin à Barcelone",
+        "type": "brand",
+        "brand": "aston-martin",
+        "image": "https://serresdrive.com/assets/img/cars/aston-martin-dbx/alquiler-aston-martin-dbx-barcelona-1.jpg"
+      },
       "/flota/mercedes-amg/": {
         "url": "/flota/mercedes-amg/",
         "canonical": "https://serresdrive.com/fr/flota/mercedes-amg/",
         "title": "Location de Mercedes-AMG à Barcelone · Serres Drive",
-        "description": "Disponibles chez Serres Drive : Mercedes-AMG G 63, Mercedes-AMG A45 S, Mercedes GLC et Mercedes A200 4Matic. Dès 150 € par jour, avec livraison dans l'aire métropolitaine de Barcelone.",
+        "description": "Disponibles chez Serres Drive : Mercedes-AMG G 63, Mercedes-AMG A45 S, Mercedes GLC, Mercedes A200 4Matic, Mercedes-AMG G 63 Verde Oliva, Mercedes-Benz GLS, Mercedes-Benz GLE Coupé, Mercedes-AMG GLC 43, Mercedes-Benz Clase V et Mercedes-Benz GLC Coupé. Dès 150 € par jour, avec livraison dans l'aire métropolitaine de Barcelone.",
         "h1": "Location de Mercedes-AMG à Barcelone",
         "type": "brand",
         "brand": "mercedes-amg",
@@ -1136,7 +1706,7 @@
         "url": "/flota/range-rover/",
         "canonical": "https://serresdrive.com/fr/flota/range-rover/",
         "title": "Location de Range Rover à Barcelone · Serres Drive",
-        "description": "Disponible chez Serres Drive : Range Rover Velar. Dès 350 € par jour, avec livraison dans l'aire métropolitaine de Barcelone.",
+        "description": "Disponibles chez Serres Drive : Range Rover Velar, Range Rover SV, Range Rover Vogue, Range Rover Sport SVR et Range Rover Sport. Dès 350 € par jour, avec livraison dans l'aire métropolitaine de Barcelone.",
         "h1": "Location de Range Rover à Barcelone",
         "type": "brand",
         "brand": "range-rover",
@@ -1281,6 +1851,136 @@
         "type": "car",
         "slug": "mercedes-a200-4matic",
         "image": "https://serresdrive.com/assets/img/cars/mercedes-a200-4matic/alquiler-mercedes-a200-4matic-barcelona-1.jpg"
+      },
+      "/coches/lamborghini-huracan-evo-spyder/": {
+        "url": "/coches/lamborghini-huracan-evo-spyder/",
+        "canonical": "https://serresdrive.com/fr/coches/lamborghini-huracan-evo-spyder/",
+        "title": "Location Lamborghini Huracán EVO Spyder à Barcelone · Serres Drive",
+        "description": "Lamborghini Huracán EVO Spyder en location à Barcelone dès 1.400 € par jour. 640 ch, 0-100 en 3,1 s. Réservation sur WhatsApp et livraison dans l'aire métropolitaine.",
+        "h1": "Location Lamborghini Huracán EVO Spyder à Barcelone",
+        "type": "car",
+        "slug": "lamborghini-huracan-evo-spyder",
+        "image": "https://serresdrive.com/assets/img/cars/lamborghini-huracan-evo-spyder/alquiler-lamborghini-huracan-evo-spyder-barcelona-1.jpg"
+      },
+      "/coches/lamborghini-urus-s/": {
+        "url": "/coches/lamborghini-urus-s/",
+        "canonical": "https://serresdrive.com/fr/coches/lamborghini-urus-s/",
+        "title": "Location Lamborghini Urus S à Barcelone · Serres Drive",
+        "description": "Lamborghini Urus S en location à Barcelone dès 1.100 € par jour. 666 ch, 0-100 en 3,5 s. Réservation sur WhatsApp et livraison dans l'aire métropolitaine.",
+        "h1": "Location Lamborghini Urus S à Barcelone",
+        "type": "car",
+        "slug": "lamborghini-urus-s",
+        "image": "https://serresdrive.com/assets/img/cars/lamborghini-urus-s/alquiler-lamborghini-urus-s-barcelona-1.jpg"
+      },
+      "/coches/aston-martin-dbx/": {
+        "url": "/coches/aston-martin-dbx/",
+        "canonical": "https://serresdrive.com/fr/coches/aston-martin-dbx/",
+        "title": "Location Aston Martin DBX à Barcelone · Serres Drive",
+        "description": "Aston Martin DBX en location à Barcelone dès 1.000 € par jour. 707 ch, 0-100 en 3,3 s. Réservation sur WhatsApp et livraison dans l'aire métropolitaine.",
+        "h1": "Location Aston Martin DBX à Barcelone",
+        "type": "car",
+        "slug": "aston-martin-dbx",
+        "image": "https://serresdrive.com/assets/img/cars/aston-martin-dbx/alquiler-aston-martin-dbx-barcelona-1.jpg"
+      },
+      "/coches/mercedes-amg-g63-verde-oliva/": {
+        "url": "/coches/mercedes-amg-g63-verde-oliva/",
+        "canonical": "https://serresdrive.com/fr/coches/mercedes-amg-g63-verde-oliva/",
+        "title": "Location Mercedes-AMG G 63 Verde Oliva à Barcelone · Serres Drive",
+        "description": "Mercedes-AMG G 63 Verde Oliva en location à Barcelone dès 1.000 € par jour. 585 ch, 0-100 en 4,5 s. Réservation sur WhatsApp et livraison dans l'aire métropolitaine.",
+        "h1": "Location Mercedes-AMG G 63 Verde Oliva à Barcelone",
+        "type": "car",
+        "slug": "mercedes-amg-g63-verde-oliva",
+        "image": "https://serresdrive.com/assets/img/cars/mercedes-amg-g63-verde-oliva/alquiler-mercedes-amg-g63-verde-oliva-barcelona-1.jpg"
+      },
+      "/coches/range-rover-sv/": {
+        "url": "/coches/range-rover-sv/",
+        "canonical": "https://serresdrive.com/fr/coches/range-rover-sv/",
+        "title": "Location Range Rover SV à Barcelone · Serres Drive",
+        "description": "Range Rover SV en location à Barcelone dès 800 € par jour. 565 ch, 0-100 en 5,4 s. Réservation sur WhatsApp et livraison dans l'aire métropolitaine.",
+        "h1": "Location Range Rover SV à Barcelone",
+        "type": "car",
+        "slug": "range-rover-sv",
+        "image": "https://serresdrive.com/assets/img/cars/range-rover-sv/alquiler-range-rover-sv-barcelona-1.jpg"
+      },
+      "/coches/range-rover-vogue/": {
+        "url": "/coches/range-rover-vogue/",
+        "canonical": "https://serresdrive.com/fr/coches/range-rover-vogue/",
+        "title": "Location Range Rover Vogue à Barcelone · Serres Drive",
+        "description": "Range Rover Vogue en location à Barcelone dès 800 € par jour. 258 ch, 0-100 en 7,9 s. Réservation sur WhatsApp et livraison dans l'aire métropolitaine.",
+        "h1": "Location Range Rover Vogue à Barcelone",
+        "type": "car",
+        "slug": "range-rover-vogue",
+        "image": "https://serresdrive.com/assets/img/cars/range-rover-vogue/alquiler-range-rover-vogue-barcelona-1.jpg"
+      },
+      "/coches/mercedes-gls/": {
+        "url": "/coches/mercedes-gls/",
+        "canonical": "https://serresdrive.com/fr/coches/mercedes-gls/",
+        "title": "Location Mercedes-Benz GLS à Barcelone · Serres Drive",
+        "description": "Mercedes-Benz GLS en location à Barcelone dès 700 € par jour. 367 ch, 0-100 en 6,1 s. Réservation sur WhatsApp et livraison dans l'aire métropolitaine.",
+        "h1": "Location Mercedes-Benz GLS à Barcelone",
+        "type": "car",
+        "slug": "mercedes-gls",
+        "image": "https://serresdrive.com/assets/img/cars/mercedes-gls/alquiler-mercedes-gls-barcelona-1.jpg"
+      },
+      "/coches/range-rover-sport-svr/": {
+        "url": "/coches/range-rover-sport-svr/",
+        "canonical": "https://serresdrive.com/fr/coches/range-rover-sport-svr/",
+        "title": "Location Range Rover Sport SVR à Barcelone · Serres Drive",
+        "description": "Range Rover Sport SVR en location à Barcelone dès 600 € par jour. 575 ch, 0-100 en 4,5 s. Réservation sur WhatsApp et livraison dans l'aire métropolitaine.",
+        "h1": "Location Range Rover Sport SVR à Barcelone",
+        "type": "car",
+        "slug": "range-rover-sport-svr",
+        "image": "https://serresdrive.com/assets/img/cars/range-rover-sport-svr/alquiler-range-rover-sport-svr-barcelona-1.jpg"
+      },
+      "/coches/mercedes-gle-coupe/": {
+        "url": "/coches/mercedes-gle-coupe/",
+        "canonical": "https://serresdrive.com/fr/coches/mercedes-gle-coupe/",
+        "title": "Location Mercedes-Benz GLE Coupé à Barcelone · Serres Drive",
+        "description": "Mercedes-Benz GLE Coupé en location à Barcelone dès 600 € par jour. 269 ch, 0-100 en 6,9 s. Réservation sur WhatsApp et livraison dans l'aire métropolitaine.",
+        "h1": "Location Mercedes-Benz GLE Coupé à Barcelone",
+        "type": "car",
+        "slug": "mercedes-gle-coupe",
+        "image": "https://serresdrive.com/assets/img/cars/mercedes-gle-coupe/alquiler-mercedes-gle-coupe-barcelona-1.jpg"
+      },
+      "/coches/range-rover-sport/": {
+        "url": "/coches/range-rover-sport/",
+        "canonical": "https://serresdrive.com/fr/coches/range-rover-sport/",
+        "title": "Location Range Rover Sport à Barcelone · Serres Drive",
+        "description": "Range Rover Sport en location à Barcelone dès 550 € par jour. 340 ch, 0-100 en 7,2 s. Réservation sur WhatsApp et livraison dans l'aire métropolitaine.",
+        "h1": "Location Range Rover Sport à Barcelone",
+        "type": "car",
+        "slug": "range-rover-sport",
+        "image": "https://serresdrive.com/assets/img/cars/range-rover-sport/alquiler-range-rover-sport-barcelona-1.jpg"
+      },
+      "/coches/mercedes-amg-glc-43/": {
+        "url": "/coches/mercedes-amg-glc-43/",
+        "canonical": "https://serresdrive.com/fr/coches/mercedes-amg-glc-43/",
+        "title": "Location Mercedes-AMG GLC 43 à Barcelone · Serres Drive",
+        "description": "Mercedes-AMG GLC 43 en location à Barcelone dès 500 € par jour. 421 ch, 0-100 en 4,8 s. Réservation sur WhatsApp et livraison dans l'aire métropolitaine.",
+        "h1": "Location Mercedes-AMG GLC 43 à Barcelone",
+        "type": "car",
+        "slug": "mercedes-amg-glc-43",
+        "image": "https://serresdrive.com/assets/img/cars/mercedes-amg-glc-43/alquiler-mercedes-amg-glc-43-barcelona-1.jpg"
+      },
+      "/coches/mercedes-clase-v/": {
+        "url": "/coches/mercedes-clase-v/",
+        "canonical": "https://serresdrive.com/fr/coches/mercedes-clase-v/",
+        "title": "Location Mercedes-Benz Clase V à Barcelone · Serres Drive",
+        "description": "Mercedes-Benz Clase V en location à Barcelone dès 350 € par jour. 239 ch, 0-100 en 7,9 s. Réservation sur WhatsApp et livraison dans l'aire métropolitaine.",
+        "h1": "Location Mercedes-Benz Clase V à Barcelone",
+        "type": "car",
+        "slug": "mercedes-clase-v",
+        "image": "https://serresdrive.com/assets/img/cars/mercedes-clase-v/alquiler-mercedes-clase-v-barcelona-1.jpg"
+      },
+      "/coches/mercedes-glc-coupe/": {
+        "url": "/coches/mercedes-glc-coupe/",
+        "canonical": "https://serresdrive.com/fr/coches/mercedes-glc-coupe/",
+        "title": "Location Mercedes-Benz GLC Coupé à Barcelone · Serres Drive",
+        "description": "Mercedes-Benz GLC Coupé en location à Barcelone dès 330 € par jour. 197 ch, 0-100 en 8,1 s. Réservation sur WhatsApp et livraison dans l'aire métropolitaine.",
+        "h1": "Location Mercedes-Benz GLC Coupé à Barcelone",
+        "type": "car",
+        "slug": "mercedes-glc-coupe",
+        "image": "https://serresdrive.com/assets/img/cars/mercedes-glc-coupe/alquiler-mercedes-glc-coupe-barcelona-1.jpg"
       }
     }
   }

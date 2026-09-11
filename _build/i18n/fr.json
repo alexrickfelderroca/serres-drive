@@ -48,7 +48,8 @@
     "form": "Formulaire",
     "threeQuarterAlt": "vue trois quarts avant",
     "rentalAlt": "en location à Barcelone",
-    "seeCarAria": "voir la fiche et les tarifs"
+    "seeCarAria": "voir la fiche et les tarifs",
+    "rentalAltNoCity": "en location"
   },
   "terms": {
     "title": "Conditions de location",
@@ -57,14 +58,20 @@
     "licence": "Permis",
     "licenceValue": "Un permis de conduire en cours de validité, rien de plus. Sans ancienneté minimale.",
     "km": "Kilomètres",
-    "kmValue": "{km} km inclus",
+    "kmValue": "{km} km/jour inclus (200 km/jour sur le Classe V)",
     "deposit": "Caution",
     "depositFrom": "Dès {amount}",
     "delivery": "Livraison",
     "deliveryValue": "Livraison et récupération dans l'aire métropolitaine : {amount}",
     "depositLabel": "Caution : {amount}",
     "depositUnknown": "Caution : nous vous la confirmons sur WhatsApp",
-    "deliveryShort": "Livraison métropolitaine {amount}"
+    "deliveryShort": "Livraison métropolitaine {amount}",
+    "kmPerDay": "Km par jour",
+    "kmPerDayValue": "{km} km/jour inclus",
+    "kmExtra": "Km supplémentaire",
+    "kmExtraValue": "{amount}/km",
+    "kmExtraUnknown": "Nous vous le confirmons sur WhatsApp",
+    "location": "Emplacement"
   },
   "home": {
     "eyebrow": "Sant Cugat del Vallès · Aire métropolitaine de Barcelone",
@@ -124,7 +131,8 @@
     "d2": "2 jours",
     "d3": "3 jours",
     "w1": "1 semaine",
-    "m1": "1 mois"
+    "m1": "1 mois",
+    "pricesOnRequest": "Tarifs 2 et 3 jours, semaine et mois : nous vous les confirmons sur WhatsApp."
   },
   "rates": {
     "h1": "Tarifs",
@@ -132,7 +140,9 @@
     "caption": "Tarifs de location par voiture et par durée",
     "colCar": "Voiture",
     "colDeposit": "Caution",
-    "note": "Livraison et récupération dans l'aire métropolitaine de Barcelone : {delivery}. {km} km inclus. Caution dès {deposit}."
+    "note": "Livraison et récupération dans l’aire métropolitaine de Barcelone : {delivery}. Les kilomètres inclus, le prix du kilomètre supplémentaire et la caution figurent par voiture dans le tableau.",
+    "colKm": "Km/jour",
+    "colKmExtra": "Km suppl."
   },
   "how": {
     "h1": "Comment ça marche",
@@ -394,6 +404,110 @@
         "163 ch micro-hybridés",
         "0-100 en 8,2 s",
         "Pack AMG Line, 5 places"
+      ]
+    },
+    "lamborghini-huracan-evo-spyder": {
+      "tagline": "V10 atmosphérique de 640 ch et capote en toile escamotable en 17 secondes : vert militaire mat dehors, sièges blancs dedans.",
+      "highlights": [
+        "640 ch, V10 atmosphérique",
+        "0-100 en 3,1 s",
+        "325 km/h, transmission intégrale"
+      ]
+    },
+    "lamborghini-urus-s": {
+      "tagline": "Noir brillant dehors, cuir brun tabac dedans, ciel de toit en Alcantara sombre et étriers rouges qui pointent entre les rayons des jantes diamantées.",
+      "highlights": [
+        "666 ch, V8 biturbo",
+        "0-100 en 3,5 s",
+        "305 km/h, transmission intégrale"
+      ]
+    },
+    "aston-martin-dbx": {
+      "tagline": "Gris graphite, jantes bronze et cuir clair pour les 707 ch du DBX707 : 0-100 en 3,3 s et 310 km/h en pointe.",
+      "highlights": [
+        "707 ch, V8 biturbo 4.0",
+        "0-100 en 3,3 s",
+        "310 km/h, transmission intégrale"
+      ]
+    },
+    "mercedes-amg-g63-verde-oliva": {
+      "tagline": "585 ch de V8 biturbo, vert olive satiné dehors et cuir rouge matelassé dedans : 2,5 tonnes qui passent de 0 à 100 en 4,5 s.",
+      "highlights": [
+        "585 ch et 850 Nm, V8 biturbo 4.0",
+        "0-100 en 4,5 s et 220 km/h",
+        "Transmission intégrale, 3 blocages de différentiel"
+      ]
+    },
+    "range-rover-sv": {
+      "tagline": "V8 suralimenté de 565 ch, carrosserie noire et cuir clair matelassé en losanges, rehaussé de noir, sous un toit panoramique.",
+      "highlights": [
+        "565 ch, V8 5.0 suralimenté",
+        "0-100 en 5,4 s et 225 km/h",
+        "Transmission intégrale, 5 places, toit panoramique"
+      ]
+    },
+    "range-rover-vogue": {
+      "tagline": "Bleu marine sur cuir bicolore ivoire et bleu, bois sombres veinés et toit panoramique à deux panneaux vitrés : 258 ch diesel et 600 Nm de poussée continue.",
+      "highlights": [
+        "258 ch et 600 Nm de couple",
+        "0-100 en 7,9 s",
+        "Transmission intégrale et suspension pneumatique"
+      ]
+    },
+    "mercedes-gls": {
+      "tagline": "Gris clair, jantes noires et cuir noir sous éclairage d'ambiance bleu : sept vraies places emmenées par 367 ch et 750 Nm de couple.",
+      "highlights": [
+        "367 ch et 750 Nm de couple",
+        "0-100 en 6,1 s et 250 km/h",
+        "7 places, transmission 4MATIC"
+      ]
+    },
+    "range-rover-sport-svr": {
+      "tagline": "Capot en fibre de carbone apparente, bleu électrique dehors et cuir blanc dedans : 575 ch suralimentés et 4,5 s pour atteindre 100 km/h.",
+      "highlights": [
+        "575 ch, V8 suralimenté",
+        "0-100 en 4,5 s",
+        "280 km/h, transmission intégrale"
+      ]
+    },
+    "mercedes-gle-coupe": {
+      "tagline": "Peinture blanche et cuir brun tabac, pack AMG Line et toit panoramique : le GLE 300 d développe 269 ch avec la transmission 4MATIC et abat le 0 à 100 en 6,9 s.",
+      "highlights": [
+        "GLE 300 d : 269 ch et 550 Nm, 2.0 diesel 48 V",
+        "0-100 en 6,9 s",
+        "226 km/h, transmission intégrale 4MATIC"
+      ]
+    },
+    "range-rover-sport": {
+      "tagline": "Noir brillant, jantes assombries et cuir ivoire dedans : 340 ch de V6 à compresseur qui avancent sans hausser le ton.",
+      "highlights": [
+        "340 ch, V6 à compresseur",
+        "0-100 en 7,2 s",
+        "209 km/h, transmission intégrale"
+      ]
+    },
+    "mercedes-amg-glc-43": {
+      "tagline": "421 ch avec turbo électrique issu de la Formule 1, carrosserie noir brillant et sièges AMG noirs à surpiqûres rouges.",
+      "highlights": [
+        "421 ch, 2.0 turbo à micro-hybridation 48 V",
+        "0-100 en 4,8 s",
+        "250 km/h, transmission intégrale 4MATIC"
+      ]
+    },
+    "mercedes-clase-v": {
+      "tagline": "Cuir noir, quatre fauteuils arrière en vis-à-vis avec table rabattable et éclairage d'ambiance : le salon roulant de Mercedes pour voyager à plusieurs.",
+      "highlights": [
+        "Six places en fauteuils individuels",
+        "Quatre sièges en vis-à-vis avec table",
+        "Diesel automatique, jusqu'à 220 km/h"
+      ]
+    },
+    "mercedes-glc-coupe": {
+      "tagline": "Gris clair avec Pack Night, toit panoramique et cuir brun sur noir : carrosserie coupé et transmission intégrale 4MATIC permanente.",
+      "highlights": [
+        "Transmission intégrale 4MATIC permanente",
+        "Toit panoramique de série",
+        "Pack Night : extérieur noir, cuir brun"
       ]
     }
   }

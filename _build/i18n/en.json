@@ -48,7 +48,8 @@
     "form": "Form",
     "threeQuarterAlt": "front three-quarter view",
     "rentalAlt": "for hire in Barcelona",
-    "seeCarAria": "see details and prices"
+    "seeCarAria": "see details and prices",
+    "rentalAltNoCity": "for hire"
   },
   "terms": {
     "title": "Hire terms",
@@ -57,14 +58,20 @@
     "licence": "Licence",
     "licenceValue": "Just a valid driving licence. No minimum years on your licence.",
     "km": "Kilometres",
-    "kmValue": "{km} km included",
+    "kmValue": "{km} km/day included (200 km/day on the V-Class)",
     "deposit": "Deposit",
     "depositFrom": "From {amount}",
     "delivery": "Delivery",
     "deliveryValue": "Delivery and collection in the metropolitan area: {amount}",
     "depositLabel": "Deposit: {amount}",
     "depositUnknown": "Deposit: we’ll confirm it on WhatsApp",
-    "deliveryShort": "Metropolitan delivery {amount}"
+    "deliveryShort": "Metropolitan delivery {amount}",
+    "kmPerDay": "Km per day",
+    "kmPerDayValue": "{km} km/day included",
+    "kmExtra": "Extra km",
+    "kmExtraValue": "{amount}/km",
+    "kmExtraUnknown": "We’ll confirm it on WhatsApp",
+    "location": "Location"
   },
   "home": {
     "eyebrow": "Sant Cugat del Vallès · Barcelona metropolitan area",
@@ -124,7 +131,8 @@
     "d2": "2 days",
     "d3": "3 days",
     "w1": "1 week",
-    "m1": "1 month"
+    "m1": "1 month",
+    "pricesOnRequest": "2- and 3-day, weekly and monthly rates: we’ll confirm them on WhatsApp."
   },
   "rates": {
     "h1": "Rates",
@@ -132,7 +140,9 @@
     "caption": "Hire rates by car and duration",
     "colCar": "Car",
     "colDeposit": "Deposit",
-    "note": "Delivery and collection in the Barcelona metropolitan area: {delivery}. {km} km included. Deposit from {deposit}."
+    "note": "Delivery and collection in the Barcelona metropolitan area: {delivery}. Included kilometres, the extra-kilometre rate and the deposit are per car, in the table.",
+    "colKm": "Km/day",
+    "colKmExtra": "Extra km"
   },
   "how": {
     "h1": "How it works",
@@ -394,6 +404,110 @@
         "163 hp mild-hybrid",
         "0-100 in 8.2 s",
         "AMG Line pack, five seats"
+      ]
+    },
+    "lamborghini-huracan-evo-spyder": {
+      "tagline": "A naturally aspirated 640 hp V10 under a fabric roof that folds away in 17 seconds: matt military green outside, white seats inside.",
+      "highlights": [
+        "640 hp naturally aspirated V10",
+        "0-100 km/h in 3.1 s",
+        "325 km/h, all-wheel drive"
+      ]
+    },
+    "lamborghini-urus-s": {
+      "tagline": "Gloss black outside and tobacco brown leather inside, the headlining trimmed in dark Alcantara and red calipers showing through the diamond-cut wheels.",
+      "highlights": [
+        "666 hp twin-turbo V8",
+        "0-100 km/h in 3.5 s",
+        "305 km/h, all-wheel drive"
+      ]
+    },
+    "aston-martin-dbx": {
+      "tagline": "Graphite grey paintwork, bronze wheels and pale leather inside: the DBX707 makes 707 hp, 0-100 km/h in 3.3 s and a 310 km/h top speed.",
+      "highlights": [
+        "707 hp 4.0 twin-turbo V8",
+        "0-100 km/h in 3.3 s",
+        "310 km/h, all-wheel drive"
+      ]
+    },
+    "mercedes-amg-g63-verde-oliva": {
+      "tagline": "585 hp from a twin-turbo V8, satin olive green outside and quilted red leather inside: 2.5 tonnes that go from 0 to 100 km/h in 4.5 s.",
+      "highlights": [
+        "585 hp and 850 Nm, 4.0 twin-turbo V8",
+        "0-100 km/h in 4.5 s, 220 km/h",
+        "All-wheel drive, three differential locks"
+      ]
+    },
+    "range-rover-sv": {
+      "tagline": "A 565 hp supercharged V8, black bodywork and an interior of pale diamond-quilted leather with black contrast, beneath a panoramic roof.",
+      "highlights": [
+        "565 hp, 5.0 supercharged V8",
+        "0-100 km/h in 5.4 s, 225 km/h",
+        "All-wheel drive, 5 seats, panoramic roof"
+      ]
+    },
+    "range-rover-vogue": {
+      "tagline": "Navy blue over two-tone ivory and blue leather, dark figured wood and a twin-panel panoramic roof: a 258 hp diesel with 600 Nm of steady pull.",
+      "highlights": [
+        "258 hp and 600 Nm of torque",
+        "0-100 km/h in 7.9 s",
+        "All-wheel drive and air suspension"
+      ]
+    },
+    "mercedes-gls": {
+      "tagline": "Light grey with black wheels and black leather under blue ambient light: seven proper seats, with 367 hp and 750 Nm of torque to move them.",
+      "highlights": [
+        "367 hp and 750 Nm of torque",
+        "0-100 km/h in 6.1 s, 250 km/h",
+        "7 seats with 4MATIC all-wheel drive"
+      ]
+    },
+    "range-rover-sport-svr": {
+      "tagline": "Exposed carbon fibre bonnet, electric blue paint and white leather inside: 575 hp from the supercharged V8 and 4.5 s to 100 km/h.",
+      "highlights": [
+        "575 hp supercharged V8",
+        "0-100 km/h in 4.5 s",
+        "280 km/h, all-wheel drive"
+      ]
+    },
+    "mercedes-gle-coupe": {
+      "tagline": "White paint and tobacco brown leather, AMG Line package and a panoramic roof: the GLE 300 d makes 269 hp, with 4MATIC all-wheel drive and 0-100 km/h in 6.9 s.",
+      "highlights": [
+        "GLE 300 d: 269 hp, 550 Nm, 2.0 diesel, 48V",
+        "0-100 km/h in 6.9 s",
+        "226 km/h, 4MATIC all-wheel drive"
+      ]
+    },
+    "range-rover-sport": {
+      "tagline": "Gloss black with darkened wheels and ivory leather inside: 340 hp from a supercharged V6 that moves it along without raising its voice.",
+      "highlights": [
+        "340 hp supercharged V6",
+        "0-100 km/h in 7.2 s",
+        "209 km/h, all-wheel drive"
+      ]
+    },
+    "mercedes-amg-glc-43": {
+      "tagline": "421 hp with an electric turbocharger drawn from Formula 1, gloss black bodywork and black AMG seats with red stitching.",
+      "highlights": [
+        "421 hp, 2.0 turbo with 48V hybrid assist",
+        "0-100 km/h in 4.8 s",
+        "250 km/h, 4MATIC all-wheel drive"
+      ]
+    },
+    "mercedes-clase-v": {
+      "tagline": "Black leather, four individual rear seats facing each other across a folding table and ambient lighting: the Mercedes lounge on wheels for travelling as a group.",
+      "highlights": [
+        "Six seats, all of them individual chairs",
+        "Four facing seats with a folding table",
+        "Automatic diesel, up to 220 km/h"
+      ]
+    },
+    "mercedes-glc-coupe": {
+      "tagline": "Light grey with the Night Package, a panoramic roof and brown leather over black: coupé bodywork and permanent 4MATIC all-wheel drive.",
+      "highlights": [
+        "Permanent 4MATIC all-wheel drive",
+        "Panoramic roof as standard",
+        "Night Package: black exterior, brown leather"
       ]
     }
   }

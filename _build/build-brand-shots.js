@@ -17,7 +17,7 @@ const fs = require('fs');
 const path = require('path');
 const http = require('http');
 const https = require('https');
-const sharp = require('C:/Users/Rickfelder/Desktop/serres/_build/node_modules/sharp');
+const sharp = require('./sharp-resolve');
 
 const ROOT = path.resolve(__dirname, '..');
 const SRC_DIR = path.join(__dirname, 'brand-shots-src');

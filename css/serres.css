@@ -120,6 +120,9 @@ table{border-collapse:collapse;width:100%}
 .lede{font-size:clamp(16px,1.6vw,19px);color:var(--text-dim);max-width:62ch}
 .muted{color:var(--text-dim)}
 .mute-sm{font-size:13px;color:var(--text-mute)}
+/* Un dato que no tenemos todavia, dicho en voz baja dentro de una tabla:
+   hereda el tamano de la celda, solo baja el color. */
+.mute{color:var(--text-mute)}
 
 /* ---------- section rhythm ---------------------------------------- */
 .section{padding-block:clamp(72px,10vw,136px)}
@@ -440,6 +443,35 @@ table{border-collapse:collapse;width:100%}
 }
 .car-card .price b{font-family:var(--font-head);font-size:28px;font-weight:700;letter-spacing:.01em;display:block;line-height:1}
 .car-card .price span{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--text-mute)}
+/* Donde esta el coche ahora mismo. Solo se pinta cuando lo sabemos: la
+   flota propia esta en Barcelona, la del proveedor repartida por Espana y
+   esos coches salen sin linea, no con un hueco ni un "consultar". */
+/* En la tarjeta va SOBRE la foto, no en el cuerpo. Puesto entre el titulo y
+   las specs empujaba el texto hacia abajo, y como los coches del proveedor no
+   llevan ubicacion, dos tarjetas vecinas de la misma fila acababan con la
+   linea de specs a distinta altura. Encima de la imagen esta fuera del flujo:
+   se ve mejor y no descuadra nada. Fondo solido, no backdrop-filter: son
+   hasta 26 tarjetas desplazandose a la vez. */
+.car-loc-tag{
+  position:absolute;left:12px;bottom:12px;z-index:2;
+  display:inline-flex;align-items:center;gap:6px;
+  padding:6px 11px 6px 9px;border-radius:999px;
+  background:rgba(10,10,11,.78);border:1px solid rgba(255,255,255,.16);
+  box-shadow:var(--shadow-1);
+  font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--text);line-height:1;
+}
+.car-loc-tag svg{width:13px;height:13px;flex:none;color:var(--gold)}
+
+.car-loc{
+  display:flex;align-items:center;gap:6px;
+  font-size:12px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--text-mute);margin-top:-2px;
+}
+.car-loc svg{width:13px;height:13px;flex:none;opacity:.85}
+.car-loc--lg{font-size:13px;letter-spacing:.08em;margin-top:10px;color:var(--text-dim)}
+.car-loc--lg svg{width:15px;height:15px}
+
 /* Whole card is the link; the WhatsApp button sits above it. */
 .card-link::after{content:"";position:absolute;inset:0;z-index:1}
 .car-card .wa-mini{position:relative;z-index:2}
@@ -480,6 +512,7 @@ table{border-collapse:collapse;width:100%}
 .price-box .from b{font-family:var(--font-head);font-size:46px;font-weight:700;line-height:1}
 .price-box .from span{font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--text-mute)}
 .price-list{display:flex;flex-direction:column;gap:0}
+.price-list b{white-space:nowrap}
 .price-list li{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-top:1px solid var(--line);font-size:15px}
 .price-list li span{color:var(--text-dim)}
 .price-list li b{font-weight:600}
@@ -513,10 +546,13 @@ table{border-collapse:collapse;width:100%}
   position:sticky;top:0;background:var(--panel-2);
   font-family:var(--font-head);font-size:13px;font-weight:600;
   letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim);
-  text-align:right;padding:14px 16px;border-bottom:1px solid var(--line-2);white-space:nowrap;
+  text-align:right;padding:14px 12px;border-bottom:1px solid var(--line-2);white-space:nowrap;
 }
 .rates thead th:first-child{text-align:left}
-.rates td{padding:13px 16px;border-top:1px solid var(--line);text-align:right;white-space:nowrap}
+/* 12 px de lado, no 16: con las columnas de Km/día y Km extra (11-09-2026)
+   la tabla se iba a 1.122 px dentro de una caja de 1.110 y aparecia una barra
+   de desplazamiento de 12 px, justo la peor de todas: se ve y no se entiende. */
+.rates td{padding:13px 12px;border-top:1px solid var(--line);text-align:right;white-space:nowrap}
 .rates td:first-child{text-align:left;white-space:normal}
 .rates tbody tr{transition:background .18s var(--ease)}
 .rates tbody tr:hover{background:rgba(255,255,255,.045)}
@@ -556,7 +592,14 @@ table{border-collapse:collapse;width:100%}
   .rates td:nth-child(5),.rates td:nth-child(6){grid-column:span 3}
   .rates td:first-child{grid-column:1/-1;padding:14px 14px;background:var(--panel-2);white-space:normal}
   .rates td:first-child::before{display:none}
-  .rates td:last-child{grid-column:1/-1;flex-direction:row;justify-content:space-between;align-items:baseline;background:var(--panel-2)}
+  /* Fianza, km/día y km extra son el pie de la tarjeta: tres celdas iguales
+     sobre el fondo del encabezado, para que se lean como un bloque de
+     condiciones y no como dos precios más. Antes la fianza iba sola a todo
+     lo ancho; con las dos columnas de kilómetros (11-09-2026) eso dejaba un
+     hueco de un tercio en la fila anterior. */
+  .rates td:nth-child(7),.rates td:nth-child(8),.rates td:last-child{
+    grid-column:span 2;background:var(--panel-2);
+  }
   .rates .d1{font-size:17px}
   .rates .car-cell img{width:76px;height:51px}
   .rates .car-cell b{font-size:21px}
@@ -596,6 +639,23 @@ table{border-collapse:collapse;width:100%}
 
 /* ---------- misc panels -------------------------------------------- */
 .panel{padding:clamp(22px,3vw,34px);border-radius:var(--radius);border:1px solid var(--line);background:var(--panel);box-shadow:var(--shadow-1)}
+/* La lista de fianzas por coche se parte en dos columnas a partir de 1040 px.
+   Con 13 coches iba bien en una; con 26 (alta de Stratos, 11-09-2026) medía
+   1.150 px al lado de un panel de 390 y dejaba medio folio en blanco a la
+   izquierda. column-count parte por altura y no por orden, asi que el
+   recorrido sigue siendo de arriba abajo y luego a la derecha. */
+@media (min-width:1041px){
+  /* display:block es obligatorio: .price-list es flex y un contenedor flex
+     IGNORA column-count sin decir nada — la lista se quedaba en una columna
+     aunque el estilo calculado ya dijera columnCount:2. */
+  .price-list--split{display:block;column-count:3;column-gap:44px}
+  .price-list--split li{break-inside:avoid}
+}
+@media (min-width:701px) and (max-width:1040px){
+  .price-list--split{display:block;column-count:2;column-gap:36px}
+  .price-list--split li{break-inside:avoid}
+}
+
 .split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:start}
 @media (max-width:860px){.split{grid-template-columns:1fr}}
 .crumbs{display:flex;flex-wrap:wrap;gap:8px;font-size:13px;color:var(--text-mute);padding-block:20px 0}

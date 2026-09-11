@@ -8,7 +8,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -20,7 +20,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/flota/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/flota/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/flota/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -32,7 +32,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/flota/porsche/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/flota/porsche/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/flota/porsche/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -44,7 +44,19 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/flota/lamborghini/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/flota/lamborghini/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/flota/lamborghini/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/flota/aston-martin/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/flota/aston-martin/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/flota/aston-martin/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/flota/aston-martin/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/flota/aston-martin/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/flota/aston-martin/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/flota/aston-martin/"/>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -56,7 +68,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/flota/mercedes-amg/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/flota/mercedes-amg/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/flota/mercedes-amg/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -68,7 +80,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/flota/audi/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/flota/audi/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/flota/audi/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -80,7 +92,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/flota/range-rover/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/flota/range-rover/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/flota/range-rover/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -92,7 +104,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/flota/volkswagen/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/flota/volkswagen/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/flota/volkswagen/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -104,7 +116,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-amg-g63/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-amg-g63/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-amg-g63/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -116,7 +128,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/lamborghini-urus/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/lamborghini-urus/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/lamborghini-urus/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -128,7 +140,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/audi-rs6-avant/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/audi-rs6-avant/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/audi-rs6-avant/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -140,7 +152,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/porsche-911-cabrio/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/porsche-911-cabrio/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/porsche-911-cabrio/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -152,7 +164,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/porsche-911-carrera-s/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/porsche-911-carrera-s/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/porsche-911-carrera-s/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -164,7 +176,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/porsche-cayenne-hybrid/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/porsche-cayenne-hybrid/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/porsche-cayenne-hybrid/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -176,7 +188,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-amg-a45/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-amg-a45/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-amg-a45/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -188,7 +200,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/audi-rs3-sportback/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/audi-rs3-sportback/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/audi-rs3-sportback/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -200,7 +212,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/audi-rsq3/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/audi-rsq3/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/audi-rsq3/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -212,7 +224,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/volkswagen-golf-r/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/volkswagen-golf-r/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/volkswagen-golf-r/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -224,7 +236,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/range-rover-velar/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/range-rover-velar/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/range-rover-velar/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -236,7 +248,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-glc/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-glc/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-glc/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -248,7 +260,163 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-a200-4matic/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-a200-4matic/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-a200-4matic/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/coches/lamborghini-huracan-evo-spyder/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/lamborghini-huracan-evo-spyder/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/lamborghini-huracan-evo-spyder/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/lamborghini-huracan-evo-spyder/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/lamborghini-huracan-evo-spyder/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/lamborghini-huracan-evo-spyder/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/lamborghini-huracan-evo-spyder/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/coches/lamborghini-urus-s/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/lamborghini-urus-s/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/lamborghini-urus-s/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/lamborghini-urus-s/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/lamborghini-urus-s/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/lamborghini-urus-s/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/lamborghini-urus-s/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/coches/aston-martin-dbx/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/aston-martin-dbx/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/aston-martin-dbx/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/aston-martin-dbx/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/aston-martin-dbx/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/aston-martin-dbx/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/aston-martin-dbx/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/coches/mercedes-amg-g63-verde-oliva/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/mercedes-amg-g63-verde-oliva/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/mercedes-amg-g63-verde-oliva/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/mercedes-amg-g63-verde-oliva/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-amg-g63-verde-oliva/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-amg-g63-verde-oliva/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-amg-g63-verde-oliva/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/coches/range-rover-sv/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/range-rover-sv/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/range-rover-sv/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/range-rover-sv/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/range-rover-sv/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/range-rover-sv/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/range-rover-sv/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/coches/range-rover-vogue/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/range-rover-vogue/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/range-rover-vogue/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/range-rover-vogue/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/range-rover-vogue/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/range-rover-vogue/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/range-rover-vogue/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/coches/mercedes-gls/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/mercedes-gls/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/mercedes-gls/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/mercedes-gls/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-gls/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-gls/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-gls/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/coches/range-rover-sport-svr/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/range-rover-sport-svr/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/range-rover-sport-svr/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/range-rover-sport-svr/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/range-rover-sport-svr/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/range-rover-sport-svr/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/range-rover-sport-svr/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/coches/mercedes-gle-coupe/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/mercedes-gle-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/mercedes-gle-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/mercedes-gle-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-gle-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-gle-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-gle-coupe/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/coches/range-rover-sport/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/range-rover-sport/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/range-rover-sport/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/range-rover-sport/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/range-rover-sport/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/range-rover-sport/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/range-rover-sport/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/coches/mercedes-amg-glc-43/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/mercedes-amg-glc-43/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/mercedes-amg-glc-43/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/mercedes-amg-glc-43/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-amg-glc-43/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-amg-glc-43/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-amg-glc-43/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/coches/mercedes-clase-v/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/mercedes-clase-v/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/mercedes-clase-v/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/mercedes-clase-v/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-clase-v/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-clase-v/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-clase-v/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/coches/mercedes-glc-coupe/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/mercedes-glc-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/mercedes-glc-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/mercedes-glc-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-glc-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-glc-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-glc-coupe/"/>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -260,7 +428,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/tarifas/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/tarifas/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/tarifas/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -272,7 +440,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/como-funciona/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/como-funciona/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/como-funciona/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -284,7 +452,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/condiciones-de-alquiler/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/condiciones-de-alquiler/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/condiciones-de-alquiler/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -296,7 +464,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/por-que-serres/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/por-que-serres/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/por-que-serres/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -308,7 +476,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/contacto/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/contacto/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/contacto/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -320,7 +488,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -332,7 +500,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/flota/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/flota/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/flota/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -344,7 +512,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/flota/porsche/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/flota/porsche/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/flota/porsche/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -356,7 +524,19 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/flota/lamborghini/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/flota/lamborghini/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/flota/lamborghini/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/en/flota/aston-martin/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/flota/aston-martin/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/flota/aston-martin/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/flota/aston-martin/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/flota/aston-martin/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/flota/aston-martin/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/flota/aston-martin/"/>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -368,7 +548,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/flota/mercedes-amg/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/flota/mercedes-amg/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/flota/mercedes-amg/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -380,7 +560,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/flota/audi/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/flota/audi/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/flota/audi/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -392,7 +572,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/flota/range-rover/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/flota/range-rover/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/flota/range-rover/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -404,7 +584,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/flota/volkswagen/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/flota/volkswagen/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/flota/volkswagen/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -416,7 +596,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-amg-g63/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-amg-g63/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-amg-g63/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -428,7 +608,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/lamborghini-urus/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/lamborghini-urus/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/lamborghini-urus/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -440,7 +620,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/audi-rs6-avant/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/audi-rs6-avant/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/audi-rs6-avant/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -452,7 +632,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/porsche-911-cabrio/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/porsche-911-cabrio/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/porsche-911-cabrio/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -464,7 +644,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/porsche-911-carrera-s/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/porsche-911-carrera-s/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/porsche-911-carrera-s/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -476,7 +656,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/porsche-cayenne-hybrid/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/porsche-cayenne-hybrid/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/porsche-cayenne-hybrid/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -488,7 +668,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-amg-a45/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-amg-a45/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-amg-a45/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -500,7 +680,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/audi-rs3-sportback/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/audi-rs3-sportback/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/audi-rs3-sportback/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -512,7 +692,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/audi-rsq3/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/audi-rsq3/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/audi-rsq3/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -524,7 +704,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/volkswagen-golf-r/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/volkswagen-golf-r/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/volkswagen-golf-r/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -536,7 +716,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/range-rover-velar/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/range-rover-velar/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/range-rover-velar/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -548,7 +728,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-glc/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-glc/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-glc/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -560,7 +740,163 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-a200-4matic/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-a200-4matic/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-a200-4matic/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/en/coches/lamborghini-huracan-evo-spyder/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/lamborghini-huracan-evo-spyder/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/lamborghini-huracan-evo-spyder/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/lamborghini-huracan-evo-spyder/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/lamborghini-huracan-evo-spyder/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/lamborghini-huracan-evo-spyder/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/lamborghini-huracan-evo-spyder/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/en/coches/lamborghini-urus-s/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/lamborghini-urus-s/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/lamborghini-urus-s/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/lamborghini-urus-s/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/lamborghini-urus-s/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/lamborghini-urus-s/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/lamborghini-urus-s/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/en/coches/aston-martin-dbx/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/aston-martin-dbx/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/aston-martin-dbx/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/aston-martin-dbx/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/aston-martin-dbx/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/aston-martin-dbx/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/aston-martin-dbx/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/en/coches/mercedes-amg-g63-verde-oliva/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/mercedes-amg-g63-verde-oliva/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/mercedes-amg-g63-verde-oliva/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/mercedes-amg-g63-verde-oliva/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-amg-g63-verde-oliva/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-amg-g63-verde-oliva/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-amg-g63-verde-oliva/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/en/coches/range-rover-sv/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/range-rover-sv/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/range-rover-sv/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/range-rover-sv/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/range-rover-sv/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/range-rover-sv/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/range-rover-sv/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/en/coches/range-rover-vogue/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/range-rover-vogue/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/range-rover-vogue/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/range-rover-vogue/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/range-rover-vogue/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/range-rover-vogue/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/range-rover-vogue/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/en/coches/mercedes-gls/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/mercedes-gls/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/mercedes-gls/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/mercedes-gls/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-gls/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-gls/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-gls/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/en/coches/range-rover-sport-svr/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/range-rover-sport-svr/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/range-rover-sport-svr/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/range-rover-sport-svr/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/range-rover-sport-svr/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/range-rover-sport-svr/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/range-rover-sport-svr/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/en/coches/mercedes-gle-coupe/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/mercedes-gle-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/mercedes-gle-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/mercedes-gle-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-gle-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-gle-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-gle-coupe/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/en/coches/range-rover-sport/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/range-rover-sport/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/range-rover-sport/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/range-rover-sport/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/range-rover-sport/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/range-rover-sport/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/range-rover-sport/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/en/coches/mercedes-amg-glc-43/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/mercedes-amg-glc-43/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/mercedes-amg-glc-43/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/mercedes-amg-glc-43/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-amg-glc-43/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-amg-glc-43/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-amg-glc-43/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/en/coches/mercedes-clase-v/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/mercedes-clase-v/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/mercedes-clase-v/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/mercedes-clase-v/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-clase-v/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-clase-v/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-clase-v/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/en/coches/mercedes-glc-coupe/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/mercedes-glc-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/mercedes-glc-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/mercedes-glc-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-glc-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-glc-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-glc-coupe/"/>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -572,7 +908,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/tarifas/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/tarifas/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/tarifas/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -584,7 +920,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/como-funciona/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/como-funciona/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/como-funciona/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -596,7 +932,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/condiciones-de-alquiler/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/condiciones-de-alquiler/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/condiciones-de-alquiler/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -608,7 +944,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/por-que-serres/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/por-que-serres/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/por-que-serres/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -620,7 +956,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/contacto/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/contacto/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/contacto/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -632,7 +968,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -644,7 +980,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/flota/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/flota/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/flota/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -656,7 +992,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/flota/porsche/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/flota/porsche/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/flota/porsche/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -668,7 +1004,19 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/flota/lamborghini/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/flota/lamborghini/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/flota/lamborghini/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/ru/flota/aston-martin/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/flota/aston-martin/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/flota/aston-martin/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/flota/aston-martin/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/flota/aston-martin/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/flota/aston-martin/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/flota/aston-martin/"/>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -680,7 +1028,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/flota/mercedes-amg/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/flota/mercedes-amg/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/flota/mercedes-amg/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -692,7 +1040,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/flota/audi/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/flota/audi/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/flota/audi/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -704,7 +1052,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/flota/range-rover/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/flota/range-rover/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/flota/range-rover/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -716,7 +1064,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/flota/volkswagen/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/flota/volkswagen/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/flota/volkswagen/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -728,7 +1076,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-amg-g63/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-amg-g63/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-amg-g63/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -740,7 +1088,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/lamborghini-urus/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/lamborghini-urus/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/lamborghini-urus/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -752,7 +1100,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/audi-rs6-avant/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/audi-rs6-avant/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/audi-rs6-avant/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -764,7 +1112,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/porsche-911-cabrio/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/porsche-911-cabrio/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/porsche-911-cabrio/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -776,7 +1124,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/porsche-911-carrera-s/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/porsche-911-carrera-s/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/porsche-911-carrera-s/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -788,7 +1136,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/porsche-cayenne-hybrid/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/porsche-cayenne-hybrid/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/porsche-cayenne-hybrid/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -800,7 +1148,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-amg-a45/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-amg-a45/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-amg-a45/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -812,7 +1160,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/audi-rs3-sportback/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/audi-rs3-sportback/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/audi-rs3-sportback/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -824,7 +1172,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/audi-rsq3/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/audi-rsq3/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/audi-rsq3/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -836,7 +1184,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/volkswagen-golf-r/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/volkswagen-golf-r/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/volkswagen-golf-r/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -848,7 +1196,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/range-rover-velar/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/range-rover-velar/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/range-rover-velar/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -860,7 +1208,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-glc/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-glc/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-glc/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -872,7 +1220,163 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-a200-4matic/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-a200-4matic/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-a200-4matic/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/ru/coches/lamborghini-huracan-evo-spyder/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/lamborghini-huracan-evo-spyder/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/lamborghini-huracan-evo-spyder/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/lamborghini-huracan-evo-spyder/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/lamborghini-huracan-evo-spyder/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/lamborghini-huracan-evo-spyder/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/lamborghini-huracan-evo-spyder/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/ru/coches/lamborghini-urus-s/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/lamborghini-urus-s/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/lamborghini-urus-s/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/lamborghini-urus-s/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/lamborghini-urus-s/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/lamborghini-urus-s/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/lamborghini-urus-s/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/ru/coches/aston-martin-dbx/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/aston-martin-dbx/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/aston-martin-dbx/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/aston-martin-dbx/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/aston-martin-dbx/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/aston-martin-dbx/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/aston-martin-dbx/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/ru/coches/mercedes-amg-g63-verde-oliva/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/mercedes-amg-g63-verde-oliva/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/mercedes-amg-g63-verde-oliva/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/mercedes-amg-g63-verde-oliva/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-amg-g63-verde-oliva/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-amg-g63-verde-oliva/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-amg-g63-verde-oliva/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/ru/coches/range-rover-sv/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/range-rover-sv/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/range-rover-sv/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/range-rover-sv/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/range-rover-sv/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/range-rover-sv/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/range-rover-sv/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/ru/coches/range-rover-vogue/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/range-rover-vogue/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/range-rover-vogue/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/range-rover-vogue/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/range-rover-vogue/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/range-rover-vogue/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/range-rover-vogue/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/ru/coches/mercedes-gls/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/mercedes-gls/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/mercedes-gls/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/mercedes-gls/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-gls/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-gls/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-gls/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/ru/coches/range-rover-sport-svr/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/range-rover-sport-svr/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/range-rover-sport-svr/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/range-rover-sport-svr/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/range-rover-sport-svr/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/range-rover-sport-svr/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/range-rover-sport-svr/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/ru/coches/mercedes-gle-coupe/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/mercedes-gle-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/mercedes-gle-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/mercedes-gle-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-gle-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-gle-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-gle-coupe/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/ru/coches/range-rover-sport/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/range-rover-sport/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/range-rover-sport/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/range-rover-sport/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/range-rover-sport/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/range-rover-sport/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/range-rover-sport/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/ru/coches/mercedes-amg-glc-43/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/mercedes-amg-glc-43/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/mercedes-amg-glc-43/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/mercedes-amg-glc-43/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-amg-glc-43/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-amg-glc-43/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-amg-glc-43/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/ru/coches/mercedes-clase-v/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/mercedes-clase-v/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/mercedes-clase-v/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/mercedes-clase-v/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-clase-v/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-clase-v/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-clase-v/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/ru/coches/mercedes-glc-coupe/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/mercedes-glc-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/mercedes-glc-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/mercedes-glc-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-glc-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-glc-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-glc-coupe/"/>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -884,7 +1388,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/tarifas/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/tarifas/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/tarifas/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -896,7 +1400,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/como-funciona/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/como-funciona/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/como-funciona/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -908,7 +1412,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/condiciones-de-alquiler/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/condiciones-de-alquiler/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/condiciones-de-alquiler/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -920,7 +1424,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/por-que-serres/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/por-que-serres/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/por-que-serres/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -932,7 +1436,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/contacto/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/contacto/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/contacto/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -944,7 +1448,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -956,7 +1460,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/flota/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/flota/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/flota/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -968,7 +1472,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/flota/porsche/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/flota/porsche/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/flota/porsche/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -980,7 +1484,19 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/flota/lamborghini/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/flota/lamborghini/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/flota/lamborghini/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/ca/flota/aston-martin/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/flota/aston-martin/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/flota/aston-martin/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/flota/aston-martin/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/flota/aston-martin/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/flota/aston-martin/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/flota/aston-martin/"/>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -992,7 +1508,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/flota/mercedes-amg/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/flota/mercedes-amg/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/flota/mercedes-amg/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1004,7 +1520,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/flota/audi/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/flota/audi/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/flota/audi/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1016,7 +1532,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/flota/range-rover/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/flota/range-rover/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/flota/range-rover/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1028,7 +1544,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/flota/volkswagen/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/flota/volkswagen/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/flota/volkswagen/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1040,7 +1556,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-amg-g63/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-amg-g63/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-amg-g63/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -1052,7 +1568,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/lamborghini-urus/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/lamborghini-urus/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/lamborghini-urus/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -1064,7 +1580,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/audi-rs6-avant/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/audi-rs6-avant/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/audi-rs6-avant/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -1076,7 +1592,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/porsche-911-cabrio/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/porsche-911-cabrio/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/porsche-911-cabrio/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -1088,7 +1604,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/porsche-911-carrera-s/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/porsche-911-carrera-s/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/porsche-911-carrera-s/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -1100,7 +1616,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/porsche-cayenne-hybrid/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/porsche-cayenne-hybrid/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/porsche-cayenne-hybrid/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -1112,7 +1628,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-amg-a45/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-amg-a45/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-amg-a45/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -1124,7 +1640,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/audi-rs3-sportback/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/audi-rs3-sportback/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/audi-rs3-sportback/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -1136,7 +1652,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/audi-rsq3/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/audi-rsq3/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/audi-rsq3/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -1148,7 +1664,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/volkswagen-golf-r/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/volkswagen-golf-r/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/volkswagen-golf-r/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -1160,7 +1676,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/range-rover-velar/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/range-rover-velar/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/range-rover-velar/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -1172,7 +1688,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-glc/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-glc/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-glc/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -1184,7 +1700,163 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-a200-4matic/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-a200-4matic/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-a200-4matic/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/ca/coches/lamborghini-huracan-evo-spyder/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/lamborghini-huracan-evo-spyder/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/lamborghini-huracan-evo-spyder/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/lamborghini-huracan-evo-spyder/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/lamborghini-huracan-evo-spyder/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/lamborghini-huracan-evo-spyder/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/lamborghini-huracan-evo-spyder/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/ca/coches/lamborghini-urus-s/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/lamborghini-urus-s/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/lamborghini-urus-s/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/lamborghini-urus-s/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/lamborghini-urus-s/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/lamborghini-urus-s/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/lamborghini-urus-s/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/ca/coches/aston-martin-dbx/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/aston-martin-dbx/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/aston-martin-dbx/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/aston-martin-dbx/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/aston-martin-dbx/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/aston-martin-dbx/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/aston-martin-dbx/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/ca/coches/mercedes-amg-g63-verde-oliva/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/mercedes-amg-g63-verde-oliva/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/mercedes-amg-g63-verde-oliva/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/mercedes-amg-g63-verde-oliva/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-amg-g63-verde-oliva/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-amg-g63-verde-oliva/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-amg-g63-verde-oliva/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/ca/coches/range-rover-sv/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/range-rover-sv/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/range-rover-sv/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/range-rover-sv/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/range-rover-sv/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/range-rover-sv/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/range-rover-sv/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/ca/coches/range-rover-vogue/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/range-rover-vogue/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/range-rover-vogue/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/range-rover-vogue/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/range-rover-vogue/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/range-rover-vogue/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/range-rover-vogue/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/ca/coches/mercedes-gls/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/mercedes-gls/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/mercedes-gls/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/mercedes-gls/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-gls/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-gls/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-gls/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/ca/coches/range-rover-sport-svr/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/range-rover-sport-svr/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/range-rover-sport-svr/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/range-rover-sport-svr/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/range-rover-sport-svr/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/range-rover-sport-svr/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/range-rover-sport-svr/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/ca/coches/mercedes-gle-coupe/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/mercedes-gle-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/mercedes-gle-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/mercedes-gle-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-gle-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-gle-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-gle-coupe/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/ca/coches/range-rover-sport/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/range-rover-sport/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/range-rover-sport/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/range-rover-sport/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/range-rover-sport/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/range-rover-sport/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/range-rover-sport/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/ca/coches/mercedes-amg-glc-43/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/mercedes-amg-glc-43/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/mercedes-amg-glc-43/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/mercedes-amg-glc-43/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-amg-glc-43/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-amg-glc-43/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-amg-glc-43/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/ca/coches/mercedes-clase-v/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/mercedes-clase-v/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/mercedes-clase-v/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/mercedes-clase-v/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-clase-v/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-clase-v/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-clase-v/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/ca/coches/mercedes-glc-coupe/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/mercedes-glc-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/mercedes-glc-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/mercedes-glc-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-glc-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-glc-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-glc-coupe/"/>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -1196,7 +1868,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/tarifas/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/tarifas/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/tarifas/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -1208,7 +1880,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/como-funciona/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/como-funciona/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/como-funciona/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -1220,7 +1892,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/condiciones-de-alquiler/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/condiciones-de-alquiler/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/condiciones-de-alquiler/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -1232,7 +1904,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/por-que-serres/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/por-que-serres/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/por-que-serres/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -1244,7 +1916,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/contacto/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/contacto/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/contacto/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -1256,7 +1928,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -1268,7 +1940,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/flota/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/flota/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/flota/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1280,7 +1952,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/flota/porsche/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/flota/porsche/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/flota/porsche/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1292,7 +1964,19 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/flota/lamborghini/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/flota/lamborghini/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/flota/lamborghini/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/fr/flota/aston-martin/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/flota/aston-martin/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/flota/aston-martin/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/flota/aston-martin/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/flota/aston-martin/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/flota/aston-martin/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/flota/aston-martin/"/>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1304,7 +1988,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/flota/mercedes-amg/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/flota/mercedes-amg/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/flota/mercedes-amg/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1316,7 +2000,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/flota/audi/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/flota/audi/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/flota/audi/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1328,7 +2012,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/flota/range-rover/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/flota/range-rover/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/flota/range-rover/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1340,7 +2024,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/flota/volkswagen/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/flota/volkswagen/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/flota/volkswagen/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1352,7 +2036,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-amg-g63/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-amg-g63/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-amg-g63/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -1364,7 +2048,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/lamborghini-urus/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/lamborghini-urus/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/lamborghini-urus/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -1376,7 +2060,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/audi-rs6-avant/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/audi-rs6-avant/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/audi-rs6-avant/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -1388,7 +2072,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/porsche-911-cabrio/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/porsche-911-cabrio/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/porsche-911-cabrio/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -1400,7 +2084,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/porsche-911-carrera-s/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/porsche-911-carrera-s/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/porsche-911-carrera-s/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -1412,7 +2096,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/porsche-cayenne-hybrid/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/porsche-cayenne-hybrid/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/porsche-cayenne-hybrid/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -1424,7 +2108,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-amg-a45/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-amg-a45/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-amg-a45/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -1436,7 +2120,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/audi-rs3-sportback/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/audi-rs3-sportback/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/audi-rs3-sportback/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -1448,7 +2132,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/audi-rsq3/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/audi-rsq3/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/audi-rsq3/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -1460,7 +2144,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/volkswagen-golf-r/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/volkswagen-golf-r/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/volkswagen-golf-r/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -1472,7 +2156,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/range-rover-velar/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/range-rover-velar/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/range-rover-velar/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -1484,7 +2168,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-glc/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-glc/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-glc/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -1496,7 +2180,163 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-a200-4matic/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-a200-4matic/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-a200-4matic/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/fr/coches/lamborghini-huracan-evo-spyder/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/lamborghini-huracan-evo-spyder/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/lamborghini-huracan-evo-spyder/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/lamborghini-huracan-evo-spyder/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/lamborghini-huracan-evo-spyder/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/lamborghini-huracan-evo-spyder/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/lamborghini-huracan-evo-spyder/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/fr/coches/lamborghini-urus-s/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/lamborghini-urus-s/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/lamborghini-urus-s/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/lamborghini-urus-s/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/lamborghini-urus-s/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/lamborghini-urus-s/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/lamborghini-urus-s/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/fr/coches/aston-martin-dbx/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/aston-martin-dbx/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/aston-martin-dbx/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/aston-martin-dbx/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/aston-martin-dbx/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/aston-martin-dbx/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/aston-martin-dbx/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/fr/coches/mercedes-amg-g63-verde-oliva/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/mercedes-amg-g63-verde-oliva/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/mercedes-amg-g63-verde-oliva/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/mercedes-amg-g63-verde-oliva/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-amg-g63-verde-oliva/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-amg-g63-verde-oliva/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-amg-g63-verde-oliva/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/fr/coches/range-rover-sv/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/range-rover-sv/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/range-rover-sv/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/range-rover-sv/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/range-rover-sv/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/range-rover-sv/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/range-rover-sv/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/fr/coches/range-rover-vogue/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/range-rover-vogue/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/range-rover-vogue/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/range-rover-vogue/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/range-rover-vogue/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/range-rover-vogue/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/range-rover-vogue/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/fr/coches/mercedes-gls/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/mercedes-gls/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/mercedes-gls/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/mercedes-gls/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-gls/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-gls/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-gls/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/fr/coches/range-rover-sport-svr/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/range-rover-sport-svr/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/range-rover-sport-svr/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/range-rover-sport-svr/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/range-rover-sport-svr/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/range-rover-sport-svr/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/range-rover-sport-svr/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/fr/coches/mercedes-gle-coupe/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/mercedes-gle-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/mercedes-gle-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/mercedes-gle-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-gle-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-gle-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-gle-coupe/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/fr/coches/range-rover-sport/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/range-rover-sport/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/range-rover-sport/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/range-rover-sport/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/range-rover-sport/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/range-rover-sport/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/range-rover-sport/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/fr/coches/mercedes-amg-glc-43/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/mercedes-amg-glc-43/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/mercedes-amg-glc-43/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/mercedes-amg-glc-43/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-amg-glc-43/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-amg-glc-43/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-amg-glc-43/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/fr/coches/mercedes-clase-v/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/mercedes-clase-v/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/mercedes-clase-v/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/mercedes-clase-v/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-clase-v/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-clase-v/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-clase-v/"/>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://serresdrive.com/fr/coches/mercedes-glc-coupe/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://serresdrive.com/coches/mercedes-glc-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://serresdrive.com/en/coches/mercedes-glc-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://serresdrive.com/ru/coches/mercedes-glc-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/coches/mercedes-glc-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/coches/mercedes-glc-coupe/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/coches/mercedes-glc-coupe/"/>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -1508,7 +2348,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/tarifas/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/tarifas/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/tarifas/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -1520,7 +2360,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/como-funciona/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/como-funciona/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/como-funciona/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -1532,7 +2372,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/condiciones-de-alquiler/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/condiciones-de-alquiler/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/condiciones-de-alquiler/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -1544,7 +2384,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/por-que-serres/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/por-que-serres/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/por-que-serres/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -1556,7 +2396,7 @@
     <xhtml:link rel="alternate" hreflang="ca" href="https://serresdrive.com/ca/contacto/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://serresdrive.com/fr/contacto/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://serresdrive.com/contacto/"/>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>

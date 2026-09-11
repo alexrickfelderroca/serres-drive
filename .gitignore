@@ -99,6 +99,11 @@ dist/
 # assets/img/cars/<slug>/ and those ARE committed.
 Sicur Cars/
 
+# "Stratos/" es lo mismo pero del proveedor Stratos (91 originales, alta de
+# 11.09.2026): mismas razones para no comitearlo. Sus derivadas web tambien
+# viven en assets/img/cars/<slug>/ y esas SI van al repo.
+Stratos/
+
 # --- The brief itself -------------------------------------------------
 # Internal task spec (Russian). Committing it would serve it at
 # serresdrive.com/serresdrive-claude-code-task_2.md.

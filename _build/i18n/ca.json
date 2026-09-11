@@ -48,7 +48,8 @@
     "form": "Formulari",
     "threeQuarterAlt": "vista tres quarts davantera",
     "rentalAlt": "de lloguer a Barcelona",
-    "seeCarAria": "veure fitxa i preus"
+    "seeCarAria": "veure fitxa i preus",
+    "rentalAltNoCity": "de lloguer"
   },
   "terms": {
     "title": "Condicions de lloguer",
@@ -57,14 +58,20 @@
     "licence": "Carnet",
     "licenceValue": "Només permís de conduir en vigor. Sense antiguitat mínima.",
     "km": "Quilòmetres",
-    "kmValue": "{km} km inclosos",
+    "kmValue": "{km} km/dia inclosos (200 km/dia a la Classe V)",
     "deposit": "Fiança",
     "depositFrom": "Des de {amount}",
     "delivery": "Lliurament",
     "deliveryValue": "Lliurament i recollida a l'àrea metropolitana: {amount}",
     "depositLabel": "Fiança: {amount}",
     "depositUnknown": "Fiança: te la confirmem per WhatsApp",
-    "deliveryShort": "Lliurament metropolità {amount}"
+    "deliveryShort": "Lliurament metropolità {amount}",
+    "kmPerDay": "Km al dia",
+    "kmPerDayValue": "{km} km/dia inclosos",
+    "kmExtra": "Km extra",
+    "kmExtraValue": "{amount}/km",
+    "kmExtraUnknown": "Te’l confirmem per WhatsApp",
+    "location": "Ubicació"
   },
   "home": {
     "eyebrow": "Sant Cugat del Vallès · Àrea metropolitana de Barcelona",
@@ -124,7 +131,8 @@
     "d2": "2 dies",
     "d3": "3 dies",
     "w1": "1 setmana",
-    "m1": "1 mes"
+    "m1": "1 mes",
+    "pricesOnRequest": "Tarifes de 2 i 3 dies, setmana i mes: te les confirmem per WhatsApp."
   },
   "rates": {
     "h1": "Tarifes",
@@ -132,7 +140,9 @@
     "caption": "Tarifes de lloguer per cotxe i durada",
     "colCar": "Cotxe",
     "colDeposit": "Fiança",
-    "note": "Lliurament i recollida a l'àrea metropolitana de Barcelona: {delivery}. {km} km inclosos. Fiança des de {deposit}."
+    "note": "Lliurament i recollida a l’àrea metropolitana de Barcelona: {delivery}. Els quilòmetres inclosos, el preu del quilòmetre extra i la fiança van per cotxe a la taula.",
+    "colKm": "Km/dia",
+    "colKmExtra": "Km extra"
   },
   "how": {
     "h1": "Com funciona",
@@ -394,6 +404,110 @@
         "163 CV amb microhibridació",
         "0-100 en 8,2 s",
         "Pack AMG Line, 5 places"
+      ]
+    },
+    "lamborghini-huracan-evo-spyder": {
+      "tagline": "V10 atmosfèric de 640 CV i capota de lona que s'obre en 17 segons: verd militar mat per fora, seients blancs per dins.",
+      "highlights": [
+        "640 CV V10 atmosfèric",
+        "0-100 en 3,1 s",
+        "325 km/h, tracció integral"
+      ]
+    },
+    "lamborghini-urus-s": {
+      "tagline": "Negre brillant per fora i pell marró tabac per dins, amb el sostre folrat d'Alcantara fosca i les pinces vermelles que treuen el cap entre els radis de les llantes diamantades.",
+      "highlights": [
+        "666 CV V8 biturbo",
+        "0-100 en 3,5 s",
+        "305 km/h, tracció integral"
+      ]
+    },
+    "aston-martin-dbx": {
+      "tagline": "Gris grafit, llantes de bronze i pell clara per als 707 CV del DBX707: 0-100 en 3,3 s i 310 km/h de punta.",
+      "highlights": [
+        "707 CV V8 biturbo 4.0",
+        "0-100 en 3,3 s",
+        "310 km/h, tracció integral"
+      ]
+    },
+    "mercedes-amg-g63-verde-oliva": {
+      "tagline": "585 CV de V8 biturbo, verd oliva setinat per fora i pell vermella encoixinada per dins: 2,5 tones que van de 0 a 100 en 4,5 s.",
+      "highlights": [
+        "585 CV i 850 Nm, V8 biturbo 4.0",
+        "0-100 en 4,5 s i 220 km/h",
+        "Tracció total amb tres bloquejos de diferencial"
+      ]
+    },
+    "range-rover-sv": {
+      "tagline": "V8 sobrealimentat de 565 CV, carrosseria negra i un interior de pell clara encoixinada en rombes, amb contrast negre, sota sostre panoràmic.",
+      "highlights": [
+        "565 CV, V8 5.0 sobrealimentat",
+        "0-100 en 5,4 s i 225 km/h",
+        "Tracció total, 5 places, sostre panoràmic"
+      ]
+    },
+    "range-rover-vogue": {
+      "tagline": "Blau marí sobre pell bicolor en ivori i blau, fustes fosques vetades i sostre panoràmic de dos vidres: 258 CV dièsel i 600 Nm d'empenta contínua.",
+      "highlights": [
+        "258 CV i 600 Nm de parell",
+        "0-100 en 7,9 s",
+        "Tracció total i suspensió pneumàtica"
+      ]
+    },
+    "mercedes-gls": {
+      "tagline": "Gris clar, llantes negres i pell negra amb llum ambiental blava: set places de debò mogudes per 367 CV i 750 Nm de parell.",
+      "highlights": [
+        "367 CV i 750 Nm de parell",
+        "0-100 en 6,1 s i 250 km/h",
+        "7 places amb tracció 4MATIC"
+      ]
+    },
+    "range-rover-sport-svr": {
+      "tagline": "Capó de fibra de carboni a la vista, blau elèctric per fora i pell blanca per dins: 575 CV sobrealimentats i 4,5 s fins als 100 km/h.",
+      "highlights": [
+        "575 CV V8 sobrealimentat",
+        "0-100 en 4,5 s",
+        "280 km/h, tracció total"
+      ]
+    },
+    "mercedes-gle-coupe": {
+      "tagline": "Pintura blanca i pell marró tabac, paquet AMG Line i sostre panoràmic: el GLE 300 d rendeix 269 CV amb tracció 4MATIC i fa el 0 a 100 en 6,9 s.",
+      "highlights": [
+        "GLE 300 d: 269 CV i 550 Nm, 2.0 dièsel amb 48 V",
+        "0-100 en 6,9 s",
+        "226 km/h, tracció integral 4MATIC"
+      ]
+    },
+    "range-rover-sport": {
+      "tagline": "Negre brillant, llantes enfosquides i pell ivori per dins: 340 CV de V6 amb compressor que empenyen sense alçar la veu.",
+      "highlights": [
+        "340 CV V6 amb compressor",
+        "0-100 en 7,2 s",
+        "209 km/h, tracció total"
+      ]
+    },
+    "mercedes-amg-glc-43": {
+      "tagline": "421 CV amb turbo elèctric de Fórmula 1, carrosseria negra brillant i seients AMG negres amb costures vermelles.",
+      "highlights": [
+        "421 CV, 2.0 turbo amb hibridació de 48 V",
+        "0-100 en 4,8 s",
+        "250 km/h, tracció total 4MATIC"
+      ]
+    },
+    "mercedes-clase-v": {
+      "tagline": "Pell negra, quatre butaques posteriors encarades amb taula plegable i il·luminació ambiental: el saló rodant de Mercedes per moure's en grup.",
+      "highlights": [
+        "Sis places en butaques individuals",
+        "Quatre seients encarats amb taula",
+        "Dièsel automàtic, fins a 220 km/h"
+      ]
+    },
+    "mercedes-glc-coupe": {
+      "tagline": "Gris clar amb el paquet Night, sostre panoràmic i pell marró sobre negre: carrosseria coupé i tracció total 4MATIC permanent.",
+      "highlights": [
+        "Tracció total 4MATIC permanent",
+        "Sostre panoràmic de sèrie",
+        "Paquet Night: negre exterior, pell marró"
       ]
     }
   }

@@ -5,7 +5,7 @@
    image small, estimate the backdrop from the border pixels, weight every row
    and column by how far it departs from that backdrop, and centre the crop on
    the weighted centroid. Falls back to centre when nothing stands out. */
-const sharp = require('C:/Users/Rickfelder/Desktop/serres/_build/node_modules/sharp');
+const sharp = require('./sharp-resolve');
 
 async function subjectWindow(src, targetRatio) {
   const S = 160;

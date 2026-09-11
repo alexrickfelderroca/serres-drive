@@ -1,6 +1,9 @@
 /* =====================================================================
    Serres Drive — fleet image pipeline
-   Source: "Sicur Cars/<folder>"  (owner's originals, git-ignored)
+   Source: "<root>/<folder>", donde <root> sale de cfg.root en
+           image-selection.json: "sicur" -> "Sicur Cars/" (originales del
+           propietario) y "stratos" -> "Stratos/" (los del proveedor).
+           Las dos carpetas estan ignoradas por git.
    Output: assets/img/cars/<slug>/alquiler-<slug>-barcelona-<n>.{jpg,webp}
 
    Sources top out at ~1290 px wide (phone captures of a listing), so
@@ -8,11 +11,14 @@
    tuned DOWN per file until it fits BUDGET, so the hero of every car
    lands under the 150 KB the brief asks for.
    ===================================================================== */
-const sharp = require('C:/Users/Rickfelder/Desktop/serres/_build/node_modules/sharp');
+const sharp = require('./sharp-resolve');
 const fs = require('fs'), path = require('path');
 
 const ROOT = path.join(__dirname, '..');
-const SRC = path.join(ROOT, 'Sicur Cars');
+const ROOTS = {
+  sicur:   path.join(ROOT, 'Sicur Cars'),
+  stratos: path.join(ROOT, 'Stratos'),
+};
 const OUT = path.join(ROOT, 'assets/img/cars');
 const { cropRect } = require('./subject-crop');
 const SEL = JSON.parse(fs.readFileSync(path.join(__dirname, 'image-selection.json'), 'utf8'));
@@ -21,21 +27,36 @@ const WIDE = 1200, CARD = 800;          // 3:2 landscape, card + 2x card
 const RATIO = 3 / 2;
 const BUDGET = { jpgWide: 150_000, webpWide: 110_000, jpgCard: 80_000, webpCard: 55_000 };
 
-/* Encode, stepping quality down until the file fits its budget. */
+/* Encode, stepping quality down until the file fits its budget.
+
+   El guardia de salida era "q === 45", pero el bucle va 82, 76, 70, 64, 58,
+   52, 46 y luego para: 45 no se pisa nunca. Mientras todas las fuentes fueron
+   las de Sicur Cars la rama no se noto, porque todas entraban en presupuesto;
+   las del DBX de Stratos son exteriores con follaje y no entran a q=46, asi
+   que encode() devolvia undefined y el manifiesto reventaba al leer .bytes.
+   Ahora se guarda siempre el ultimo intento (el mas comprimido) y se avisa. */
 async function encode(pipeline, file, fmt, budget, start = 82) {
+  let last = null, lastQ = start;
   for (let q = start; q >= 45; q -= 6) {
     const buf = await (fmt === 'webp'
       ? pipeline.clone().webp({ quality: q })
       : pipeline.clone().jpeg({ quality: q, mozjpeg: true, progressive: true })).toBuffer();
-    if (buf.length <= budget || q === 45) { fs.writeFileSync(file, buf); return { q, bytes: buf.length }; }
+    last = buf; lastQ = q;
+    if (buf.length <= budget) { fs.writeFileSync(file, buf); return { q, bytes: buf.length }; }
   }
+  fs.writeFileSync(file, last);
+  console.warn(`  !! ${path.basename(file)}: ${Math.round(last.length / 1024)} KB a q=${lastQ}, por encima del presupuesto de ${Math.round(budget / 1024)} KB`);
+  return { q: lastQ, bytes: last.length, overBudget: true };
 }
 
 (async () => {
   const manifest = {};
   for (const [slug, cfg] of Object.entries(SEL)) {
     if (slug.startsWith('_')) continue;
-    const dir = path.join(SRC, cfg.folder);
+    const root = ROOTS[cfg.root || 'sicur'];
+    if (!root) throw new Error(`${slug}: root desconocido "${cfg.root}"`);
+    const dir = path.join(root, cfg.folder);
+    if (!fs.existsSync(dir)) throw new Error(`${slug}: no existe ${dir}`);
     const files = fs.readdirSync(dir).filter(f => /\.(jpe?g|png)$/i.test(f));
     const outDir = path.join(OUT, slug);
     fs.mkdirSync(outDir, { recursive: true });

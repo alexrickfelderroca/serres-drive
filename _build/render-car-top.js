@@ -19,7 +19,7 @@ const NM = process.env.SHOT_NODE_MODULES
 const CHROME = process.env.SHOT_CHROME
   || 'C:/Program Files/Google/Chrome/Application/chrome.exe';
 const puppeteer = require(path.join(NM, 'puppeteer-core'));
-const sharp = require('C:/Users/Rickfelder/Desktop/serres/_build/node_modules/sharp');
+const sharp = require('./sharp-resolve');
 const ROOT = path.join(__dirname, '..');
 const BASE = process.env.SHOT_BASE || 'http://localhost:8131';
 

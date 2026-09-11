@@ -14,9 +14,10 @@
 /alquiler-porsche-911-targa-gts-barcelona.html  /coches/porsche-911-cabrio/  301
 /alquiler-porsche-cayenne-gts-coupe-barcelona.html  /coches/porsche-cayenne-hybrid/  301
 /alquiler-porsche-cayenne-turbo-gt-barcelona.html  /coches/porsche-cayenne-hybrid/  301
+/alquiler-aston-martin-dbx-707-barcelona.html  /coches/aston-martin-dbx/  301
+/alquiler-lamborghini-huracan-coupe-barcelona.html  /coches/lamborghini-huracan-evo-spyder/  301
 /alquiler-porsche-718-spyder-barcelona.html  /flota/porsche/  301
 /alquiler-mercedes-c220d-cabrio-barcelona.html  /flota/mercedes-amg/  301
-/alquiler-lamborghini-huracan-coupe-barcelona.html  /flota/lamborghini/  301
 /alquiler-audi-rs4-avant-barcelona.html  /flota/audi/  301
 /alquiler-audi-a5-avant-barcelona.html  /flota/audi/  301
 /alquiler-ferrari-458-spider-barcelona.html  /flota/  301
@@ -24,7 +25,6 @@
 /alquiler-ferrari-f8-spider-barcelona.html  /flota/  301
 /alquiler-ferrari-portofino-m-barcelona.html  /flota/  301
 /alquiler-mclaren-570s-gt-barcelona.html  /flota/  301
-/alquiler-aston-martin-dbx-707-barcelona.html  /flota/  301
 /alquiler-bmw-m8-competition-cabrio-barcelona.html  /flota/  301
 /alquiler-bmw-x7-m60i-barcelona.html  /flota/  301
 /alquiler-bmw-m4-competition-barcelona.html  /flota/  301
@@ -53,10 +53,11 @@
 /flota  /flota/porsche/  301  Query marca=porsche
 /flota  /flota/lamborghini/  301  Query marca=lamborghini
 /flota  /flota/audi/  301  Query marca=audi
+/flota  /flota/aston-martin/  301  Query marca=aston-martin
+/flota  /flota/aston-martin/  301  Query marca=aston
 /flota  /flota/  301  Query marca=ferrari
 /flota  /flota/  301  Query marca=bmw
 /flota  /flota/  301  Query marca=mclaren
-/flota  /flota/  301  Query marca=aston-martin
 /flota  /flota/  301  Query marca=maserati
 /flota  /flota/  301  Query marca=alfa-romeo
 /flota  /flota/  301  Query marca=abarth

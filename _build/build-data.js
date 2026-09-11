@@ -16,6 +16,15 @@ const cars = base.cars.map(car => {
   const shots = images[car.slug];
   if (!s) throw new Error(`no specs for ${car.slug}`);
   if (!shots || !shots.length) throw new Error(`no images for ${car.slug}`);
+  /* Nada de datos comerciales a medias. Un coche sin fianza, sin km/dia o sin
+     precio de un dia se publicaria con un hueco, y un hueco en un precio lo
+     acaba pagando alguien. kmExtra y location SI pueden ser null a proposito:
+     null significa "no lo sabemos" y la web lo dice, en vez de inventarlo. */
+  if (typeof car.prices?.d1 !== 'number') throw new Error(`${car.slug}: falta prices.d1`);
+  if (typeof car.kmPerDay !== 'number') throw new Error(`${car.slug}: falta kmPerDay`);
+  if (car.deposit !== null && typeof car.deposit !== 'number') throw new Error(`${car.slug}: deposit invalido`);
+  if (car.kmExtra !== null && typeof car.kmExtra !== 'number') throw new Error(`${car.slug}: kmExtra invalido`);
+  if (car.location !== null && typeof car.location !== 'string') throw new Error(`${car.slug}: location invalida`);
   const dir = `assets/img/cars/${car.slug}`;
   return {
     ...car,
@@ -50,7 +59,14 @@ cars.forEach(c => (byBrand[c.brand] ||= []).push(c.slug));
 const brands = base.brands.map(b => ({ ...b, cars: byBrand[b.slug] || [] }));
 brands.forEach(b => { if (!b.cars.length) throw new Error(`brand ${b.slug} has no cars`); });
 
-const out = { generated: 'run _build/build-data.js to regenerate', site: base.site, contact: base.contact, terms: base.terms, brands, cars };
+/* "Fianza desde X" se calcula, no se teclea. Estaba fijo en 2.000 € y al
+   entrar la Clase V (1.000 €) la frase paso a ser falsa en la portada, en
+   /tarifas, en /condiciones-de-alquiler y en las descripciones SEO de los
+   cinco idiomas a la vez. Igual que los precios: vive en un solo sitio. */
+const fianzas = cars.map(c => c.deposit).filter(d => typeof d === 'number');
+const terms = { ...base.terms, depositFrom: Math.min(...fianzas) };
+
+const out = { generated: 'run _build/build-data.js to regenerate', site: base.site, contact: base.contact, terms, brands, cars };
 fs.writeFileSync(path.join(ROOT, 'data/fleet.json'), JSON.stringify(out, null, 2));
 console.log(`data/fleet.json — ${cars.length} cars, ${brands.length} brands, ${cars.reduce((n, c) => n + c.gallery.length, 0)} images`);
 brands.forEach(b => console.log(`  ${b.slug.padEnd(14)} ${b.cars.length}  ${b.cars.join(', ')}`));

@@ -21,7 +21,7 @@
 
 const path = require('path');
 const fs = require('fs');
-const sharp = require('C:/Users/Rickfelder/Desktop/serres/_build/node_modules/sharp');
+const sharp = require('./sharp-resolve');
 
 const ROOT = path.resolve(__dirname, '..');
 const SRC_DIR = path.join(__dirname, 'brand-logos-src');

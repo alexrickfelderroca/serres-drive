@@ -7,24 +7,56 @@
 const fs = require('fs'), path = require('path');
 const ROOT = path.join(__dirname, '..');
 
-/* slug: [1d, 2d, 3d, week, month, deposit|null], brandPage */
+/* slug: [[precios conocidos], deposit|null, brandPage, kmPerDay, kmExtra|null, location|null]
+
+   Retecleado a mano desde las dos fuentes, NO leido de fleet.json: comparar
+   el HTML con el JSON que lo genero solo probaria que el generador es
+   determinista.
+     - Los 13 primeros: ETAPA 0 de serresdrive-claude-code-task_2.md, con las
+       fianzas por tramo que fijo Alex el 11.09.2026 (5.000 premium /
+       3.500 gama media / 2.000 el resto).
+     - Los 13 ultimos: coches del proveedor Stratos. El precio/dia es el PVP
+       que paso Alex por chat; fianza, km/dia y km extra salen de la tabla de
+       tarifas del proveedor. Solo tienen precio de 1 dia: los demas tramos se
+       confirman por WhatsApp, no se inventan. */
 const BRIEF = {
-  'mercedes-amg-g63':       [[1000, 1700, 2700, 6000, 12000], 5000, 'mercedes-amg'],
-  'lamborghini-urus':       [[1100, 1900, 3000, 6500, 13000], null, 'lamborghini'],
-  'audi-rs6-avant':         [[900, 1600, 2500, 5500, 11000], null, 'audi'],
-  'porsche-911-cabrio':     [[800, 1500, 2200, 4600, 9000], 2000, 'porsche'],
-  'porsche-911-carrera-s':  [[700, 1300, 2000, 3500, 7500], 2000, 'porsche'],
-  'porsche-cayenne-hybrid': [[700, 1300, 2000, 3500, 7500], 2000, 'porsche'],
-  'mercedes-amg-a45':       [[450, 800, 1100, 2000, 5000], 2000, 'mercedes-amg'],
-  'audi-rs3-sportback':     [[450, 800, 1100, 2000, 5000], 2000, 'audi'],
-  'audi-rsq3':              [[450, 800, 1100, 2000, 5000], 2000, 'audi'],
-  'volkswagen-golf-r':      [[400, 750, 1000, 1800, 4500], 2000, 'volkswagen'],
-  'range-rover-velar':      [[350, 700, 900, 1800, 4300], 2000, 'range-rover'],
-  'mercedes-glc':           [[200, 350, 550, 1000, 2500], 2000, 'mercedes-amg'],
-  'mercedes-a200-4matic':   [[150, 250, 400, 900, 1800], 2000, 'mercedes-amg'],
+  'mercedes-amg-g63':       [[1000, 1700, 2700, 6000, 12000], 5000, 'mercedes-amg', 150, null, 'Barcelona'],
+  'lamborghini-urus':       [[1100, 1900, 3000, 6500, 13000], 5000, 'lamborghini',  150, null, 'Barcelona'],
+  'audi-rs6-avant':         [[900, 1600, 2500, 5500, 11000],  5000, 'audi',         150, null, 'Barcelona'],
+  'porsche-911-cabrio':     [[800, 1500, 2200, 4600, 9000],   5000, 'porsche',      150, null, 'Barcelona'],
+  'porsche-911-carrera-s':  [[700, 1300, 2000, 3500, 7500],   5000, 'porsche',      150, null, 'Barcelona'],
+  'porsche-cayenne-hybrid': [[700, 1300, 2000, 3500, 7500],   5000, 'porsche',      150, null, 'Barcelona'],
+  'mercedes-amg-a45':       [[450, 800, 1100, 2000, 5000],    3500, 'mercedes-amg', 150, null, 'Barcelona'],
+  'audi-rs3-sportback':     [[450, 800, 1100, 2000, 5000],    3500, 'audi',         150, null, 'Barcelona'],
+  'audi-rsq3':              [[450, 800, 1100, 2000, 5000],    3500, 'audi',         150, null, 'Barcelona'],
+  'volkswagen-golf-r':      [[400, 750, 1000, 1800, 4500],    3500, 'volkswagen',   150, null, 'Barcelona'],
+  'range-rover-velar':      [[350, 700, 900, 1800, 4300],     3500, 'range-rover',  150, null, 'Barcelona'],
+  'mercedes-glc':           [[200, 350, 550, 1000, 2500],     2000, 'mercedes-amg', 150, null, 'Barcelona'],
+  'mercedes-a200-4matic':   [[150, 250, 400, 900, 1800],      2000, 'mercedes-amg', 150, null, 'Barcelona'],
+
+  'lamborghini-huracan-evo-spyder': [[1400], 7000, 'lamborghini',  150, 5,   null],
+  'lamborghini-urus-s':             [[1100], 6000, 'lamborghini',  150, 5,   null],
+  'aston-martin-dbx':               [[1000], 6000, 'aston-martin', 150, 5,   null],
+  'mercedes-amg-g63-verde-oliva':   [[1000], 5000, 'mercedes-amg', 150, 5,   null],
+  'range-rover-sv':                 [[800],  5000, 'range-rover',  150, 5,   null],
+  'range-rover-vogue':              [[800],  3000, 'range-rover',  150, 4,   null],
+  'mercedes-gls':                   [[700],  3000, 'mercedes-amg', 150, 3.5, null],
+  'range-rover-sport-svr':          [[600],  4000, 'range-rover',  150, 5,   null],
+  'mercedes-gle-coupe':             [[600],  3000, 'mercedes-amg', 150, 3.5, null],
+  'range-rover-sport':              [[550],  3000, 'range-rover',  150, 4,   null],
+  'mercedes-amg-glc-43':            [[500],  3000, 'mercedes-amg', 150, 3.5, null],
+  'mercedes-clase-v':               [[350],  1000, 'mercedes-amg', 200, 0.5, null],
+  'mercedes-glc-coupe':             [[330],  2000, 'mercedes-amg', 150, 2,   null],
 };
-const GONE = ['ferrari', 'mclaren', 'aston martin', 'maserati', 'alfa romeo', 'abarth', 'bmw',
-  'huracán', 'huracan', 'macan', '718 spyder', 'c220d', 'clio', 'tmax', 'harley', 'renault',
+const CARS = Object.keys(BRIEF).length;
+const eurDec = n => n.toLocaleString('de-DE', {
+  minimumFractionDigits: Number.isInteger(n) ? 0 : 2, maximumFractionDigits: 2 }) + ' €';
+
+/* "aston martin", "huracán" y "huracan" SALIERON de esta lista el 11.09.2026:
+   el DBX y el Huracán EVO Spyder vuelven a la flota con los coches de Stratos,
+   asi que ahora tienen que APARECER, no desaparecer. */
+const GONE = ['ferrari', 'mclaren', 'maserati', 'alfa romeo', 'abarth', 'bmw',
+  'macan', '718 spyder', 'c220d', 'clio', 'tmax', 'harley', 'renault',
   'targa gts', 'turbo gt', 'gts coupé', 'rs 4', 'rs4', 'a5 avant', 'g63 plus'];
 
 const eur = n => n.toLocaleString('de-DE') + ' €';
@@ -32,17 +64,38 @@ const read = p => fs.readFileSync(path.join(ROOT, p), 'utf8');
 const fail = [], warn = [], pass = [];
 const check = (ok, msg) => (ok ? pass : fail).push(msg);
 
-/* --- 1. exactly 13 car pages, no more ---------------------------------- */
+/* --- 1. exactamente CARS fichas de coche, ni una mas -------------------- */
 const carDirs = fs.readdirSync(path.join(ROOT, 'coches'));
-check(carDirs.length === 13, `13 car pages (found ${carDirs.length})`);
+check(carDirs.length === CARS, `${CARS} car pages (found ${carDirs.length})`);
 check(carDirs.every(d => BRIEF[d]), `every car page slug is in the brief: ${carDirs.filter(d => !BRIEF[d]).join(', ') || 'yes'}`);
 check(Object.keys(BRIEF).every(s => carDirs.includes(s)), 'every brief slug has a page');
 
 /* --- 2. prices + deposit on each car page ------------------------------ */
-for (const [slug, [prices, deposit]] of Object.entries(BRIEF)) {
+for (const [slug, [prices, deposit, , kmPerDay, kmExtra, location]] of Object.entries(BRIEF)) {
   const html = read(`coches/${slug}/index.html`);
   const missing = prices.filter(p => !html.includes(eur(p)));
-  check(!missing.length, `${slug}: all 5 prices present${missing.length ? ` — missing ${missing.map(eur)}` : ''}`);
+  check(!missing.length, `${slug}: sus ${prices.length} tarifa(s) estan${missing.length ? ` — falta ${missing.map(eur)}` : ''}`);
+
+  /* Un coche con una sola tarifa NO puede haberse inventado las otras cuatro:
+     tiene que decir que se confirman por WhatsApp. */
+  if (prices.length < 5) {
+    check(/te las confirmamos por WhatsApp/i.test(html), `${slug}: dice que los demas tramos se confirman por WhatsApp`);
+  }
+
+  /* Kilometros incluidos y precio del kilometro extra. */
+  check(html.includes(`${kmPerDay} km/día incluidos`), `${slug}: ${kmPerDay} km/día incluidos`);
+  check(html.includes(kmExtra === null ? 'Te lo confirmamos por WhatsApp' : eurDec(kmExtra) + '/km'),
+    `${slug}: km extra ${kmExtra === null ? '(por WhatsApp)' : eurDec(kmExtra) + '/km'}`);
+
+  /* Ubicacion: la flota propia la lleva; la del proveedor esta repartida por
+     Espana y NO puede inventarse una ciudad ni en el texto ni en el alt. */
+  const loc = /class="car-loc car-loc--lg"/.test(html);
+  check(location ? loc : !loc, `${slug}: ${location ? 'muestra "' + location + '"' : 'no inventa ubicacion'}`);
+  if (location) check(html.includes(location), `${slug}: pone "${location}"`);
+  else {
+    const heroAlt = (html.match(/alt="([^"]*)" id="gMainImg"/) || [])[1] || '';
+    check(!/en Barcelona/.test(heroAlt), `${slug}: el alt del hero no dice "en Barcelona" (dice "${heroAlt}")`);
+  }
   if (deposit === null) {
     check(html.includes('te la confirmamos por WhatsApp'), `${slug}: deposit reads "te la confirmamos por WhatsApp"`);
     check(!/Fianza:\s*2\.000/.test(html), `${slug}: no invented 2.000 € deposit`);
@@ -58,20 +111,25 @@ for (const [slug, [prices, deposit]] of Object.entries(BRIEF)) {
 /* --- 3. /tarifas carries the same numbers ------------------------------ */
 {
   const html = read('tarifas/index.html');
-  for (const [slug, [prices, deposit]] of Object.entries(BRIEF)) {
+  for (const [slug, [prices, deposit, , kmPerDay, kmExtra]] of Object.entries(BRIEF)) {
     /* <tr role="row">: la tabla lleva roles explícitos porque en móvil se
        pinta como tarjetas (display:grid) y eso le quitaría la semántica. */
     const row = html.split(/<tr[^>]*>/).find(r => r.includes(`coches/${slug}/`));
     check(!!row, `tarifas: row for ${slug}`);
     if (!row) continue;
     const missing = prices.filter(p => !row.includes(eur(p)));
-    check(!missing.length, `tarifas ${slug}: 5 prices match${missing.length ? ` — missing ${missing.map(eur)}` : ''}`);
-    check(row.includes(deposit === null ? 'Por WhatsApp' : eur(deposit)), `tarifas ${slug}: deposit cell`);
+    check(!missing.length, `tarifas ${slug}: cuadran sus ${prices.length} tarifa(s)${missing.length ? ` — falta ${missing.map(eur)}` : ''}`);
+    check(row.includes(deposit === null ? 'Por WhatsApp' : eur(deposit)), `tarifas ${slug}: celda de fianza`);
+    check(row.includes(`>${kmPerDay} km<`), `tarifas ${slug}: ${kmPerDay} km/día`);
+    check(row.includes(kmExtra === null ? 'Por WhatsApp' : eurDec(kmExtra) + '/km'), `tarifas ${slug}: celda de km extra`);
+    /* Las celdas sin tarifa dicen "Por WhatsApp"; ninguna se rellena sola. */
+    const vacias = (row.match(/Por WhatsApp/g) || []).length;
+    check(vacias >= (5 - prices.length), `tarifas ${slug}: ${5 - prices.length} tramo(s) sin inventar`);
   }
 }
 
 /* --- 4. brand pages hold the right cars --------------------------------- */
-const BRANDS = ['porsche', 'lamborghini', 'mercedes-amg', 'audi', 'range-rover', 'volkswagen'];
+const BRANDS = ['porsche', 'lamborghini', 'aston-martin', 'mercedes-amg', 'audi', 'range-rover', 'volkswagen'];
 for (const b of BRANDS) {
   const html = read(`flota/${b}/index.html`);
   const expect = Object.entries(BRIEF).filter(([, v]) => v[2] === b).map(([s]) => s);
@@ -91,7 +149,7 @@ const shipped = [];
     /* "seo y google ads" is the owner's internal documentation, not shipped
        pages. Its TZ files legitimately name Ferrari, BMW and the rest while
        describing what was removed, so walking it produced 13 false failures. */
-    if (e.isDirectory()) { if (!/^(_build|\.git|\.screenshots|node_modules|Sicur Cars|data|seo|seo y google ads)$/.test(e.name)) walk(p); }
+    if (e.isDirectory()) { if (!/^(_build|\.git|\.screenshots|node_modules|Sicur Cars|Stratos|data|seo|seo y google ads)$/.test(e.name)) walk(p); }
     else if (/\.(html|xml|txt)$/.test(e.name)) shipped.push(p);
   }
 })(ROOT);
@@ -123,14 +181,16 @@ for (const f of shipped) {
 {
   const xml = read('sitemap.xml');
   const locs = [...xml.matchAll(/<loc>https:\/\/serresdrive\.com(.*?)<\/loc>/g)].map(m => m[1]);
-  /* 26 páginas x 5 idiomas. */
-  check(locs.length === 130, `sitemap tiene 130 URLs (26 x 5 idiomas) — encontradas ${locs.length}`);
+  /* 13 páginas fijas + una por coche + una por marca, x 5 idiomas. */
+  const FIJAS = 7;   // /, flota, tarifas, como-funciona, condiciones, por-que-serres, contacto
+  const PAGES = FIJAS + CARS + BRANDS.length, URLS = PAGES * 5;
+  check(locs.length === URLS, `sitemap tiene ${URLS} URLs (${PAGES} x 5 idiomas) — encontradas ${locs.length}`);
   const perLang = { es: 0, en: 0, ru: 0, ca: 0, fr: 0 };
   locs.forEach(u => { const m = u.match(/^\/(en|ru|ca|fr)\//); perLang[m ? m[1] : 'es']++; });
-  check(Object.values(perLang).every(n => n === 26),
-    `26 URLs por idioma — ${JSON.stringify(perLang)}`);
+  check(Object.values(perLang).every(n => n === PAGES),
+    `${PAGES} URLs por idioma — ${JSON.stringify(perLang)}`);
   const alts = (xml.match(/xhtml:link rel="alternate"/g) || []).length;
-  check(alts === 130 * 6, `cada URL declara sus 6 alternativas (${alts}/${130 * 6})`);
+  check(alts === URLS * 6, `cada URL declara sus 6 alternativas (${alts}/${URLS * 6})`);
   const missing = locs.filter(u => !fs.existsSync(path.join(ROOT, u === '/' ? 'index.html' : u.slice(1) + 'index.html')));
   check(!missing.length, `every sitemap URL exists${missing.length ? ` — missing ${missing}` : ''}`);
   check(!/alquiler-|fleet\.html|rates\.html|motos/.test(xml), 'sitemap has no legacy URLs');

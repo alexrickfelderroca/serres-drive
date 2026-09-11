@@ -1,5 +1,5 @@
 {
-  "_comment": "Curated per car, chosen by eye from the contact sheets in _build/contact-sheet.js. Index 0 is the hero: a 3/4 front exterior for every car, so the 13 cards share one angle even though the shoots differ. Values are matched as substrings against the source filename.",
+  "_comment": "Curated per car (13 de Sicur Cars + 13 de Stratos), chosen by eye from the contact sheets in _build/contact-sheet.js. Index 0 is the hero: a 3/4 front exterior for every car, so the 13 cards share one angle even though the shoots differ. Values are matched as substrings against the source filename. Los de Stratos llevan \"root\": \"stratos\" y salen de la carpeta Stratos/.",
   "mercedes-amg-g63": {
     "folder": "G-wagon",
     "shots": [
@@ -152,6 +152,166 @@
       "IMG_2035",
       "IMG_2037",
       "IMG_2040"
+    ]
+  },
+  "lamborghini-huracan-evo-spyder": {
+    "root": "stratos",
+    "folder": "Huracan EVO Spyder",
+    "shots": [
+      "IMG_2301",
+      "IMG_2302",
+      "IMG_2303",
+      "IMG_2297",
+      "IMG_2298",
+      "IMG_2296",
+      "IMG_2300"
+    ]
+  },
+  "lamborghini-urus-s": {
+    "root": "stratos",
+    "folder": "Urus S",
+    "shots": [
+      "IMG_2313",
+      "IMG_2312",
+      "IMG_2314",
+      "IMG_2308",
+      "IMG_2309",
+      "IMG_2310",
+      "IMG_2311"
+    ]
+  },
+  "aston-martin-dbx": {
+    "root": "stratos",
+    "folder": "DBX",
+    "shots": [
+      "IMG_2355",
+      "IMG_2356",
+      "IMG_2357",
+      "IMG_2358"
+    ]
+  },
+  "mercedes-amg-g63-verde-oliva": {
+    "root": "stratos",
+    "folder": "G63  Stratos",
+    "shots": [
+      "IMG_2343",
+      "IMG_2344",
+      "Peachy",
+      "IMG_2338",
+      "IMG_2339",
+      "IMG_2340",
+      "IMG_2341"
+    ]
+  },
+  "range-rover-sv": {
+    "root": "stratos",
+    "folder": "SV",
+    "shots": [
+      "IMG_2368",
+      "IMG_2369",
+      "IMG_2370",
+      "IMG_2363",
+      "IMG_2364",
+      "IMG_2365",
+      "IMG_2367"
+    ]
+  },
+  "range-rover-vogue": {
+    "root": "stratos",
+    "folder": "Vogue",
+    "shots": [
+      "IMG_2413",
+      "IMG_2414",
+      "IMG_2415",
+      "IMG_2416",
+      "IMG_2417"
+    ]
+  },
+  "mercedes-gls": {
+    "root": "stratos",
+    "folder": "GLS Maybach",
+    "shots": [
+      "IMG_2374",
+      "IMG_2375",
+      "IMG_2376",
+      "IMG_2377",
+      "IMG_2378",
+      "IMG_2379",
+      "IMG_2380"
+    ]
+  },
+  "range-rover-sport-svr": {
+    "root": "stratos",
+    "folder": "SVR",
+    "shots": [
+      "IMG_2402",
+      "IMG_2401",
+      "IMG_2403",
+      "IMG_2404",
+      "IMG_2405",
+      "IMG_2406"
+    ]
+  },
+  "mercedes-gle-coupe": {
+    "root": "stratos",
+    "folder": "GLE COUPE",
+    "shots": [
+      "IMG_2388",
+      "IMG_2389",
+      "IMG_2390",
+      "IMG_2391",
+      "IMG_2392",
+      "IMG_2393"
+    ]
+  },
+  "range-rover-sport": {
+    "root": "stratos",
+    "folder": "RR sport",
+    "shots": [
+      "IMG_2418",
+      "IMG_2419",
+      "IMG_2420",
+      "IMG_2421",
+      "IMG_2422",
+      "IMG_2424",
+      "IMG_2425"
+    ]
+  },
+  "mercedes-amg-glc-43": {
+    "root": "stratos",
+    "folder": "GLC 43 AMG",
+    "shots": [
+      "IMG_2332",
+      "IMG_2333",
+      "IMG_2334",
+      "IMG_2328",
+      "IMG_2329",
+      "IMG_2330",
+      "IMG_2331"
+    ]
+  },
+  "mercedes-clase-v": {
+    "root": "stratos",
+    "folder": "Clase V",
+    "shots": [
+      "IMG_2353",
+      "IMG_2352",
+      "IMG_2354",
+      "IMG_2349",
+      "IMG_2350",
+      "IMG_2351"
+    ]
+  },
+  "mercedes-glc-coupe": {
+    "root": "stratos",
+    "folder": "GLC Coupe",
+    "shots": [
+      "IMG_2383",
+      "IMG_2382",
+      "IMG_2384",
+      "IMG_2385",
+      "IMG_2386",
+      "IMG_2387"
     ]
   }
 }

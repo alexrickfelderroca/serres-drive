@@ -1,9 +1,9 @@
 /* Contact sheets: one montage per Sicur Cars folder, so photos can be
    reviewed visually before choosing hero + gallery order. Regenerable. */
-const sharp = require('C:/Users/Rickfelder/Desktop/serres/_build/node_modules/sharp');
+const sharp = require('./sharp-resolve');
 const fs = require('fs'), path = require('path');
 
-const SRC = 'c:/Users/Rickfelder/Desktop/serres-drive-main/Sicur Cars';
+const SRC = process.argv[3] || path.join(__dirname, '..', 'Sicur Cars');
 const OUT = process.argv[2];
 fs.mkdirSync(OUT, { recursive: true });
 

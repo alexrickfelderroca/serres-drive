@@ -99,6 +99,11 @@ const { howMap } = require('./how-map');
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
   .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const eur = n => n.toLocaleString('de-DE') + ' €';                  // 1.000 €
+/* Importes con decimales: 5 -> "5 €", 3.5 -> "3,50 €", 0.5 -> "0,50 €".
+   Es como los escribe la tarifa del proveedor, y como los espera un lector
+   espanol: sin decimales cuando son redondos, con dos cuando no. */
+const eurDec = n => n.toLocaleString('de-DE', {
+  minimumFractionDigits: Number.isInteger(n) ? 0 : 2, maximumFractionDigits: 2 }) + ' €';
 const car = slug => fleet.cars.find(c => c.slug === slug);
 const carsOf = brand => fleet.brands.find(b => b.slug === brand).cars.map(car);
 const brandOf = c => fleet.brands.find(b => b.slug === c.brand);
@@ -111,8 +116,26 @@ const depositText = c => c.deposit === null
   ? L.terms.depositUnknown
   : f(L.terms.depositLabel, { amount: eur(c.deposit) });
 
+/* Kilometros y ubicacion, por coche.
+
+   La flota propia esta en Barcelona; los coches del proveedor estan repartidos
+   por Espana, asi que van SIN ubicacion a proposito — no se inventa una. Lo
+   mismo con el precio del kilometro extra de la flota propia: el propietario
+   aun no lo ha dado, y en produccion un hueco honesto es mejor que un numero
+   inventado, asi que cae en el mismo "te lo confirmamos por WhatsApp" que ya
+   usaba la fianza desconocida. */
+const kmPerDayText = c => f(L.terms.kmPerDayValue, { km: c.kmPerDay ?? T.kmIncluded });
+const kmExtraText = c => c.kmExtra === null || c.kmExtra === undefined
+  ? L.terms.kmExtraUnknown
+  : f(L.terms.kmExtraValue, { amount: eurDec(c.kmExtra) });
+const hasLocation = c => typeof c.location === 'string' && c.location.length > 0;
+/* El alt dice "de alquiler en Barcelona" solo si el coche esta de verdad en
+   Barcelona. Para los demas, la version sin ciudad. */
+const rentalAlt = c => hasLocation(c) ? L.common.rentalAlt : L.common.rentalAltNoCity;
+
 const ICON = {
   arrow: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
+  pin: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>',
   wa: '<svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16.04 3C9.4 3 4 8.4 4 15.04c0 2.12.56 4.18 1.62 6L4 29l8.16-1.58a12 12 0 0 0 3.88.64C22.7 28.06 28.1 22.66 28.1 16.02 28.1 8.4 22.68 3 16.04 3Zm5.39 14.57c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.66.15-.2.3-.76.96-.93 1.15-.17.2-.34.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.3-.02-.46.13-.61.13-.13.3-.34.45-.51.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.66-1.6-.9-2.18-.24-.58-.48-.5-.66-.5l-.56-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.22 3.08.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.08 1.75-.71 2-1.4.25-.69.25-1.28.17-1.4-.07-.13-.27-.2-.57-.35Z"/></svg>',
   /* Official marks, in their own colours. The Instagram gradient lives once
      per page in the sprite below, so three copies of the icon do not mean
@@ -294,8 +317,9 @@ function carCard(c, r, ra, { lazy = true, level = 2 } = {}) {
   <a class="shot card-link" href="${r}coches/${c.slug}/" aria-label="${esc(c.name)} — ${L.common.seeCarAria}">
     <picture>
       <source type="image/webp" srcset="${ra}${asset(g.webp800)} 800w, ${ra}${asset(g.webp)} ${g.width}w" sizes="(max-width:640px) 92vw, (max-width:1040px) 46vw, 30vw">
-      <img src="${ra}${asset(g.jpg800)}" width="800" height="533" alt="${esc(c.name)} ${L.common.rentalAlt}, ${L.common.threeQuarterAlt}"${lazy ? ' loading="lazy"' : ''} decoding="async">
+      <img src="${ra}${asset(g.jpg800)}" width="800" height="533" alt="${esc(c.name)} ${rentalAlt(c)}, ${L.common.threeQuarterAlt}"${lazy ? ' loading="lazy"' : ''} decoding="async">
     </picture>
+    ${hasLocation(c) ? `<span class="car-loc-tag">${ICON.pin}<span>${esc(c.location)}</span></span>` : ''}
   </a>
   <div class="body">
     <h${level}>${esc(c.name)}</h${level}>
@@ -340,13 +364,20 @@ function crumbs(r, trail) {
 </nav>`;
 }
 
-function termsList() {
+/* Sin coche (en /condiciones-de-alquiler) muestra las condiciones generales;
+   con coche muestra SUS kilometros, SU km extra, SU fianza y — solo si lo
+   sabemos — donde esta. */
+function termsList(c) {
+  const row = (k, v) => `<li><span class="k">${k}</span><span class="v">${v}</span></li>`;
   return `<ul class="terms-list">
-  <li><span class="k">${L.terms.age}</span><span class="v">${f(L.terms.ageValue, { age: T.minAge })}</span></li>
-  <li><span class="k">${L.terms.licence}</span><span class="v">${esc(L.terms.licenceValue)}</span></li>
-  <li><span class="k">${L.terms.km}</span><span class="v">${f(L.terms.kmValue, { km: T.kmIncluded })}</span></li>
-  <li><span class="k">${L.terms.deposit}</span><span class="v">${f(L.terms.depositFrom, { amount: eur(T.depositFrom) })}</span></li>
-  <li><span class="k">${L.terms.delivery}</span><span class="v">${f(L.terms.deliveryValue, { amount: eur(T.deliveryFee) })}</span></li>
+  ${row(L.terms.age, f(L.terms.ageValue, { age: T.minAge }))}
+  ${row(L.terms.licence, esc(L.terms.licenceValue))}
+  ${c ? row(L.terms.kmPerDay, esc(kmPerDayText(c))) : row(L.terms.km, f(L.terms.kmValue, { km: T.kmIncluded }))}
+  ${c ? row(L.terms.kmExtra, esc(kmExtraText(c))) : ''}
+  ${c ? row(L.terms.deposit, c.deposit === null ? L.common.byWhatsapp : eur(c.deposit))
+        : row(L.terms.deposit, f(L.terms.depositFrom, { amount: eur(T.depositFrom) }))}
+  ${row(L.terms.delivery, f(L.terms.deliveryValue, { amount: eur(T.deliveryFee) }))}
+  ${c && hasLocation(c) ? row(L.terms.location, esc(c.location)) : ''}
 </ul>`;
 }
 
@@ -668,10 +699,15 @@ for (const c of fleet.cars) {
   const url = `/coches/${c.slug}/`, r = rel(url), ra = rel(lp(url)), meta = seo[url];
   const b = brandOf(c);
   const g0 = c.gallery[0];
-  const priceRows = [
+  /* Los coches del proveedor solo traen precio por dia: las filas de 2 y 3
+     dias, semana y mes se omiten en vez de inventarse, y debajo se explica
+     que se confirman por WhatsApp. */
+  const allPriceRows = [
     [L.carPage.d1, c.prices.d1], [L.carPage.d2, c.prices.d2], [L.carPage.d3, c.prices.d3],
     [L.carPage.w1, c.prices.w1], [L.carPage.m1, c.prices.m1],
   ];
+  const priceRows = allPriceRows.filter(([, v]) => v !== null && v !== undefined);
+  const pricesIncomplete = priceRows.length < allPriceRows.length;
   const specs = [
     [L.carPage.power, `${c.powerCv} CV`], [L.carPage.zeroHundred, c.zeroToHundred],
     [L.carPage.topSpeed, c.topSpeed], [L.carPage.seats, c.seats],
@@ -688,7 +724,7 @@ for (const c of fleet.cars) {
         <div class="main" id="gMain">
           <picture>
             <source type="image/webp" srcset="${ra}${asset(g0.webp)}" id="gMainWebp">
-            <img src="${ra}${asset(g0.jpg)}" width="${g0.width}" height="${g0.height}" alt="${esc(c.name)} ${L.common.rentalAlt}" id="gMainImg" fetchpriority="high" decoding="async">
+            <img src="${ra}${asset(g0.jpg)}" width="${g0.width}" height="${g0.height}" alt="${esc(c.name)} ${rentalAlt(c)}" id="gMainImg" fetchpriority="high" decoding="async">
           </picture>
         </div>
         ${c.gallery.length > 1 ? `<div class="thumbs" style="--n:${c.gallery.length}" role="group" aria-label="${f(L.carPage.gallery, { car: esc(c.name) })}">
@@ -702,6 +738,7 @@ for (const c of fleet.cars) {
         <div>
           <p class="eyebrow">${b.label}</p>
           <h1 class="h-md" style="margin-top:8px">${esc(c.name)}</h1>
+          ${hasLocation(c) ? `<p class="car-loc car-loc--lg">${ICON.pin}<span>${esc(c.location)}</span></p>` : ''}
           <p class="lede" style="margin-top:12px">${esc(carCopy(c).tagline)}</p>
         </div>
 
@@ -710,6 +747,7 @@ for (const c of fleet.cars) {
           <ul class="price-list">
             ${priceRows.map(([k, v]) => `<li><span>${k}</span><b>${eur(v)}</b></li>`).join('\n            ')}
           </ul>
+          ${pricesIncomplete ? `<p class="mute-sm" style="margin-top:12px">${L.carPage.pricesOnRequest}</p>` : ''}
           <p class="mute-sm" style="margin-top:14px">${esc(depositText(c))} · ${f(L.terms.deliveryShort, { amount: eur(T.deliveryFee) })}</p>
           <a class="btn btn--wa btn--block" style="margin-top:16px" href="${waCar(c)}" target="_blank" rel="noopener">${ICON.wa}<span>${L.nav.bookWa}</span></a>
         </div>
@@ -733,7 +771,7 @@ for (const c of fleet.cars) {
   <div class="wrap split">
     <div class="panel">
       <h2 class="h-sm" style="margin-bottom:14px">${L.footer.terms}</h2>
-      ${termsList()}
+      ${termsList(c)}
       <p class="mute-sm" style="margin-top:16px"><strong>${esc(depositText(c))}</strong> · <a href="${r}condiciones-de-alquiler/">${L.common.seeAllTerms}</a></p>
     </div>
     <div class="section-head">
@@ -774,6 +812,7 @@ ${others.length ? `<section class="section--tight" style="padding-top:0">
 {
   const url = '/tarifas/', r = rel(url), ra = rel(lp(url)), meta = seo[url];
   const cars = [...fleet.cars].sort((a, b) => b.prices.d1 - a.prices.d1);
+  const cell = v => v === null || v === undefined ? `<span class="mute">${L.common.byWhatsapp}</span>` : eur(v);
   const body = `${crumbs(r, [{ label: L.nav.rates }])}
 <section class="section section--tight">
   <div class="wrap">
@@ -791,6 +830,7 @@ ${others.length ? `<section class="section--tight" style="padding-top:0">
         <thead role="rowgroup"><tr role="row">
           <th scope="col" role="columnheader">${L.rates.colCar}</th><th scope="col" role="columnheader">${L.carPage.d1}</th><th scope="col" role="columnheader">${L.carPage.d2}</th>
           <th scope="col" role="columnheader">${L.carPage.d3}</th><th scope="col" role="columnheader">${L.carPage.w1}</th><th scope="col" role="columnheader">${L.carPage.m1}</th><th scope="col" role="columnheader">${L.terms.deposit}</th>
+          <th scope="col" role="columnheader">${L.rates.colKm}</th><th scope="col" role="columnheader">${L.rates.colKmExtra}</th>
         </tr></thead>
         <tbody role="rowgroup">
           ${cars.map(c => `<tr role="row">
@@ -798,9 +838,11 @@ ${others.length ? `<section class="section--tight" style="padding-top:0">
               <img src="${ra}${asset(c.gallery[0].jpg800)}" alt="" width="64" height="43" loading="lazy" decoding="async">
               <a href="${r}coches/${c.slug}/"><b>${esc(c.name)}</b></a>
             </div></td>
-            <td role="cell" class="d1" data-label="${esc(L.carPage.d1)}">${eur(c.prices.d1)}</td><td role="cell" data-label="${esc(L.carPage.d2)}">${eur(c.prices.d2)}</td><td role="cell" data-label="${esc(L.carPage.d3)}">${eur(c.prices.d3)}</td>
-            <td role="cell" data-label="${esc(L.carPage.w1)}">${eur(c.prices.w1)}</td><td role="cell" data-label="${esc(L.carPage.m1)}">${eur(c.prices.m1)}</td>
+            <td role="cell" class="d1" data-label="${esc(L.carPage.d1)}">${eur(c.prices.d1)}</td><td role="cell" data-label="${esc(L.carPage.d2)}">${cell(c.prices.d2)}</td><td role="cell" data-label="${esc(L.carPage.d3)}">${cell(c.prices.d3)}</td>
+            <td role="cell" data-label="${esc(L.carPage.w1)}">${cell(c.prices.w1)}</td><td role="cell" data-label="${esc(L.carPage.m1)}">${cell(c.prices.m1)}</td>
             <td role="cell" data-label="${esc(L.terms.deposit)}">${c.deposit === null ? L.common.byWhatsapp : eur(c.deposit)}</td>
+            <td role="cell" data-label="${esc(L.rates.colKm)}">${c.kmPerDay ?? T.kmIncluded} km</td>
+            <td role="cell" data-label="${esc(L.rates.colKmExtra)}">${c.kmExtra === null || c.kmExtra === undefined ? `<span class="mute">${L.common.byWhatsapp}</span>` : eurDec(c.kmExtra) + '/km'}</td>
           </tr>`).join('\n          ')}
         </tbody>
       </table>
@@ -1017,19 +1059,20 @@ ${scene({ n: 4, kind: 'drive', title: steps[3][1], body: steps[3][2], stage: sta
         <h2 class="h-sm" style="margin-bottom:14px">${L.termsPage.requirements}</h2>
         ${termsList()}
       </div>
-      <div class="panel">
-        <h2 class="h-sm" style="margin-bottom:14px">${L.termsPage.depositPerCar}</h2>
-        <ul class="price-list">
-          ${[...fleet.cars].sort((a, b) => b.prices.d1 - a.prices.d1).map(c =>
-            `<li><span><a href="${r}coches/${c.slug}/">${esc(c.name)}</a></span><b>${c.deposit === null ? L.common.byWhatsapp : eur(c.deposit)}</b></li>`).join('\n          ')}
-        </ul>
+      <div>
+        <p class="lede" style="max-width:46ch">${L.termsPage.footnote}</p>
+        <div class="hero-cta" style="margin-top:22px">
+          <a class="btn btn--wa" href="${waGeneral()}" target="_blank" rel="noopener">${ICON.wa}<span>${L.common.askWa}</span></a>
+        </div>
       </div>
     </div>
-    <p class="mute-sm" style="margin-top:24px;max-width:70ch">${L.termsPage.footnote}</p>
-    <div class="hero-cta" style="margin-top:20px">
-      <a class="btn btn--wa" href="${waGeneral()}" target="_blank" rel="noopener">${ICON.wa}<span>${L.common.askWa}</span></a>
+    <div class="panel" style="margin-top:clamp(24px,4vw,44px)">
+      <h2 class="h-sm" style="margin-bottom:16px">${L.termsPage.depositPerCar}</h2>
+      <ul class="price-list price-list--split">
+        ${[...fleet.cars].sort((a, b) => b.prices.d1 - a.prices.d1).map(c =>
+          `<li><span><a href="${r}coches/${c.slug}/">${esc(c.name)}</a></span><b>${c.deposit === null ? L.common.byWhatsapp : eur(c.deposit)}</b></li>`).join('\n        ')}
+      </ul>
     </div>
-  </div>
 </section>`;
   write(url, page({ url, body, schema: [breadcrumb([{ name: L.common.start, url: '/' }, { name: L.footer.terms, url }])] }));
 }
@@ -1111,7 +1154,7 @@ ${scene({ n: 4, kind: 'drive', title: steps[3][1], body: steps[3][2], stage: sta
           <label for="f-car">${L.rates.colCar}</label>
           <select id="f-car" name="car" required>
             <option value="">${L.contact.chooseCar}</option>
-            ${fleet.cars.map(c => `<option value="${esc(c.name)}" data-slug="${c.slug}">${esc(c.name)} — desde ${eur(c.prices.d1)}/día</option>`).join('\n            ')}
+            ${fleet.cars.map(c => `<option value="${esc(c.name)}" data-slug="${c.slug}">${esc(c.name)} — ${L.common.from} ${eur(c.prices.d1)} ${L.common.aDay}</option>`).join('\n            ')}
           </select>
           <p class="err" id="e-car" role="alert"></p>
         </div>

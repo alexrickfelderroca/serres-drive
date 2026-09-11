@@ -28,11 +28,15 @@ const CAR = {
   'porsche-911-targa-gts': '/coches/porsche-911-cabrio/',
   'porsche-cayenne-gts-coupe': '/coches/porsche-cayenne-hybrid/',
   'porsche-cayenne-turbo-gt': '/coches/porsche-cayenne-hybrid/',
+  /* 11.09.2026: los dos vuelven a la flota con los coches de Stratos, asi que
+     sus URLs antiguas recuperan una ficha real en vez del listado. */
+  'aston-martin-dbx-707': '/coches/aston-martin-dbx/',
+  'lamborghini-huracan-coupe': '/coches/lamborghini-huracan-evo-spyder/',
 
   /* --- gone, brand still exists -------------------------------------- */
   'porsche-718-spyder': '/flota/porsche/',
   'mercedes-c220d-cabrio': '/flota/mercedes-amg/',
-  'lamborghini-huracan-coupe': '/flota/lamborghini/',
+
   'audi-rs4-avant': '/flota/audi/',
   'audi-a5-avant': '/flota/audi/',
 
@@ -42,7 +46,7 @@ const CAR = {
   'ferrari-f8-spider': '/flota/',
   'ferrari-portofino-m': '/flota/',
   'mclaren-570s-gt': '/flota/',
-  'aston-martin-dbx-707': '/flota/',
+
   'bmw-m8-competition-cabrio': '/flota/',
   'bmw-x7-m60i': '/flota/',
   'bmw-m4-competition': '/flota/',
@@ -76,8 +80,9 @@ const MARCA = {
   mercedes: 'mercedes-amg', 'mercedes-benz': 'mercedes-amg', 'mercedes-amg': 'mercedes-amg',
   vw: 'volkswagen', volkswagen: 'volkswagen', 'range-rover': 'range-rover', 'land-rover': 'range-rover',
   porsche: 'porsche', lamborghini: 'lamborghini', audi: 'audi',
+  'aston-martin': 'aston-martin', aston: 'aston-martin',
 };
-const MARCA_GONE = ['ferrari', 'bmw', 'mclaren', 'aston-martin', 'maserati', 'alfa-romeo', 'abarth', 'renault', 'motos'];
+const MARCA_GONE = ['ferrari', 'bmw', 'mclaren', 'maserati', 'alfa-romeo', 'abarth', 'renault', 'motos'];
 
 const rules = [];   // [from, to] for the plain-path redirects
 Object.entries(CAR).forEach(([k, v]) => rules.push([`/alquiler-${k}-barcelona.html`, v]));

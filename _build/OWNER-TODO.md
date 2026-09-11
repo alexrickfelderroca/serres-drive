@@ -1,5 +1,11 @@
 # Pendiente de confirmar con el propietario
 
+> **11-09-2026 — alta de los 13 coches de Stratos.** Lo que decidió Alex ese
+> día y lo que queda pendiente está en el **punto 0**, al principio. Dos cosas
+> del encargo antiguo quedan resueltas de paso: los **150 km son POR DÍA**
+> (punto 2) y las **fianzas del Urus y del RS 6** ya no son «por WhatsApp»
+> (ahora 5.000 €).
+
 > **Actualizado 06-09-2026.** El propietario ha decidido:
 > - **Contacto (punto 1): RESUELTO.** Correo `serresdrive@gmail.com` e Instagram
 >   `@serres.drive` ya en la web. **07-09-2026:** el telefono de reservas pasa a
@@ -25,6 +31,112 @@ Ordenado por lo que más daño hace si está mal.
 
 ---
 
+## 0. Coches de Stratos (alta 11-09-2026) — LO MÁS URGENTE
+
+Trece coches del proveedor Stratos ya están publicados. De ellos, **lo que Alex
+dio por escrito** (precio/día, fianza, km/día, km extra) está en la web tal
+cual. Lo que **no** dio, **no se ha inventado**. Por orden de urgencia:
+
+### 0.1 Faltan las tarifas de 2 y 3 días, semana y mes — BLOQUEADOR COMERCIAL
+
+Alex solo pasó **precio por día** de los 13. La tabla de `/tarifas` y la ficha
+de cada uno enseñan ese precio y, en los otros cuatro tramos, «Por WhatsApp».
+Es correcto pero pierde ventas: un cliente que quiere una semana no ve precio.
+
+La flota propia usa multiplicadores de ~1,7× (2 días), ~2,7× (3), ~5,5× (semana)
+y ~12× (mes), pero **cada coche los tiene distintos y los puso el propietario a
+mano**, así que aplicarlos a los de Stratos sería inventarse 52 precios.
+
+→ **Pedir a Alex los cuatro tramos de cada coche.** Se escriben en
+`_build/fleet-base.json` (bloque `prices`) y se regenera.
+
+### 0.2 Falta el precio del km extra de la flota propia
+
+Los 13 de Stratos lo tienen (de 0,50 €/km la Clase V a 5 €/km el Huracán).
+Los 13 propios dicen «Te lo confirmamos por WhatsApp», porque ese dato nunca
+se ha dado. → `fleet-base.json` → `kmExtra` de cada coche.
+
+### 0.3 Dos coches de la tarifa de Stratos que NO se han publicado
+
+Están en la lista de precios de Alex pero **no hay fotos** en la carpeta, y sin
+foto no se publica una ficha:
+
+| Coche | Precio que dio Alex | Por qué no está |
+|---|---|---|
+| Range Rover Vogue Autobiography | 600 €/día | Sin fotos en `Stratos/` |
+| Mercedes-Benz GLC (el de Stratos) | 300 €/día | Sin fotos. Ojo: la web ya tiene un **Mercedes GLC propio a 200 €/día**; si los 300 € eran para ESE, es un cambio de precio, no un coche nuevo. **Preguntar.** |
+
+### 0.4 La carpeta `A45` de Stratos se ha quedado fuera
+
+Tiene fotos pero **Alex no le puso precio**, y además mezcla dos coches (tres
+fotos de un A45 gris y dos de uno blanco). La web ya publica un
+**Mercedes-AMG A45 S propio a 450 €/día**. → Si el de Stratos va a la web,
+hacen falta precio, fianza y fotos de un solo coche.
+
+### 0.5 Nombres y variantes a confirmar
+
+- **«Mercedes-AMG G 63 Verde Oliva»**: el nombre lleva el color porque la web
+  ya tenía otro G 63 (el gris) y dos fichas con el mismo título se pelean en
+  Google. Si Alex prefiere otro nombre, se cambia en `fleet-base.json`.
+- **La carpeta se llama «GLS Maybach» pero el coche NO es un Maybach**: no
+  tiene la parrilla vertical ni emblemas Maybach, y se le ve la tercera fila
+  de asientos (el Maybach GLS es de 4 plazas). La tarifa del proveedor tampoco
+  dice Maybach: dice «Mercedes-Benz GLS». Publicado como **GLS**. Confirmar.
+- La variante exacta de cada coche (año, motor) está asumida desde las fotos.
+  Cada ficha lleva su duda concreta en `notes`, dentro de
+  `_build/fleet-specs.json`.
+
+### 0.6 Ubicación
+
+Los 13 propios dicen **«Barcelona»**. Los 13 de Stratos salen **sin ubicación**,
+porque Alex dijo que están repartidos por España. Si algún día se sabe dónde
+está cada uno, se rellena `location` en `fleet-base.json` y aparece solo.
+
+### 0.7 La entrega de 100 € y los títulos «en Barcelona» — REVISAR
+
+Todo el sitio promete **«Entrega y recogida en el área metropolitana: 100 €»**
+y los títulos SEO de marca dicen «Alquiler de X **en Barcelona**». Eso lo
+hereda cada coche nuevo, incluidos los 13 de Stratos, que según Alex están
+**repartidos por España**.
+
+Si uno de esos coches está en Madrid o en Málaga, los 100 € de entrega no
+cubren traerlo, y un cliente puede reservarlo dando por hecho que sí. No se ha
+tocado la frase porque es una decisión comercial, no técnica.
+
+→ **Preguntar a Alex:** ¿los coches de Stratos se traen a Barcelona sin coste
+extra, o hay un suplemento por traslado? Si lo hay, hay que decirlo en la ficha
+de esos 13. Vive en `fleet-base.json` → `terms.deliveryFee` y en las claves
+`terms.deliveryValue` de los cinco idiomas.
+
+### 0.8 Las fotos del proveedor no parecen hechas en España
+
+Revisando las originales una a una aparecen tres pistas de que son fotos de
+anuncio de concesionario, no del parque real:
+
+- **Urus S** — el cuadro de instrumentos de `IMG_2310` está **en ruso** y
+  sintoniza «RADIOMSK» (Moscú); el navegador muestra un mapa ruso.
+- **GLC Coupé** — el adhesivo del montante B es de **Mercedes-Benz AG,
+  Mercedesstraße 120, Stuttgart**, con teléfono alemán de asistencia.
+- **DBX** — tomadas en una avenida arbolada con un campanario de aspecto
+  italiano al fondo.
+
+No es un impedimento para publicarlas (son las que manda el proveedor), pero
+conviene saberlo: si un cliente se presenta esperando el coche de la foto y la
+unidad real tiene otra tapicería o acabado, la reclamación es legítima.
+
+→ **Preguntar a Stratos** si son fotos de las unidades concretas que alquilan.
+
+### 0.9 Portada: Range Rover y Aston Martin no tienen mosaico
+
+La portada tiene cinco mosaicos de marca (Porsche, Lamborghini, Mercedes-AMG,
+Audi, Volkswagen). **Range Rover** ya son 5 coches y **Aston Martin** es marca
+nueva, pero ninguna tiene logo ni foto de marca, así que no salen. Si el
+propietario los manda: `_build/brand-logos-src/` y
+`_build/brand-shots-src/manifest.json`, y añadir la marca a `TILES` en
+`build-site.js`.
+
+---
+
 ## 1. Contacto — RESUELTO
 
 - Correo: **serresdrive@gmail.com** (pie, pagina de contacto, portada y schema).
@@ -35,7 +147,14 @@ Ordenado por lo que más daño hace si está mal.
 
 Si cambia algo: `_build/fleet-base.json` -> bloque `contact`, y regenerar.
 
-## 2. ¿Los 150 km son por día o por todo el alquiler?
+## 2. ¿Los 150 km son por día o por todo el alquiler? — RESUELTO 11-09-2026
+
+**POR DÍA.** Lo confirmó Alex al dar de alta los coches de Stratos («pon en los
+coches los kilómetros al día que se pueden hacer»). La web ya dice
+«150 km/día incluidos» en cada ficha y lleva una columna **Km/día** en
+`/tarifas`. La Clase V es la excepción: **200 km/día**.
+
+*Lo que decía antes de resolverse:*
 
 **Estado en la web:** «150 km incluidos», sin unidad de tiempo.
 
