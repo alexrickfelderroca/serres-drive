@@ -239,6 +239,29 @@ de 720 px desplazada en horizontal dejaba los precios cortados.
 
 ## 7. Estado de las comprobaciones
 
+### 13-09-2026 — el Porsche vuelve al hero en móvil
+
+El cambio del 12-09 apagaba el hero 3D en `<=960px` y en los clics de anuncio,
+para ahorrar los 1,49 MiB de `gt3.glb`. **Revertido el mismo dia siguiente**: el
+«hero estático» al que caía NO tiene coche, así que la mitad de abajo de la
+portada se quedaba vacía. Lo notaron varias personas desde el móvil, y en
+escritorio le pasaba además a quien llegaba con `gclid` — la visita pagada.
+
+Lo que **sí se conserva** es saltarse el preloader en los clics de anuncio: ahí
+el ahorro son 4,3 s de scroll bloqueado y no deja ningún hueco.
+
+La lección, escrita también al lado del código en `js/experience.js`: **no se
+apaga un elemento visual sin poner algo en su lugar.** Si algún día se quiere
+volver a ahorrar ese peso, primero hay que renderizar un WebP del propio
+`gt3.glb` con `_build/render-car-top.js` (el de `/como-funciona` pesa 46 KB) y
+enseñarlo donde estaba el coche; entonces sí.
+
+- **32/32 comprobaciones funcionales**, tres de ellas nuevas: el hero 3D
+  arranca en móvil, hay lienzo y el modelo está visible, y `gt3.glb` se
+  descarga. Esa es justo la comprobación que faltaba el 12-09 — nada medía que
+  el coche siguiera ahí.
+- Capturas del antes y el después en `.screenshots/hero-movil-incidencia/`.
+
 ### 12-09-2026 — consentimiento, medición y páginas legales
 
 El navegador del MCP de Chrome DevTools **no estaba levantado**, así que todo
@@ -258,8 +281,7 @@ puppeteer-core), que es para lo que existen.
   aceptar → `consent update` + `sd_consent` guardado, recarga sin reaparecer,
   `whatsapp_click` y `phone_click` con su conversión y su `send_to`,
   `form_submit` con el teléfono en E.164 y **sin** `whatsapp_click` duplicado,
-  `filter_brand`, y la portada con `?gclid=` sin preloader y sin descargar
-  `gt3.glb`.
+  `filter_brand`, y la portada con `?gclid=` sin preloader.
 - Lighthouse móvil en portada, `/contacto/`, ficha de coche y
   `/politica-de-privacidad/` — Accesibilidad **100**, Buenas prácticas **100**,
   SEO **100**. Dos auditorías se arreglaron por el camino: el enlace `tel:`

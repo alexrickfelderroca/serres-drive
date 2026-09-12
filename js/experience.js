@@ -42,15 +42,27 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
       return !!(window.WebGLRenderingContext && (c.getContext("webgl") || c.getContext("experimental-webgl")));
     } catch (e) { return false; }
   }
-  /* El hero 3D cuesta gt3.glb (1,49 MiB) mas el decodificador Draco de
-     gstatic, que es obligatorio porque el modelo declara
-     KHR_draco_mesh_compression. Eso no se le sirve a un movil, y menos a un
-     movil que ha llegado desde un anuncio. En los dos casos el hero cae al
-     estado estatico que ya estaba previsto: titular sobre el fondo del
-     taller, sin hueco ni salto (.sd-model se queda a opacity:0). */
-  const narrow = window.matchMedia("(max-width:960px)").matches;
-  const fromAd = /[?&](gclid|gbraid|wbraid|utm_source|utm_medium|utm_campaign)=/i.test(location.search);
-  if (reduce || narrow || fromAd || !hasWebGL() || !gsap || !ScrollTrigger || !Lenis) return; // graceful static hero
+  /* 12-09-2026: aqui se anadio una puerta que apagaba el hero 3D en <=960px y
+     en los clics de anuncio, para ahorrar los 1,49 MiB de gt3.glb y el
+     decodificador Draco. Se REVIERTE el 13-09-2026, a peticion de Alex,
+     porque el ahorro salia carisimo por otro lado:
+
+     el "hero estatico" al que se caia NO tiene coche. El titular y los dos
+     botones ocupan la mitad de arriba y la mitad de abajo se queda vacia,
+     con el fondo del taller y nada mas. En movil lo noto gente de fuera y
+     lo dijo; en escritorio le pasaba ademas a quien llegaba con gclid, que
+     es exactamente la visita que se ha pagado.
+
+     La leccion, por si vuelve a tentar: no se apaga un elemento visual sin
+     poner algo en su lugar. Si se quiere volver a ahorrar ese peso, primero
+     hay que renderizar un WebP del propio gt3.glb con
+     _build/render-car-top.js (el de /como-funciona pesa 46 KB) y ensenarlo
+     donde estaba el coche; entonces si.
+
+     Lo que SI sigue en pie es la puerta de js/preloader.js: saltarse los
+     4,3 s de animacion con el scroll bloqueado en un clic de anuncio no
+     deja ningun hueco, solo ensena la pagina antes. */
+  if (reduce || !hasWebGL() || !gsap || !ScrollTrigger || !Lenis) return; // graceful static hero
   document.body.classList.add("sd-home");
 
   /* La seccion sobre la que el coche termina de girar y aparca. Si algun
