@@ -82,7 +82,19 @@
     try { sessionStorage.setItem(SEEN_KEY, "1"); } catch (e) { /* private mode */ }
   }
 
-  if (seen()) return;   // do nothing at all: no overlay, no scroll lock
+  /* ---------- puerta del trafico de pago ----------
+     Una visita que llega de un anuncio ha pagado por entrar y no puede
+     esperar 4,3 s con el scroll bloqueado antes de ver un precio: eso es
+     LCP, es Quality Score y es dinero. El preloader es para quien llega a
+     la marca, no para quien llega a comprar.
+     Va AQUI, junto a seen(), y no mas abajo: a partir de start() el overlay
+     ya esta construido y markSeen() ya ha marcado la sesion entera. */
+  function fromAd() {
+    try { return /[?&](gclid|gbraid|wbraid|utm_source|utm_medium|utm_campaign)=/i.test(location.search); }
+    catch (e) { return false; }
+  }
+
+  if (seen() || fromAd()) return;   // do nothing at all: no overlay, no scroll lock
 
   /* ---------- cubic-bezier easing ----------
      GSAP core cannot parse a cubic-bezier() string and CustomEase is a

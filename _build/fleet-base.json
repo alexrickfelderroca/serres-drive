@@ -506,5 +506,23 @@
   "site": {
     "origin": "https://serresdrive.com",
     "name": "Serres Drive"
+  },
+  "_analyticsNote": "Identificadores de Google, en un solo sitio (12-09-2026, TZ-tracking DELTA). El generador emite la linea de GA4 SOLO si 'ga4' tiene valor: mientras sea null, el Google tag carga con el ID de Ads, que si es real, y no se pide a googletagmanager.com un contenedor que no existe. Cuando el propietario cree la propiedad 'Serres Drive', poner aqui el G-XXXXXXXXXX y volver a generar. NO usar G-1K6FYZ99GN: es de otra propiedad.",
+  "analytics": {
+    "ads": "AW-18441458977",
+    "ga4": null,
+    "labels": {
+      "whatsapp_click": "RCXNCLPKx_IcEKGqydlE",
+      "form_submit": "ZlzGCNzbx_IcEKGqydlE",
+      "phone_click": "43ZuCMPdx_IcEKGqydlE"
+    }
+  },
+  "_legalNote": "Datos del titular para /aviso-legal/ y /politica-de-privacidad/. Los tres campos de identificacion fiscal estan a null a proposito: NO se inventan (regla de sitio en produccion). Mientras sean null, el generador omite el bloque de identificacion y el aviso legal se publica con el responsable, el correo y el telefono, que si son ciertos. Rellenarlos y volver a generar los imprime. Ver _build/OWNER-TODO.md.",
+  "legal": {
+    "entityName": null,
+    "taxId": null,
+    "registeredAddress": null,
+    "updated": "2026-09-12",
+    "dpaUrl": "https://www.aepd.es"
   }
 }

@@ -1,0 +1,213 @@
+{
+  "_meta": {
+    "lang": "en",
+    "note": "British English translation of the legal texts. The source is es.json: exactly the same keys and the same number of paragraphs. Placeholders: {entity} the party responsible, {email}, {phone}, {origin}, {updated}, {dpa}, {prefsLink}. The generator (build-site.js) inserts the tax identification block ONLY if data/fleet.json -> legal.entityName has a value.",
+    "disclaimer": "Texts drafted from a standard GDPR/LSSI template and adjusted to what this website actually does. They are not legal advice: an adviser should look them over before the legal side is treated as finished."
+  },
+  "idLabels": {
+    "company": "Registered name",
+    "taxId": "Tax ID (NIF)",
+    "address": "Registered address"
+  },
+  "privacy": {
+    "h1": "Privacy policy",
+    "updated": "Last updated: {updated}",
+    "intro": "This policy explains what we do with your data when you write to us or when you visit {origin}. It is written to be understood: if anything is unclear, ask us on WhatsApp or by email and we will explain it.",
+    "sections": [
+      {
+        "h2": "Who handles your data",
+        "p": [
+          "The party responsible for handling your data is {entity}, which runs the website {origin} and provides the vehicle hire service described on it.",
+          "You can write to us at {email} or call us on {phone} about anything to do with your data, including exercising the rights explained below."
+        ]
+      },
+      {
+        "h2": "What data we handle",
+        "p": [
+          "Whatever you give us when you get in touch: your name, phone number, the car you are interested in, the dates and anything you tell us in your message.",
+          "It is worth knowing how the form on this website works, because it is not the usual arrangement: it sends nothing to any server of ours. When you press “Send on WhatsApp”, WhatsApp opens with the message already written and you are the one who decides whether to send it. This website does not store what you type into the form, neither on a server nor in your browser.",
+          "Browsing data: if you accept the analytics or advertising cookies, Google receives information about your visit (pages viewed, where the traffic came from, device type, IP address). If you do not accept them, they are never switched on.",
+          "If you do go ahead and hire a vehicle, we will also ask you, in order to sign the agreement, for the details the law and the insurer require: identification, driving licence and means of payment. Those details are collected away from this website."
+        ]
+      },
+      {
+        "h2": "What we use it for, and on what legal basis",
+        "ul": [
+          "Answering your enquiry and putting a quote together for you — to take steps at your request before entering into a contract (GDPR art. 6.1.b).",
+          "Managing the hire, the handover and the return of the vehicle — performance of the contract (GDPR art. 6.1.b).",
+          "Meeting our tax, accounting and driver identification obligations — legal obligation (GDPR art. 6.1.c).",
+          "Measuring how the website performs and which adverts bring in customers — only with your consent (GDPR art. 6.1.a), which you can withdraw whenever you like.",
+          "Dealing with complaints, accidents, fines or anything else that comes up during the hire — legitimate interest in defending our rights (GDPR art. 6.1.f)."
+        ]
+      },
+      {
+        "h2": "Who we share it with",
+        "p": [
+          "We do not sell your data and we do not hand it to anyone so they can advertise to you off their own bat. It only reaches the people needed to provide you with the service:"
+        ],
+        "ul": [
+          "WhatsApp Ireland Limited (Meta group), if you write to us on WhatsApp: the conversation is governed by WhatsApp's terms and privacy policy.",
+          "Google Ireland Limited, if you accept the analytics or advertising cookies, to measure visits and campaigns.",
+          "Our web hosting provider, which stores the site and logs access to the server.",
+          "The owner of the vehicle, when the car you choose does not belong to our own fleet but to a partner supplier, and only with the data needed to arrange that hire.",
+          "Insurers, public authorities and law enforcement when a rule obliges us to, for instance in the event of a fine or an accident."
+        ]
+      },
+      {
+        "h2": "Transfers outside the European Union",
+        "p": [
+          "Google and Meta may handle data on servers located outside the European Economic Area. Both rely on the EU-US Data Privacy Framework and on the standard contractual clauses approved by the European Commission, which are the mechanisms the GDPR provides for these cases."
+        ]
+      },
+      {
+        "h2": "How long we keep it",
+        "p": [
+          "WhatsApp conversations and emails, for as long as we are dealing with each other and afterwards for as long as we need in order to answer any complaint.",
+          "Hire agreement and invoicing data, for the periods tax and commercial law require.",
+          "Analytics and advertising data, for the retention periods Google sets for each service.",
+          "Your decision about cookies is kept in your own browser until you change it or clear the site data."
+        ]
+      },
+      {
+        "h2": "Your rights",
+        "p": [
+          "You can ask us to give you access to your data, correct it, erase it, restrict or object to the way we handle it, and ask for it to be passed on elsewhere. You can also withdraw any consent you have given at any time, without that affecting anything done before you withdrew it.",
+          "To exercise them, write to us at {email} saying what you want and attaching something that proves who you are. We will reply within one month at the latest.",
+          "If you think we have not dealt with your request properly, you can complain to the Spanish data protection authority, the Agencia Española de Protección de Datos ({dpa})."
+        ]
+      },
+      {
+        "h2": "Security and young people",
+        "p": [
+          "We apply reasonable technical and organisational measures to protect your data. The site is always served over an encrypted connection (HTTPS).",
+          "This site is not aimed at under-18s and we do not knowingly collect data about children. To hire a car you need a valid driving licence."
+        ]
+      },
+      {
+        "h2": "Changes to this policy",
+        "p": [
+          "If we change the way we handle data, we will update this page and the date shown at the top. It is worth looking it over now and then."
+        ]
+      }
+    ]
+  },
+  "cookies": {
+    "h1": "Cookie policy",
+    "updated": "Last updated: {updated}",
+    "intro": "Cookies are small files that a website stores on your device. Here we tell you exactly which ones we use, what for, and how to change your mind at any time.",
+    "sections": [
+      {
+        "h2": "This website sets no cookies off its own bat",
+        "p": [
+          "When you arrive, no analytics or advertising cookie is installed. They are only switched on if you accept them in the notice that appears on your first visit.",
+          "The one thing we always keep is your own decision about cookies, in your browser's local storage, under the name “sd_consent”. It is not a cookie, it is not sent to any server, and it is there for one reason: so we do not ask you the same thing every time you come back. If you delete it, we will ask you again."
+        ]
+      },
+      {
+        "h2": "The ones switched on if you accept",
+        "table": {
+          "head": [
+            "Cookie",
+            "Who sets it",
+            "What for",
+            "Lifespan"
+          ],
+          "rows": [
+            [
+              "_ga, _ga_*",
+              "Google Analytics",
+              "Tells visitors and sessions apart so we know which pages work and which do not.",
+              "Up to 2 years"
+            ],
+            [
+              "_gcl_au",
+              "Google Ads",
+              "Credits a booking to the advert that brought it in.",
+              "90 days"
+            ],
+            [
+              "NID, IDE",
+              "Google",
+              "Personalised advertising and campaign measurement, only if you accept the advertising category.",
+              "Up to 13 months"
+            ]
+          ]
+        },
+        "p": [
+          "If you reject them, these cookies are not installed. Google still receives measurement signals without cookies and without identifying you, through consent mode, which gives us aggregate figures without tracking you."
+        ]
+      },
+      {
+        "h2": "What loads even if you reject them",
+        "p": [
+          "So that the website looks as it should, we load typefaces from the Google Fonts servers and, on the home page, a few animation libraries from public content delivery networks. These services receive your IP address because there is no way to send you the file without it, but they install no tracking cookies and build no profile of you through this website."
+        ]
+      },
+      {
+        "h2": "Changing your decision",
+        "p": [
+          "You can change it whenever you like from the “{prefsLink}” link at the foot of every page. The notice will appear again with your options.",
+          "You can also delete or block cookies from your browser settings. The help pages for Chrome, Safari, Firefox or Edge explain how. Bear in mind that blocking them all may affect how other websites work."
+        ]
+      }
+    ]
+  },
+  "notice": {
+    "h1": "Legal notice",
+    "updated": "Last updated: {updated}",
+    "intro": "Terms of use of the website {origin} and identifying details of its owner, in accordance with Spanish Law 34/2002 on information society services and electronic commerce.",
+    "sections": [
+      {
+        "h2": "Owner of the website",
+        "p": [
+          "This website belongs to {entity}, which provides the vehicle hire service described on it.",
+          "Contact email: {email}. Phone: {phone}."
+        ]
+      },
+      {
+        "h2": "Purpose",
+        "p": [
+          "This site sets out the vehicles available for hire, their specifications and their prices, and lets you get in touch to request a booking. It is not a checkout: the booking is not completed on the website, but in the conversation that follows and in the hire agreement signed at handover."
+        ]
+      },
+      {
+        "h2": "Using the site",
+        "p": [
+          "By using this site you undertake to do so within the law and not to use it for unlawful activity, to damage its systems or to introduce content that could harm others."
+        ]
+      },
+      {
+        "h2": "Intellectual and industrial property",
+        "p": [
+          "The text, design, code and photographs on this site belong to its owner or are used with permission, and may not be reproduced without written permission.",
+          "The manufacturers' trade marks and names that appear on the website belong to their respective owners and are used solely to identify the vehicles we offer for hire. This site is not an official dealership and is not connected with those manufacturers."
+        ]
+      },
+      {
+        "h2": "Liability",
+        "p": [
+          "We take care to keep the information correct and up to date, but prices, availability and vehicle specifications are a guide and remain subject to confirmation before each hire is agreed. The terms governing the hire are those of the signed agreement and those published on the hire conditions page.",
+          "We are not liable for interruptions to the service outside our control, nor for damage arising from improper use of the site."
+        ]
+      },
+      {
+        "h2": "Links to other sites",
+        "p": [
+          "The site links to third-party services such as WhatsApp, Instagram or Serres Wrap Center. We do not control their content or their policies and we take no responsibility for them."
+        ]
+      },
+      {
+        "h2": "Data protection and cookies",
+        "p": [
+          "How personal data is handled is explained in the privacy policy, and the use of cookies in the cookie policy, both linked at the foot of every page."
+        ]
+      },
+      {
+        "h2": "Applicable law",
+        "p": [
+          "These terms are governed by Spanish law. For any dispute, the parties submit to the courts and tribunals that are competent under the law."
+        ]
+      }
+    ]
+  }
+}

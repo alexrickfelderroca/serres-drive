@@ -42,7 +42,15 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
       return !!(window.WebGLRenderingContext && (c.getContext("webgl") || c.getContext("experimental-webgl")));
     } catch (e) { return false; }
   }
-  if (reduce || !hasWebGL() || !gsap || !ScrollTrigger || !Lenis) return; // graceful static hero
+  /* El hero 3D cuesta gt3.glb (1,49 MiB) mas el decodificador Draco de
+     gstatic, que es obligatorio porque el modelo declara
+     KHR_draco_mesh_compression. Eso no se le sirve a un movil, y menos a un
+     movil que ha llegado desde un anuncio. En los dos casos el hero cae al
+     estado estatico que ya estaba previsto: titular sobre el fondo del
+     taller, sin hueco ni salto (.sd-model se queda a opacity:0). */
+  const narrow = window.matchMedia("(max-width:960px)").matches;
+  const fromAd = /[?&](gclid|gbraid|wbraid|utm_source|utm_medium|utm_campaign)=/i.test(location.search);
+  if (reduce || narrow || fromAd || !hasWebGL() || !gsap || !ScrollTrigger || !Lenis) return; // graceful static hero
   document.body.classList.add("sd-home");
 
   /* La seccion sobre la que el coche termina de girar y aparca. Si algun

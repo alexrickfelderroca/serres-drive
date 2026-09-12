@@ -64,6 +64,33 @@
         "type": "contact",
         "image": "https://serresdrive.com/assets/img/cars/mercedes-amg-a45/alquiler-mercedes-amg-a45-barcelona-1.jpg"
       },
+      "/politica-de-privacidad/": {
+        "url": "/politica-de-privacidad/",
+        "canonical": "https://serresdrive.com/politica-de-privacidad/",
+        "title": "Política de privacidad · Serres Drive",
+        "description": "Qué hacemos con tus datos cuando nos escribes o visitas serresdrive.com, y cómo ejercer tus derechos.",
+        "h1": "Política de privacidad",
+        "type": "privacy",
+        "image": "https://serresdrive.com/assets/img/cars/porsche-911-carrera-s/alquiler-porsche-911-carrera-s-barcelona-1.jpg"
+      },
+      "/politica-de-cookies/": {
+        "url": "/politica-de-cookies/",
+        "canonical": "https://serresdrive.com/politica-de-cookies/",
+        "title": "Política de cookies · Serres Drive",
+        "description": "Qué cookies usa esta web, para qué sirven y cómo cambiar tu decisión en cualquier momento.",
+        "h1": "Política de cookies",
+        "type": "cookies",
+        "image": "https://serresdrive.com/assets/img/cars/porsche-911-carrera-s/alquiler-porsche-911-carrera-s-barcelona-1.jpg"
+      },
+      "/aviso-legal/": {
+        "url": "/aviso-legal/",
+        "canonical": "https://serresdrive.com/aviso-legal/",
+        "title": "Aviso legal · Serres Drive",
+        "description": "Datos identificativos del titular de serresdrive.com y condiciones de uso del sitio.",
+        "h1": "Aviso legal",
+        "type": "notice",
+        "image": "https://serresdrive.com/assets/img/cars/porsche-911-carrera-s/alquiler-porsche-911-carrera-s-barcelona-1.jpg"
+      },
       "/flota/porsche/": {
         "url": "/flota/porsche/",
         "canonical": "https://serresdrive.com/flota/porsche/",
@@ -460,6 +487,33 @@
         "h1": "Contact",
         "type": "contact",
         "image": "https://serresdrive.com/assets/img/cars/mercedes-amg-a45/alquiler-mercedes-amg-a45-barcelona-1.jpg"
+      },
+      "/politica-de-privacidad/": {
+        "url": "/politica-de-privacidad/",
+        "canonical": "https://serresdrive.com/en/politica-de-privacidad/",
+        "title": "Privacy policy · Serres Drive",
+        "description": "What we do with your data when you write to us or visit serresdrive.com, and how to exercise your rights.",
+        "h1": "Privacy policy",
+        "type": "privacy",
+        "image": "https://serresdrive.com/assets/img/cars/porsche-911-carrera-s/alquiler-porsche-911-carrera-s-barcelona-1.jpg"
+      },
+      "/politica-de-cookies/": {
+        "url": "/politica-de-cookies/",
+        "canonical": "https://serresdrive.com/en/politica-de-cookies/",
+        "title": "Cookie policy · Serres Drive",
+        "description": "Which cookies this website uses, what they are for and how to change your decision at any time.",
+        "h1": "Cookie policy",
+        "type": "cookies",
+        "image": "https://serresdrive.com/assets/img/cars/porsche-911-carrera-s/alquiler-porsche-911-carrera-s-barcelona-1.jpg"
+      },
+      "/aviso-legal/": {
+        "url": "/aviso-legal/",
+        "canonical": "https://serresdrive.com/en/aviso-legal/",
+        "title": "Legal notice · Serres Drive",
+        "description": "Identifying details of the owner of serresdrive.com and the terms of use of the site.",
+        "h1": "Legal notice",
+        "type": "notice",
+        "image": "https://serresdrive.com/assets/img/cars/porsche-911-carrera-s/alquiler-porsche-911-carrera-s-barcelona-1.jpg"
       },
       "/flota/porsche/": {
         "url": "/flota/porsche/",
@@ -858,6 +912,33 @@
         "type": "contact",
         "image": "https://serresdrive.com/assets/img/cars/mercedes-amg-a45/alquiler-mercedes-amg-a45-barcelona-1.jpg"
       },
+      "/politica-de-privacidad/": {
+        "url": "/politica-de-privacidad/",
+        "canonical": "https://serresdrive.com/ru/politica-de-privacidad/",
+        "title": "Политика конфиденциальности · Serres Drive",
+        "description": "Что мы делаем с вашими данными, когда вы пишете нам или заходите на serresdrive.com, и как воспользоваться своими правами.",
+        "h1": "Политика конфиденциальности",
+        "type": "privacy",
+        "image": "https://serresdrive.com/assets/img/cars/porsche-911-carrera-s/alquiler-porsche-911-carrera-s-barcelona-1.jpg"
+      },
+      "/politica-de-cookies/": {
+        "url": "/politica-de-cookies/",
+        "canonical": "https://serresdrive.com/ru/politica-de-cookies/",
+        "title": "Политика cookie · Serres Drive",
+        "description": "Какие файлы cookie использует этот сайт, для чего они нужны и как в любой момент изменить своё решение.",
+        "h1": "Политика использования файлов cookie",
+        "type": "cookies",
+        "image": "https://serresdrive.com/assets/img/cars/porsche-911-carrera-s/alquiler-porsche-911-carrera-s-barcelona-1.jpg"
+      },
+      "/aviso-legal/": {
+        "url": "/aviso-legal/",
+        "canonical": "https://serresdrive.com/ru/aviso-legal/",
+        "title": "Правовая информация · Serres Drive",
+        "description": "Идентификационные данные владельца serresdrive.com и условия использования сайта.",
+        "h1": "Правовая информация",
+        "type": "notice",
+        "image": "https://serresdrive.com/assets/img/cars/porsche-911-carrera-s/alquiler-porsche-911-carrera-s-barcelona-1.jpg"
+      },
       "/flota/porsche/": {
         "url": "/flota/porsche/",
         "canonical": "https://serresdrive.com/ru/flota/porsche/",
@@ -1255,6 +1336,33 @@
         "type": "contact",
         "image": "https://serresdrive.com/assets/img/cars/mercedes-amg-a45/alquiler-mercedes-amg-a45-barcelona-1.jpg"
       },
+      "/politica-de-privacidad/": {
+        "url": "/politica-de-privacidad/",
+        "canonical": "https://serresdrive.com/ca/politica-de-privacidad/",
+        "title": "Política de privacitat · Serres Drive",
+        "description": "Què fem amb les teves dades quan ens escrius o visites serresdrive.com, i com exercir els teus drets.",
+        "h1": "Política de privacitat",
+        "type": "privacy",
+        "image": "https://serresdrive.com/assets/img/cars/porsche-911-carrera-s/alquiler-porsche-911-carrera-s-barcelona-1.jpg"
+      },
+      "/politica-de-cookies/": {
+        "url": "/politica-de-cookies/",
+        "canonical": "https://serresdrive.com/ca/politica-de-cookies/",
+        "title": "Política de galetes · Serres Drive",
+        "description": "Quines galetes fa servir aquesta web, per a què serveixen i com canviar la teva decisió en qualsevol moment.",
+        "h1": "Política de galetes",
+        "type": "cookies",
+        "image": "https://serresdrive.com/assets/img/cars/porsche-911-carrera-s/alquiler-porsche-911-carrera-s-barcelona-1.jpg"
+      },
+      "/aviso-legal/": {
+        "url": "/aviso-legal/",
+        "canonical": "https://serresdrive.com/ca/aviso-legal/",
+        "title": "Avís legal · Serres Drive",
+        "description": "Dades identificatives del titular de serresdrive.com i condicions d'ús del lloc.",
+        "h1": "Avís legal",
+        "type": "notice",
+        "image": "https://serresdrive.com/assets/img/cars/porsche-911-carrera-s/alquiler-porsche-911-carrera-s-barcelona-1.jpg"
+      },
       "/flota/porsche/": {
         "url": "/flota/porsche/",
         "canonical": "https://serresdrive.com/ca/flota/porsche/",
@@ -1651,6 +1759,33 @@
         "h1": "Contact",
         "type": "contact",
         "image": "https://serresdrive.com/assets/img/cars/mercedes-amg-a45/alquiler-mercedes-amg-a45-barcelona-1.jpg"
+      },
+      "/politica-de-privacidad/": {
+        "url": "/politica-de-privacidad/",
+        "canonical": "https://serresdrive.com/fr/politica-de-privacidad/",
+        "title": "Politique de confidentialité · Serres Drive",
+        "description": "Ce que nous faisons de vos données quand vous nous écrivez ou visitez serresdrive.com, et comment exercer vos droits.",
+        "h1": "Politique de confidentialité",
+        "type": "privacy",
+        "image": "https://serresdrive.com/assets/img/cars/porsche-911-carrera-s/alquiler-porsche-911-carrera-s-barcelona-1.jpg"
+      },
+      "/politica-de-cookies/": {
+        "url": "/politica-de-cookies/",
+        "canonical": "https://serresdrive.com/fr/politica-de-cookies/",
+        "title": "Politique de cookies · Serres Drive",
+        "description": "Quels cookies utilise ce site, à quoi ils servent et comment changer votre décision à tout moment.",
+        "h1": "Politique de cookies",
+        "type": "cookies",
+        "image": "https://serresdrive.com/assets/img/cars/porsche-911-carrera-s/alquiler-porsche-911-carrera-s-barcelona-1.jpg"
+      },
+      "/aviso-legal/": {
+        "url": "/aviso-legal/",
+        "canonical": "https://serresdrive.com/fr/aviso-legal/",
+        "title": "Mentions légales · Serres Drive",
+        "description": "Données d'identification du titulaire de serresdrive.com et conditions d'utilisation du site.",
+        "h1": "Mentions légales",
+        "type": "notice",
+        "image": "https://serresdrive.com/assets/img/cars/porsche-911-carrera-s/alquiler-porsche-911-carrera-s-barcelona-1.jpg"
       },
       "/flota/porsche/": {
         "url": "/flota/porsche/",

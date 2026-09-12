@@ -21,8 +21,13 @@ Hostinger desde la raíz.
 - **Cinco idiomas, cada uno con sus propias URLs:** español (raíz), inglés
   (`/en/`), ruso (`/ru/`), catalán (`/ca/`) y francés (`/fr/`), con `hreflang`
   entre las cinco y selector con banderas en el menú.
-- **200 páginas** (40 × 5 idiomas) con `<title>`, `description`, `H1`,
-  `canonical`, `hreflang` y schema propios.
+- **215 páginas** (43 × 5 idiomas) con `<title>`, `description`, `H1`,
+  `canonical`, `hreflang` y schema propios, más una **404 por idioma**.
+- **Consentimiento y medición** (12-09-2026): Consent Mode v2 antes de
+  cualquier script de Google, aviso de cookies con aceptar / rechazar /
+  configurar al mismo peso visual, tres páginas legales en los cinco idiomas
+  y eventos de WhatsApp, teléfono, correo y formulario con conversiones de
+  Google Ads. Los identificadores viven en `data/fleet.json` → `analytics`.
 
 ---
 
@@ -38,6 +43,11 @@ data/seo-meta.json     ← title / description / H1 / canonical, por idioma
 _build/i18n/es.json    ← DICCIONARIO FUENTE. Todo el texto de la web sale de
                          aquí; en.json / ru.json / ca.json / fr.json son su
                          traducción, con exactamente las mismas claves
+_build/i18n/legal/     ← los cuerpos de las tres páginas legales, uno por
+                         idioma. Aparte de los diccionarios porque son textos
+                         largos: dentro descuadrarían la alineación línea a
+                         línea de los cinco archivos, que es lo que hace
+                         evidente de un vistazo si a un idioma le falta algo
 
 _build/                ← generadores (no los sirve nadie, pero viven en el repo
                          para que el sitio se pueda reconstruir)
@@ -54,7 +64,8 @@ _build/                ← generadores (no los sirve nadie, pero viven en el rep
                          (three.js en el Chrome del sistema) → assets/img/how/
   build-data.js          fleet-base + fleet-specs + manifiesto → data/fleet.json
   build-seo-meta.js      data/fleet.json → data/seo-meta.json
-  build-site.js          → las 40 páginas + 404.html + sitemap.xml
+  build-site.js          → las 43 páginas x 5 idiomas + una 404 por idioma
+                         + sitemap.xml
   build-redirects.js     → .htaccess + seo/redirects/
   how-map.js             mapa SVG del área metropolitana para /como-funciona
   verify.js              compara el HTML generado con los números del encargo
@@ -74,7 +85,7 @@ node _build/build-data.js        # si has tocado _build/fleet-*.json
 node _build/build-seo-meta.js
 node _build/build-site.js
 node _build/build-redirects.js
-node _build/verify.js            # 212 comprobaciones; debe salir FAIL 0
+node _build/verify.js            # 1.316 comprobaciones; debe salir FAIL 0
 ```
 
 `build-images.js` solo hace falta si cambian las fotos: necesita `Sicur Cars/`
@@ -131,7 +142,13 @@ equivalencias que mantener.
 /condiciones-de-alquiler/
 /por-que-serres/
 /contacto/                    formulario → WhatsApp
-/404.html
+/politica-de-privacidad/      RGPD: qué se hace con los datos
+/politica-de-cookies/         qué cookies hay y cómo cambiar la decisión
+/aviso-legal/                 LSSI: titular del sitio y condiciones de uso
+/404.html                     una por idioma (/en/404.html, /ru/…). Cada
+                              carpeta de idioma lleva su propio .htaccess con
+                              su ErrorDocument: sin bloques <If>, que bajo
+                              LiteSpeed pueden dar 500 en todo el sitio
 ```
 
 Son **directorios con `index.html`**, así que las URLs limpias funcionan sin
@@ -221,6 +238,44 @@ de 720 px desplazada en horizontal dejaba los precios cortados.
 ---
 
 ## 7. Estado de las comprobaciones
+
+### 12-09-2026 — consentimiento, medición y páginas legales
+
+El navegador del MCP de Chrome DevTools **no estaba levantado**, así que todo
+se midió con `_build/shot.js` y `_build/lh.js` (Chrome del sistema con
+puppeteer-core), que es para lo que existen.
+
+- `node _build/verify.js` → **1.316 comprobaciones, 0 fallos** (antes 1.218).
+  Las nuevas cubren, en las 220 páginas servidas: que el consentimiento se
+  declara **antes** de cargar gtag, que en la portada va antes que
+  `preloader.js`, que existe `window.SD_PAGE`, que hay `tel:`, que ningún
+  `wa.me` se queda sin `data-placement`, que no se cuela el marcador
+  `G-XXXXXXXXXX`, que sin datos fiscales no se imprime ningún bloque de
+  identificación, y que las tres legales y las cinco 404 existen y están
+  enlazadas.
+- **29/29 comprobaciones funcionales** en Chrome, interceptando `dataLayer`
+  para leer lo que se envía de verdad: consentimiento por defecto denegado,
+  aceptar → `consent update` + `sd_consent` guardado, recarga sin reaparecer,
+  `whatsapp_click` y `phone_click` con su conversión y su `send_to`,
+  `form_submit` con el teléfono en E.164 y **sin** `whatsapp_click` duplicado,
+  `filter_brand`, y la portada con `?gclid=` sin preloader y sin descargar
+  `gt3.glb`.
+- Lighthouse móvil en portada, `/contacto/`, ficha de coche y
+  `/politica-de-privacidad/` — Accesibilidad **100**, Buenas prácticas **100**,
+  SEO **100**. Dos auditorías se arreglaron por el camino: el enlace `tel:`
+  del pie tenía un `aria-label` que no contenía su texto visible (WCAG 2.5.3)
+  y el enlace del aviso decía «Más información» a secas.
+- Ficha en móvil: el precio del día pasa de **758 px** (al borde de una
+  pantalla de 844 y tapado por la barra verde) a **366 px**, y el H1 de 589 a
+  196. El aviso de cookies se coloca **encima** de `.sticky-wa`, sin taparla.
+- Sin scroll horizontal a 390 px ni a 1440 en ninguna página nueva; consola
+  sin errores, sin imágenes rotas.
+- **Pendiente, y NO es de este cambio:** el nav de escritorio en ruso desborda
+  a 1440 px (1.564 px de ancho). Medido idéntico antes y después contra un
+  worktree en `HEAD`, y ya estaba anotado abajo desde el 07-09.
+- Capturas de las dos pasadas en `.screenshots/tracking-consent-legal/`.
+
+### 07-09-2026 — portada nueva
 
 Última verificación (07-09-2026, portada nueva; `_build/serve.js` + Chrome
 DevTools MCP para las capturas, `_build/shot.js` para los idiomas y

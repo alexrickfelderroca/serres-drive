@@ -24,7 +24,13 @@
   "footer": {
     "nav": "Footer",
     "terms": "Hire terms",
-    "wrapCenter": "Serres Wrap Center"
+    "wrapCenter": "Serres Wrap Center",
+    "privacy": "Privacy policy",
+    "cookies": "Cookie policy",
+    "legalNotice": "Legal notice",
+    "cookiePrefs": "Change cookie preferences",
+    "legalNav": "Legal links",
+    "call": "Call"
   },
   "common": {
     "breadcrumb": "Breadcrumb",
@@ -132,7 +138,8 @@
     "d3": "3 days",
     "w1": "1 week",
     "m1": "1 month",
-    "pricesOnRequest": "2- and 3-day, weekly and monthly rates: we’ll confirm them on WhatsApp."
+    "pricesOnRequest": "2- and 3-day, weekly and monthly rates: we’ll confirm them on WhatsApp.",
+    "callAlt": "or call us on {phone}"
   },
   "rates": {
     "h1": "Rates",
@@ -263,7 +270,8 @@
     "waPhone": "Phone",
     "waCar": "Car",
     "waDates": "Dates",
-    "waMessage": "Message"
+    "waMessage": "Message",
+    "call": "Call"
   },
   "wa": {
     "general": "Hi Serres Drive, I’d like to book a car.",
@@ -275,6 +283,22 @@
     "h1": "This page no longer exists",
     "body": "The car you were looking for may not be in the fleet any more. These are the {total} you can hire right now.",
     "goHome": "Go to the homepage"
+  },
+  "cookies": {
+    "aria": "Cookie notice",
+    "title": "Cookies",
+    "body": "We use our own and third-party cookies to measure visits and see which adverts bring in customers. You decide.",
+    "accept": "Accept",
+    "reject": "Reject",
+    "configure": "Customise",
+    "save": "Save",
+    "necessary": "Necessary",
+    "necessaryHelp": "They store your decision about cookies. Always on.",
+    "analytics": "Analytics",
+    "analyticsHelp": "Tells us which pages work and which do not.",
+    "ads": "Advertising",
+    "adsHelp": "Lets us see which advert brought in each booking.",
+    "more": "More about cookies"
   },
   "seo": {
     "homeTitle": "Luxury car hire in Barcelona · Serres Drive",
@@ -299,7 +323,13 @@
     "carTitle": "{car} hire in Barcelona · Serres Drive",
     "carDesc": "Hire a {car} in Barcelona from {from} a day. {cv} hp, 0-100 km/h in {zero}. Book on WhatsApp and we deliver it across the metropolitan area.",
     "carH1": "{car} hire in Barcelona",
-    "listJoin": " and "
+    "listJoin": " and ",
+    "privacyTitle": "Privacy policy · Serres Drive",
+    "privacyDesc": "What we do with your data when you write to us or visit serresdrive.com, and how to exercise your rights.",
+    "cookiesTitle": "Cookie policy · Serres Drive",
+    "cookiesDesc": "Which cookies this website uses, what they are for and how to change your decision at any time.",
+    "legalTitle": "Legal notice · Serres Drive",
+    "legalDesc": "Identifying details of the owner of serresdrive.com and the terms of use of the site."
   },
   "cars": {
     "mercedes-amg-g63": {

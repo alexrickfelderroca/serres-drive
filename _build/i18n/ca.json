@@ -24,7 +24,13 @@
   "footer": {
     "nav": "Peu de pàgina",
     "terms": "Condicions de lloguer",
-    "wrapCenter": "Serres Wrap Center"
+    "wrapCenter": "Serres Wrap Center",
+    "privacy": "Política de privacitat",
+    "cookies": "Política de galetes",
+    "legalNotice": "Avís legal",
+    "cookiePrefs": "Canviar preferències de galetes",
+    "legalNav": "Enllaços legals",
+    "call": "Trucar"
   },
   "common": {
     "breadcrumb": "Ruta de navegació",
@@ -132,7 +138,8 @@
     "d3": "3 dies",
     "w1": "1 setmana",
     "m1": "1 mes",
-    "pricesOnRequest": "Tarifes de 2 i 3 dies, setmana i mes: te les confirmem per WhatsApp."
+    "pricesOnRequest": "Tarifes de 2 i 3 dies, setmana i mes: te les confirmem per WhatsApp.",
+    "callAlt": "o truca al {phone}"
   },
   "rates": {
     "h1": "Tarifes",
@@ -263,7 +270,8 @@
     "waPhone": "Telèfon",
     "waCar": "Cotxe",
     "waDates": "Dates",
-    "waMessage": "Missatge"
+    "waMessage": "Missatge",
+    "call": "Trucar"
   },
   "wa": {
     "general": "Hola Serres Drive, vull reservar un cotxe.",
@@ -275,6 +283,22 @@
     "h1": "Aquesta pàgina ja no existeix",
     "body": "Potser el cotxe que buscaves ja no és a la flota. Aquests són els {total} que sí que pots llogar ara mateix.",
     "goHome": "Torna a l'inici"
+  },
+  "cookies": {
+    "aria": "Avís de galetes",
+    "title": "Galetes",
+    "body": "Fem servir galetes pròpies i de tercers per mesurar les visites i saber quins anuncis porten clients. Tu decideixes.",
+    "accept": "Accepta",
+    "reject": "Rebutja",
+    "configure": "Configura",
+    "save": "Desa",
+    "necessary": "Necessàries",
+    "necessaryHelp": "Desen la teva decisió sobre les galetes. Sempre actives.",
+    "analytics": "Analítica",
+    "analyticsHelp": "Ens diu quines pàgines funcionen i quines no.",
+    "ads": "Publicitat",
+    "adsHelp": "Permet saber quin anunci ha portat cada reserva.",
+    "more": "Més sobre les galetes"
   },
   "seo": {
     "homeTitle": "Lloguer de cotxes de luxe a Barcelona · Serres Drive",
@@ -299,7 +323,13 @@
     "carTitle": "Lloguer {car} a Barcelona · Serres Drive",
     "carDesc": "Lloga un {car} a Barcelona des de {from} al dia. {cv} CV, 0-100 en {zero}. Reserva per WhatsApp amb lliurament a l'àrea metropolitana.",
     "carH1": "Lloguer {car} a Barcelona",
-    "listJoin": " i "
+    "listJoin": " i ",
+    "privacyTitle": "Política de privacitat · Serres Drive",
+    "privacyDesc": "Què fem amb les teves dades quan ens escrius o visites serresdrive.com, i com exercir els teus drets.",
+    "cookiesTitle": "Política de galetes · Serres Drive",
+    "cookiesDesc": "Quines galetes fa servir aquesta web, per a què serveixen i com canviar la teva decisió en qualsevol moment.",
+    "legalTitle": "Avís legal · Serres Drive",
+    "legalDesc": "Dades identificatives del titular de serresdrive.com i condicions d'ús del lloc."
   },
   "cars": {
     "mercedes-amg-g63": {

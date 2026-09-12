@@ -261,7 +261,23 @@ RewriteRule "^_build(/|$)" - [R=404,L]
 RewriteRule "^IMG_[0-9]+.(png|jpe?g)$" - [R=404,L,NC]
 
 # --- branded 404 -------------------------------------------------------
+# Esta es la espanola, la de la raiz. La de cada idioma la pone un .htaccess
+# dentro de su carpeta (en/, ru/, ca/, fr/), que este mismo generador
+# escribe. Se hizo asi y NO con bloques <If ...> a proposito: el sitio lo
+# sirve LiteSpeed, donde el soporte de <If> en .htaccess no esta garantizado,
+# y una directiva que el servidor no entiende no degrada — tumba el sitio
+# entero con un 500. ErrorDocument por directorio es directiva de nucleo y
+# funciona en cualquier Apache o LiteSpeed.
 ErrorDocument 404 /404.html
+
+# --- tipos MIME --------------------------------------------------------
+# El modelo del hero se servia con el tipo por defecto del servidor (se vio
+# como text/plain). Con el tipo correcto el navegador puede cachearlo y
+# tratarlo como binario en lugar de intentar interpretarlo como texto.
+<IfModule mod_mime.c>
+  AddType model/gltf-binary .glb
+  AddType model/gltf+json .gltf
+</IfModule>
 
 # --- caching -----------------------------------------------------------
 # Assets are requested with ?v= cache-busters (bumped on every deploy), so

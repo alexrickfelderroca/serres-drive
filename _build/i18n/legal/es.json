@@ -1,0 +1,213 @@
+{
+  "_meta": {
+    "lang": "es",
+    "note": "FUENTE de los textos legales. en/ru/ca/fr son su traduccion, con exactamente las mismas claves y el mismo numero de parrafos. Marcadores: {entity} responsable, {email}, {phone}, {origin}, {updated}, {dpa}, {prefsLink}. El generador (build-site.js) inserta el bloque de identificacion fiscal SOLO si data/fleet.json -> legal.entityName tiene valor.",
+    "disclaimer": "Textos redactados sobre plantilla estandar RGPD/LSSI y ajustados a lo que esta web hace de verdad. No son asesoramiento juridico: conviene que los revise un asesor antes de dar por cerrada la parte legal."
+  },
+  "idLabels": {
+    "company": "Razón social",
+    "taxId": "NIF",
+    "address": "Domicilio"
+  },
+  "privacy": {
+    "h1": "Política de privacidad",
+    "updated": "Última actualización: {updated}",
+    "intro": "Esta política explica qué hacemos con tus datos cuando nos escribes o cuando visitas {origin}. Está escrita para que se entienda: si algo no te queda claro, pregúntanos por WhatsApp o por correo y te lo explicamos.",
+    "sections": [
+      {
+        "h2": "Quién trata tus datos",
+        "p": [
+          "El responsable del tratamiento es {entity}, que explota el sitio web {origin} y presta el servicio de alquiler de vehículos descrito en él.",
+          "Puedes escribirnos a {email} o llamarnos al {phone} para cualquier cosa relacionada con tus datos, incluido ejercer los derechos que se explican más abajo."
+        ]
+      },
+      {
+        "h2": "Qué datos tratamos",
+        "p": [
+          "Los que nos das tú al contactarnos: nombre, teléfono, el coche que te interesa, las fechas y lo que nos cuentes en el mensaje.",
+          "Conviene que sepas cómo funciona el formulario de esta web, porque no es lo habitual: no envía nada a ningún servidor nuestro. Al pulsar «Enviar por WhatsApp» se abre WhatsApp con el mensaje ya escrito y eres tú quien decide enviarlo. Esta web no guarda lo que escribes en el formulario, ni en un servidor ni en tu navegador.",
+          "Datos de navegación: si aceptas las cookies de analítica o de publicidad, Google recibe información sobre tu visita (páginas vistas, origen del tráfico, tipo de dispositivo, dirección IP). Si no las aceptas, no se activan.",
+          "Si finalmente alquilas un vehículo, para firmar el contrato te pediremos además los datos que exige la ley y la aseguradora: identificación, permiso de conducción y medio de pago. Esos datos se recogen fuera de esta web."
+        ]
+      },
+      {
+        "h2": "Para qué los usamos y con qué base legal",
+        "ul": [
+          "Responder a tu consulta y prepararte un presupuesto — para aplicar, a petición tuya, medidas precontractuales (art. 6.1.b RGPD).",
+          "Gestionar el alquiler, la entrega y la devolución del vehículo — ejecución del contrato (art. 6.1.b RGPD).",
+          "Cumplir con nuestras obligaciones fiscales, contables y de identificación del conductor — obligación legal (art. 6.1.c RGPD).",
+          "Medir cómo funciona la web y qué anuncios traen clientes — únicamente con tu consentimiento (art. 6.1.a RGPD), que puedes retirar cuando quieras.",
+          "Atender reclamaciones, siniestros, multas o incidencias del alquiler — interés legítimo en defender nuestros derechos (art. 6.1.f RGPD)."
+        ]
+      },
+      {
+        "h2": "Con quién los compartimos",
+        "p": [
+          "No vendemos tus datos ni los cedemos a nadie para que te haga publicidad por su cuenta. Solo llegan a quien hace falta para prestarte el servicio:"
+        ],
+        "ul": [
+          "WhatsApp Ireland Limited (grupo Meta), si nos escribes por WhatsApp: la conversación se rige por las condiciones y la política de privacidad de WhatsApp.",
+          "Google Ireland Limited, si aceptas las cookies de analítica o publicidad, para medir las visitas y las campañas.",
+          "Nuestro proveedor de alojamiento web, que almacena el sitio y registra los accesos al servidor.",
+          "El propietario del vehículo, cuando el coche que eliges no pertenece a nuestra flota propia sino a un proveedor colaborador, y únicamente con los datos necesarios para preparar ese alquiler.",
+          "Aseguradoras, administraciones públicas y fuerzas de seguridad cuando una norma nos obliga a ello, por ejemplo ante una multa o un siniestro."
+        ]
+      },
+      {
+        "h2": "Transferencias fuera de la Unión Europea",
+        "p": [
+          "Google y Meta pueden tratar datos en servidores situados fuera del Espacio Económico Europeo. Ambos se acogen al Marco de Privacidad de Datos UE-EE. UU. y a las cláusulas contractuales tipo aprobadas por la Comisión Europea, que son los mecanismos que el RGPD prevé para estos casos."
+        ]
+      },
+      {
+        "h2": "Cuánto tiempo los guardamos",
+        "p": [
+          "Las conversaciones de WhatsApp y los correos, mientras dure el trato y después el tiempo necesario para atender cualquier reclamación.",
+          "Los datos del contrato de alquiler y la facturación, durante los plazos que exigen la normativa fiscal y mercantil.",
+          "Los datos de analítica y publicidad, durante los plazos de conservación que fija Google para cada servicio.",
+          "Tu decisión sobre las cookies se guarda en tu propio navegador hasta que la cambies o borres los datos del sitio."
+        ]
+      },
+      {
+        "h2": "Tus derechos",
+        "p": [
+          "Puedes pedirnos acceder a tus datos, rectificarlos, suprimirlos, limitar u oponerte a su tratamiento, y solicitar su portabilidad. También puedes retirar en cualquier momento el consentimiento que hayas dado, sin que eso afecte a lo hecho antes de retirarlo.",
+          "Para ejercerlos, escríbenos a {email} indicando qué quieres y adjuntando algo que acredite tu identidad. Te responderemos en el plazo máximo de un mes.",
+          "Si crees que no hemos atendido bien tu petición, puedes reclamar ante la Agencia Española de Protección de Datos ({dpa})."
+        ]
+      },
+      {
+        "h2": "Seguridad y menores",
+        "p": [
+          "Aplicamos las medidas técnicas y organizativas razonables para proteger tus datos. El sitio se sirve siempre por conexión cifrada (HTTPS).",
+          "Este sitio no está dirigido a menores de edad y no recogemos datos de menores de forma consciente. Para alquilar hace falta un permiso de conducción en vigor."
+        ]
+      },
+      {
+        "h2": "Cambios en esta política",
+        "p": [
+          "Si cambiamos la forma de tratar los datos, actualizaremos esta página y la fecha que aparece arriba. Te recomendamos revisarla de vez en cuando."
+        ]
+      }
+    ]
+  },
+  "cookies": {
+    "h1": "Política de cookies",
+    "updated": "Última actualización: {updated}",
+    "intro": "Las cookies son pequeños archivos que una web guarda en tu dispositivo. Aquí te contamos exactamente cuáles usamos, para qué, y cómo cambiar de opinión en cualquier momento.",
+    "sections": [
+      {
+        "h2": "Esta web no te pone cookies por su cuenta",
+        "p": [
+          "Al entrar no se instala ninguna cookie de analítica ni de publicidad. Solo se activan si las aceptas en el aviso que aparece en tu primera visita.",
+          "Lo único que guardamos siempre es tu propia decisión sobre las cookies, en el almacenamiento local de tu navegador, bajo el nombre «sd_consent». No es una cookie, no se envía a ningún servidor y sirve exactamente para no volver a preguntarte lo mismo cada vez que entras. Si la borras, volveremos a preguntarte."
+        ]
+      },
+      {
+        "h2": "Las que se activan si aceptas",
+        "table": {
+          "head": [
+            "Cookie",
+            "Quién la pone",
+            "Para qué",
+            "Duración"
+          ],
+          "rows": [
+            [
+              "_ga, _ga_*",
+              "Google Analytics",
+              "Distinguir visitantes y sesiones para saber qué páginas funcionan y cuáles no.",
+              "Hasta 2 años"
+            ],
+            [
+              "_gcl_au",
+              "Google Ads",
+              "Atribuir una reserva al anuncio que la trajo.",
+              "90 días"
+            ],
+            [
+              "NID, IDE",
+              "Google",
+              "Publicidad personalizada y medición de campañas, solo si aceptas la categoría de publicidad.",
+              "Hasta 13 meses"
+            ]
+          ]
+        },
+        "p": [
+          "Si rechazas, estas cookies no se instalan. Google sigue recibiendo señales de medición sin cookies y sin identificarte, mediante el modo de consentimiento, lo que nos permite tener estadísticas agregadas sin rastrearte."
+        ]
+      },
+      {
+        "h2": "Lo que se carga aunque rechaces",
+        "p": [
+          "Para que la web se vea bien cargamos tipografías desde los servidores de Google Fonts, y en la portada algunas librerías de animación desde redes de distribución de contenido públicas. Estos servicios reciben tu dirección IP porque es imprescindible para servirte el archivo, pero no instalan cookies de seguimiento ni construyen un perfil tuyo a través de esta web."
+        ]
+      },
+      {
+        "h2": "Cambiar tu decisión",
+        "p": [
+          "Puedes cambiarla cuando quieras desde el enlace «{prefsLink}» que hay en el pie de todas las páginas. Se te volverá a mostrar el aviso con tus opciones.",
+          "También puedes borrar o bloquear las cookies desde la configuración de tu navegador. En la ayuda de Chrome, Safari, Firefox o Edge encontrarás cómo hacerlo. Ten en cuenta que bloquearlas todas puede afectar al funcionamiento de otras webs."
+        ]
+      }
+    ]
+  },
+  "notice": {
+    "h1": "Aviso legal",
+    "updated": "Última actualización: {updated}",
+    "intro": "Condiciones de uso del sitio web {origin} y datos identificativos de su titular, conforme a la Ley 34/2002 de servicios de la sociedad de la información y de comercio electrónico.",
+    "sections": [
+      {
+        "h2": "Titular del sitio web",
+        "p": [
+          "Este sitio web pertenece a {entity}, que presta el servicio de alquiler de vehículos descrito en él.",
+          "Correo electrónico de contacto: {email}. Teléfono: {phone}."
+        ]
+      },
+      {
+        "h2": "Objeto",
+        "p": [
+          "Este sitio informa sobre los vehículos disponibles para alquiler, sus características y sus tarifas, y permite ponerse en contacto para solicitar una reserva. No es una pasarela de contratación: la reserva no se formaliza en la web, sino en la conversación posterior y en el contrato de alquiler que se firma en la entrega."
+        ]
+      },
+      {
+        "h2": "Uso del sitio",
+        "p": [
+          "Al usar este sitio te comprometes a hacerlo conforme a la ley y a no emplearlo para actividades ilícitas, para dañar sus sistemas o para introducir contenido que pueda perjudicar a terceros."
+        ]
+      },
+      {
+        "h2": "Propiedad intelectual e industrial",
+        "p": [
+          "Los textos, el diseño, el código y las fotografías de este sitio pertenecen a su titular o se usan con autorización, y no pueden reproducirse sin permiso por escrito.",
+          "Las marcas y los nombres de los fabricantes que aparecen en la web pertenecen a sus respectivos titulares y se utilizan únicamente para identificar los vehículos que ofrecemos en alquiler. Este sitio no es un concesionario oficial ni está asociado a esos fabricantes."
+        ]
+      },
+      {
+        "h2": "Responsabilidad",
+        "p": [
+          "Cuidamos que la información sea correcta y esté al día, pero los precios, la disponibilidad y las características de los vehículos son orientativos y quedan sujetos a confirmación antes de cerrar cada alquiler. Las condiciones que rigen el alquiler son las del contrato firmado y las publicadas en la página de condiciones de alquiler.",
+          "No respondemos de las interrupciones del servicio ajenas a nuestra voluntad ni de los daños derivados de un uso indebido del sitio."
+        ]
+      },
+      {
+        "h2": "Enlaces a otros sitios",
+        "p": [
+          "El sitio enlaza a servicios de terceros, como WhatsApp, Instagram o Serres Wrap Center. No controlamos sus contenidos ni sus políticas y no asumimos responsabilidad sobre ellos."
+        ]
+      },
+      {
+        "h2": "Protección de datos y cookies",
+        "p": [
+          "El tratamiento de datos personales se explica en la política de privacidad, y el uso de cookies en la política de cookies, ambas enlazadas en el pie de todas las páginas."
+        ]
+      },
+      {
+        "h2": "Legislación aplicable",
+        "p": [
+          "Estas condiciones se rigen por la legislación española. Para cualquier controversia, las partes se someten a los juzgados y tribunales que resulten competentes conforme a derecho."
+        ]
+      }
+    ]
+  }
+}

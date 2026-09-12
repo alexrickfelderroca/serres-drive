@@ -181,8 +181,9 @@ for (const f of shipped) {
 {
   const xml = read('sitemap.xml');
   const locs = [...xml.matchAll(/<loc>https:\/\/serresdrive\.com(.*?)<\/loc>/g)].map(m => m[1]);
-  /* 13 páginas fijas + una por coche + una por marca, x 5 idiomas. */
-  const FIJAS = 7;   // /, flota, tarifas, como-funciona, condiciones, por-que-serres, contacto
+  /* páginas fijas + una por coche + una por marca, x 5 idiomas. */
+  const FIJAS = 10;  // /, flota, tarifas, como-funciona, condiciones, por-que-serres,
+                     // contacto + las tres legales (privacidad, cookies, aviso legal)
   const PAGES = FIJAS + CARS + BRANDS.length, URLS = PAGES * 5;
   check(locs.length === URLS, `sitemap tiene ${URLS} URLs (${PAGES} x 5 idiomas) — encontradas ${locs.length}`);
   const perLang = { es: 0, en: 0, ru: 0, ca: 0, fr: 0 };
@@ -194,6 +195,99 @@ for (const f of shipped) {
   const missing = locs.filter(u => !fs.existsSync(path.join(ROOT, u === '/' ? 'index.html' : u.slice(1) + 'index.html')));
   check(!missing.length, `every sitemap URL exists${missing.length ? ` — missing ${missing}` : ''}`);
   check(!/alquiler-|fleet\.html|rates\.html|motos/.test(xml), 'sitemap has no legacy URLs');
+}
+
+/* --- 9. consentimiento, medicion y paginas legales ---------------------- */
+/* Una comprobacion POR CONDICION, no por archivo: con 220 HTML, un check por
+   archivo y condicion son mas de mil lineas de ruido y la cuenta total deja
+   de decir nada. Cada check nombra a los infractores si los hay.          */
+{
+  const pages = shipped.filter(f => /\.html$/.test(f))
+    .map(f => ({ rp: path.relative(ROOT, f).replace(/\\/g, '/'), html: fs.readFileSync(f, 'utf8') }));
+  const offenders = fn => pages.filter(fn).map(p => p.rp);
+  const few = a => a.length ? ` — ${a.slice(0, 5).join(', ')}${a.length > 5 ? ` y ${a.length - 5} mas` : ''}` : '';
+
+  check(pages.length === 220, `220 HTML servidos: 215 paginas + 5 paginas 404 (hay ${pages.length})`);
+
+  let bad = offenders(p => !/gtag\('consent','default'/.test(p.html));
+  check(!bad.length, `las ${pages.length} paginas declaran el consentimiento por defecto${few(bad)}`);
+
+  /* Lo que de verdad importa del Consent Mode es el ORDEN: si el gtag se
+     carga antes de la declaracion, el consentimiento por defecto no se
+     aplica y Google trata la visita como consentida. */
+  bad = offenders(p => {
+    const c = p.html.indexOf("gtag('consent','default'");
+    const g = p.html.indexOf('googletagmanager.com/gtag/js');
+    return c < 0 || g < 0 || c > g;
+  });
+  check(!bad.length, `el consentimiento se declara ANTES de cargar gtag${few(bad)}`);
+
+  /* En la portada el primer script era preloader.js, sincrono y bloqueante:
+     si el bloque de consentimiento quedara detras, no serviria de nada. */
+  bad = offenders(p => {
+    const c = p.html.indexOf("gtag('consent','default'");
+    const pre = p.html.indexOf('js/preloader.js');
+    return pre >= 0 && c > pre;
+  });
+  check(!bad.length, `en la portada el consentimiento va antes que preloader.js${few(bad)}`);
+
+  bad = offenders(p => !/window\.SD_PAGE=\{/.test(p.html));
+  check(!bad.length, `las ${pages.length} paginas declaran window.SD_PAGE${few(bad)}`);
+
+  bad = offenders(p => !/href="tel:\+34649663380"/.test(p.html));
+  check(!bad.length, `las ${pages.length} paginas tienen al menos un enlace tel:${few(bad)}`);
+
+  /* Un wa.me sin data-placement es una conversion que llega sin saber de
+     que boton salio, que es justo lo que se queria arreglar. */
+  bad = offenders(p => (p.html.match(/<a[^>]*wa\.me[^>]*>/g) || []).some(a => !/data-placement=/.test(a)));
+  check(!bad.length, `todos los enlaces wa.me llevan data-placement${few(bad)}`);
+
+  bad = offenders(p => !/id="cookieCard"/.test(p.html));
+  check(!bad.length, `las ${pages.length} paginas llevan el aviso de cookies${few(bad)}`);
+
+  /* El marcador de GA4 nunca puede llegar a produccion: seria una peticion
+     rota a googletagmanager.com en cada carga de cada pagina. */
+  bad = offenders(p => /G-X{6,}/.test(p.html));
+  check(!bad.length, `ningun marcador G-XXXXXXXXXX en el HTML servido${few(bad)}`);
+
+  /* Ni datos fiscales inventados: mientras fleet.json los tenga a null, el
+     bloque de identificacion no puede aparecer. */
+  const legalData = JSON.parse(read('data/fleet.json')).legal;
+  if (!legalData.entityName) {
+    bad = offenders(p => /class="legal-id"/.test(p.html));
+    check(!bad.length, `sin datos fiscales en fleet.json, no se imprime ningun bloque de identificacion${few(bad)}`);
+  }
+
+  /* Las tres legales, en los cinco idiomas, existen y estan enlazadas. */
+  for (const slug of ['politica-de-privacidad', 'politica-de-cookies', 'aviso-legal']) {
+    const missing = ['', 'en/', 'ru/', 'ca/', 'fr/']
+      .filter(pre => !fs.existsSync(path.join(ROOT, pre + slug, 'index.html')));
+    check(!missing.length, `/${slug}/ existe en los 5 idiomas${missing.length ? ` — falta en ${missing}` : ''}`);
+    bad = offenders(p => !new RegExp(`${slug}/"`).test(p.html));
+    check(!bad.length, `todas las paginas enlazan a /${slug}/ en el pie${few(bad)}`);
+  }
+
+  /* Cada 404 en su idioma: era el fallo concreto que reporto el delta. */
+  for (const [pre, code] of [['', 'es'], ['en/', 'en'], ['ru/', 'ru'], ['ca/', 'ca'], ['fr/', 'fr']]) {
+    const f = path.join(ROOT, pre + '404.html');
+    const ok = fs.existsSync(f) && new RegExp(`<html lang="${code}">`).test(fs.readFileSync(f, 'utf8'));
+    check(ok, `/${pre}404.html existe y declara lang="${code}"`);
+  }
+  /* Cada idioma lleva su ErrorDocument en SU carpeta, no en la raiz con
+     bloques <If>: bajo LiteSpeed una directiva no soportada no degrada, da
+     500 en todo el sitio. */
+  check(/^ErrorDocument 404 \/404\.html$/m.test(read('.htaccess')), '.htaccess de la raiz sirve la 404 espanola');
+  for (const code of ['en', 'ru', 'ca', 'fr']) {
+    const f = path.join(ROOT, code, '.htaccess');
+    const ok = fs.existsSync(f) && fs.readFileSync(f, 'utf8').includes(`ErrorDocument 404 /${code}/404.html`);
+    check(ok, `/${code}/.htaccess sirve la 404 de su idioma`);
+  }
+  check(!/^\s*<If /m.test(read('.htaccess')), 'sin bloques <If> en .htaccess (LiteSpeed daria 500)');
+
+  /* @context en TODO el JSON-LD: sin el, Google no lee el bloque. */
+  bad = offenders(p => (p.html.match(/<script type="application\/ld\+json">([^<]*)</g) || [])
+    .some(s => !s.includes('"@context"')));
+  check(!bad.length, `todo el JSON-LD lleva @context${few(bad)}`);
 }
 
 /* --- 8. no legacy files left ------------------------------------------- */

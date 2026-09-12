@@ -28,7 +28,12 @@ const seoAll = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/seo-meta.json'),
    una tabla de equivalencias que mantener.                                */
 const LANGS = ['es', 'en', 'ru', 'ca', 'fr'].map(code => {
   const d = JSON.parse(fs.readFileSync(path.join(__dirname, 'i18n', `${code}.json`), 'utf8'));
-  return { code, dict: d, ...d._meta, prefix: code === 'es' ? '' : code + '/' };
+  /* Los cuerpos legales viven en i18n/legal/<code>.json y no dentro del
+     diccionario: son textos largos y dentro descuadrarian la alineacion
+     linea a linea que tienen los cinco archivos, que es justo lo que hace
+     evidente de un vistazo si a un idioma le falta algo. */
+  const lg = JSON.parse(fs.readFileSync(path.join(__dirname, 'i18n', 'legal', `${code}.json`), 'utf8'));
+  return { code, dict: d, legal: lg, ...d._meta, prefix: code === 'es' ? '' : code + '/' };
 });
 let LG = LANGS[0];      // idioma que se esta generando
 let L = LG.dict;        // su diccionario
@@ -136,6 +141,9 @@ const rentalAlt = c => hasLocation(c) ? L.common.rentalAlt : L.common.rentalAltN
 const ICON = {
   arrow: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
   pin: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>',
+  /* Auricular. Los otros tres del pie son marcas y van en su color; este es
+     nuestro, asi que hereda el color del texto como el resto del pie. */
+  phone: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.6 3.5h3l1.5 3.8-1.9 1.4a12.4 12.4 0 0 0 5.1 5.1l1.4-1.9 3.8 1.5v3a1.9 1.9 0 0 1-2.1 1.9A16.6 16.6 0 0 1 4.7 5.6 1.9 1.9 0 0 1 6.6 3.5Z"/></svg>',
   wa: '<svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16.04 3C9.4 3 4 8.4 4 15.04c0 2.12.56 4.18 1.62 6L4 29l8.16-1.58a12 12 0 0 0 3.88.64C22.7 28.06 28.1 22.66 28.1 16.02 28.1 8.4 22.68 3 16.04 3Zm5.39 14.57c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.66.15-.2.3-.76.96-.93 1.15-.17.2-.34.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.3-.02-.46.13-.61.13-.13.3-.34.45-.51.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.66-1.6-.9-2.18-.24-.58-.48-.5-.66-.5l-.56-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.22 3.08.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.08 1.75-.71 2-1.4.25-.69.25-1.28.17-1.4-.07-.13-.27-.2-.57-.35Z"/></svg>',
   /* Official marks, in their own colours. The Instagram gradient lives once
      per page in the sprite below, so three copies of the icon do not mean
@@ -145,8 +153,47 @@ const ICON = {
   waColor: '<svg class="ico-brand" viewBox="0 0 32 32" aria-hidden="true"><path fill="#25D366" d="M16.04 3C9.4 3 4 8.4 4 15.04c0 2.12.56 4.18 1.62 6L4 29l8.16-1.58a12 12 0 0 0 3.88.64C22.7 28.06 28.1 22.66 28.1 16.02 28.1 8.4 22.68 3 16.04 3Z"/><path fill="#fff" d="M21.43 17.57c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.66.15-.2.3-.76.96-.93 1.15-.17.2-.34.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.3-.02-.46.13-.61.13-.13.3-.34.45-.51.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.66-1.6-.9-2.18-.24-.58-.48-.5-.66-.5l-.56-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.22 3.08.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.08 1.75-.71 2-1.4.25-.69.25-1.28.17-1.4-.07-.13-.27-.2-.57-.35Z"/></svg>',
 };
 
+/* ---------- Google: consentimiento y etiqueta ------------------------- */
+/* TZ-tracking secciones 1 y 2. Va DENTRO de page(), no en extraHead: solo
+   dos llamadas pasan extraHead y en la portada quedaria detras de
+   preloader.js, que es justo lo que no puede pasar — el consentimiento
+   tiene que declararse antes que ningun script de Google.
+
+   La linea de GA4 se emite SOLO si data/fleet.json -> analytics.ga4 tiene
+   valor. Con el marcador G-XXXXXXXXXX puesto, cada carga de cada pagina
+   pediria a googletagmanager.com un contenedor que no existe. El ID de Ads
+   si es real, asi que las conversiones miden desde el primer dia y GA4 se
+   enciende cambiando UN dato y volviendo a generar.                      */
+const A = fleet.analytics;
+const googleTag = () => `<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+gtag('consent','default',{ad_storage:'denied',analytics_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',functionality_storage:'granted',security_storage:'granted',wait_for_update:500});
+gtag('set','ads_data_redaction',true);gtag('set','url_passthrough',true);
+try{var sdc=JSON.parse(localStorage.getItem('sd_consent')||'null');if(sdc&&sdc.v===1)gtag('consent','update',sdc.state)}catch(e){}
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=${A.ga4 || A.ads}"></script>
+<script>
+gtag('js',new Date());
+${A.ga4 ? `gtag('config','${A.ga4}');\n` : ''}gtag('config','${A.ads}',{allow_enhanced_conversions:true});
+</script>`;
+
+/* Los identificadores que el script de eventos (js/site.js) necesita en
+   caliente. Van en el HTML y no cableados en el JS por lo mismo que todo lo
+   demas: un dato vive en un solo sitio. */
+const adsConfig = () => `<script>window.SD_ADS=${JSON.stringify({ id: A.ads, labels: A.labels })}</script>`;
+
+/* seo-meta ya clasifica cada pagina en 'type'; esto lo traduce al
+   vocabulario de page_type que pide el TZ (seccion 3). Sin tabla intermedia
+   se colarian 'fleet' y 'brand' como dos tipos distintos, y para la
+   analitica son lo mismo: el catalogo.                                   */
+const PAGE_TYPE = {
+  home: 'home', fleet: 'flota', brand: 'flota', car: 'coche', rates: 'tarifas',
+  how: 'como_funciona', why: 'por_que', contact: 'contacto',
+  terms: 'legal', privacy: 'legal', cookies: 'legal', notice: 'legal',
+};
+
 /* Defined once per page; every Instagram icon points at it. */
-const SVG_SPRITE = '<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute"><defs><radialGradient id="igGrad" cx=".28" cy="1.03" r="1.25"><stop offset="0" stop-color="#FFD776"/><stop offset=".22" stop-color="#F8A650"/><stop offset=".42" stop-color="#EF4A5B"/><stop offset=".62" stop-color="#D62976"/><stop offset=".8" stop-color="#962FBF"/><stop offset="1" stop-color="#4F5BD5"/></radialGradient></defs></svg>';
+const SVG_SPRITE ='<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute"><defs><radialGradient id="igGrad" cx=".28" cy="1.03" r="1.25"><stop offset="0" stop-color="#FFD776"/><stop offset=".22" stop-color="#F8A650"/><stop offset=".42" stop-color="#EF4A5B"/><stop offset=".62" stop-color="#D62976"/><stop offset=".8" stop-color="#962FBF"/><stop offset="1" stop-color="#4F5BD5"/></radialGradient></defs></svg>';
 const btnArrow = `<span class="disc">${ICON.arrow}</span>`;
 
 /* Depth of a URL like /coches/x/ -> how many ../ to reach the site root. */
@@ -204,14 +251,14 @@ function header(r, ra, current, canonicalUrl = '/') {
     </nav>
     <div class="nav-actions">
       ${langPicker(canonicalUrl)}
-      <a class="btn btn--wa-quiet btn--sm" href="${waGeneral()}" target="_blank" rel="noopener" aria-label="${L.nav.bookWa}">${ICON.waColor}<span>${L.nav.book}</span></a>
+      <a class="btn btn--wa-quiet btn--sm" href="${waGeneral()}" target="_blank" rel="noopener" data-placement="nav" aria-label="${L.nav.bookWa}">${ICON.waColor}<span>${L.nav.book}</span></a>
       <button class="menu-btn" id="menuBtn" type="button" aria-label="${L.nav.openMenu}" data-open="${esc(L.nav.openMenu)}" data-close="${esc(L.nav.closeMenu)}" aria-expanded="false" aria-controls="mobileMenu"><i></i></button>
     </div>
   </div>
 </header>
 <div class="mobile-menu" id="mobileMenu" hidden>
   ${navItems().map(n => `<a href="${r}${n.href}">${n.label}</a>`).join('\n  ')}
-  <a class="btn btn--wa btn--block" href="${waGeneral()}" target="_blank" rel="noopener">${ICON.waColor}<span>${L.nav.bookWa}</span></a>
+  <a class="btn btn--wa btn--block" href="${waGeneral()}" target="_blank" rel="noopener" data-placement="menu">${ICON.waColor}<span>${L.nav.bookWa}</span></a>
   ${langPicker(canonicalUrl)}
 </div>`;
 }
@@ -231,15 +278,65 @@ function footer(r, ra) {
     </div>
     <div class="footer-social">
       <a href="${C.instagram}" target="_blank" rel="noopener">${ICON.ig}<span>${esc(C.instagramHandle)}</span></a>
-      <a href="${waGeneral()}" target="_blank" rel="noopener">${ICON.waColor}<span>WhatsApp ${C.phoneDisplay}</span></a>
+      <a href="${waGeneral()}" target="_blank" rel="noopener" data-placement="footer">${ICON.waColor}<span>WhatsApp ${C.phoneDisplay}</span></a>
+      <!-- Sin aria-label: el texto visible YA es el nombre accesible. Con
+           uno distinto ("Llamar a Serres Drive") el nombre accesible no
+           contenia el texto visible y se incumplia WCAG 2.5.3, Label in
+           Name — quien navega por voz dice lo que lee. -->
+      <a href="tel:+${C.whatsapp}" data-placement="footer">${ICON.phone}<span>${L.footer.call} ${C.phoneDisplay}</span></a>
       <a href="mailto:${C.email}">${ICON.gmail}<span>${C.email}</span></a>
     </div>
     <div class="bottom">
       <span>© ${new Date().getFullYear()} Serres Drive · ${C.address.locality}, ${C.address.region}</span>
-      <span><a href="${r}condiciones-de-alquiler/">${L.footer.terms}</a></span>
+      <nav class="legal-links" aria-label="${esc(L.footer.legalNav)}">
+        <a href="${r}condiciones-de-alquiler/">${L.footer.terms}</a>
+        <a href="${r}politica-de-privacidad/">${L.footer.privacy}</a>
+        <a href="${r}politica-de-cookies/">${L.footer.cookies}</a>
+        <a href="${r}aviso-legal/">${L.footer.legalNotice}</a>
+        <button type="button" class="linklike" data-cookie-prefs>${L.footer.cookiePrefs}</button>
+      </nav>
     </div>
   </div>
 </footer>`;
+}
+
+/* ---------- aviso de cookies ------------------------------------------ */
+/* Tres botones del MISMO peso visual (los tres .btn--secondary), que es lo
+   que pide el TZ y lo que pide el RGPD: aceptar no puede ser mas facil que
+   rechazar. "Guardar" solo aparece con el panel abierto, cuando ya no hay
+   asimetria que falsear.
+
+   Sale en el HTML con [hidden]; js/site.js lo descubre si no hay decision
+   guardada. Asi quien ya decidio no ve nunca un parpadeo, y sin JS no
+   aparece un banner que no sabria guardar nada.
+
+   Las casillas de "necesarias" van checked+disabled: no se pueden desactivar
+   porque lo unico que guardan es la propia decision.                      */
+function cookieBanner(r) {
+  const row = (id, label, help, fixed) => `<label class="cc-row">
+        <input type="checkbox"${id ? ` id="${id}"` : ''}${fixed ? ' checked disabled' : ''}>
+        <span class="cc-row-txt"><b>${label}</b><em>${help}</em></span>
+      </label>`;
+  return `<div class="cc" id="cookieCard" role="dialog" aria-labelledby="ccTitle" aria-describedby="ccBody" aria-label="${esc(L.cookies.aria)}" hidden>
+  <div class="cc-in">
+    <h2 class="cc-title" id="ccTitle">${L.cookies.title}</h2>
+    <!-- El texto del enlace dice a donde va. Sin aria-label: un nombre
+         accesible distinto del texto visible incumpliria WCAG 2.5.3, y con
+         un texto ya descriptivo no hace ninguna falta. -->
+    <p class="cc-body" id="ccBody">${L.cookies.body} <a href="${r}politica-de-cookies/">${L.cookies.more}</a></p>
+    <div class="cc-opts" id="ccOpts" hidden>
+      ${row('', L.cookies.necessary, L.cookies.necessaryHelp, true)}
+      ${row('ccAnalytics', L.cookies.analytics, L.cookies.analyticsHelp, false)}
+      ${row('ccAds', L.cookies.ads, L.cookies.adsHelp, false)}
+    </div>
+    <div class="cc-actions">
+      <button type="button" class="btn btn--secondary btn--sm" data-cc="accept">${L.cookies.accept}</button>
+      <button type="button" class="btn btn--secondary btn--sm" data-cc="reject">${L.cookies.reject}</button>
+      <button type="button" class="btn btn--secondary btn--sm" data-cc="config">${L.cookies.configure}</button>
+      <button type="button" class="btn btn--primary btn--sm" data-cc="save" hidden>${L.cookies.save}</button>
+    </div>
+  </div>
+</div>`;
 }
 
 /* ---------- page shell ------------------------------------------------ */
@@ -259,14 +356,33 @@ function page({ url, body, schema = [], bodyClass = '', current = '', extraHead 
   const alternates = LANGS.map(l =>
     `<link rel="alternate" hreflang="${l.code}" href="${origin}${l.code === 'es' ? '' : '/' + l.code}${url}">`
   ).concat(`<link rel="alternate" hreflang="x-default" href="${origin}${url}">`).join('\n');
+  /* Un solo schema salia PELADO, sin "@context", y sin el Google no lo lee:
+     afectaba a 55 paginas (las 5 portadas, /tarifas, /condiciones, /por-que
+     y las 7 de marca, por 5 idiomas). Las que pasan dos ya iban bien porque
+     el @graph lo traia. */
   const ld = schema.length
-    ? `<script type="application/ld+json">${JSON.stringify(schema.length === 1 ? schema[0] : { '@context': 'https://schema.org', '@graph': schema })}</script>`
+    ? `<script type="application/ld+json">${JSON.stringify(schema.length === 1
+        ? { '@context': 'https://schema.org', ...schema[0] }
+        : { '@context': 'https://schema.org', '@graph': schema })}</script>`
     : '';
+  /* Lo que cada pagina declara ser, para los eventos (TZ seccion 3). No hace
+     falta pasar nada desde las llamadas: seo-meta ya trae type, slug y brand,
+     que hasta hoy eran datos muertos. */
+  const sd = { page_type: PAGE_TYPE[meta.type] || meta.type, lang: LG.code,
+    car_slug: null, car_name: null, car_brand: null, price_1d: null };
+  if (meta.type === 'car') {
+    const c = car(meta.slug);
+    sd.car_slug = c.slug; sd.car_name = c.name; sd.car_brand = c.brandLabel; sd.price_1d = c.prices.d1;
+  }
+  if (meta.type === 'brand') sd.brand = meta.brand;
   return `<!DOCTYPE html>
 <html lang="${LG.code}">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+${googleTag()}
+<script>window.SD_PAGE=${JSON.stringify(sd)}</script>
+${adsConfig()}
 <title>${esc(meta.title)}</title>
 <meta name="description" content="${esc(meta.description)}">
 <link rel="canonical" href="${meta.canonical}">
@@ -303,6 +419,7 @@ ${body}
 </main>
 ${afterMain}
 ${footer(r, ra)}
+${cookieBanner(r)}
 ${extraScripts}
 <script src="${ra}js/site.js?${V}" defer></script>
 </body>
@@ -328,7 +445,7 @@ function carCard(c, r, ra, { lazy = true, level = 2 } = {}) {
     </ul>
     <div class="foot">
       <p class="price"><b>${eur(c.prices.d1)}</b><span>${L.common.perDay}</span></p>
-      <a class="btn btn--wa-quiet btn--sm wa-mini" href="${waCar(c)}" target="_blank" rel="noopener" aria-label="Reservar ${esc(c.name)} por WhatsApp">${ICON.wa}<span>${L.nav.book}</span></a>
+      <a class="btn btn--wa-quiet btn--sm wa-mini" href="${waCar(c)}" target="_blank" rel="noopener" data-placement="card" aria-label="${esc(f(L.fleet.bookAria, { car: c.name }))}">${ICON.wa}<span>${L.nav.book}</span></a>
     </div>
   </div>
 </article>`;
@@ -352,8 +469,8 @@ function brandLogo(b, r) {
 
 function brandChips(r, current) {
   return `<nav class="chips" aria-label="${L.common.filterByBrand}">
-  <a class="chip" href="${r}flota/"${!current ? ' aria-current="page"' : ''}>${L.common.allCars}</a>
-  ${fleet.brands.map(b => `<a class="chip" href="${r}flota/${b.slug}/"${current === b.slug ? ' aria-current="page"' : ''}>${b.label}</a>`).join('\n  ')}
+  <a class="chip" href="${r}flota/" data-brand="todas"${!current ? ' aria-current="page"' : ''}>${L.common.allCars}</a>
+  ${fleet.brands.map(b => `<a class="chip" href="${r}flota/${b.slug}/" data-brand="${b.slug}"${current === b.slug ? ' aria-current="page"' : ''}>${b.label}</a>`).join('\n  ')}
 </nav>`;
 }
 
@@ -553,7 +670,7 @@ for (const lang of LANGS) {
       <span class="oa-row oa-row-geo">${L.home.titleRow4}</span>
     </h1>
     <div class="oa-cta oa-intro-cta">
-      <a href="${waGeneral()}" class="btn gold" target="_blank" rel="noopener">
+      <a href="${waGeneral()}" class="btn gold" target="_blank" rel="noopener" data-placement="hero">
         ${L.home.ctaBook}
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
@@ -561,10 +678,10 @@ for (const lang of LANGS) {
         ${L.common.seeFleet}
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
-      <a href="${C.wrapCenter}" class="btn ghost" target="_blank" rel="noopener">
-        Serres Wrap Center
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
-      </a>
+      <!-- El boton a Serres Wrap Center salio de aqui el 12-09-2026 (delta de
+           tracking, punto 7): un clic pagado no puede irse a otro dominio
+           desde el primer bloque de la pagina de destino. Sigue estando en la
+           banda "swc" mas abajo y en el pie. -->
     </div>
   </section>
 
@@ -616,8 +733,8 @@ for (const lang of LANGS) {
         <h2 class="h-md">${L.home.ctaTitleA} <span class="gold-text">${L.home.ctaTitleB}</span>?</h2>
         <p class="lede" style="margin-inline:auto">${L.home.ctaBody}</p>
         <div class="hero-cta" style="justify-content:center">
-          <a href="${waGeneral()}" class="btn btn--wa" target="_blank" rel="noopener">${ICON.wa}<span>${L.common.writeWa}</span></a>
-          <a href="tel:+${C.whatsapp}" class="btn btn--secondary">${C.phoneDisplay}</a>
+          <a href="${waGeneral()}" class="btn btn--wa" target="_blank" rel="noopener" data-placement="cta">${ICON.wa}<span>${L.common.writeWa}</span></a>
+          <a href="tel:+${C.whatsapp}" class="btn btn--secondary" data-placement="cta">${C.phoneDisplay}</a>
         </div>
         <div class="footer-social" style="justify-content:center">
           <a href="${C.instagram}" target="_blank" rel="noopener">${ICON.ig}<span>${esc(C.instagramHandle)}</span></a>
@@ -749,7 +866,8 @@ for (const c of fleet.cars) {
           </ul>
           ${pricesIncomplete ? `<p class="mute-sm" style="margin-top:12px">${L.carPage.pricesOnRequest}</p>` : ''}
           <p class="mute-sm" style="margin-top:14px">${esc(depositText(c))} · ${f(L.terms.deliveryShort, { amount: eur(T.deliveryFee) })}</p>
-          <a class="btn btn--wa btn--block" style="margin-top:16px" href="${waCar(c)}" target="_blank" rel="noopener">${ICON.wa}<span>${L.nav.bookWa}</span></a>
+          <a class="btn btn--wa btn--block" style="margin-top:16px" href="${waCar(c)}" target="_blank" rel="noopener" data-placement="ficha">${ICON.wa}<span>${L.nav.bookWa}</span></a>
+          <p class="call-alt"><a href="tel:+${C.whatsapp}" data-placement="ficha">${f(L.carPage.callAlt, { phone: esc(C.phoneDisplay) })}</a></p>
         </div>
 
         <ul class="highlights">${carCopy(c).highlights.map(h => `<li>${esc(h)}</li>`).join('')}</ul>
@@ -779,8 +897,8 @@ for (const c of fleet.cars) {
       <h2 class="h-md">${f(L.carPage.bookTitle, { car: esc(c.name) })}</h2>
       <p class="lede">${L.carPage.bookBody}</p>
       <div class="hero-cta">
-        <a class="btn btn--wa" href="${waCar(c)}" target="_blank" rel="noopener">${ICON.wa}<span>${L.nav.bookWa}</span></a>
-        <a class="btn btn--ghost" href="${r}contacto/?coche=${c.slug}">Formulario ${btnArrow}</a>
+        <a class="btn btn--wa" href="${waCar(c)}" target="_blank" rel="noopener" data-placement="cta">${ICON.wa}<span>${L.nav.bookWa}</span></a>
+        <a class="btn btn--ghost" href="${r}contacto/?coche=${c.slug}">${L.common.form} ${btnArrow}</a>
       </div>
     </div>
   </div>
@@ -796,7 +914,7 @@ ${others.length ? `<section class="section--tight" style="padding-top:0">
 </section>` : ''}
 
 <div class="sticky-wa">
-  <a class="btn btn--wa btn--block" href="${waCar(c)}" target="_blank" rel="noopener">${ICON.wa}<span>Reservar ${esc(c.name)}</span></a>
+  <a class="btn btn--wa btn--block" href="${waCar(c)}" target="_blank" rel="noopener" data-placement="sticky">${ICON.wa}<span>${L.fleet.book} ${esc(c.name)}</span></a>
 </div>`;
 
   write(url, page({
@@ -1010,7 +1128,7 @@ ${others.length ? `<section class="section--tight" style="padding-top:0">
 ${scene({ n: 1, kind: 'pick', title: steps[0][1], body: steps[0][2], stage: stagePick,
     extra: `<a class="btn btn--secondary btn--sm" href="${r}flota/">${L.common.seeFullFleet} ${btnArrow}</a>` })}
 ${scene({ n: 2, kind: 'book', title: steps[1][1], body: steps[1][2], stage: stageBook,
-    extra: `<a class="btn btn--wa btn--sm" href="${waGeneral()}" target="_blank" rel="noopener">${ICON.wa}<span>${L.nav.bookWa}</span></a>` })}
+    extra: `<a class="btn btn--wa btn--sm" href="${waGeneral()}" target="_blank" rel="noopener" data-placement="cta">${ICON.wa}<span>${L.nav.bookWa}</span></a>` })}
 ${scene({ n: 3, kind: 'deliver', title: steps[2][1], body: steps[2][2], stage: stageDeliver,
     extra: `<a class="btn btn--secondary btn--sm" href="${r}condiciones-de-alquiler/">${L.footer.terms} ${btnArrow}</a>` })}
 ${scene({ n: 4, kind: 'drive', title: steps[3][1], body: steps[3][2], stage: stageDrive })}
@@ -1020,7 +1138,7 @@ ${scene({ n: 4, kind: 'drive', title: steps[3][1], body: steps[3][2], stage: sta
   <div class="wrap">
     <div class="hero-cta">
       <a class="btn btn--primary" href="${r}flota/">${L.common.seeFleet} ${btnArrow}</a>
-      <a class="btn btn--wa" href="${waGeneral()}" target="_blank" rel="noopener">${ICON.wa}<span>${L.nav.bookWa}</span></a>
+      <a class="btn btn--wa" href="${waGeneral()}" target="_blank" rel="noopener" data-placement="cta">${ICON.wa}<span>${L.nav.bookWa}</span></a>
     </div>
   </div>
 </section>`;
@@ -1062,7 +1180,7 @@ ${scene({ n: 4, kind: 'drive', title: steps[3][1], body: steps[3][2], stage: sta
       <div>
         <p class="lede" style="max-width:46ch">${L.termsPage.footnote}</p>
         <div class="hero-cta" style="margin-top:22px">
-          <a class="btn btn--wa" href="${waGeneral()}" target="_blank" rel="noopener">${ICON.wa}<span>${L.common.askWa}</span></a>
+          <a class="btn btn--wa" href="${waGeneral()}" target="_blank" rel="noopener" data-placement="cta">${ICON.wa}<span>${L.common.askWa}</span></a>
         </div>
       </div>
     </div>
@@ -1108,6 +1226,84 @@ ${scene({ n: 4, kind: 'drive', title: steps[3][1], body: steps[3][2], stage: sta
   write(url, page({ url, body, current: 'por-que-serres/', schema: [breadcrumb([{ name: L.common.start, url: '/' }, { name: L.nav.why, url }])] }));
 }
 
+/* --- paginas legales: privacidad, cookies y aviso legal --------------------- */
+/* Las exige la revision de anuncios de Google y la politica de consentimiento
+   de la UE; sin ellas no hay campaña que arranque. El texto vive en
+   _build/i18n/legal/<idioma>.json, no aqui.
+
+   El bloque de identificacion fiscal se imprime SOLO si data/fleet.json ->
+   legal.entityName tiene valor. Mientras sea null no se inventa nada: la
+   pagina sale con el responsable, el correo y el telefono, que si son
+   ciertos, y el dato pendiente esta en _build/OWNER-TODO.md. Un aviso legal
+   con un NIF inventado no es contenido de relleno, es un problema real.   */
+{
+  const F = fleet.legal;
+  const LEG = LG.legal;
+  const entity = F.entityName || fleet.site.name;
+  /* {dpa} entra como enlace ya montado: es el unico marcador que lleva HTML,
+     por eso los valores se escapan uno a uno y no la plantilla entera. */
+  const vars = {
+    entity: esc(entity), origin, email: esc(C.email), phone: esc(C.phoneDisplay),
+    updated: esc(F.updated), prefsLink: esc(L.footer.cookiePrefs),
+    dpa: `<a href="${F.dpaUrl}" target="_blank" rel="noopener">${esc(F.dpaUrl.replace(/^https?:\/\//, ''))}</a>`,
+  };
+  const fill = s => f(esc(s), vars);
+
+  /* Fallback por si un idioma aun no trae las etiquetas: antes texto en otro
+     idioma que un build roto o un "undefined" en una pagina legal. */
+  const IDL = LEG.idLabels || { company: 'Razón social', taxId: 'NIF', address: 'Domicilio' };
+  const idBlock = F.entityName ? `
+      <dl class="legal-id">
+        <dt>${esc(IDL.company)}</dt><dd>${esc(F.entityName)}</dd>
+        ${F.taxId ? `<dt>${esc(IDL.taxId)}</dt><dd>${esc(F.taxId)}</dd>` : ''}
+        ${F.registeredAddress ? `<dt>${esc(IDL.address)}</dt><dd>${esc(F.registeredAddress)}</dd>` : ''}
+      </dl>` : '';
+
+  const sectionHtml = (s, i) => {
+    let h = `<h2>${fill(s.h2)}</h2>`;
+    if (s.p) h += '\n      ' + s.p.map(t => `<p>${fill(t)}</p>`).join('\n      ');
+    if (s.ul) h += `\n      <ul>${s.ul.map(t => `<li>${fill(t)}</li>`).join('')}</ul>`;
+    if (s.table) h += `\n      <div class="table-wrap"><table class="legal-table">
+        <thead><tr>${s.table.head.map(x => `<th>${esc(x)}</th>`).join('')}</tr></thead>
+        <tbody>${s.table.rows.map(row => `<tr>${row.map((x, n) =>
+          `<td${n === 0 ? ' class="ct"' : ''}>${esc(x)}</td>`).join('')}</tr>`).join('')}</tbody>
+      </table></div>`;
+    /* La identificacion del titular va justo detras de la primera seccion,
+       que es la que habla de quien es el responsable. */
+    if (i === 0) h += idBlock;
+    return h;
+  };
+
+  for (const [key, url] of [
+    ['privacy', '/politica-de-privacidad/'],
+    ['cookies', '/politica-de-cookies/'],
+    ['notice', '/aviso-legal/'],
+  ]) {
+    const doc = LEG[key];
+    const r = rel(url), meta = seo[url];
+    const body = `${crumbs(r, [{ label: doc.h1 }])}
+<section class="section section--tight">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">${fill(doc.updated)}</p>
+      <h1 class="h-lg">${esc(meta.h1)}</h1>
+      <p class="lede">${fill(doc.intro)}</p>
+    </div>
+    <article class="prose">
+      ${doc.sections.map(sectionHtml).join('\n      ')}
+    </article>
+    <div class="hero-cta" style="margin-top:40px">
+      <a class="btn btn--secondary" href="${r}contacto/">${L.nav.contact} ${btnArrow}</a>
+    </div>
+  </div>
+</section>`;
+    write(url, page({
+      url, body,
+      schema: [breadcrumb([{ name: L.common.start, url: '/' }, { name: doc.h1, url }])],
+    }));
+  }
+}
+
 /* --- /contacto -------------------------------------------------------------- */
 {
   const url = '/contacto/', r = rel(url), ra = rel(lp(url)), meta = seo[url];
@@ -1119,12 +1315,14 @@ ${scene({ n: 4, kind: 'drive', title: steps[3][1], body: steps[3][2], stage: sta
       <h1 class="h-lg">${esc(meta.h1)}</h1>
       <p class="lede">${esc(meta.description)}</p>
       <div class="hero-cta">
-        <a class="btn btn--wa" href="${waGeneral()}" target="_blank" rel="noopener">${ICON.wa}<span>${C.phoneDisplay}</span></a>
+        <a class="btn btn--wa" href="${waGeneral()}" target="_blank" rel="noopener" data-placement="contacto">${ICON.wa}<span>WhatsApp</span></a>
+        <a class="btn btn--secondary" href="tel:+${C.whatsapp}" data-placement="contacto">${ICON.phone}<span>${C.phoneDisplay}</span></a>
         <a class="btn btn--secondary" href="mailto:${C.email}">${ICON.gmail}<span>${L.contact.writeEmail}</span></a>
         <a class="btn btn--secondary" href="${C.instagram}" target="_blank" rel="noopener" aria-label="Instagram ${esc(C.instagramHandle)}">${ICON.ig}<span>${L.contact.instagram}</span></a>
       </div>
       <ul class="terms-list" style="margin-top:24px">
         <li><span class="k">${L.terms.delivery}</span><span class="v">Área metropolitana de Barcelona · ${eur(T.deliveryFee)}</span></li>
+        <li><span class="k">${L.contact.call}</span><span class="v"><a class="ico-link" href="tel:+${C.whatsapp}" data-placement="contacto">${ICON.phone}<span>${C.phoneDisplay}</span></a></span></li>
         <li><span class="k">${L.contact.email}</span><span class="v"><a class="ico-link" href="mailto:${C.email}">${ICON.gmail}<span>${C.email}</span></a></span></li>
         <li><span class="k">${L.contact.instagram}</span><span class="v"><a class="ico-link" href="${C.instagram}" target="_blank" rel="noopener">${ICON.ig}<span>${esc(C.instagramHandle)}</span></a></span></li>
       </ul>
@@ -1180,18 +1378,25 @@ ${scene({ n: 4, kind: 'drive', title: steps[3][1], body: steps[3][2], stage: sta
 
 }   /* fin del bucle de idiomas */
 
-/* La 404 la sirve Apache para cualquier ruta: se genera una sola, en
-   espanol, y su selector de idioma lleva a la portada de cada uno. */
-LG = LANGS[0]; L = LG.dict; seo = seoAll.es.pages;
-
-/* --- 404 (not in the sitemap, noindex) ------------------------------------- */
-{
-  const r = '';
+/* --- 404, una por idioma (fuera del sitemap, noindex) ---------------------- */
+/* Hasta el 12-09-2026 habia UNA sola 404, en espanol, y /en/no-existe/ la
+   servia con <html lang="es"> y el texto en castellano. Ahora se genera una
+   por idioma y .htaccess elige la del prefijo de la URL.
+   No pasa por page() ni por write(): tiene su propio <head> (no hay entrada
+   de seo-meta para ella) y no debe entrar ni en el sitemap ni en el recuento.
+   Todo lo que se añada al <head> de page() hay que duplicarlo AQUI.        */
+for (const lang of LANGS) {
+  LG = lang; L = lang.dict; seo = seoAll[lang.code].pages;
+  const r = '/' + LG.prefix;                       // '/' o '/en/'
+  const sd = { page_type: '404', lang: LG.code, car_slug: null, car_name: null, car_brand: null, price_1d: null };
   const html = `<!DOCTYPE html>
-<html lang="es">
+<html lang="${LG.code}">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+${googleTag()}
+<script>window.SD_PAGE=${JSON.stringify(sd)}</script>
+${adsConfig()}
 <title>${L.e404.title}</title>
 <meta name="robots" content="noindex,follow">
 <meta name="theme-color" content="#0a0a0b">
@@ -1204,29 +1409,31 @@ LG = LANGS[0]; L = LG.dict; seo = seoAll.es.pages;
 <body>
 ${SVG_SPRITE}
 <a class="skip" href="#main">${L.nav.skip}</a>
-${header('/', '/', '').replace(/href="\/\//g, 'href="/')}
+${header(r, '/', '').replace(/href="\/\//g, 'href="/')}
 <main id="main">
   <section class="section">
     <div class="wrap center-pad">
       <div class="section-head" style="align-items:center;text-align:center">
         <p class="eyebrow">${L.e404.eyebrow}</p>
         <h1 class="h-lg">${L.e404.h1}</h1>
-        <p class="lede" style="margin-inline:auto">Puede que el coche que buscabas ya no esté en la flota. Estos son los ${fleet.cars.length} que sí puedes alquilar ahora mismo.</p>
+        <p class="lede" style="margin-inline:auto">${esc(f(L.e404.body, { total: fleet.cars.length }))}</p>
         <div class="hero-cta" style="justify-content:center">
-          <a class="btn btn--primary" href="/flota/">${L.common.seeFleet} ${btnArrow}</a>
-          <a class="btn btn--secondary" href="/">Ir al inicio ${btnArrow}</a>
+          <a class="btn btn--primary" href="${r}flota/">${L.common.seeFleet} ${btnArrow}</a>
+          <a class="btn btn--secondary" href="${r}">${L.e404.goHome} ${btnArrow}</a>
         </div>
       </div>
     </div>
   </section>
 </main>
-${footer('/', '/').replace(/href="\/\//g, 'href="/')}
+${footer(r, '/').replace(/href="\/\//g, 'href="/')}
+${cookieBanner(r)}
 <script src="/js/site.js?${V}" defer></script>
 </body>
 </html>
 `;
-  fs.writeFileSync(path.join(ROOT, '404.html'), html);
+  fs.writeFileSync(path.join(ROOT, LG.prefix, '404.html'), html);
 }
+LG = LANGS[0]; L = LG.dict; seo = seoAll.es.pages;   // el sitemap se arma en espanol
 
 /* --- sitemap --------------------------------------------------------------- */
 {

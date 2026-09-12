@@ -31,6 +31,75 @@ Ordenado por lo que más daño hace si está mal.
 
 ---
 
+## 0-BIS. Analítica, consentimiento y páginas legales (12-09-2026) — BLOQUEA LAS CAMPAÑAS
+
+El sitio ya trae Consent Mode v2, el aviso de cookies, las tres páginas
+legales en los cinco idiomas y los eventos con conversiones de Google Ads.
+Faltan **tres datos que solo puede dar el propietario**. Sin ellos la web
+funciona y mide conversiones de Ads, pero GA4 está apagado y el aviso legal
+sale sin identificación fiscal.
+
+### 0-BIS.1 Falta el ID de medición de GA4 — GA4 NO ESTÁ MIDIENDO
+
+El de Google Ads (`AW-18441458977`) es real y ya mide: las tres conversiones
+(WhatsApp, formulario, teléfono) se disparan con su etiqueta correcta.
+
+El de GA4 sigue sin existir: hay que **crear la propiedad «Serres Drive»** y
+pasar el `G-XXXXXXXXXX`. **No vale `G-1K6FYZ99GN`**, que es de otra propiedad.
+
+Mientras tanto, `data/fleet.json` → `analytics.ga4` está a `null` **a
+propósito**: así el Google tag carga con el ID de Ads y no se pide en cada
+carga de cada página un contenedor que no existe. Cuando llegue el ID:
+
+```
+1. _build/fleet-base.json → analytics.ga4: "G-XXXXXXXXXX"
+2. node _build/build-data.js && node _build/build-site.js
+3. node _build/verify.js   (debe seguir en FAIL 0)
+```
+
+### 0-BIS.2 Faltan los datos fiscales del aviso legal
+
+La LSSI exige identificar al titular del sitio. Hoy `/aviso-legal/` y
+`/politica-de-privacidad/` dicen que el responsable es «Serres Drive» y dan
+el correo y el teléfono, **que son ciertos**. Lo que falta:
+
+- **Razón social** (el nombre con el que factura)
+- **NIF / CIF**
+- **Domicilio fiscal**
+
+No se han inventado, y ese bloque **no se imprime** mientras estén vacíos: un
+aviso legal con un NIF falso no es contenido de relleno, es un problema real.
+Van en `_build/fleet-base.json` → `legal` (`entityName`, `taxId`,
+`registeredAddress`) y se regeneran con los mismos dos comandos de arriba.
+
+Recordatorio del punto 1: el propietario **no quiere publicar dirección**. Si
+el domicilio fiscal es su casa, conviene decírselo antes: en el aviso legal es
+obligatorio, y esa es una decisión suya, no nuestra.
+
+### 0-BIS.3 Los textos legales los tiene que revisar un asesor
+
+Están redactados sobre plantilla estándar RGPD/LSSI y **ajustados a lo que
+esta web hace de verdad** (el formulario no envía nada a ningún servidor, solo
+abre WhatsApp; no hay cookies propias; los coches de Stratos son de un
+proveedor colaborador y eso se dice). No son asesoramiento jurídico. Dos
+puntos concretos que conviene que mire un asesor:
+
+- La redacción sobre el Marco de Privacidad de Datos UE-EE. UU. para Google y Meta.
+- Si hay que nombrar a los proveedores de vehículos por su razón social.
+
+### 0-BIS.4 ¿El +34 649 66 33 80 atiende llamadas de voz?
+
+Confirmado por Alex el 12-09-2026: **sí**. Por eso el número aparece ahora como
+enlace `tel:` en el pie de las 220 páginas, en `/contacto/` y bajo el botón de
+reserva de las 26 fichas, y el evento `phone_click` ya mide.
+
+Queda una cosa **fuera de este repositorio**: en el proyecto de campañas,
+`serresdrive_campaigns.py` línea 40 tiene `PHONE = None`, así que no se crea
+el *call asset* de Google Ads. Ahora que el número está como `tel:` en todas
+las páginas de destino, se puede poner `PHONE = "+34 649 66 33 80"`.
+
+---
+
 ## 0. Coches de Stratos (alta 11-09-2026) — LO MÁS URGENTE
 
 Trece coches del proveedor Stratos ya están publicados. De ellos, **lo que Alex

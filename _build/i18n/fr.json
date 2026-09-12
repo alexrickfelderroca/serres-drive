@@ -24,7 +24,13 @@
   "footer": {
     "nav": "Pied de page",
     "terms": "Conditions de location",
-    "wrapCenter": "Serres Wrap Center"
+    "wrapCenter": "Serres Wrap Center",
+    "privacy": "Politique de confidentialité",
+    "cookies": "Politique de cookies",
+    "legalNotice": "Mentions légales",
+    "cookiePrefs": "Modifier les préférences de cookies",
+    "legalNav": "Liens légaux",
+    "call": "Appeler"
   },
   "common": {
     "breadcrumb": "Fil d'Ariane",
@@ -132,7 +138,8 @@
     "d3": "3 jours",
     "w1": "1 semaine",
     "m1": "1 mois",
-    "pricesOnRequest": "Tarifs 2 et 3 jours, semaine et mois : nous vous les confirmons sur WhatsApp."
+    "pricesOnRequest": "Tarifs 2 et 3 jours, semaine et mois : nous vous les confirmons sur WhatsApp.",
+    "callAlt": "ou appelez le {phone}"
   },
   "rates": {
     "h1": "Tarifs",
@@ -263,7 +270,8 @@
     "waPhone": "Téléphone",
     "waCar": "Voiture",
     "waDates": "Dates",
-    "waMessage": "Message"
+    "waMessage": "Message",
+    "call": "Appeler"
   },
   "wa": {
     "general": "Bonjour Serres Drive, je voudrais louer une voiture.",
@@ -275,6 +283,22 @@
     "h1": "Cette page n'existe plus",
     "body": "La voiture que vous cherchiez n'est peut-être plus dans la flotte. Voici les {total} que vous pouvez louer dès maintenant.",
     "goHome": "Aller à l'accueil"
+  },
+  "cookies": {
+    "aria": "Avis relatif aux cookies",
+    "title": "Cookies",
+    "body": "Nous utilisons des cookies internes et tiers pour mesurer les visites et savoir quelles annonces amènent des clients. C'est vous qui décidez.",
+    "accept": "Accepter",
+    "reject": "Refuser",
+    "configure": "Paramétrer",
+    "save": "Enregistrer",
+    "necessary": "Nécessaires",
+    "necessaryHelp": "Elles conservent votre décision sur les cookies. Toujours actives.",
+    "analytics": "Mesure d'audience",
+    "analyticsHelp": "Nous indique quelles pages fonctionnent et lesquelles non.",
+    "ads": "Publicité",
+    "adsHelp": "Permet de savoir quelle annonce a amené chaque réservation.",
+    "more": "En savoir plus sur les cookies"
   },
   "seo": {
     "homeTitle": "Location de voitures de luxe à Barcelone · Serres Drive",
@@ -299,7 +323,13 @@
     "carTitle": "Location {car} à Barcelone · Serres Drive",
     "carDesc": "{car} en location à Barcelone dès {from} par jour. {cv} ch, 0-100 en {zero}. Réservation sur WhatsApp et livraison dans l'aire métropolitaine.",
     "carH1": "Location {car} à Barcelone",
-    "listJoin": " et "
+    "listJoin": " et ",
+    "privacyTitle": "Politique de confidentialité · Serres Drive",
+    "privacyDesc": "Ce que nous faisons de vos données quand vous nous écrivez ou visitez serresdrive.com, et comment exercer vos droits.",
+    "cookiesTitle": "Politique de cookies · Serres Drive",
+    "cookiesDesc": "Quels cookies utilise ce site, à quoi ils servent et comment changer votre décision à tout moment.",
+    "legalTitle": "Mentions légales · Serres Drive",
+    "legalDesc": "Données d'identification du titulaire de serresdrive.com et conditions d'utilisation du site."
   },
   "cars": {
     "mercedes-amg-g63": {

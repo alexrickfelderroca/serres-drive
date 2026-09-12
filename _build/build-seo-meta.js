@@ -14,6 +14,10 @@ const { origin } = fleet.site;
 const LANGS = ['es', 'en', 'ru', 'ca', 'fr'].map(code => ({
   code,
   dict: JSON.parse(fs.readFileSync(path.join(__dirname, 'i18n', `${code}.json`), 'utf8')),
+  /* Los cuerpos legales viven aparte de los diccionarios: son textos largos
+     y meterlos dentro descuadraria la alineacion linea a linea de los cinco
+     archivos. De aqui sale el H1 de cada pagina legal. */
+  legal: JSON.parse(fs.readFileSync(path.join(__dirname, 'i18n', 'legal', `${code}.json`), 'utf8')),
   prefix: code === 'es' ? '' : '/' + code,
 }));
 
@@ -58,6 +62,17 @@ for (const lang of LANGS) {
     image: origin + '/' + car('range-rover-velar').image });
   add('/contacto/', { title: S.contactTitle, description: S.contactDesc, h1: lang.dict.contact.h1, type: 'contact',
     image: origin + '/' + car('mercedes-amg-a45').image });
+
+  /* Las tres legales (12-09-2026, delta de tracking). Las rutas NO se
+     traducen, como el resto del sitio: el prefijo cambia, el slug no. El H1
+     sale del bundle legal, que es donde vive el texto. */
+  const LEG = lang.legal;
+  add('/politica-de-privacidad/', { title: S.privacyTitle, description: S.privacyDesc, h1: LEG.privacy.h1, type: 'privacy',
+    image: origin + '/' + car('porsche-911-carrera-s').image });
+  add('/politica-de-cookies/', { title: S.cookiesTitle, description: S.cookiesDesc, h1: LEG.cookies.h1, type: 'cookies',
+    image: origin + '/' + car('porsche-911-carrera-s').image });
+  add('/aviso-legal/', { title: S.legalTitle, description: S.legalDesc, h1: LEG.notice.h1, type: 'notice',
+    image: origin + '/' + car('porsche-911-carrera-s').image });
 
   for (const brand of fleet.brands) {
     const cars = carsOf(brand.slug);

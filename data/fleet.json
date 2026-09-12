@@ -23,6 +23,22 @@
       "lng": 2.0865
     }
   },
+  "analytics": {
+    "ads": "AW-18441458977",
+    "ga4": null,
+    "labels": {
+      "whatsapp_click": "RCXNCLPKx_IcEKGqydlE",
+      "form_submit": "ZlzGCNzbx_IcEKGqydlE",
+      "phone_click": "43ZuCMPdx_IcEKGqydlE"
+    }
+  },
+  "legal": {
+    "entityName": null,
+    "taxId": null,
+    "registeredAddress": null,
+    "updated": "2026-09-12",
+    "dpaUrl": "https://www.aepd.es"
+  },
   "terms": {
     "minAge": 18,
     "licenceNote": "Solo permiso de conducir en vigor. Sin antigüedad mínima.",

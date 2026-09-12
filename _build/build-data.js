@@ -66,7 +66,11 @@ brands.forEach(b => { if (!b.cars.length) throw new Error(`brand ${b.slug} has n
 const fianzas = cars.map(c => c.deposit).filter(d => typeof d === 'number');
 const terms = { ...base.terms, depositFrom: Math.min(...fianzas) };
 
-const out = { generated: 'run _build/build-data.js to regenerate', site: base.site, contact: base.contact, terms, brands, cars };
+/* analytics y legal pasan tal cual: son datos del encargo, no derivados.
+   El generador decide con analytics.ga4 === null si emite o no la linea de
+   GA4, y con legal.entityName === null si imprime o no el bloque fiscal. */
+const out = { generated: 'run _build/build-data.js to regenerate', site: base.site, contact: base.contact,
+  analytics: base.analytics, legal: base.legal, terms, brands, cars };
 fs.writeFileSync(path.join(ROOT, 'data/fleet.json'), JSON.stringify(out, null, 2));
 console.log(`data/fleet.json — ${cars.length} cars, ${brands.length} brands, ${cars.reduce((n, c) => n + c.gallery.length, 0)} images`);
 brands.forEach(b => console.log(`  ${b.slug.padEnd(14)} ${b.cars.length}  ${b.cars.join(', ')}`));

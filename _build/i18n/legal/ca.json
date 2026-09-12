@@ -1,0 +1,213 @@
+{
+  "_meta": {
+    "lang": "ca",
+    "note": "Traducció al català dels textos legals. La FONT és es.json: aquest fitxer en té exactament les mateixes claus i el mateix nombre de paràgrafs. Marcadors: {entity} responsable, {email}, {phone}, {origin}, {updated}, {dpa}, {prefsLink}. El generador (build-site.js) insereix el bloc d'identificació fiscal NOMÉS si data/fleet.json -> legal.entityName té valor.",
+    "disclaimer": "Textos redactats sobre una plantilla estàndard RGPD/LSSI i ajustats al que aquesta web fa de debò. No són assessorament jurídic: convé que els revisi un assessor abans de donar per tancada la part legal."
+  },
+  "idLabels": {
+    "company": "Raó social",
+    "taxId": "NIF",
+    "address": "Domicili"
+  },
+  "privacy": {
+    "h1": "Política de privacitat",
+    "updated": "Darrera actualització: {updated}",
+    "intro": "Aquesta política explica què fem amb les teves dades quan ens escrius o quan visites {origin}. Està escrita perquè s'entengui: si hi ha res que no et queda clar, pregunta'ns per WhatsApp o per correu i t'ho expliquem.",
+    "sections": [
+      {
+        "h2": "Qui tracta les teves dades",
+        "p": [
+          "El responsable del tractament és {entity}, que explota el lloc web {origin} i presta el servei de lloguer de vehicles que s'hi descriu.",
+          "Pots escriure'ns a {email} o trucar-nos al {phone} per a qualsevol cosa relacionada amb les teves dades, inclòs exercir els drets que s'expliquen més avall."
+        ]
+      },
+      {
+        "h2": "Quines dades tractem",
+        "p": [
+          "Les que ens facilites tu quan ens contactes: nom, telèfon, el cotxe que t'interessa, les dates i el que ens expliquis al missatge.",
+          "Convé que sàpigues com funciona el formulari d'aquesta web, perquè no és l'habitual: no envia res a cap servidor nostre. En prémer «Enviar per WhatsApp» s'obre el WhatsApp amb el missatge ja escrit i ets tu qui decideix enviar-lo. Aquesta web no desa el que escrius al formulari, ni en un servidor ni al teu navegador.",
+          "Dades de navegació: si acceptes les galetes d'analítica o de publicitat, Google rep informació sobre la teva visita (pàgines vistes, origen del trànsit, tipus de dispositiu, adreça IP). Si no les acceptes, no s'activen.",
+          "Si finalment llogues un vehicle, per signar el contracte també et demanarem les dades que exigeixen la llei i l'asseguradora: identificació, permís de conducció i mitjà de pagament. Aquestes dades es recullen fora d'aquesta web."
+        ]
+      },
+      {
+        "h2": "Per a què les fem servir i amb quina base legal",
+        "ul": [
+          "Respondre la teva consulta i preparar-te un pressupost — per aplicar, a petició teva, mesures precontractuals (art. 6.1.b RGPD).",
+          "Gestionar el lloguer, el lliurament i la devolució del vehicle — execució del contracte (art. 6.1.b RGPD).",
+          "Complir les nostres obligacions fiscals, comptables i d'identificació del conductor — obligació legal (art. 6.1.c RGPD).",
+          "Mesurar com funciona la web i quins anuncis porten clients — únicament amb el teu consentiment (art. 6.1.a RGPD), que pots retirar quan vulguis.",
+          "Atendre reclamacions, sinistres, multes o incidències del lloguer — interès legítim a defensar els nostres drets (art. 6.1.f RGPD)."
+        ]
+      },
+      {
+        "h2": "Amb qui les compartim",
+        "p": [
+          "No venem les teves dades ni les cedim a ningú perquè et faci publicitat pel seu compte. Només arriben a qui cal per prestar-te el servei:"
+        ],
+        "ul": [
+          "WhatsApp Ireland Limited (grup Meta), si ens escrius per WhatsApp: la conversa es regeix per les condicions i la política de privacitat de WhatsApp.",
+          "Google Ireland Limited, si acceptes les galetes d'analítica o de publicitat, per mesurar les visites i les campanyes.",
+          "El nostre proveïdor d'allotjament web, que emmagatzema el lloc i registra els accessos al servidor.",
+          "El propietari del vehicle, quan el cotxe que tries no pertany a la nostra flota pròpia sinó a un proveïdor col·laborador, i únicament amb les dades necessàries per preparar aquell lloguer.",
+          "Asseguradores, administracions públiques i forces de seguretat quan una norma ens hi obliga, per exemple davant d'una multa o un sinistre."
+        ]
+      },
+      {
+        "h2": "Transferències fora de la Unió Europea",
+        "p": [
+          "Google i Meta poden tractar dades en servidors situats fora de l'Espai Econòmic Europeu. Tots dos s'acullen al Marc de Privacitat de Dades UE-EUA i a les clàusules contractuals tipus aprovades per la Comissió Europea, que són els mecanismes que el RGPD preveu per a aquests casos."
+        ]
+      },
+      {
+        "h2": "Quant de temps les guardem",
+        "p": [
+          "Les converses de WhatsApp i els correus, mentre duri el tracte i, després, el temps necessari per atendre qualsevol reclamació.",
+          "Les dades del contracte de lloguer i la facturació, durant els terminis que exigeix la normativa fiscal i mercantil.",
+          "Les dades d'analítica i publicitat, durant els terminis de conservació que fixa Google per a cada servei.",
+          "La teva decisió sobre les galetes es desa al teu propi navegador fins que la canviïs o esborris les dades del lloc."
+        ]
+      },
+      {
+        "h2": "Els teus drets",
+        "p": [
+          "Pots demanar-nos accedir a les teves dades, rectificar-les, suprimir-les, limitar-ne el tractament o oposar-t'hi, i sol·licitar-ne la portabilitat. També pots retirar en qualsevol moment el consentiment que hagis donat, sense que això afecti el que s'hagi fet abans de retirar-lo.",
+          "Per exercir-los, escriu-nos a {email} indicant què vols i adjuntant alguna cosa que acrediti la teva identitat. Et respondrem en el termini màxim d'un mes.",
+          "Si creus que no hem atès bé la teva petició, pots reclamar davant l'Agència Espanyola de Protecció de Dades ({dpa})."
+        ]
+      },
+      {
+        "h2": "Seguretat i menors",
+        "p": [
+          "Apliquem les mesures tècniques i organitzatives raonables per protegir les teves dades. El lloc se serveix sempre per connexió xifrada (HTTPS).",
+          "Aquest lloc no s'adreça a menors d'edat i no recollim dades de menors de manera conscient. Per llogar cal un permís de conducció en vigor."
+        ]
+      },
+      {
+        "h2": "Canvis en aquesta política",
+        "p": [
+          "Si canviem la manera de tractar les dades, actualitzarem aquesta pàgina i la data que hi ha a dalt. Et recomanem revisar-la de tant en tant."
+        ]
+      }
+    ]
+  },
+  "cookies": {
+    "h1": "Política de galetes",
+    "updated": "Darrera actualització: {updated}",
+    "intro": "Les galetes són fitxers petits que una web desa al teu dispositiu. Aquí t'expliquem exactament quines fem servir, per a què, i com canviar d'opinió en qualsevol moment.",
+    "sections": [
+      {
+        "h2": "Aquesta web no et posa galetes pel seu compte",
+        "p": [
+          "En entrar-hi no s'instal·la cap galeta d'analítica ni de publicitat. Només s'activen si les acceptes a l'avís que apareix la primera vegada que ens visites.",
+          "L'única cosa que desem sempre és la teva pròpia decisió sobre les galetes, a l'emmagatzematge local del teu navegador, amb el nom «sd_consent». No és una galeta, no s'envia a cap servidor i serveix exactament per no tornar-te a preguntar el mateix cada vegada que entres. Si l'esborres, t'ho tornarem a preguntar."
+        ]
+      },
+      {
+        "h2": "Les que s'activen si acceptes",
+        "table": {
+          "head": [
+            "Galeta",
+            "Qui la posa",
+            "Per a què",
+            "Durada"
+          ],
+          "rows": [
+            [
+              "_ga, _ga_*",
+              "Google Analytics",
+              "Distingir visitants i sessions per saber quines pàgines funcionen i quines no.",
+              "Fins a 2 anys"
+            ],
+            [
+              "_gcl_au",
+              "Google Ads",
+              "Atribuir una reserva a l'anunci que l'ha portada.",
+              "90 dies"
+            ],
+            [
+              "NID, IDE",
+              "Google",
+              "Publicitat personalitzada i mesurament de campanyes, només si acceptes la categoria de publicitat.",
+              "Fins a 13 mesos"
+            ]
+          ]
+        },
+        "p": [
+          "Si les rebutges, aquestes galetes no s'instal·len. Google continua rebent senyals de mesurament sense galetes i sense identificar-te, mitjançant el mode de consentiment, cosa que ens permet tenir estadístiques agregades sense rastrejar-te."
+        ]
+      },
+      {
+        "h2": "El que es carrega encara que ho rebutgis",
+        "p": [
+          "Perquè la web es vegi bé carreguem tipografies des dels servidors de Google Fonts i, a la portada, algunes biblioteques d'animació des de xarxes de distribució de continguts públiques. Aquests serveis reben la teva adreça IP perquè és imprescindible per servir-te el fitxer, però no instal·len galetes de seguiment ni construeixen un perfil teu a través d'aquesta web."
+        ]
+      },
+      {
+        "h2": "Canviar la teva decisió",
+        "p": [
+          "Pots canviar-la quan vulguis des de l'enllaç «{prefsLink}» que hi ha al peu de totes les pàgines. Se't tornarà a mostrar l'avís amb les teves opcions.",
+          "També pots esborrar o bloquejar les galetes des de la configuració del teu navegador. A l'ajuda de Chrome, Safari, Firefox o Edge hi trobaràs com fer-ho. Tingues en compte que bloquejar-les totes pot afectar el funcionament d'altres webs."
+        ]
+      }
+    ]
+  },
+  "notice": {
+    "h1": "Avís legal",
+    "updated": "Darrera actualització: {updated}",
+    "intro": "Condicions d'ús del lloc web {origin} i dades identificatives del seu titular, d'acord amb la Llei 34/2002, de serveis de la societat de la informació i de comerç electrònic.",
+    "sections": [
+      {
+        "h2": "Titular del lloc web",
+        "p": [
+          "Aquest lloc web pertany a {entity}, que presta el servei de lloguer de vehicles que s'hi descriu.",
+          "Correu electrònic de contacte: {email}. Telèfon: {phone}."
+        ]
+      },
+      {
+        "h2": "Objecte",
+        "p": [
+          "Aquest lloc informa sobre els vehicles disponibles per a lloguer, les seves característiques i les seves tarifes, i permet posar-se en contacte per sol·licitar una reserva. No és una passarel·la de contractació: la reserva no es formalitza a la web, sinó en la conversa posterior i en el contracte de lloguer que se signa en el lliurament."
+        ]
+      },
+      {
+        "h2": "Ús del lloc",
+        "p": [
+          "En fer servir aquest lloc et compromets a fer-ho d'acord amb la llei i a no emprar-lo per a activitats il·lícites, per danyar-ne els sistemes o per introduir-hi contingut que pugui perjudicar tercers."
+        ]
+      },
+      {
+        "h2": "Propietat intel·lectual i industrial",
+        "p": [
+          "Els textos, el disseny, el codi i les fotografies d'aquest lloc pertanyen al seu titular o es fan servir amb autorització, i no es poden reproduir sense permís per escrit.",
+          "Les marques i els noms dels fabricants que apareixen a la web pertanyen als seus titulars respectius i s'utilitzen únicament per identificar els vehicles que oferim en lloguer. Aquest lloc no és un concessionari oficial ni està associat a aquests fabricants."
+        ]
+      },
+      {
+        "h2": "Responsabilitat",
+        "p": [
+          "Procurem que la informació sigui correcta i estigui al dia, però els preus, la disponibilitat i les característiques dels vehicles són orientatius i queden subjectes a confirmació abans de tancar cada lloguer. Les condicions que regeixen el lloguer són les del contracte signat i les publicades a la pàgina de condicions de lloguer.",
+          "No responem de les interrupcions del servei alienes a la nostra voluntat ni dels danys derivats d'un ús indegut del lloc."
+        ]
+      },
+      {
+        "h2": "Enllaços a altres llocs",
+        "p": [
+          "El lloc enllaça a serveis de tercers, com ara WhatsApp, Instagram o Serres Wrap Center. No en controlem els continguts ni les polítiques i no n'assumim cap responsabilitat."
+        ]
+      },
+      {
+        "h2": "Protecció de dades i galetes",
+        "p": [
+          "El tractament de dades personals s'explica a la política de privacitat, i l'ús de galetes a la política de galetes, totes dues enllaçades al peu de totes les pàgines."
+        ]
+      },
+      {
+        "h2": "Legislació aplicable",
+        "p": [
+          "Aquestes condicions es regeixen per la legislació espanyola. Per a qualsevol controvèrsia, les parts se sotmeten als jutjats i tribunals que resultin competents d'acord amb dret."
+        ]
+      }
+    ]
+  }
+}

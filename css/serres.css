@@ -478,7 +478,18 @@ table{border-collapse:collapse;width:100%}
 
 /* ---------- car detail -------------------------------------------- */
 .car-head{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:clamp(28px,4vw,56px);align-items:start}
-@media (max-width:960px){.car-head{grid-template-columns:1fr}}
+/* En movil el precio del dia y el boton de reservar van ANTES de la galeria.
+   Medido antes del cambio en un iPhone de 844 px de alto: el H1 caia a 589 px
+   y la caja de precio a 758, o sea al borde inferior y con la barra verde
+   encima — el dato por el que ha entrado la visita quedaba fuera de la
+   primera pantalla, detras de la foto grande y de siete miniaturas.
+   Se cambia a flex en el MISMO punto en el que la rejilla ya apilaba (960),
+   asi que entre 761 y 960 px, donde no hay barra fija, tambien se arregla. */
+@media (max-width:960px){
+  .car-head{display:flex;flex-direction:column;grid-template-columns:1fr}
+  .car-head > .car-aside{order:1}
+  .car-head > .gallery{order:2}
+}
 
 .gallery{display:flex;flex-direction:column;gap:12px}
 .gallery .main{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line-2);background:var(--panel);box-shadow:var(--shadow-2)}
@@ -737,6 +748,113 @@ svg.ico-brand{width:18px;height:18px;flex:none;color:initial}
 
 /* ---------- 404 ------------------------------------------------------ */
 .center-pad{min-height:calc(100dvh - var(--nav-h) - 200px);display:grid;place-items:center;text-align:center}
+
+/* ---------- paginas legales ------------------------------------------ */
+/* Este sitio tiene p{margin:0} y ul{list-style:none} como reglas globales,
+   porque todo lo demas son componentes. Un texto legal sin una clase de
+   prosa sale como un ladrillo pegado y con las listas sin viñetas: no se ve
+   en el codigo, solo en pantalla. */
+.prose{max-width:74ch;color:var(--text-dim);font-size:16px;line-height:1.7}
+.prose h2{
+  font-size:clamp(20px,2.3vw,25px);color:var(--white);letter-spacing:.005em;
+  margin:36px 0 14px;padding-top:24px;border-top:1px solid var(--line);
+}
+.prose h2:first-child{margin-top:0;padding-top:0;border-top:0}
+.prose p{margin:0 0 13px}
+.prose ul{margin:4px 0 18px;display:grid;gap:11px}
+.prose li{position:relative;padding-left:20px}
+.prose li::before{
+  content:"";position:absolute;left:2px;top:.72em;
+  width:7px;height:1px;background:var(--gold-deep);
+}
+.prose a{color:var(--text);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--line-strong)}
+.prose a:hover{color:var(--white);text-decoration-color:var(--gold)}
+
+/* Identificacion del titular. Solo se imprime cuando fleet.json trae los
+   datos fiscales; hoy no existe en ninguna pagina. */
+.legal-id{
+  margin:18px 0 6px;display:grid;grid-template-columns:auto 1fr;gap:9px 20px;
+  padding:16px 18px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-sm);
+}
+.legal-id dt{color:var(--text-mute);font-size:12px;letter-spacing:.11em;text-transform:uppercase;padding-top:2px}
+.legal-id dd{margin:0;color:var(--text)}
+
+.table-wrap{overflow-x:auto;margin:8px 0 20px;border:1px solid var(--line);border-radius:var(--radius-sm)}
+.legal-table{min-width:540px;font-size:14px}
+.legal-table th,.legal-table td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+.legal-table th{color:var(--text-mute);font-size:11.5px;letter-spacing:.11em;text-transform:uppercase;background:var(--panel)}
+.legal-table tbody tr:last-child td{border-bottom:0}
+.legal-table td.ct{color:var(--white);font-family:var(--font-head);letter-spacing:.02em;white-space:nowrap}
+
+/* Enlaces legales del pie + el boton que reabre el aviso de cookies. */
+/* flex-start, no flex-end: en escritorio el space-between de .bottom ya
+   empuja el bloque al borde derecho, y en movil, cuando el pie apila y los
+   enlaces ocupan tres filas, alinearlos a la derecha los dejaba descolgados
+   del copyright y del resto del pie, que van a la izquierda. */
+.legal-links{display:flex;flex-wrap:wrap;gap:9px 20px;align-items:center;justify-content:flex-start}
+.linklike{
+  background:none;border:0;padding:0;margin:0;cursor:pointer;
+  font-size:inherit;font-family:inherit;color:var(--text-dim);text-align:left;
+}
+.legal-links a:hover,.linklike:hover{color:var(--white)}
+
+/* "o llama al +34 ..." bajo el boton de reserva de cada ficha. */
+.call-alt{margin-top:11px;text-align:center;font-size:14px;color:var(--text-mute)}
+.call-alt a{color:var(--text-dim);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--line-strong)}
+.call-alt a:hover{color:var(--white);text-decoration-color:var(--gold)}
+
+/* ---------- aviso de cookies ----------------------------------------- */
+/* Tarjeta abajo a la izquierda: bloquea una esquina, no la pagina. Los tres
+   botones son .btn--secondary, el MISMO peso visual — aceptar no puede ser
+   mas facil que rechazar, ni por diseño. */
+.cc{
+  position:fixed;z-index:60;left:var(--gutter);bottom:22px;
+  width:min(430px,calc(100vw - var(--gutter) * 2));
+  background:var(--panel);border:1px solid var(--line-2);border-radius:var(--radius);
+  box-shadow:var(--shadow-3);
+}
+.cc[hidden]{display:none}
+.cc-in{padding:20px 20px 18px}
+.cc-title{font-size:19px;color:var(--white);letter-spacing:.02em}
+.cc-body{margin-top:9px;font-size:14px;line-height:1.6;color:var(--text-dim)}
+.cc-body a{color:var(--text);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--line-strong)}
+.cc-body a:hover{color:var(--white);text-decoration-color:var(--gold)}
+.cc-opts{margin-top:15px;padding-top:15px;border-top:1px solid var(--line);display:grid;gap:12px}
+.cc-opts[hidden]{display:none}
+.cc-row{display:flex;gap:11px;align-items:flex-start;cursor:pointer}
+.cc-row-txt{font-size:13.5px;line-height:1.45}
+.cc-row-txt b{display:block;color:var(--text);font-weight:600}
+.cc-row-txt em{display:block;font-style:normal;color:var(--text-mute);margin-top:2px}
+.cc-actions{margin-top:17px;display:flex;flex-wrap:wrap;gap:8px}
+.cc-actions .btn{flex:1 1 auto;justify-content:center}
+.cc-actions .btn[hidden]{display:none}
+/* Es la unica casilla de todo el sitio: la nativa de Chrome sobre #0a0a0b
+   sale blanca y cuadrada, ajena a todo lo demas. Alcance limitado a .cc. */
+.cc-row input[type=checkbox]{
+  appearance:none;-webkit-appearance:none;
+  width:20px;height:20px;flex:none;margin:1px 0 0;
+  border:1px solid var(--line-strong);border-radius:6px;background:var(--bg-3);
+  display:grid;place-content:center;cursor:pointer;
+  transition:background .18s var(--ease),border-color .18s var(--ease);
+}
+.cc-row input[type=checkbox]::after{
+  content:"";width:10px;height:5px;
+  border-left:2px solid #0a0a0b;border-bottom:2px solid #0a0a0b;
+  transform:rotate(-45deg) scale(.55);opacity:0;
+  transition:opacity .15s var(--ease),transform .15s var(--ease);
+}
+.cc-row input[type=checkbox]:checked{background:var(--gold-soft);border-color:var(--gold-soft)}
+.cc-row input[type=checkbox]:checked::after{opacity:1;transform:rotate(-45deg) scale(1)}
+.cc-row input[type=checkbox]:disabled{opacity:.5;cursor:default}
+.cc-row input[type=checkbox]:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+@media (max-width:760px){
+  .cc{left:10px;right:10px;width:auto;bottom:12px}
+  /* En las fichas la esquina de abajo ya la ocupa .sticky-wa (bottom:0,
+     ~76px). El aviso se coloca ENCIMA, no delante: tapar el boton de
+     reservar con el aviso de cookies seria cambiar un problema por otro. */
+  body.has-sticky .cc{bottom:calc(86px + env(safe-area-inset-bottom))}
+}
 
 /* ---------- reduced motion ------------------------------------------- */
 @media (prefers-reduced-motion:reduce){

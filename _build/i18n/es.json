@@ -24,7 +24,13 @@
   "footer": {
     "nav": "Pie de página",
     "terms": "Condiciones de alquiler",
-    "wrapCenter": "Serres Wrap Center"
+    "wrapCenter": "Serres Wrap Center",
+    "privacy": "Política de privacidad",
+    "cookies": "Política de cookies",
+    "legalNotice": "Aviso legal",
+    "cookiePrefs": "Cambiar preferencias de cookies",
+    "legalNav": "Enlaces legales",
+    "call": "Llamar"
   },
   "common": {
     "breadcrumb": "Migas de pan",
@@ -132,7 +138,8 @@
     "d3": "3 días",
     "w1": "1 semana",
     "m1": "1 mes",
-    "pricesOnRequest": "Tarifas de 2 y 3 días, semana y mes: te las confirmamos por WhatsApp."
+    "pricesOnRequest": "Tarifas de 2 y 3 días, semana y mes: te las confirmamos por WhatsApp.",
+    "callAlt": "o llama al {phone}"
   },
   "rates": {
     "h1": "Tarifas",
@@ -263,7 +270,8 @@
     "waPhone": "Teléfono",
     "waCar": "Coche",
     "waDates": "Fechas",
-    "waMessage": "Mensaje"
+    "waMessage": "Mensaje",
+    "call": "Llamar"
   },
   "wa": {
     "general": "Hola Serres Drive, quiero reservar un coche.",
@@ -275,6 +283,22 @@
     "h1": "Esta página ya no existe",
     "body": "Puede que el coche que buscabas ya no esté en la flota. Estos son los {total} que sí puedes alquilar ahora mismo.",
     "goHome": "Ir al inicio"
+  },
+  "cookies": {
+    "aria": "Aviso de cookies",
+    "title": "Cookies",
+    "body": "Usamos cookies propias y de terceros para medir las visitas y saber qué anuncios traen clientes. Tú decides.",
+    "accept": "Aceptar",
+    "reject": "Rechazar",
+    "configure": "Configurar",
+    "save": "Guardar",
+    "necessary": "Necesarias",
+    "necessaryHelp": "Guardan tu decisión sobre las cookies. Siempre activas.",
+    "analytics": "Analítica",
+    "analyticsHelp": "Nos dice qué páginas funcionan y cuáles no.",
+    "ads": "Publicidad",
+    "adsHelp": "Permite saber qué anuncio ha traído cada reserva.",
+    "more": "Más sobre las cookies"
   },
   "seo": {
     "homeTitle": "Alquiler de coches de lujo en Barcelona · Serres Drive",
@@ -299,6 +323,12 @@
     "carTitle": "Alquiler {car} en Barcelona · Serres Drive",
     "carDesc": "Alquila un {car} en Barcelona desde {from} al día. {cv} CV, 0-100 en {zero}. Reserva por WhatsApp con entrega en el área metropolitana.",
     "carH1": "Alquiler {car} en Barcelona",
-    "listJoin": " y "
+    "listJoin": " y ",
+    "privacyTitle": "Política de privacidad · Serres Drive",
+    "privacyDesc": "Qué hacemos con tus datos cuando nos escribes o visitas serresdrive.com, y cómo ejercer tus derechos.",
+    "cookiesTitle": "Política de cookies · Serres Drive",
+    "cookiesDesc": "Qué cookies usa esta web, para qué sirven y cómo cambiar tu decisión en cualquier momento.",
+    "legalTitle": "Aviso legal · Serres Drive",
+    "legalDesc": "Datos identificativos del titular de serresdrive.com y condiciones de uso del sitio."
   }
 }
