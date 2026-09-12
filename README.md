@@ -239,6 +239,37 @@ de 720 px desplazada en horizontal dejaba los precios cortados.
 
 ## 7. Estado de las comprobaciones
 
+### 13-09-2026 (5) — el botón de los mosaicos, transparente
+
+El botón «Ver coches» de cada mosaico de marca era blanco macizo y tapaba la
+foto del taller. Ahora deja verla.
+
+**Un blanco translúcido no valía.** Medido pintando la página dos veces —una
+normal y otra con el texto del botón en transparente— y leyendo con `sharp`
+los píxeles reales que quedan debajo: con un velo blanco al 10 % el peor píxel
+llegaba a `rgb(150,150,150)` y el contraste caía a **2,8:1**, muy por debajo
+del mínimo AA de 4,5 (el texto es de 15 px y peso 600: no cuenta como texto
+grande). Se cambió a un film **oscuro** al 44 %: sigue viéndose la foto a
+través y las cinco marcas pasan con margen.
+
+| marca | peor píxel | contraste |
+|---|---|---|
+| Porsche | rgb(93,98,104) | 6,05:1 |
+| Lamborghini | rgb(106,108,111) | 5,18:1 |
+| Mercedes-AMG | rgb(106,107,110) | 5,24:1 |
+| Audi | rgb(107,111,113) | 4,99:1 |
+| Volkswagen | rgb(106,108,113) | 5,17:1 |
+
+Audi era el que mandaba: su foto tiene una zona clara justo bajo el botón y se
+quedaba en 4,28:1 con el film al 34 %. El resto ya pasaba.
+
+Sin borde a propósito: un contorno de 1 px sobre una figura achaflanada deja la
+diagonal sin línea y parece un fallo de maquetación.
+
+- 1.318 comprobaciones en 0 fallos · 32/32 funcionales · Lighthouse de la
+  portada 100/100/100 en móvil y escritorio · capturas y medidas en
+  `.screenshots/boton-transparente/`.
+
 ### 13-09-2026 (4) — el catálogo estaba apretado en escritorio
 
 Reportado: en ordenador el catálogo se veía «muy compactado, pequeño y

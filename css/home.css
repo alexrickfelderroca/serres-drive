@@ -236,7 +236,24 @@ html.lenis, .lenis.lenis-smooth { scroll-behavior: auto !important; }
   font-size:.82rem;font-weight:500;color:var(--gold-soft);
   text-shadow:0 1px 10px rgba(0,0,0,.75);font-variant-numeric:tabular-nums;
 }
-.brand-tile .brand-tile-btn{transition:transform .3s var(--ease),box-shadow .3s var(--ease),background .2s var(--ease)}
+/* El boton de cada mosaico va TRANSPARENTE, para que se vea la foto del
+   taller que hay detras. Sigue siendo .btn--primary en el marcado por una
+   razon concreta y no por pereza: esa variante es la que lleva el chaflan.
+   Aqui se le cambia el relleno, no la forma.
+
+   Sin borde a proposito. Un contorno de 1px sobre una figura achaflanada
+   deja la diagonal SIN linea -clip-path se la lleva- y queda como un fallo
+   de maquetacion; con relleno translucido y sin linea el chaflan se lee
+   solo. La sombra del texto no es decorativa: es lo que sostiene la
+   legibilidad cuando debajo pasa una zona clara de la foto. */
+.brand-tile .brand-tile-btn{
+  --btn-bg:rgba(8,8,10,.44);
+  --btn-fg:var(--white);
+  --btn-line:transparent;
+  text-shadow:0 1px 10px rgba(0,0,0,.6),0 0 2px rgba(0,0,0,.5);
+  transition:transform .3s var(--ease),background .25s var(--ease);
+}
+.brand-tile .brand-tile-btn .disc{background:rgba(255,255,255,.16)}
 
 @media (hover:hover){
   .brand-tile:hover{border-color:var(--line-strong);transform:translateY(-3px)}
@@ -247,8 +264,10 @@ html.lenis, .lenis.lenis-smooth { scroll-behavior: auto !important; }
      sistema de botones y pisaba cualquier relleno que se le ponga a
      .btn--primary. Y la sombra sobraba: el boton lleva chaflan y clip-path
      la recorta. */
-  .brand-tile:hover .brand-tile-btn{--btn-bg:#fff;--btn-line:#fff;transform:translateY(-1px)}
-  .brand-tile:hover .brand-tile-btn .disc{transform:translate(2px,-1px);background:rgba(0,0,0,.18)}
+  /* Al pasar por encima se densifica, no se vuelve blanco: el boton tiene
+     que seguir dejando ver la foto tambien en hover. */
+  .brand-tile:hover .brand-tile-btn{--btn-bg:rgba(8,8,10,.58);transform:translateY(-1px)}
+  .brand-tile:hover .brand-tile-btn .disc{transform:translate(2px,-1px);background:rgba(255,255,255,.28)}
 }
 /* Hacia DENTRO: con offset positivo el anillo se pinta fuera de la caja y el
    clip-path se lo lleva entero — el spot enfocado con el teclado se quedaba
