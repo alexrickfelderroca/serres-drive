@@ -239,6 +239,48 @@ de 720 px desplazada en horizontal dejaba los precios cortados.
 
 ## 7. Estado de las comprobaciones
 
+### 13-09-2026 (2) — el Porsche no giraba al bajar rápido
+
+Reportado: «si scrolleas rápido el coche se buguea y no hace el efecto de
+girar». Eran **dos causas a la vez**, y las dos medidas antes de tocar nada
+sumando el recorrido angular fotograma a fotograma al bajar el hero entero
+(una vuelta entera = 6,283 rad):
+
+| | despacio | normal | rápido | de un tirón |
+|---|---|---|---|---|
+| **antes** | 98 % | 26 % | 1 % | **1 %** |
+| **después** | 99 % | 95 % | 86 % | 79 % |
+
+**1. `wrapPi()` mataba el giro.** El seguimiento del yaw envolvía el error en
+(−π, π] porque «el yaw es modular». Cierto, pero la vuelta completa es
+exactamente `SPINS = 2π`: al bajar rápido la pose avanzaba casi 2π de golpe,
+`wrapPi` lo convertía en ~0 y el coche **se quedaba quieto**. Cuanto más
+rápido bajabas, menos giraba. Quitado: `ry` es continua en `p`, así que no hay
+ambigüedad modular que resolver, y un salto real lo acota el techo de rad/s.
+
+**2. La pista era de media pantalla.** El giro se repartía en
+`.brands.offsetTop − 52 % de pantalla` = **432 px en escritorio, 405 en móvil**:
+0,48 pantallas para 360°. Cualquier deslizamiento se la comía de un trago.
+Ahora `--hero-pista: 110svh` reparte la vuelta en ~1,6 pantallas.
+
+Esa es la forma de que «el scroll vaya lento ahí» **sin secuestrar el dedo**:
+sin tocar la inercia nativa, sin `syncTouch` (que en iOS da problemas) y sin
+pelearse con quien solo quiere llegar abajo.
+
+**La pista solo existe si el coche existe** (`body.sd-home`). Sin WebGL, sin JS
+o con `prefers-reduced-motion` vale 0 y la página vuelve a 5,4 pantallas: si no,
+sería el hueco vacío del 12-09 otra vez, por otro camino. Verificado en los tres.
+
+También: el techo de giro baja de 18 a 9 rad/s (18 dejaba la vuelta en 0,35 s,
+que no se ve girar, se ve parpadear) y el coche deja de renderizarse cuando ha
+**terminado** la vuelta, no a los N ms — antes se congelaba a mitad de giro y lo
+que se desvanecía era una foto quieta.
+
+- Se probó 4,2 rad/s y era peor: el coche se quedaba tan rezagado que aparcaba
+  sin terminar, y seguía girando después de parar el dedo. Queda anotado.
+- 1.318 comprobaciones en 0 fallos · 32/32 funcionales · Lighthouse móvil de la
+  portada 100 / 100 / 100 · capturas en `.screenshots/giro-hero/`.
+
 ### 13-09-2026 — el Porsche vuelve al hero en móvil
 
 El cambio del 12-09 apagaba el hero 3D en `<=960px` y en los clics de anuncio,

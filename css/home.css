@@ -76,8 +76,29 @@ html.lenis, .lenis.lenis-smooth { scroll-behavior: auto !important; }
 /* =====================================================================
    INTRO — el titular escalonado; el GT3 gira detras de la fila del medio
    ===================================================================== */
+/* --hero-pista: el tramo de scroll que el coche tiene para dar su vuelta.
+   Es margen, no altura: el titular se sigue centrando en su pantalla y
+   debajo queda una pista por la que se baja viendo SOLO el coche girar
+   sobre el fondo del taller (el lienzo es position:fixed).
+
+   13-09-2026. Antes no existia, y experience.js calculaba la pista como
+   .brands.offsetTop - 52% de pantalla: salian 432 px en escritorio y 405 en
+   movil, o sea 0,48 pantallas para una vuelta ENTERA de 360 grados.
+   Cualquier deslizamiento normal se la comia de un trago, y por eso el giro
+   no se veia. Con 110svh la vuelta se reparte en ~1,6 pantallas: se baja
+   igual de rapido, pero el efecto da tiempo a leerse. Esta es la forma de
+   que "el scroll vaya lento aqui" sin secuestrar el dedo de nadie: sin
+   tocar la inercia nativa, sin romper el scroll del movil y sin pelearse
+   con quien solo quiere llegar abajo. */
+.home-exp{--hero-pista:110svh}
 .home-exp .oa-exp section.oa-intro{width:100%;min-height:100svh;display:flex;flex-direction:column;justify-content:center;
   gap:.1em;padding:calc(var(--nav-h) + 2vh) clamp(18px,4vw,48px) 4vh}
+/* La pista SOLO existe si el coche existe. `sd-home` lo pone experience.js
+   cuando el hero 3D arranca de verdad, y se lo quita si el modelo no carga.
+   Sin esta condicion, quien entra con prefers-reduced-motion, sin WebGL o
+   sin JS se comeria 1,1 pantallas de fondo vacio sin ningun coche dentro
+   — que es exactamente el fallo del 12-09, otra vez y por otro camino. */
+.home-exp.sd-home .oa-exp section.oa-intro{margin-bottom:var(--hero-pista)}
 /* ONE h1 wraps the staggered rows (it used to be three h1 fragments — a
    broken heading outline and no "Barcelona" anywhere in the page's h1). */
 .home-exp .oa-title{display:flex;flex-direction:column;gap:.1em}

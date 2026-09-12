@@ -72,7 +72,9 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
   const clamp = function (v, a, b) { return v < a ? a : v > b ? b : v; };
   const lerp = function (a, b, t) { return a + (b - a) * t; };
   const smooth = function (t) { t = clamp(t, 0, 1); return t * t * (3 - 2 * t); };
-  const wrapPi = function (a) { return a - Math.PI * 2 * Math.round(a / (Math.PI * 2)); };
+  /* Aqui vivia wrapPi(), que envolvia el error de yaw en (-pi, pi]. Se quito
+     el 13-09-2026: era exactamente lo que impedia que el coche girase al
+     bajar rapido. La explicacion larga esta junto al bucle de render. */
 
   /* ------------------------------------------------------------------ *
    * 1 · Smooth scroll (Lenis) → GSAP / ScrollTrigger                   *
@@ -202,10 +204,30 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
   /* ------------------------------------------------------------------ *
    * 5 · Aparcar: el coche se funde cuando llegan las marcas            *
    * ------------------------------------------------------------------ */
+  /* Al aparcar se arranca el fundido (quitar .is-live, 0,8 s en home.css)
+     pero se SIGUE renderizando hasta que termina. Antes se paraba en seco en
+     el mismo fotograma: el coche se quedaba congelado en un angulo cualquiera
+     y lo que se desvanecia era una foto quieta, que es medio tiron mas de los
+     que se reportaron. Ahora sigue girando mientras se va. */
+  /* Se deja de renderizar cuando la vuelta ha TERMINADO, no a los N ms: con
+     un temporizador fijo, quien baja de un tiron congelaba el coche a mitad
+     de giro y lo que se desvanecia era una foto quieta. El tope de 1,8 s
+     esta para que esto no pueda quedarse encendido para siempre.
+     Declarado ANTES del trigger a proposito: ScrollTrigger puede disparar
+     onEnter en el mismo momento de crearse si el elemento ya esta a la
+     vista, y con el let debajo eso seria una zona muerta temporal. */
+  let parkWanted = false, parkAt = 0;
   ScrollTrigger.create({
     trigger: parkEl || exp, start: parkEl ? "top 52%" : "bottom 52%",
-    onEnter: function () { mount.classList.remove("is-live"); running = false; },
-    onLeaveBack: function () { if (ready) { mount.classList.add("is-live"); running = true; } }
+    onEnter: function () {
+      mount.classList.remove("is-live");   // arranca el fundido de 0,8 s
+      parkWanted = true;
+      parkAt = performance.now();
+    },
+    onLeaveBack: function () {
+      parkWanted = false;
+      if (ready) { mount.classList.add("is-live"); running = true; }
+    }
   });
 
   /* ------------------------------------------------------------------ *
@@ -229,7 +251,14 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
      The easing is what stops a fling reading as a blur; the ceiling exists
      only to bound outright discontinuities (a Home key, a back-restore). */
   const CAR_YAW_FOLLOW = 0.18;          // ease toward the pose, per 60fps frame
-  const CAR_YAW_MAX_RATE = 18.0;        // rad/s — bounds jumps, not normal scroll
+  /* 13-09-2026. Antes 18 rad/s: una vuelta entera en 0,35 s, que no se ve
+     girar, se ve parpadear. Ahora 9 -> la vuelta nunca baja de ~0,7 s.
+     Se probo 4,2 (vuelta de 1,5 s) y era PEOR: el coche se quedaba tan
+     rezagado del scroll que aparcaba sin haber terminado de girar, y ademas
+     seguia dando vueltas despues de que el dedo parase, que es otra forma
+     de parecer roto. 9 es el punto en el que la vuelta se lee entera y el
+     coche sigue pareciendo atado al scroll. */
+  const CAR_YAW_MAX_RATE = 9.0;         // rad/s — techo de velocidad de giro
   let carYaw = 0, carYawSynced = false;
 
   const clock = new THREE.Clock();
@@ -254,17 +283,38 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
     const rz = BASE_ROLL;
     const sc = popState.v * (1 + pe * 0.14);
 
-    /* Ease the rendered yaw toward the pose rather than snapping to it, with
-       the rad/s ceiling on top. The error is wrapped into (-π, π] first,
-       because yaw is modular: a jump that changes p by 1 moves the pose by
-       exactly 2π, which is the SAME orientation. */
+    /* El yaw persigue la pose en vez de saltar a ella, con el techo de rad/s
+       encima.
+
+       AQUI ESTABA EL FALLO (arreglado el 13-09-2026). El error se envolvia
+       antes con wrapPi(), en (-pi, pi], con este razonamiento: "el yaw es
+       modular, un salto que cambia p en 1 mueve la pose exactamente 2*pi,
+       que es la MISMA orientacion". Cierto para una restauracion de
+       historial... y demoledor para el efecto, porque la vuelta entera es
+       justo SPINS = 2*pi. Al bajar rapido la pose avanzaba casi 2*pi de
+       golpe, wrapPi lo convertia en ~0, y el coche NO GIRABA.
+
+       Medido antes de tocarlo, sumando el recorrido angular fotograma a
+       fotograma al bajar el hero entero: despacio 98% de vuelta, con scroll
+       normal 26%, y de un tiron 1%. O sea que el efecto solo se veia yendo
+       muy despacio; el resto de la gente veia un coche quieto que ademas
+       daba tirones. Eso es lo que se reporto como "se buguea".
+
+       Ahora se persigue el objetivo SIN envolver. No hay ambiguedad modular
+       que resolver: ry es una funcion continua de p, que a su vez es
+       continua en la posicion de scroll, asi que el objetivo recorre de
+       verdad de BASE_YAW a BASE_YAW + 2*pi. Un salto real (tecla Inicio,
+       ancla, restauracion) ya no hace falta envolverlo: el techo de rad/s lo
+       convierte en una vuelta rapida pero mirable, que es justo lo que se
+       quiere ver. El primer fotograma sigue fijando la pose de golpe
+       (carYawSynced), que es lo que cubre el caso de recargar a media pagina. */
     if (!carYawSynced) {
       carYaw = ry;
       carYawSynced = true;
     } else {
       const follow = 1 - Math.pow(1 - CAR_YAW_FOLLOW, dt * 60);
       const maxStep = CAR_YAW_MAX_RATE * dt;
-      carYaw += clamp(wrapPi(ry - carYaw) * follow, -maxStep, maxStep);
+      carYaw += clamp((ry - carYaw) * follow, -maxStep, maxStep);
     }
 
     model.rotation.set(rx, carYaw, rz);
@@ -279,6 +329,14 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
     camera.lookAt(0, aimY, 0);
 
     renderer.render(scene, camera);
+
+    /* Apagar el bucle solo cuando el coche ha llegado de verdad a su pose.
+       Mientras tanto sigue girando por detras del telon de .brands (que sube
+       de transparente a negro), asi que termina la vuelta en vez de
+       congelarse. */
+    if (parkWanted && (Math.abs(ry - carYaw) < 0.05 || performance.now() - parkAt > 1800)) {
+      running = false;
+    }
   }
 
   /* ------------------------------------------------------------------ *
