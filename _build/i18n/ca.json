@@ -85,6 +85,12 @@
     "titleRow2": "de cotxes",
     "titleRow3": "de luxe",
     "titleRow4": "a Barcelona",
+    "titleRow4Cities": [
+      "a Barcelona",
+      "a Marbella",
+      "a Eivissa",
+      "a Madrid"
+    ],
     "ctaBook": "Reserva el teu vehicle",
     "brandsEyebrow": "Les nostres marques",
     "brandsTitle": "Tria la teva marca",

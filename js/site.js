@@ -60,6 +60,56 @@
     });
   }
 
+  /* ---- 4b. la ciudad del titular, rotando ----------------------------- */
+  /* Barcelona · Marbella · Ibiza · Madrid. El HTML se queda SIEMPRE con la
+     primera, que es la que lee Google y la que coincide con el h1 de
+     seo-meta: esto es un adorno visual encima, no la fuente del titular.
+
+     Sin JS, con prefers-reduced-motion o con una sola ciudad en la lista no
+     pasa nada y el titular se lee completo igual.
+
+     Sin aria-live a proposito: es parte del H1, y un lector de pantalla lo
+     lee una vez al llegar. Anunciar un cambio de ciudad cada cuatro
+     segundos seria ruido, no informacion. */
+  var geoWrap = document.querySelector('.geo-flip');
+  var geo = geoWrap && geoWrap.querySelector('.geo-city');
+  if (geo && !window.matchMedia('(prefers-reduced-motion:reduce)').matches) {
+    var ciudades = [];
+    try { ciudades = JSON.parse(geoWrap.getAttribute('data-cities') || '[]'); } catch (e) {}
+    if (ciudades.length > 1) {
+      /* Reserva el ancho de la ciudad mas larga para que el titular no baile
+         al cambiar de palabra: se mide una vez, con la fuente ya cargada. */
+      var fijarAncho = function () {
+        var previo = geo.style.getPropertyValue('--geo-city'), max = 0;
+        geo.style.width = 'auto';
+        for (var i = 0; i < ciudades.length; i++) {
+          geo.style.setProperty('--geo-city', JSON.stringify(ciudades[i]));
+          max = Math.max(max, geo.getBoundingClientRect().width);
+        }
+        geo.style.setProperty('--geo-city', previo);
+        geo.style.width = Math.ceil(max) + 'px';
+      };
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(fijarAncho);
+      else fijarAncho();
+      window.addEventListener('resize', function () {
+        clearTimeout(geo._t); geo._t = setTimeout(fijarAncho, 200);
+      }, { passive: true });
+
+      var n = 0;
+      setInterval(function () {
+        /* Con la pestana de fondo el navegador ya frena los timers, pero
+           ademas no tiene sentido gastar repintados sin nadie mirando. */
+        if (document.hidden) return;
+        geo.style.opacity = '0';
+        setTimeout(function () {
+          n = (n + 1) % ciudades.length;
+          geo.style.setProperty('--geo-city', JSON.stringify(ciudades[n]));
+          geo.style.opacity = '1';
+        }, 320);
+      }, 3200);
+    }
+  }
+
   /* ---- 5. consentimiento ---------------------------------------------- */
   /* El estado por defecto (todo denegado) ya lo declaro el bloque del <head>,
      que tambien reaplica la decision guardada. Aqui solo se gestiona el

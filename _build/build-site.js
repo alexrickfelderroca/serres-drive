@@ -101,6 +101,14 @@ const VW = 'v=' + assetHash('css/how.css', 'js/how.js');
 const { howMap } = require('./how-map');
 
 /* ---------- helpers -------------------------------------------------- */
+/* Una cadena para meter dentro de content: de CSS, entre comillas simples,
+   dentro de un atributo style de HTML. Si algun dia entra una ciudad con
+   apostrofo ("a l'Hospitalet") esto TIENE que reventar en el build, no
+   colarse rompiendo la regla en silencio. */
+const cssStr = s => {
+  if (/['"\\\n]/.test(String(s))) throw new Error(`ciudad con comilla o barra, no vale para content: ${s}`);
+  return String(s);
+};
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
   .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const eur = n => n.toLocaleString('de-DE') + ' €';                  // 1.000 €
@@ -144,7 +152,12 @@ const ICON = {
   /* Auricular. Los otros tres del pie son marcas y van en su color; este es
      nuestro, asi que hereda el color del texto como el resto del pie. */
   phone: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.6 3.5h3l1.5 3.8-1.9 1.4a12.4 12.4 0 0 0 5.1 5.1l1.4-1.9 3.8 1.5v3a1.9 1.9 0 0 1-2.1 1.9A16.6 16.6 0 0 1 4.7 5.6 1.9 1.9 0 0 1 6.6 3.5Z"/></svg>',
-  wa: '<svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16.04 3C9.4 3 4 8.4 4 15.04c0 2.12.56 4.18 1.62 6L4 29l8.16-1.58a12 12 0 0 0 3.88.64C22.7 28.06 28.1 22.66 28.1 16.02 28.1 8.4 22.68 3 16.04 3Zm5.39 14.57c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.66.15-.2.3-.76.96-.93 1.15-.17.2-.34.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.3-.02-.46.13-.61.13-.13.3-.34.45-.51.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.66-1.6-.9-2.18-.24-.58-.48-.5-.66-.5l-.56-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.22 3.08.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.08 1.75-.71 2-1.4.25-.69.25-1.28.17-1.4-.07-.13-.27-.2-.57-.35Z"/></svg>',
+  /* El logo de WhatsApp en su forma CONTORNEADA: burbuja hueca con el
+     auricular macizo dentro. Antes esta variante era la burbuja MACIZA, y
+     dentro de un boton verde no se leia como WhatsApp — se leia como un
+     bocadillo de chat cualquiera, que es justo lo que se reporto.
+     Es el mismo trazado que usa Serres Wrap Center. */
+  wa: '<svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16.04 3C9.4 3 4 8.4 4 15.04c0 2.12.56 4.18 1.62 6L4 29l8.16-1.58a12 12 0 0 0 3.88.64h.01C22.7 28.06 28.1 22.66 28.1 16.02 28.1 8.4 22.68 3 16.04 3Zm0 21.9h-.01c-1.18 0-2.34-.22-3.43-.66l-.25-.1-4.84.94.97-4.72-.16-.25a9.74 9.74 0 0 1-1.49-5.18c0-5.4 4.4-9.8 9.83-9.8 2.62 0 5.08 1.02 6.93 2.88a9.7 9.7 0 0 1 2.87 6.93c0 5.4-4.4 9.8-9.82 9.8Zm5.39-7.33c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.66.15-.2.3-.76.96-.93 1.15-.17.2-.34.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.3-.02-.46.13-.61.13-.13.3-.34.45-.51.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.66-1.6-.9-2.18-.24-.58-.48-.5-.66-.5l-.56-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.22 3.08.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.08 1.75-.71 2-1.4.25-.69.25-1.28.17-1.4-.07-.13-.27-.2-.57-.35Z"/></svg>',
   /* Official marks, in their own colours. The Instagram gradient lives once
      per page in the sprite below, so three copies of the icon do not mean
      three elements sharing an id. */
@@ -667,7 +680,18 @@ for (const lang of LANGS) {
       <span class="oa-row">${L.home.titleRow1}</span>
       <span class="oa-row">${L.home.titleRow2}</span>
       <span class="oa-row">${L.home.titleRow3}</span>
-      <span class="oa-row oa-row-geo">${L.home.titleRow4}</span>
+      <!-- La ciudad va rotando (Barcelona · Marbella · Ibiza · Madrid).
+           DOS spans a proposito:
+             .sr        texto canonico, invisible pero SIEMPRE presente. Es lo
+                        que leen Google y los lectores de pantalla, y coincide
+                        con el h1 de data/seo-meta.json.
+             .geo-city  lo que se ve, aria-hidden, y lo unico que rota.
+           Sin esta separacion el H1 renderizado podia decir «en Madrid»
+           mientras el title, la meta y el canonical dicen Barcelona: Google
+           ejecuta JS y captura la pagina en un momento cualquiera.
+           Las formas de cada idioma no son mecanicas: en ruso Ibiza es una
+           isla y pide «на Ибице», y en catalan es Eivissa. -->
+      <span class="oa-row oa-row-geo"><span class="geo-flip" data-cities="${esc(JSON.stringify(L.home.titleRow4Cities))}"><span class="sr">${L.home.titleRow4}</span><span class="geo-city" aria-hidden="true" style="--geo-city:'${cssStr(L.home.titleRow4)}'"></span></span></span>
     </h1>
     <div class="oa-cta oa-intro-cta">
       <a href="${waGeneral()}" class="btn gold" target="_blank" rel="noopener" data-placement="hero">

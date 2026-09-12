@@ -85,6 +85,12 @@
     "titleRow2": "car",
     "titleRow3": "hire",
     "titleRow4": "in Barcelona",
+    "titleRow4Cities": [
+      "in Barcelona",
+      "in Marbella",
+      "in Ibiza",
+      "in Madrid"
+    ],
     "ctaBook": "Book your car",
     "brandsEyebrow": "Our brands",
     "brandsTitle": "Choose your brand",

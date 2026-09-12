@@ -239,6 +239,65 @@ de 720 px desplazada en horizontal dejaba los precios cortados.
 
 ## 7. Estado de las comprobaciones
 
+### 13-09-2026 (3) — el lenguaje visual de Serres Wrap Center
+
+A petición del propietario, la web de alquiler adopta el lenguaje visual de
+la de detailing (`Serres web/Serres wrap center webpage/Serres wrap center V12`).
+**Son dos marcas del mismo dueño y ahora se parecen a propósito** — es la
+excepción deliberada a la regla de que dos proyectos no se parezcan.
+
+Los valores NO se sacaron de una captura: se leyeron del CSS de la otra web.
+Resultó que la mitad ya coincidía — las dos usan Barlow Condensed + DM Sans y
+el mismo gradiente cromado (`--chrome` allí, `--chrome-grad` aquí, carácter por
+carácter). Lo que faltaba era aplicarlo.
+
+| | antes | ahora |
+|---|---|---|
+| Titulares `.h-lg` / `.h-md` | blanco sólido | cromado (`background-clip:text`) |
+| Tracking de titular | −.015em (negativo) | +.012em |
+| Interlineado de titular | 1.02 | .94 |
+| Texto base | 16px | 17px |
+| `--text` | `#e7e7ec` | `#f3f3f5` |
+| `.lede` | `--text-dim`, 19px | `#d4d4d9`, 20px, 1.55 |
+| `.eyebrow` | DM Sans 11px / .22em | Barlow Condensed 13px / .34em |
+| Botones | píldora 999px, 17px / .06em | rectángulo, 15px / .14em |
+| Paneles y spots | `border-radius:16px` | chaflán abajo-izquierda de 16px |
+| Icono de WhatsApp | burbuja maciza | logo contorneado |
+
+**La esquina cortada tiene tres trampas**, las tres comprobadas en pantalla y
+documentadas en `css/serres.css`:
+
+1. `clip-path` y `border-radius` no se sustituyen, **se intersecan**: sin poner
+   el radius a 0 quedan tres esquinas redondas y una cortada.
+2. `clip-path` **recorta la `box-shadow` exterior**. Las sombras de esos paneles
+   ya no se veían; se han quitado en vez de dejarlas mintiendo. (`drop-shadow`
+   en el mismo elemento tampoco sobrevive: haría falta un envoltorio.)
+3. 🔴 El `outline` de foco global lleva `outline-offset:3px`, o sea **por fuera**
+   de la caja, y el chaflán se lo come entero. Todo lo achaflanado que se puede
+   enfocar lleva ahora el anillo hacia dentro. La web de detailing arrastra ese
+   fallo en sus tarjetas: es lo único que NO se ha copiado.
+
+Las **tarjetas de coche del catálogo** (`.car-card`), su galería y sus miniaturas
+se quedan con las esquinas redondeadas, por decisión del propietario.
+
+**La ciudad del titular rota**: Barcelona · Marbella · Ibiza · Madrid. Se pinta
+con `content:` desde una variable CSS, **no como texto del DOM**: así el
+`textContent` del H1 sigue siendo el canónico («…en Barcelona», el que coincide
+con `data/seo-meta.json`). Con dos spans de texto el H1 renderizado decía
+«…en Barcelonaen Marbella», y con uno solo Google podía capturar «en Madrid»
+mientras el title y el canonical dicen Barcelona. Las formas no son mecánicas:
+en ruso Ibiza es una isla y pide «на Ибице», y en catalán es Eivissa.
+
+- 1.318 comprobaciones en 0 fallos · 32/32 funcionales · Lighthouse móvil
+  100/100/100 en portada, ficha y contacto · sin scroll horizontal ni errores
+  de consola en las 14 capturas.
+- Capturas del antes y el después en `.screenshots/estilo-detailing/`.
+
+**Pendiente de decisión, no de código:** si de verdad se opera en las cuatro
+ciudades, el SEO sigue apuntando solo a Barcelona (títulos, descripciones,
+`areaServed` del schema y la línea de entrega «Área metropolitana de
+Barcelona»). El rotativo es una promesa visual que el SEO todavía no respalda.
+
 ### 13-09-2026 (2) — el Porsche no giraba al bajar rápido
 
 Reportado: «si scrolleas rápido el coche se buguea y no hace el efecto de

@@ -43,10 +43,10 @@ gtag('config','AW-18441458977',{allow_enhanced_conversions:true});
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../css/serres.css?v=0f5e1d7375">
-<link rel="stylesheet" href="../css/home.css?v=3fee162abe">
-<link rel="stylesheet" href="../css/preloader.css?v=3fee162abe">
-<script src="../js/preloader.js?v=3fee162abe"></script>
+<link rel="stylesheet" href="../css/serres.css?v=360db05299">
+<link rel="stylesheet" href="../css/home.css?v=50f7394861">
+<link rel="stylesheet" href="../css/preloader.css?v=50f7394861">
+<script src="../js/preloader.js?v=50f7394861"></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"AutoRental","@id":"https://serresdrive.com/#business","name":"Serres Drive","url":"https://serresdrive.com/","telephone":"+34649663380","email":"serresdrive@gmail.com","image":"https://serresdrive.com/assets/img/cars/mercedes-amg-g63/alquiler-mercedes-amg-g63-barcelona-1.jpg","logo":"https://serresdrive.com/assets/brand/serres-wordmark-flat.svg","priceRange":"€€€","currenciesAccepted":"EUR","address":{"@type":"PostalAddress","addressLocality":"Sant Cugat del Vallès","addressRegion":"Barcelona","addressCountry":"ES"},"areaServed":[{"@type":"City","name":"Barcelona"},{"@type":"City","name":"Sant Cugat del Vallès"},{"@type":"AdministrativeArea","name":"Àrea Metropolitana de Barcelona"}],"sameAs":["https://www.instagram.com/serres.drive/"]}</script>
 </head>
 <body class="home-exp">
@@ -89,7 +89,18 @@ gtag('config','AW-18441458977',{allow_enhanced_conversions:true});
       <span class="oa-row">Location</span>
       <span class="oa-row">de voitures</span>
       <span class="oa-row">de luxe</span>
-      <span class="oa-row oa-row-geo">à Barcelone</span>
+      <!-- La ciudad va rotando (Barcelona · Marbella · Ibiza · Madrid).
+           DOS spans a proposito:
+             .sr        texto canonico, invisible pero SIEMPRE presente. Es lo
+                        que leen Google y los lectores de pantalla, y coincide
+                        con el h1 de data/seo-meta.json.
+             .geo-city  lo que se ve, aria-hidden, y lo unico que rota.
+           Sin esta separacion el H1 renderizado podia decir «en Madrid»
+           mientras el title, la meta y el canonical dicen Barcelona: Google
+           ejecuta JS y captura la pagina en un momento cualquiera.
+           Las formas de cada idioma no son mecanicas: en ruso Ibiza es una
+           isla y pide «на Ибице», y en catalan es Eivissa. -->
+      <span class="oa-row oa-row-geo"><span class="geo-flip" data-cities="[&quot;à Barcelone&quot;,&quot;à Marbella&quot;,&quot;à Ibiza&quot;,&quot;à Madrid&quot;]"><span class="sr">à Barcelone</span><span class="geo-city" aria-hidden="true" style="--geo-city:'à Barcelone'"></span></span></span>
     </h1>
     <div class="oa-cta oa-intro-cta">
       <a href="https://wa.me/34649663380?text=Bonjour%20Serres%20Drive%2C%20je%20voudrais%20louer%20une%20voiture." class="btn gold" target="_blank" rel="noopener" data-placement="hero">
@@ -214,7 +225,7 @@ gtag('config','AW-18441458977',{allow_enhanced_conversions:true});
         <h2 class="h-md">Prêt à <span class="gold-text">conduire</span>?</h2>
         <p class="lede" style="margin-inline:auto">Dites-nous quelle voiture et quelles dates. Nous vous répondons avec la disponibilité et les conditions en quelques minutes.</p>
         <div class="hero-cta" style="justify-content:center">
-          <a href="https://wa.me/34649663380?text=Bonjour%20Serres%20Drive%2C%20je%20voudrais%20louer%20une%20voiture." class="btn btn--wa" target="_blank" rel="noopener" data-placement="cta"><svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16.04 3C9.4 3 4 8.4 4 15.04c0 2.12.56 4.18 1.62 6L4 29l8.16-1.58a12 12 0 0 0 3.88.64C22.7 28.06 28.1 22.66 28.1 16.02 28.1 8.4 22.68 3 16.04 3Zm5.39 14.57c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.66.15-.2.3-.76.96-.93 1.15-.17.2-.34.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.3-.02-.46.13-.61.13-.13.3-.34.45-.51.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.66-1.6-.9-2.18-.24-.58-.48-.5-.66-.5l-.56-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.22 3.08.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.08 1.75-.71 2-1.4.25-.69.25-1.28.17-1.4-.07-.13-.27-.2-.57-.35Z"/></svg><span>Écrivez-nous sur WhatsApp</span></a>
+          <a href="https://wa.me/34649663380?text=Bonjour%20Serres%20Drive%2C%20je%20voudrais%20louer%20une%20voiture." class="btn btn--wa" target="_blank" rel="noopener" data-placement="cta"><svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16.04 3C9.4 3 4 8.4 4 15.04c0 2.12.56 4.18 1.62 6L4 29l8.16-1.58a12 12 0 0 0 3.88.64h.01C22.7 28.06 28.1 22.66 28.1 16.02 28.1 8.4 22.68 3 16.04 3Zm0 21.9h-.01c-1.18 0-2.34-.22-3.43-.66l-.25-.1-4.84.94.97-4.72-.16-.25a9.74 9.74 0 0 1-1.49-5.18c0-5.4 4.4-9.8 9.83-9.8 2.62 0 5.08 1.02 6.93 2.88a9.7 9.7 0 0 1 2.87 6.93c0 5.4-4.4 9.8-9.82 9.8Zm5.39-7.33c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.66.15-.2.3-.76.96-.93 1.15-.17.2-.34.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.3-.02-.46.13-.61.13-.13.3-.34.45-.51.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.66-1.6-.9-2.18-.24-.58-.48-.5-.66-.5l-.56-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.22 3.08.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.08 1.75-.71 2-1.4.25-.69.25-1.28.17-1.4-.07-.13-.27-.2-.57-.35Z"/></svg><span>Écrivez-nous sur WhatsApp</span></a>
           <a href="tel:+34649663380" class="btn btn--secondary" data-placement="cta">+34 649 66 33 80</a>
         </div>
         <div class="footer-social" style="justify-content:center">
@@ -303,7 +314,7 @@ gtag('config','AW-18441458977',{allow_enhanced_conversions:true});
   "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
 }}
 </script>
-<script type="module" src="../js/experience.js?v=3fee162abe"></script>
-<script src="../js/site.js?v=0f5e1d7375" defer></script>
+<script type="module" src="../js/experience.js?v=50f7394861"></script>
+<script src="../js/site.js?v=360db05299" defer></script>
 </body>
 </html>

@@ -119,6 +119,24 @@ html.lenis, .lenis.lenis-smooth { scroll-behavior: auto !important; }
 .home-exp .oa-row.oa-row-geo{padding-left:clamp(0px,17vw,30vw);
   font-size:clamp(1.05rem,3.4vw,2.4rem);letter-spacing:.22em;
   color:var(--gold-soft);margin-top:.28em}
+/* La ciudad rota entre las cuatro. El fundido dura lo mismo que el salto
+   que programa js/site.js (320 ms), y el ancho lo fija el propio JS a la
+   ciudad mas larga para que el titular no baile al cambiar de palabra.
+   text-align:left ancla la palabra por la izquierda dentro de ese ancho. */
+/* La ciudad visible se pinta con content: desde una variable, NO como texto
+   del DOM. Asi el textContent del H1 sigue siendo exactamente
+   "Alquiler de coches de lujo en Barcelona" -el canonico, el que coincide
+   con data/seo-meta.json- en vez de sumar la ciudad rotada y quedarse en
+   "...en Barcelonaen Marbella", que es lo que pasaba con dos spans de texto
+   y lo que habria leido Google al renderizar.
+   El valor inicial va inline desde el generador, asi que sin JS la ciudad
+   se lee igual. */
+.home-exp .geo-city::after{content:var(--geo-city,"")}
+.home-exp .geo-city{display:inline-block;text-align:left;transition:opacity .32s var(--ease)}
+.home-exp .geo-flip{text-align:left}
+@media (prefers-reduced-motion:reduce){
+  .home-exp .geo-flip{transition:none}
+}
 /* the hero CTAs under the headline (Reserva / Ver la flota / Wrap Center) */
 .home-exp .oa-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:2em}
 .home-exp .oa-intro-cta{margin-top:clamp(1.4em,4.5vh,2.6em)}
@@ -180,8 +198,14 @@ html.lenis, .lenis.lenis-smooth { scroll-behavior: auto !important; }
 
 .brand-tile{
   position:relative;display:flex;align-items:center;justify-content:center;
-  aspect-ratio:16/9;border-radius:var(--radius);overflow:hidden;
-  border:1px solid var(--line);background:var(--panel);box-shadow:var(--shadow-2);
+  aspect-ratio:16/9;overflow:hidden;
+  /* 13-09-2026: esquina cortada como en Serres Wrap Center. border-radius a
+     0 obligatoriamente — con los dos puestos se INTERSECAN y quedan tres
+     esquinas redondas y una cortada. overflow:hidden se queda: la foto
+     arranca a scale(1.02) y sube a 1.06 en hover, sin recorte se derrama. */
+  border-radius:0;
+  clip-path:polygon(0 0,100% 0,100% 100%,var(--cut) 100%,0 calc(100% - var(--cut)));
+  border:1px solid var(--line);background:var(--panel);
   isolation:isolate;color:var(--white);
   transition:border-color .3s var(--ease),box-shadow .4s var(--ease),transform .4s var(--ease);
 }
@@ -215,14 +239,21 @@ html.lenis, .lenis.lenis-smooth { scroll-behavior: auto !important; }
 .brand-tile .brand-tile-btn{transition:transform .3s var(--ease),box-shadow .3s var(--ease),background .2s var(--ease)}
 
 @media (hover:hover){
-  .brand-tile:hover{border-color:var(--line-strong);box-shadow:var(--shadow-3);transform:translateY(-3px)}
+  .brand-tile:hover{border-color:var(--line-strong);transform:translateY(-3px)}
   .brand-tile:hover .brand-tile-shot img{transform:scale(1.06)}
   .brand-tile:hover .brand-tile-veil{opacity:.86}
   .brand-tile:hover .brand-tile-logo{transform:translateY(-2px)}
-  .brand-tile:hover .brand-tile-btn{background:#fff;transform:translateY(-1px);box-shadow:var(--shadow-2)}
+  /* Escribe --btn-bg, NO background: background directo (0,3,0) le ganaba al
+     sistema de botones y pisaba cualquier relleno que se le ponga a
+     .btn--primary. Y la sombra sobraba: el boton lleva chaflan y clip-path
+     la recorta. */
+  .brand-tile:hover .brand-tile-btn{--btn-bg:#fff;--btn-line:#fff;transform:translateY(-1px)}
   .brand-tile:hover .brand-tile-btn .disc{transform:translate(2px,-1px);background:rgba(0,0,0,.18)}
 }
-.brand-tile:focus-visible{outline:2px solid var(--gold-soft);outline-offset:4px}
+/* Hacia DENTRO: con offset positivo el anillo se pinta fuera de la caja y el
+   clip-path se lo lleva entero — el spot enfocado con el teclado se quedaba
+   sin ningun indicador visible. */
+.brand-tile:focus-visible{outline:2px solid var(--gold-soft);outline-offset:-4px}
 
 /* =====================================================================
    RESPONSIVE
