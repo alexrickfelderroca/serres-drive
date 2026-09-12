@@ -54,6 +54,14 @@
 
   /* geometry — 4/8 scale */
   --maxw:1240px;
+  /* 1240 es el ancho de una COLUMNA DE TEXTO: a partir de ahi una linea
+     de prosa se hace incomoda de leer. Pero una rejilla de tarjetas no
+     es prosa, y heredar ese limite dejaba el catalogo clavado en 1240
+     con 340 px muertos a cada lado en un monitor de 1920 -un 35% de la
+     pantalla- y la tarjeta congelada en 355 px con la foto a 235,
+     daba igual el monitor. 1680 es el mismo ancho que ya usa la barra de
+     navegacion por esta misma razon. */
+  --maxw-wide:1680px;
   --gutter:clamp(18px,5vw,64px);
   --radius:16px;
   /* Chaflan de la esquina inferior izquierda: el vocabulario de forma que
@@ -119,6 +127,10 @@ table{border-collapse:collapse;width:100%}
 .skip:focus{left:16px;top:16px}
 
 .wrap{width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gutter)}
+/* Para rejillas de tarjetas, no para texto. El .lede que vive dentro
+   sigue limitado por su propio max-width en ch, asi que se ensancha la
+   rejilla sin estirar el parrafo. */
+.wrap--wide{max-width:var(--maxw-wide)}
 .sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
 /* ---------- type scale (1.25) ------------------------------------- */
@@ -473,7 +485,7 @@ table{border-collapse:collapse;width:100%}
 @media (max-width:480px){.brand-card{min-height:150px;padding:16px}}
 
 /* ---------- car grid ---------------------------------------------- */
-.car-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,1.8vw,24px)}
+.car-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,1.8vw,30px)}
 .car-grid--2{grid-template-columns:repeat(2,1fr)}
 @media (max-width:1040px){.car-grid{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:640px){.car-grid,.car-grid--2{grid-template-columns:1fr}}
@@ -488,17 +500,43 @@ table{border-collapse:collapse;width:100%}
 .car-card .shot{position:relative;aspect-ratio:3/2;overflow:hidden;background:var(--bg-3)}
 .car-card .shot img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease-out)}
 .car-card:hover .shot img{transform:scale(1.035)}
-.car-card .body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
-.car-card h3{font-size:clamp(20px,2vw,25px);text-transform:uppercase;letter-spacing:.005em}
-.car-card .specs{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--text-dim)}
+/* La tarjeta crece con el contenedor: en 1240 se quedaba en 355 px y todo
+   dentro estaba dimensionado para ese ancho. Los topes de los clamp eran
+   lo que la mantenia pequena aunque hubiera sitio. */
+.car-card .body{padding:22px 24px 24px;display:flex;flex-direction:column;gap:12px;flex:1}
+/* El nivel del encabezado CAMBIA segun donde este la tarjeta: carCard() emite
+   h2 en /flota/ y en las paginas de marca, y h3 en la rejilla de "mas de esta
+   marca" de las fichas. La regla apuntaba solo a h3, asi que en TODO el
+   catalogo el titulo nunca recibia este estilo y caia al tamano por defecto
+   del navegador para un h2. Con :is() vale para los tres y mantiene la misma
+   especificidad que tenia. */
+.car-card :is(h2,h3,h4){font-size:clamp(21px,1.7vw,29px);text-transform:uppercase;letter-spacing:.005em}
+.car-card .specs{display:flex;flex-wrap:wrap;gap:7px 16px;font-size:14px;color:var(--text-dim)}
 .car-card .specs li{display:flex;align-items:center;gap:6px}
 .car-card .specs li+li::before{content:"";width:3px;height:3px;border-radius:999px;background:var(--text-mute);margin-right:8px;margin-left:-8px}
 .car-card .foot{
-  margin-top:auto;padding-top:14px;border-top:1px solid var(--line);
-  display:flex;align-items:flex-end;justify-content:space-between;gap:12px;
+  margin-top:auto;padding-top:17px;border-top:1px solid var(--line);
+  display:flex;align-items:flex-end;justify-content:space-between;gap:14px;
 }
-.car-card .price b{font-family:var(--font-head);font-size:28px;font-weight:700;letter-spacing:.01em;display:block;line-height:1}
-.car-card .price span{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--text-mute)}
+.car-card .price b{font-family:var(--font-head);font-size:clamp(28px,2.1vw,36px);font-weight:700;letter-spacing:.01em;display:block;line-height:1}
+
+/* La tarjeta se dimensiona por SU PROPIO ancho, no por el de la pantalla.
+   Con vw pasaba esto: en un monitor de 1920 el titulo se iba al tope de
+   29 px tanto en el catalogo (tarjeta de 497 px, donde cuadra) como en la
+   rejilla de "mas de esta marca" de las fichas, que sigue a 1240 y tiene
+   tarjetas de 351 px — ahi 29 px quedaban apretados. cqi mide el ancho del
+   contenedor, asi que cada tarjeta pide el tamano que le corresponde y da
+   igual donde se la ponga.
+   Las reglas de arriba con vw se quedan como respaldo: si el navegador no
+   entiende container queries, @supports no entra y hereda el clamp viejo. */
+@supports (container-type:inline-size){
+  .car-card{container-type:inline-size}
+  .car-card :is(h2,h3,h4){font-size:clamp(21px,5.8cqi,29px)}
+  .car-card .price b{font-size:clamp(28px,7.2cqi,36px)}
+  .car-card .body{padding:clamp(18px,4.6cqi,24px)}
+  .car-card .specs{font-size:clamp(13px,2.9cqi,14px)}
+}
+.car-card .price span{font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--text-mute)}
 /* Donde esta el coche ahora mismo. Solo se pinta cuando lo sabemos: la
    flota propia esta en Barcelona, la del proveedor repartida por Espana y
    esos coches salen sin linea, no con un hueco ni un "consultar". */

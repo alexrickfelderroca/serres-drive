@@ -790,7 +790,10 @@ for (const lang of LANGS) {
   const cars = [...fleet.cars].sort((a, b) => b.prices.d1 - a.prices.d1);
   const body = `${crumbs(r, [{ label: L.nav.fleet }])}
 <section class="section section--tight">
-  <div class="wrap">
+  <!-- wrap--wide: el catalogo es una rejilla de tarjetas, no una columna de
+       texto, y con el ancho de prosa se quedaba pequeno en cualquier monitor
+       moderno. El .lede de dentro sigue capado por su propio max-width. -->
+  <div class="wrap wrap--wide">
     <div class="section-head">
       <p class="eyebrow">${fleet.cars.length} ${L.common.carsAvailable}</p>
       <h1 class="h-lg">${esc(meta.h1)}</h1>
@@ -817,7 +820,8 @@ for (const b of fleet.brands) {
   const cars = carsOf(b.slug).sort((a, x) => x.prices.d1 - a.prices.d1);
   const body = `${crumbs(r, [{ label: L.nav.fleet, href: `${r}flota/` }, { label: b.label }])}
 <section class="section section--tight">
-  <div class="wrap">
+  <!-- wrap--wide, igual que /flota/: las dos son catalogo. -->
+  <div class="wrap wrap--wide">
     <div class="section-head">
       <p class="eyebrow">${cars.length} ${cars.length === 1 ? L.common.modelAvailable : L.common.modelsAvailable}</p>
       <h1 class="h-lg">${esc(meta.h1)}</h1>

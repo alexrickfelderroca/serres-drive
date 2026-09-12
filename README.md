@@ -239,6 +239,52 @@ de 720 px desplazada en horizontal dejaba los precios cortados.
 
 ## 7. Estado de las comprobaciones
 
+### 13-09-2026 (4) — el catálogo estaba apretado en escritorio
+
+Reportado: en ordenador el catálogo se veía «muy compactado, pequeño y
+apretado». Medido antes de tocar nada, en `/flota/`:
+
+| pantalla | contenedor | aire muerto por lado | tarjeta | foto |
+|---|---|---|---|---|
+| 1366 | 1240 | 63 px | 355 px | 235 px |
+| 1440 | 1240 | 100 px | 355 px | 235 px |
+| 1920 | 1240 | **340 px** | 355 px | 235 px |
+| 2560 | 1240 | 660 px | 355 px | 235 px |
+
+La tarjeta **no crecía nunca**: el contenedor estaba clavado en `--maxw:1240px`
+y en un monitor de 1920 se tiraban 340 px a cada lado, un 35 % de la pantalla.
+
+1240 es el ancho correcto para una **columna de texto** — más allá, una línea
+de prosa se lee mal. Pero una rejilla de tarjetas no es prosa. Se añade
+`--maxw-wide:1680px` y la clase `.wrap--wide`, y la usan `/flota/` y las
+páginas de marca. 1680 es el mismo ancho que ya usaba la barra de navegación,
+con un comentario que describía este mismo problema. El `.lede` de dentro
+sigue limitado por su propio `max-width` en `ch`, así que la rejilla se
+ensancha sin estirar el párrafo.
+
+Resultado: la tarjeta pasa de 355 px a **497 px en 1920 (+40 %)** y la foto de
+235 a 330. En 1440, de 355 a 420 (+18 %).
+
+**Las tarjetas se dimensionan ahora por su PROPIO ancho, no por el de la
+pantalla** (`container-type:inline-size` + unidades `cqi`). Con `vw` pasaba
+esto: en un monitor de 1920 el título se iba al tope de 29 px tanto en el
+catálogo (tarjeta de 497 px, donde cuadra) como en la rejilla de «más de esta
+marca» de las fichas, que sigue a 1240 con tarjetas de 351 px — ahí quedaba
+apretado. Las reglas con `vw` se quedan debajo como respaldo para cualquier
+navegador sin `@supports (container-type)`.
+
+**Un fallo preexistente que salió por el camino:** `carCard()` emite `h2` en
+`/flota/` y en las páginas de marca, y `h3` en la rejilla de las fichas. La
+regla de estilo apuntaba solo a `.car-card h3`, así que **en todo el catálogo
+el título de la tarjeta nunca recibió su estilo** y caía al tamaño por defecto
+del navegador. Con `:is(h2,h3,h4)` vale para los tres. Efecto visible: los
+nombres del catálogo ahora van en versalitas, como ya iban en las fichas.
+
+- 1.318 comprobaciones en 0 fallos · 32/32 funcionales · Lighthouse de
+  `/flota/` 100/100/100 en móvil **y** en escritorio · sin scroll horizontal ni
+  imágenes rotas a 390, 1440 y 1920.
+- Capturas en `.screenshots/catalogo-ancho/`.
+
 ### 13-09-2026 (3) — el lenguaje visual de Serres Wrap Center
 
 A petición del propietario, la web de alquiler adopta el lenguaje visual de
