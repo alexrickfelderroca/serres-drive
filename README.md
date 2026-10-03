@@ -205,21 +205,29 @@ proveedores distintos.
 Hostinger sirve **la raíz del repositorio**: todo lo que se comitea es
 accesible desde el dominio.
 
-> **03-10-2026 — un push a `main` NO publica solo.** Aquí decía que sí, y es
-> falso: costó una confusión. Medido ese día, con el número de teléfono recién
-> cambiado y subido:
+> **03-10-2026 — un push a `main` no siempre publica.** Aquí decía que sí, sin
+> matices, y costó una confusión entera. Lo que hay montado de verdad, visto en
+> hPanel ese día:
 >
-> - `origin/main` estaba en `96b3869` (el cambio, empujado y correcto).
-> - `serresdrive.com/index.html` era **byte a byte** el `index.html` del commit
->   ANTERIOR, `6ecfebf`, con `last-modified: Sat, 12 Sep 2026 15:43:39 GMT`.
-> - No era caché: `x-hcdn-cache-status: DYNAMIC` y una petición con
->   `?nocache=<timestamp>` devolvía exactamente el mismo contenido viejo.
-> - No hay `.github/workflows/` ni ningún script de despliegue en el repo.
+> | | |
+> |---|---|
+> | Repositorio | `alexrickfelderroca/serres-drive`, conectado con GitHub |
+> | Rama | `main` |
+> | Directorio raíz | `public_html` |
+> | Implementación automática | **activada** |
 >
-> O sea: **el push llega a GitHub, pero la publicación es un paso aparte** que
-> hay que lanzar en hPanel (Avanzado → Git → Desplegar), o el webhook de
-> despliegue automático no está disparando. Hasta que no se haga eso, el
-> dominio sigue sirviendo la versión anterior por mucho que el repo esté bien.
+> Y aun así **no se disparó**. El último despliegue era del `6ecfebf` del
+> 12-09 a las 17:43; los dos commits del 03-10 llevaban horas en GitHub sin
+> llegar al dominio. Comprobado que no era caché (`x-hcdn-cache-status:
+> DYNAMIC`, y `?nocache=<timestamp>` devolvía el mismo contenido viejo).
+>
+> Se resolvió con el botón **Redistribuir** de esa misma pantalla: despliegue
+> manual a las 16:52, 6 s, y el dominio pasó a servir `4807eed`.
+>
+> **La regla, entonces:** empujar no es publicar. Después de un push,
+> comprobar el dominio; si está atrasado, hPanel → `serresdrive.com` →
+> Avanzado → GIT → **Redistribuir**. Si esto se repite, hay que mirar por qué
+> el webhook de GitHub no llega, porque la opción está activada y debería.
 
 ### Comprobar qué hay publicado de verdad
 
