@@ -502,7 +502,8 @@ reduced-motion, `_build/lh.js` para Lighthouse):
 ## 8. Pendiente de confirmar con el propietario
 
 Está recogido en `_build/OWNER-TODO.md`. Resueltos el 07-09-2026: el teléfono
-de reservas es el del propietario (+34 649 66 33 80) y la dirección postal no se
+de reservas es el del propietario (desde el 03-10-2026, **+34 611 87 34 75**;
+antes el +34 649 66 33 80) y la dirección postal no se
 publica (ni en contacto, ni en el schema, ni coordenadas). Resumen de lo que
 queda: la fianza del Urus y del RS 6, si los 150 km son por
 día o por alquiler, y las fichas técnicas de los coches marcados con confianza

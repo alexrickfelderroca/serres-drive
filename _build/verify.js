@@ -234,8 +234,21 @@ for (const f of shipped) {
   bad = offenders(p => !/window\.SD_PAGE=\{/.test(p.html));
   check(!bad.length, `las ${pages.length} paginas declaran window.SD_PAGE${few(bad)}`);
 
-  bad = offenders(p => !/href="tel:\+34649663380"/.test(p.html));
-  check(!bad.length, `las ${pages.length} paginas tienen al menos un enlace tel:${few(bad)}`);
+  /* El numero NO se teclea aqui: sale de data/fleet.json, que es de donde lo
+     saca el generador. Estuvo escrito a mano ("tel:+34649663380") y al
+     cambiar de numero esta comprobacion habria seguido en verde buscando el
+     viejo — es decir, habria dejado pasar justo el fallo que existe para
+     cazar. Un verificador que repite el dato en vez de leerlo no verifica. */
+  const C = JSON.parse(read('data/fleet.json')).contact;
+  bad = offenders(p => !p.html.includes(`href="tel:+${C.whatsapp}"`));
+  check(!bad.length, `las ${pages.length} paginas tienen al menos un enlace tel: a +${C.whatsapp}${few(bad)}`);
+  /* Y que no quede ni rastro de un numero anterior en ninguno de los cuatro
+     formatos en los que aparece (wa.me, tel:, texto visible, schema). */
+  const viejos = ['34649663380', '649 66 33 80'].filter(v => !C.whatsapp.includes(v.replace(/\D/g, '')));
+  for (const v of viejos) {
+    bad = offenders(p => p.html.includes(v));
+    check(!bad.length, `ningun rastro del numero antiguo ${v}${few(bad)}`);
+  }
 
   /* Un wa.me sin data-placement es una conversion que llega sin saber de
      que boton salio, que es justo lo que se queria arreglar. */

@@ -1,5 +1,15 @@
 # Pendiente de confirmar con el propietario
 
+> **03-10-2026 — CAMBIO DE NÚMERO.** El teléfono del negocio pasa a ser
+> **+34 611 87 34 75**, y es el mismo para llamadas y para WhatsApp. El
+> anterior (+34 649 66 33 80) ya no aparece en ninguna página. Vive en un
+> solo sitio: `_build/fleet-base.json` → `contact.whatsapp` y
+> `contact.phoneDisplay`; de ahí salen los 1.655 enlaces de WhatsApp, los
+> 365 `tel:`, los 595 textos visibles y el `telephone` del schema.
+> **Pendiente fuera de este repositorio:** el número aparece también en las
+> campañas de Google Ads (extensión de llamada y textos de anuncio) y en la
+> ficha de Google Business Profile. Cambiarlo ahí no lo hace este proyecto.
+
 > **11-09-2026 — alta de los 13 coches de Stratos.** Lo que decidió Alex ese
 > día y lo que queda pendiente está en el **punto 0**, al principio. Dos cosas
 > del encargo antiguo quedan resueltas de paso: los **150 km son POR DÍA**
@@ -9,7 +19,8 @@
 > **Actualizado 06-09-2026.** El propietario ha decidido:
 > - **Contacto (punto 1): RESUELTO.** Correo `serresdrive@gmail.com` e Instagram
 >   `@serres.drive` ya en la web. **07-09-2026:** el telefono de reservas pasa a
->   ser el del propietario, `+34 649 66 33 80` (WhatsApp, `tel:` y schema), y
+>   ser el del propietario, `+34 649 66 33 80` (WhatsApp, `tel:` y schema)
+>   — SUPERADO el 03-10-2026: ahora es el +34 611 87 34 75 —, y
 >   **la direccion postal desaparece de la web** (contacto, schema y
 >   coordenadas): no se puede publicar direccion. Queda solo "Sant Cugat del
 >   Vallès, Barcelona" como localidad.
@@ -87,16 +98,23 @@ puntos concretos que conviene que mire un asesor:
 - La redacción sobre el Marco de Privacidad de Datos UE-EE. UU. para Google y Meta.
 - Si hay que nombrar a los proveedores de vehículos por su razón social.
 
-### 0-BIS.4 ¿El +34 649 66 33 80 atiende llamadas de voz?
+### 0-BIS.4 ¿El +34 611 87 34 75 atiende llamadas de voz?
 
-Confirmado por Alex el 12-09-2026: **sí**. Por eso el número aparece ahora como
+Confirmado por Alex para el número anterior el 12-09-2026, y el 03-10-2026 se
+cambia el número manteniendo el mismo uso: **sí**, atiende llamadas y es
+también el WhatsApp. Por eso el número aparece como
 enlace `tel:` en el pie de las 220 páginas, en `/contacto/` y bajo el botón de
 reserva de las 26 fichas, y el evento `phone_click` ya mide.
 
 Queda una cosa **fuera de este repositorio**: en el proyecto de campañas,
 `serresdrive_campaigns.py` línea 40 tiene `PHONE = None`, así que no se crea
 el *call asset* de Google Ads. Ahora que el número está como `tel:` en todas
-las páginas de destino, se puede poner `PHONE = "+34 649 66 33 80"`.
+las páginas de destino, se puede poner `PHONE = "+34 611 87 34 75"`.
+
+**Ojo con esto ahora que el número ha cambiado:** si las campañas ya llevaban
+el 649 en algún sitio (extensión de llamada, texto de anuncio, sitelinks),
+hay que cambiarlo allí también. Un anuncio con un número que ya no es el del
+negocio es peor que no tener extensión de llamada.
 
 ---
 
@@ -211,7 +229,8 @@ propietario los manda: `_build/brand-logos-src/` y
 - Correo: **serresdrive@gmail.com** (pie, pagina de contacto, portada y schema).
 - Instagram: **@serres.drive** — ojo, con punto; antes estaba mal como
   `instagram.com/serresdrive/`, que no es la cuenta.
-- Telefono / WhatsApp: **+34 649 66 33 80**, confirmado por el propietario.
+- Telefono / WhatsApp: **+34 611 87 34 75**, desde el 03-10-2026 (antes, el
+  +34 649 66 33 80).
 - `info@serreswrapcenter.es` sigue sin aparecer en ninguna pagina.
 
 Si cambia algo: `_build/fleet-base.json` -> bloque `contact`, y regenerar.
