@@ -202,7 +202,43 @@ proveedores distintos.
 
 ## 5. Deploy
 
-Hostinger sirve **la raíz del repositorio**. Un push a `main` publica.
+Hostinger sirve **la raíz del repositorio**: todo lo que se comitea es
+accesible desde el dominio.
+
+> **03-10-2026 — un push a `main` NO publica solo.** Aquí decía que sí, y es
+> falso: costó una confusión. Medido ese día, con el número de teléfono recién
+> cambiado y subido:
+>
+> - `origin/main` estaba en `96b3869` (el cambio, empujado y correcto).
+> - `serresdrive.com/index.html` era **byte a byte** el `index.html` del commit
+>   ANTERIOR, `6ecfebf`, con `last-modified: Sat, 12 Sep 2026 15:43:39 GMT`.
+> - No era caché: `x-hcdn-cache-status: DYNAMIC` y una petición con
+>   `?nocache=<timestamp>` devolvía exactamente el mismo contenido viejo.
+> - No hay `.github/workflows/` ni ningún script de despliegue en el repo.
+>
+> O sea: **el push llega a GitHub, pero la publicación es un paso aparte** que
+> hay que lanzar en hPanel (Avanzado → Git → Desplegar), o el webhook de
+> despliegue automático no está disparando. Hasta que no se haga eso, el
+> dominio sigue sirviendo la versión anterior por mucho que el repo esté bien.
+
+### Comprobar qué hay publicado de verdad
+
+No vale mirar la web y fiarse: hay que comparar con el repositorio. Esto dice
+exactamente en qué commit está producción:
+
+```bash
+curl -s https://serresdrive.com/ -o /tmp/live.html
+for sha in $(git log --format=%H -10); do
+  git show $sha:index.html | diff -q - /tmp/live.html >/dev/null \
+    && echo "publicado: $(git log --oneline -1 $sha)" && break
+done
+```
+
+Y para un cambio concreto, basta con buscar su marcador:
+
+```bash
+curl -s https://serresdrive.com/ | grep -o 'wa\.me/[0-9]*' | sort -u
+```
 
 Todo lo que se comitea es accesible desde el dominio: por eso `Sicur Cars/`
 (62 MB de originales) y el documento del encargo están en `.gitignore`.
